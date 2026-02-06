@@ -106,6 +106,11 @@ export default function Home() {
                  Track Load
                </Button>
             </Link>
+            <Link href="/admin">
+               <Button variant="ghost" className={`font-medium ${scrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"}`}>
+                 Login
+               </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -142,6 +147,11 @@ export default function Home() {
               <Link href="/tracking">
                  <Button className="w-full font-bold bg-primary text-white rounded-xl h-12 shadow-lg shadow-primary/20 mt-2">
                    Track Load
+                 </Button>
+              </Link>
+              <Link href="/admin">
+                 <Button variant="outline" className="w-full font-bold rounded-xl h-12 mt-2">
+                   Portal Login
                  </Button>
               </Link>
             </motion.div>
