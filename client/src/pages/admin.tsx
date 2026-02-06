@@ -27,9 +27,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 // Mock Data for Charts
-const revenueData = [
+const weeklyData = [
   { name: "Mon", value: 12400 },
   { name: "Tue", value: 14200 },
   { name: "Wed", value: 11800 },
@@ -38,6 +39,41 @@ const revenueData = [
   { name: "Sat", value: 16400 },
   { name: "Sun", value: 13200 },
 ];
+
+const monthlyData = [
+  { name: "Week 1", value: 45000 },
+  { name: "Week 2", value: 52000 },
+  { name: "Week 3", value: 48000 },
+  { name: "Week 4", value: 61000 },
+];
+
+const quarterlyData = [
+  { name: "Jan", value: 180000 },
+  { name: "Feb", value: 210000 },
+  { name: "Mar", value: 195000 },
+];
+
+const yearlyData = [
+  { name: "Jan", value: 180000 },
+  { name: "Feb", value: 210000 },
+  { name: "Mar", value: 195000 },
+  { name: "Apr", value: 230000 },
+  { name: "May", value: 245000 },
+  { name: "Jun", value: 215000 },
+  { name: "Jul", value: 260000 },
+  { name: "Aug", value: 280000 },
+  { name: "Sep", value: 250000 },
+  { name: "Oct", value: 290000 },
+  { name: "Nov", value: 310000 },
+  { name: "Dec", value: 340000 },
+];
+
+const revenueDataMap = {
+  weekly: weeklyData,
+  monthly: monthlyData,
+  quarterly: quarterlyData,
+  yearly: yearlyData,
+};
 
 // Mock Data for Table
 const recentShipments = [
@@ -51,6 +87,7 @@ const recentShipments = [
 export default function AdminDashboard() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
+  const [revenueFilter, setRevenueFilter] = useState<keyof typeof revenueDataMap>("weekly");
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex">
@@ -170,14 +207,30 @@ export default function AdminDashboard() {
           {/* Charts & Map Area */}
           <section className="grid lg:grid-cols-3 gap-6">
             <Card className="lg:col-span-2 shadow-sm">
-              <CardHeader>
-                <CardTitle>Revenue Overview</CardTitle>
-                <CardDescription>Weekly performance vs previous period</CardDescription>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <div className="space-y-1">
+                  <CardTitle>Revenue Overview</CardTitle>
+                  <CardDescription>Performance trends over time</CardDescription>
+                </div>
+                <Select 
+                  value={revenueFilter} 
+                  onValueChange={(val: any) => setRevenueFilter(val)}
+                >
+                  <SelectTrigger className="w-[140px] h-8 text-xs">
+                    <SelectValue placeholder="Period" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="weekly">Weekly</SelectItem>
+                    <SelectItem value="monthly">Monthly</SelectItem>
+                    <SelectItem value="quarterly">Quarterly</SelectItem>
+                    <SelectItem value="yearly">Yearly</SelectItem>
+                  </SelectContent>
+                </Select>
               </CardHeader>
               <CardContent>
-                <div className="h-[300px] w-full">
+                <div className="h-[300px] w-full pt-4">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={revenueData}>
+                    <AreaChart data={revenueDataMap[revenueFilter]}>
                       <defs>
                         <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
                           <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
