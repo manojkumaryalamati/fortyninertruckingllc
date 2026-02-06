@@ -71,7 +71,11 @@ export default function Tracking() {
             </div>
           </Link>
           <div className="font-bold text-lg tracking-tight">Track Shipment</div>
-          <div className="w-24"></div> {/* Spacer for center alignment */}
+          <Link href="/admin">
+             <Button variant="ghost" size="sm" className="font-medium text-muted-foreground hover:text-foreground">
+               Login
+             </Button>
+          </Link>
         </div>
       </nav>
 

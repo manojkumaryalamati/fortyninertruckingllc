@@ -3,11 +3,108 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Link } from "wouter";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Contact() {
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "Services", href: "/services" },
+    { name: "Fleet", href: "/fleet" },
+    { name: "Careers", href: "/careers" },
+    { name: "Contact", href: "/contact" }
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans pt-24 pb-24">
+      {/* Shared Navbar */}
+      <nav 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/50 py-3 shadow-sm" : "bg-background/80 backdrop-blur-md py-4 border-b border-border/20"
+        }`}
+      >
+        <div className="container mx-auto px-6 flex items-center justify-between">
+          <Link href="/">
+            <div className="flex items-center gap-3 cursor-pointer group">
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-gradient-to-br from-primary to-orange-600 flex items-center justify-center shadow-lg shadow-primary/20">
+                <span className="text-white font-bold text-lg">49</span>
+              </div>
+              <div className="flex flex-col text-foreground">
+                <span className="font-bold text-lg tracking-tight leading-none">Fortyniner</span>
+                <span className="text-xs font-medium opacity-80 uppercase tracking-widest">Trucking</span>
+              </div>
+            </div>
+          </Link>
+          
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((item) => (
+              <Link key={item.name} href={item.href}>
+                <a className="text-sm font-medium transition-colors text-muted-foreground hover:text-foreground cursor-pointer">
+                  {item.name}
+                </a>
+              </Link>
+            ))}
+            <Link href="/tracking">
+               <Button className="font-semibold shadow-lg shadow-primary/20 bg-primary hover:bg-primary/90 text-white rounded-full px-6 transition-all hover:scale-105 active:scale-95">
+                 Track Load
+               </Button>
+            </Link>
+            <Link href="/admin">
+               <Button variant="ghost" className="font-medium text-muted-foreground hover:text-foreground">
+                 Login
+               </Button>
+            </Link>
+          </div>
+
+          <button 
+            className="md:hidden p-2 rounded-full transition-colors text-foreground hover:bg-secondary"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 right-0 bg-background border-b border-border shadow-2xl p-6 md:hidden flex flex-col gap-4"
+            >
+              {navLinks.map((item) => (
+                <Link key={item.name} href={item.href}>
+                  <a className="text-lg font-medium text-foreground hover:text-primary transition-colors py-2 border-b border-border/50 last:border-0" onClick={() => setIsMobileMenuOpen(false)}>
+                    {item.name}
+                  </a>
+                </Link>
+              ))}
+              <Link href="/tracking">
+                 <Button className="w-full font-bold bg-primary text-white rounded-xl h-12 shadow-lg shadow-primary/20 mt-2">
+                   Track Load
+                 </Button>
+              </Link>
+              <Link href="/admin">
+                 <Button variant="outline" className="w-full font-bold rounded-xl h-12 mt-2">
+                   Portal Login
+                 </Button>
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+
       <div className="container mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Get In Touch</h1>
