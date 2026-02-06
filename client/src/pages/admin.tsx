@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { useAuth } from "@/lib/auth";
 import { 
   LayoutDashboard, 
   Truck, 
@@ -16,7 +17,8 @@ import {
   Plus,
   ChevronDown,
   Map,
-  BarChart3
+  BarChart3,
+  LogOut
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,6 +49,7 @@ const recentShipments = [
 
 export default function AdminDashboard() {
   const [location] = useLocation();
+  const { user, logout } = useAuth();
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex">
@@ -88,17 +91,25 @@ export default function AdminDashboard() {
         </nav>
 
         <div className="p-4 border-t border-border">
-          <Button variant="ghost" className="w-full justify-start gap-3">
+          <Button variant="ghost" className="w-full justify-start gap-3 mb-2">
             <Settings size={18} /> Settings
           </Button>
-          <div className="mt-4 flex items-center gap-3 px-2">
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start gap-3 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 mb-4"
+            onClick={logout}
+          >
+            <LogOut size={18} /> Logout
+          </Button>
+          
+          <div className="flex items-center gap-3 px-2 pt-2 border-t border-border">
             <Avatar className="h-8 w-8">
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>AD</AvatarFallback>
             </Avatar>
-            <div className="flex flex-col text-sm">
-              <span className="font-semibold">Admin User</span>
-              <span className="text-muted-foreground text-xs">admin@49trucking.com</span>
+            <div className="flex flex-col text-sm overflow-hidden">
+              <span className="font-semibold truncate">{user?.name || "Admin User"}</span>
+              <span className="text-muted-foreground text-xs truncate" title={user?.email}>{user?.email || "admin@49trucking.com"}</span>
             </div>
           </div>
         </div>
