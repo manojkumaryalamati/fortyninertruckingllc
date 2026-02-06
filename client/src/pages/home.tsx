@@ -48,22 +48,22 @@ export default function Home() {
       title: "Built for the Heavy Haul",
       subtitle: "Specialized construction transport and aggregate logistics for major infrastructure.",
       cta: "Our Fleet",
-      link: "#fleet"
+      link: "/fleet"
     },
     {
       image: HeroSlide3,
       title: "Supply Chain Precision",
       subtitle: "Advanced warehousing and distribution solutions that keep your business moving forward.",
       cta: "Get Quote",
-      link: "#contact"
+      link: "/contact"
     }
   ];
 
   const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "Fleet", href: "#fleet" },
-    { name: "Safety", href: "#safety" },
-    { name: "Careers", href: "#careers" }
+    { name: "Services", href: "/services" },
+    { name: "Fleet", href: "/fleet" },
+    { name: "Careers", href: "/careers" },
+    { name: "Contact", href: "/contact" }
   ];
 
   return (
