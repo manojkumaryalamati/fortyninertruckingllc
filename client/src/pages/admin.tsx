@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { 
   LayoutDashboard, 
   Truck, 
@@ -46,33 +46,43 @@ const recentShipments = [
 ];
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState("overview");
+  const [location] = useLocation();
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex">
       {/* Sidebar */}
       <aside className="w-64 border-r border-border bg-card hidden md:flex flex-col sticky top-0 h-screen">
         <div className="p-6 border-b border-border">
-          <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">49</div>
-            <span>Admin</span>
-          </div>
+          <Link href="/admin">
+            <div className="flex items-center gap-2 font-bold text-xl tracking-tight cursor-pointer">
+              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">49</div>
+              <span>Admin</span>
+            </div>
+          </Link>
         </div>
         
         <nav className="flex-1 p-4 space-y-1">
-          <Button variant={activeTab === "overview" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setActiveTab("overview")}>
-            <LayoutDashboard size={18} /> Overview
-          </Button>
-          <Button variant={activeTab === "shipments" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setActiveTab("shipments")}>
-            <Package size={18} /> Shipments
-          </Button>
-          <Button variant={activeTab === "fleet" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setActiveTab("fleet")}>
-            <Truck size={18} /> Fleet Management
-          </Button>
-          <Button variant={activeTab === "drivers" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setActiveTab("drivers")}>
-            <Users size={18} /> Drivers
-          </Button>
-          <Button variant={activeTab === "analytics" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setActiveTab("analytics")}>
+          <Link href="/admin">
+            <Button variant={location === "/admin" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
+              <LayoutDashboard size={18} /> Overview
+            </Button>
+          </Link>
+          <Link href="/admin/trips">
+            <Button variant={location === "/admin/trips" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
+              <Package size={18} /> Trips & Loads
+            </Button>
+          </Link>
+          <Link href="/admin/trucks">
+            <Button variant={location === "/admin/trucks" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
+              <Truck size={18} /> Fleet Management
+            </Button>
+          </Link>
+          <Link href="/admin/drivers">
+            <Button variant={location === "/admin/drivers" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
+              <Users size={18} /> Drivers
+            </Button>
+          </Link>
+          <Button variant="ghost" className="w-full justify-start gap-3 mb-1">
             <BarChart3 size={18} /> Analytics
           </Button>
         </nav>
@@ -119,6 +129,7 @@ export default function AdminDashboard() {
         <div className="p-6 space-y-8 max-w-[1600px] mx-auto">
           {/* Key Metrics */}
           <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
             {[
               { label: "Total Revenue", value: "$128,420", change: "+12.5%", trend: "up", icon: ArrowUpRight },
               { label: "Active Loads", value: "48", change: "+4", trend: "up", icon: Package },
