@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Check, Shield, Clock, MapPin, Truck, Phone, HardHat, Warehouse, BadgeCheck, ChevronRight, ArrowRight } from "lucide-react";
+import { Check, Shield, Clock, MapPin, Truck, Phone, HardHat, Warehouse, BadgeCheck, ChevronRight, ArrowRight, Menu, X } from "lucide-react";
 import Logo from "@/assets/logo.png";
 import HeroSlide1 from "@/assets/hero-slide-1.jpg";
 import HeroSlide2 from "@/assets/hero-slide-2.jpg";
@@ -14,6 +14,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Home() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 20 }, [Autoplay({ delay: 6000 })]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -50,9 +51,16 @@ export default function Home() {
     }
   ];
 
+  const navLinks = [
+    { name: "Services", href: "#services" },
+    { name: "Fleet", href: "#fleet" },
+    { name: "Safety", href: "#safety" },
+    { name: "Careers", href: "#careers" }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-primary selection:text-black">
-      {/* Cinematic Navigation - Transparent until scrolled (simplified for this mockup) */}
+      {/* Cinematic Navigation - Transparent until scrolled */}
       <nav className="absolute top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-sm">
         <div className="container mx-auto px-6 h-24 flex items-center justify-between">
           <Link href="/">
@@ -72,10 +80,11 @@ export default function Home() {
             </div>
           </Link>
           
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-10">
-            {["Services", "Fleet", "Safety", "Careers"].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-bold uppercase tracking-widest text-white/80 hover:text-primary transition-colors relative group">
-                {item}
+            {navLinks.map((item) => (
+              <a key={item.name} href={item.href} className="text-sm font-bold uppercase tracking-widest text-white/80 hover:text-primary transition-colors relative group">
+                {item.name}
                 <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
@@ -85,7 +94,43 @@ export default function Home() {
                </Button>
             </Link>
           </div>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="md:hidden text-white hover:text-primary transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+          </button>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-24 left-0 right-0 bg-black/95 border-b border-white/10 p-6 md:hidden flex flex-col gap-6 shadow-2xl"
+            >
+              {navLinks.map((item) => (
+                <a 
+                  key={item.name} 
+                  href={item.href} 
+                  className="text-lg font-bold uppercase tracking-widest text-white hover:text-primary transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ))}
+              <Link href="/tracking">
+                 <Button className="w-full font-bold bg-primary hover:bg-primary/90 text-black border-none rounded-none h-12 uppercase tracking-wider">
+                   Track Load
+                 </Button>
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Immersive Hero Slider */}
@@ -263,8 +308,75 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Fleet Section - Added for Link Compatibility */}
+      <section id="fleet" className="py-24 bg-muted/30">
+        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+          <div className="order-2 md:order-1 relative h-[600px] w-full overflow-hidden group">
+             <img 
+               src={HeroSlide2} 
+               alt="Fleet Truck" 
+               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" 
+             />
+             <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
+          </div>
+          <div className="order-1 md:order-2 space-y-8">
+            <span className="text-primary font-bold tracking-widest uppercase block">Our Fleet</span>
+            <h2 className="text-5xl md:text-6xl font-display font-bold text-secondary uppercase leading-[0.9]">
+              Modern <span className="text-primary">&</span><br/> Reliable
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Our fleet of late-model Kenworth and Peterbilt trucks ensures reliability on every mile. Equipped with the latest safety technology and GPS tracking, we maintain a 99.9% uptime record.
+            </p>
+            <ul className="space-y-4">
+               {["GPS Real-time Tracking", "Collision Mitigation Systems", "EPA SmartWay Certified", "Average Age < 3 Years"].map((item, i) => (
+                 <li key={i} className="flex items-center gap-3 font-medium">
+                   <Check className="text-primary" /> {item}
+                 </li>
+               ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      {/* Safety Section - Added for Link Compatibility */}
+      <section id="safety" className="py-24 bg-black text-white">
+        <div className="container mx-auto px-6 text-center">
+           <h2 className="text-5xl font-display font-bold uppercase mb-6">Safety Is Our DNA</h2>
+           <p className="max-w-2xl mx-auto text-white/60 text-lg mb-12">
+             We invest in our drivers and technology to ensure every load arrives safely. Zero compromises.
+           </p>
+           <div className="grid md:grid-cols-3 gap-8">
+              <div className="p-8 border border-white/10 hover:border-primary/50 transition-colors">
+                <BadgeCheck className="w-12 h-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-bold uppercase mb-2">FMCSA Compliant</h3>
+                <p className="text-white/40 text-sm">Exceeding all federal safety regulations.</p>
+              </div>
+              <div className="p-8 border border-white/10 hover:border-primary/50 transition-colors">
+                <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-bold uppercase mb-2">Ongoing Training</h3>
+                <p className="text-white/40 text-sm">Monthly safety workshops for all drivers.</p>
+              </div>
+              <div className="p-8 border border-white/10 hover:border-primary/50 transition-colors">
+                <Truck className="w-12 h-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-bold uppercase mb-2">24/7 Monitoring</h3>
+                <p className="text-white/40 text-sm">Round-the-clock fleet supervision.</p>
+              </div>
+           </div>
+        </div>
+      </section>
+
+      {/* Careers Section - Added for Link Compatibility */}
+      <section id="careers" className="py-24 bg-primary text-black">
+         <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-display font-bold uppercase mb-8">Drive For The Best</h2>
+            <Button size="lg" className="h-16 px-12 text-lg font-bold uppercase bg-black text-white hover:bg-black/80">
+              View Open Positions
+            </Button>
+         </div>
+      </section>
+
       {/* CTA Section - Dark Mode style */}
-      <section className="py-32 bg-secondary text-white relative overflow-hidden">
+      <section id="contact" className="py-32 bg-secondary text-white relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-10 grayscale mix-blend-overlay" />
           <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/80 to-transparent" />
