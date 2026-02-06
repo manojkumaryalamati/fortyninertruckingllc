@@ -18,7 +18,8 @@ import {
   ChevronDown,
   Map,
   BarChart3,
-  LogOut
+  LogOut,
+  FileText
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -83,6 +84,11 @@ export default function AdminDashboard() {
           <Link href="/admin/drivers">
             <Button variant={location === "/admin/drivers" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
               <Users size={18} /> Drivers
+            </Button>
+          </Link>
+          <Link href="/admin/documents">
+            <Button variant={location === "/admin/documents" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
+              <FileText size={18} /> Documents
             </Button>
           </Link>
           <Button variant="ghost" className="w-full justify-start gap-3 mb-1">
