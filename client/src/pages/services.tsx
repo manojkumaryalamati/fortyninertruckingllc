@@ -6,6 +6,8 @@ import { Check, Truck, HardHat, Warehouse, Clock, MapPin, ArrowRight, Shield, Ch
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import Footer from "@/components/Footer";
+
 export default function Services() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -192,6 +194,8 @@ export default function Services() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

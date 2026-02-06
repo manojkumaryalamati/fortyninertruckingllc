@@ -6,6 +6,8 @@ import { Check, Shield, Clock, Users, ArrowRight, Truck, HardHat, Scale, Menu, X
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import Footer from "@/components/Footer";
+
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -279,6 +281,7 @@ export default function Home() {
         </div>
       </section>
 
+      <Footer />
     </div>
   );
 }

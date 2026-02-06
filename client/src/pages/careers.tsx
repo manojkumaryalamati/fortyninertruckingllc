@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 
+import Footer from "@/components/Footer";
+
 export default function Careers() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -178,6 +180,7 @@ export default function Careers() {
           </Card>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
