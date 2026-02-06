@@ -22,6 +22,7 @@ export default function Contact() {
     { name: "Services", href: "/services" },
     { name: "Fleet", href: "/fleet" },
     { name: "Careers", href: "/careers" },
+    { name: "Subhaulers", href: "/subhaulers" },
     { name: "Contact", href: "/contact" }
   ];
 
@@ -40,8 +41,8 @@ export default function Contact() {
                 <span className="text-white font-bold text-lg">49</span>
               </div>
               <div className="flex flex-col text-foreground">
-                <span className="font-bold text-lg tracking-tight leading-none">Fortyniner</span>
-                <span className="text-xs font-medium opacity-80 uppercase tracking-widest">Trucking</span>
+                <span className="font-bold text-lg tracking-tight leading-none">FortyNiner</span>
+                <span className="text-xs font-medium opacity-80 uppercase tracking-widest">Trucking LLC</span>
               </div>
             </div>
           </Link>
@@ -97,9 +98,9 @@ export default function Contact() {
 
       <div className="container mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Get In Touch</h1>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Let's Connect</h1>
           <p className="text-xl text-muted-foreground">
-            Have a question about a shipment or need a quote? Our 24/7 dispatch team is ready to help.
+            Contractors, subhaulers, and partners – reach out to our dispatch team for reliable service and fast response times.
           </p>
         </div>
 
@@ -110,7 +111,7 @@ export default function Contact() {
                 <Phone size={24} />
               </div>
               <h3 className="text-xl font-bold">Call Dispatch</h3>
-              <p className="text-muted-foreground">24/7 Support Line</p>
+              <p className="text-muted-foreground">Immediate Assistance</p>
               <p className="text-2xl font-bold text-primary">(800) 555-0149</p>
             </CardContent>
           </Card>
@@ -121,7 +122,7 @@ export default function Contact() {
                 <Mail size={24} />
               </div>
               <h3 className="text-xl font-bold">Email Us</h3>
-              <p className="text-muted-foreground">Quotes & General Inquiries</p>
+              <p className="text-muted-foreground">Quotes & Bids</p>
               <p className="text-xl font-bold text-primary">dispatch@49trucking.com</p>
             </CardContent>
           </Card>
@@ -158,9 +159,9 @@ export default function Contact() {
                    <Label htmlFor="subject">Subject</Label>
                    <select className="w-full h-10 rounded-md border border-input bg-secondary/30 px-3 py-2 text-sm">
                      <option>Request a Quote</option>
-                     <option>Track a Shipment</option>
-                     <option>Billing Inquiry</option>
-                     <option>Other</option>
+                     <option>Subhauler Inquiry</option>
+                     <option>Billing Question</option>
+                     <option>General Information</option>
                    </select>
                  </div>
 
@@ -169,7 +170,7 @@ export default function Contact() {
                    <Textarea id="message" placeholder="How can we help you?" className="min-h-[150px] bg-secondary/30" />
                  </div>
 
-                 <Button size="lg" className="w-full rounded-full h-12 text-base font-bold">SendMessage</Button>
+                 <Button size="lg" className="w-full rounded-full h-12 text-base font-bold">Send Message</Button>
                </form>
              </CardContent>
            </Card>

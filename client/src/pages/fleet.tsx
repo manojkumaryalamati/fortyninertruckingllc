@@ -7,15 +7,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 
 const fleetData = [
-  { id: 1, name: "Kenworth T680", type: "Long Haul", specs: "PACCAR MX-13, 455HP", image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop", category: "Tractors" },
-  { id: 2, name: "Peterbilt 389", type: "Heavy Haul", specs: "Cummins X15, 605HP", image: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop", category: "Tractors" },
-  { id: 3, name: "Great Dane Champion", type: "Dry Van", specs: "53' Air Ride", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop", category: "Trailers" },
-  { id: 4, name: "Super Dump", type: "Construction", specs: "20 Ton Capacity", image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
-  { id: 5, name: "Flatbed Step Deck", type: "Specialized", specs: "48' Spread Axle", image: "https://images.unsplash.com/photo-1592861956120-e524fc739696?q=80&w=2940&auto=format&fit=crop", category: "Trailers" },
-  { id: 6, name: "Volvo VNL 860", type: "Regional", specs: "Volvo D13, 425HP", image: "https://images.unsplash.com/photo-1616432043562-3671ea2e5242?q=80&w=2940&auto=format&fit=crop", category: "Tractors" },
+  { id: 1, name: "10-Wheel Dump Truck", type: "Standard Haul", specs: "16-18 Ton Capacity", image: "https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
+  { id: 2, name: "Super Dump", type: "Heavy Haul", specs: "20-22 Ton Capacity", image: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
+  { id: 3, name: "End Dump Trailer", type: "Material Transport", specs: "High Volume, Rapid Unload", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop", category: "Trailers" },
+  { id: 4, name: "Transfer Truck", type: "Aggregates", specs: "Max Payload Efficiency", image: "https://images.unsplash.com/photo-1605218427306-635ba2439af2?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
 ];
 
-const categories = ["All", "Tractors", "Trailers", "Construction"];
+const categories = ["All", "Construction", "Trailers"];
 
 export default function Fleet() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -33,6 +31,7 @@ export default function Fleet() {
     { name: "Services", href: "/services" },
     { name: "Fleet", href: "/fleet" },
     { name: "Careers", href: "/careers" },
+    { name: "Subhaulers", href: "/subhaulers" },
     { name: "Contact", href: "/contact" }
   ];
 
@@ -55,8 +54,8 @@ export default function Fleet() {
                 <span className="text-white font-bold text-lg">49</span>
               </div>
               <div className="flex flex-col text-foreground">
-                <span className="font-bold text-lg tracking-tight leading-none">Fortyniner</span>
-                <span className="text-xs font-medium opacity-80 uppercase tracking-widest">Trucking</span>
+                <span className="font-bold text-lg tracking-tight leading-none">FortyNiner</span>
+                <span className="text-xs font-medium opacity-80 uppercase tracking-widest">Trucking LLC</span>
               </div>
             </div>
           </Link>
@@ -112,9 +111,9 @@ export default function Fleet() {
 
       <div className="container mx-auto px-6">
         <div className="mb-12">
-           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Our Modern Fleet</h1>
+           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Our Fleet</h1>
            <p className="text-xl text-muted-foreground max-w-2xl">
-             We operate one of the youngest fleets in the industry. Every vehicle is maintained to the highest standards for safety and reliability.
+             We operate a diverse, well-maintained fleet ready for small and large-scale projects. Every truck undergoes regular inspections to ensure safety and compliance.
            </p>
         </div>
 
@@ -181,13 +180,13 @@ export default function Fleet() {
                  
                  <div className="space-y-4 py-6 border-t border-border">
                    <div>
-                     <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-1">Specifications</p>
+                     <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-1">Capabilities</p>
                      <p className="font-medium text-lg">{selectedTruck.specs}</p>
                    </div>
                    <div>
-                     <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-1">Maintenance Status</p>
+                     <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-1">Availability</p>
                      <div className="flex items-center gap-2 text-green-600 font-medium">
-                       <div className="h-2 w-2 rounded-full bg-green-500" /> Active Service
+                       <div className="h-2 w-2 rounded-full bg-green-500" /> Operational
                      </div>
                    </div>
                  </div>
