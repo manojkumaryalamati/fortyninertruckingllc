@@ -3,10 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, Plus, Filter, AlertTriangle, Wrench, CheckCircle2, MoreVertical, Truck } from "lucide-react";
+import { Search, Plus, Filter, AlertTriangle, Wrench, CheckCircle2, MoreVertical, Truck, Upload } from "lucide-react";
 import { Link } from "wouter";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const mockTrucks = [
+const initialTrucks = [
   { id: "TRK-409", type: "Kenworth T680", plate: "XYZ-1234", vin: "...89201", status: "Active", maintenance: "Due in 30 days", mileage: "142,000 mi", category: "Tractor" },
   { id: "TRK-410", type: "Kenworth T680", plate: "ABC-5678", vin: "...19283", status: "Active", maintenance: "Up to date", mileage: "89,500 mi", category: "Tractor" },
   { id: "TRK-205", type: "Peterbilt 389", plate: "LMN-9012", vin: "...56473", status: "Maintenance", maintenance: "Service in progress", mileage: "210,000 mi", category: "Tractor" },
@@ -15,9 +18,28 @@ const mockTrucks = [
 ];
 
 export default function TrucksManagement() {
+  const [trucks, setTrucks] = useState(initialTrucks);
   const [filter, setFilter] = useState("All");
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const filteredTrucks = filter === "All" ? mockTrucks : mockTrucks.filter(t => t.category === filter);
+  const filteredTrucks = filter === "All" ? trucks : trucks.filter(t => t.category === filter);
+
+  const handleAddTruck = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const newTruck = {
+      id: formData.get("truckNumber") as string,
+      type: formData.get("type") as string,
+      plate: formData.get("plate") as string,
+      vin: `...${(formData.get("vin") as string).slice(-5)}`,
+      status: formData.get("status") as string,
+      maintenance: "Up to date",
+      mileage: `${formData.get("mileage")} mi`,
+      category: formData.get("category") as string,
+    };
+    setTrucks([...trucks, newTruck]);
+    setIsAddModalOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
@@ -32,7 +54,88 @@ export default function TrucksManagement() {
              <Link href="/admin">
                <Button variant="outline">Back to Dashboard</Button>
              </Link>
-             <Button className="gap-2"><Plus size={16} /> Add Vehicle</Button>
+             
+             <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
+               <DialogTrigger asChild>
+                 <Button className="gap-2"><Plus size={16} /> Add Vehicle</Button>
+               </DialogTrigger>
+               <DialogContent className="sm:max-w-[600px]">
+                 <DialogHeader>
+                   <DialogTitle>Add New Vehicle</DialogTitle>
+                 </DialogHeader>
+                 <form onSubmit={handleAddTruck} className="space-y-6 py-4">
+                   <div className="grid grid-cols-2 gap-4">
+                     <div className="space-y-2">
+                       <Label htmlFor="truckNumber">Unit Number</Label>
+                       <Input id="truckNumber" name="truckNumber" placeholder="TRK-100" required />
+                     </div>
+                     <div className="space-y-2">
+                       <Label htmlFor="category">Category</Label>
+                       <Select name="category" defaultValue="Tractor">
+                         <SelectTrigger>
+                           <SelectValue placeholder="Select category" />
+                         </SelectTrigger>
+                         <SelectContent>
+                           <SelectItem value="Tractor">Tractor</SelectItem>
+                           <SelectItem value="Trailer">Trailer</SelectItem>
+                           <SelectItem value="Construction">Construction</SelectItem>
+                         </SelectContent>
+                       </Select>
+                     </div>
+                   </div>
+
+                   <div className="grid grid-cols-2 gap-4">
+                     <div className="space-y-2">
+                       <Label htmlFor="type">Make & Model</Label>
+                       <Input id="type" name="type" placeholder="e.g. Kenworth T680" required />
+                     </div>
+                     <div className="space-y-2">
+                       <Label htmlFor="mileage">Current Mileage</Label>
+                       <Input id="mileage" name="mileage" placeholder="0" type="number" required />
+                     </div>
+                   </div>
+
+                   <div className="grid grid-cols-2 gap-4">
+                     <div className="space-y-2">
+                       <Label htmlFor="vin">VIN Number</Label>
+                       <Input id="vin" name="vin" placeholder="Full VIN" required />
+                     </div>
+                     <div className="space-y-2">
+                       <Label htmlFor="plate">License Plate</Label>
+                       <Input id="plate" name="plate" placeholder="XYZ-123" required />
+                     </div>
+                   </div>
+
+                   <div className="space-y-2">
+                     <Label htmlFor="status">Initial Status</Label>
+                     <Select name="status" defaultValue="Active">
+                       <SelectTrigger>
+                         <SelectValue placeholder="Select status" />
+                       </SelectTrigger>
+                       <SelectContent>
+                         <SelectItem value="Active">Active</SelectItem>
+                         <SelectItem value="Maintenance">Maintenance</SelectItem>
+                         <SelectItem value="Out of Service">Out of Service</SelectItem>
+                       </SelectContent>
+                     </Select>
+                   </div>
+
+                   <div className="space-y-2">
+                     <Label>Upload Registration/Insurance</Label>
+                     <div className="border-2 border-dashed border-border rounded-xl p-6 text-center hover:bg-secondary/50 transition-colors cursor-pointer">
+                       <Upload className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
+                       <p className="text-sm font-medium">Click to upload vehicle documents</p>
+                       <p className="text-xs text-muted-foreground">PDF, JPG up to 10MB</p>
+                     </div>
+                   </div>
+
+                   <DialogFooter>
+                     <Button type="button" variant="outline" onClick={() => setIsAddModalOpen(false)}>Cancel</Button>
+                     <Button type="submit">Add Vehicle</Button>
+                   </DialogFooter>
+                 </form>
+               </DialogContent>
+             </Dialog>
           </div>
         </div>
 
@@ -42,7 +145,7 @@ export default function TrucksManagement() {
              <CardContent className="p-4 flex items-center justify-between">
                <div>
                  <p className="text-xs font-bold uppercase text-primary mb-1">Total Fleet</p>
-                 <p className="text-2xl font-bold">48</p>
+                 <p className="text-2xl font-bold">{trucks.length}</p>
                </div>
                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary"><Truck size={16} /></div>
              </CardContent>
@@ -51,7 +154,7 @@ export default function TrucksManagement() {
              <CardContent className="p-4 flex items-center justify-between">
                <div>
                  <p className="text-xs font-bold uppercase text-green-700 mb-1">Active</p>
-                 <p className="text-2xl font-bold text-green-800">42</p>
+                 <p className="text-2xl font-bold text-green-800">{trucks.filter(t => t.status === "Active").length}</p>
                </div>
                <div className="h-8 w-8 rounded-full bg-green-200 flex items-center justify-center text-green-700"><CheckCircle2 size={16} /></div>
              </CardContent>
@@ -60,7 +163,7 @@ export default function TrucksManagement() {
              <CardContent className="p-4 flex items-center justify-between">
                <div>
                  <p className="text-xs font-bold uppercase text-orange-700 mb-1">In Shop</p>
-                 <p className="text-2xl font-bold text-orange-800">4</p>
+                 <p className="text-2xl font-bold text-orange-800">{trucks.filter(t => t.status === "Maintenance").length}</p>
                </div>
                <div className="h-8 w-8 rounded-full bg-orange-200 flex items-center justify-center text-orange-700"><Wrench size={16} /></div>
              </CardContent>
@@ -69,7 +172,7 @@ export default function TrucksManagement() {
              <CardContent className="p-4 flex items-center justify-between">
                <div>
                  <p className="text-xs font-bold uppercase text-red-700 mb-1">Critical</p>
-                 <p className="text-2xl font-bold text-red-800">2</p>
+                 <p className="text-2xl font-bold text-red-800">{trucks.filter(t => t.status === "Out of Service").length}</p>
                </div>
                <div className="h-8 w-8 rounded-full bg-red-200 flex items-center justify-center text-red-700"><AlertTriangle size={16} /></div>
              </CardContent>
