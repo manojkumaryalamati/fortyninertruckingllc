@@ -20,6 +20,7 @@ import DocumentsCenter from "@/pages/admin/documents";
 import Services from "@/pages/services";
 import Fleet from "@/pages/fleet";
 import Careers from "@/pages/careers";
+import Subhaulers from "@/pages/subhaulers";
 import Contact from "@/pages/contact";
 
 function Router() {
@@ -48,6 +49,7 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/fleet" component={Fleet} />
       <Route path="/careers" component={Careers} />
+      <Route path="/subhaulers" component={Subhaulers} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
