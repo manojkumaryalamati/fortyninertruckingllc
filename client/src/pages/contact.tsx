@@ -112,7 +112,7 @@ export default function Contact() {
               </div>
               <h3 className="text-xl font-bold">Call Dispatch</h3>
               <p className="text-muted-foreground">Immediate Assistance</p>
-              <p className="text-2xl font-bold text-primary">(800) 555-0149</p>
+              <p className="text-2xl font-bold text-primary">(925) 250-4605</p>
             </CardContent>
           </Card>
           
@@ -123,7 +123,7 @@ export default function Contact() {
               </div>
               <h3 className="text-xl font-bold">Email Us</h3>
               <p className="text-muted-foreground">Quotes & Bids</p>
-              <p className="text-xl font-bold text-primary">dispatch@49trucking.com</p>
+              <p className="text-xl font-bold text-primary">fortyninertrucking@gmail.com</p>
             </CardContent>
           </Card>
 
@@ -134,7 +134,7 @@ export default function Contact() {
               </div>
               <h3 className="text-xl font-bold">Visit HQ</h3>
               <p className="text-muted-foreground">Main Terminal</p>
-              <p className="text-lg font-medium">123 Industrial Pkwy<br/>Pittsburg, CA 94565</p>
+              <p className="text-lg font-medium">28 Glen Canyon Court<br/>Pittsburg CA 94565</p>
             </CardContent>
           </Card>
         </div>
