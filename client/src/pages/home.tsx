@@ -1,296 +1,335 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Check, Shield, Clock, MapPin, Truck, Phone, HardHat, Warehouse, BadgeCheck } from "lucide-react";
+import { Check, Shield, Clock, MapPin, Truck, Phone, HardHat, Warehouse, BadgeCheck, ChevronRight, ArrowRight } from "lucide-react";
 import Logo from "@/assets/logo.png";
-import HeroImage from "@/assets/hero-truck.jpg";
+import HeroSlide1 from "@/assets/hero-slide-1.jpg";
+import HeroSlide2 from "@/assets/hero-slide-2.jpg";
+import HeroSlide3 from "@/assets/hero-slide-3.jpg";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 20 }, [Autoplay({ delay: 6000 })]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on("select", onSelect);
+    onSelect();
+  }, [emblaApi, onSelect]);
+
+  const slides = [
+    {
+      image: HeroSlide1,
+      title: "Logistics Without Limits",
+      subtitle: "Connecting coasts, communities, and commerce with 99.9% on-time reliability.",
+      cta: "Track Shipment",
+      link: "/tracking"
+    },
+    {
+      image: HeroSlide2,
+      title: "Built for the Heavy Haul",
+      subtitle: "Specialized construction transport and aggregate logistics for major infrastructure.",
+      cta: "Our Fleet",
+      link: "#fleet"
+    },
+    {
+      image: HeroSlide3,
+      title: "Supply Chain Precision",
+      subtitle: "Advanced warehousing and distribution solutions that keep your business moving forward.",
+      cta: "Get Quote",
+      link: "#contact"
+    }
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground font-sans">
-      {/* Navigation */}
-      <nav className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+    <div className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-primary selection:text-black">
+      {/* Cinematic Navigation - Transparent until scrolled (simplified for this mockup) */}
+      <nav className="absolute top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-sm">
+        <div className="container mx-auto px-6 h-24 flex items-center justify-between">
           <Link href="/">
-            <div className="flex items-center gap-3 cursor-pointer">
-              <img src={Logo} alt="FortyninerTrucking Logo" className="h-10 w-10 object-contain" />
-              <span className="font-display text-2xl font-bold tracking-tight text-primary">
-                FORTYNINER<span className="text-foreground">TRUCKING</span>
-              </span>
+            <div className="flex items-center gap-3 cursor-pointer group">
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
+                <img src={Logo} alt="FortyninerTrucking Logo" className="h-12 w-12 object-contain relative z-10" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-display text-2xl font-bold tracking-tight text-white leading-none">
+                  FORTYNINER
+                </span>
+                <span className="font-display text-sm font-bold tracking-[0.2em] text-primary leading-none">
+                  TRUCKING
+                </span>
+              </div>
             </div>
           </Link>
           
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-sm font-medium hover:text-primary transition-colors">Services</a>
-            <a href="#about" className="text-sm font-medium hover:text-primary transition-colors">Our Fleet</a>
-            <Link href="/tracking" className="text-sm font-medium hover:text-primary transition-colors cursor-pointer">
-              Track Load
+          <div className="hidden md:flex items-center gap-10">
+            {["Services", "Fleet", "Safety", "Careers"].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-bold uppercase tracking-widest text-white/80 hover:text-primary transition-colors relative group">
+                {item}
+                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+              </a>
+            ))}
+            <Link href="/tracking">
+               <Button className="font-bold bg-primary hover:bg-primary/90 text-black border-none rounded-none px-6 h-10 clip-path-slant uppercase tracking-wider">
+                 Track Load
+               </Button>
             </Link>
-            <Button size="sm" className="font-bold bg-primary hover:bg-primary/90 text-primary-foreground">
-              (925) 555-0149
-            </Button>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative h-[650px] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={HeroImage} 
-            alt="Commercial trucking fleet on highway" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent" />
+      {/* Immersive Hero Slider */}
+      <section className="relative h-screen min-h-[700px] bg-black overflow-hidden group">
+        <div className="absolute inset-0 z-0" ref={emblaRef}>
+          <div className="flex h-full">
+            {slides.map((slide, index) => (
+              <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full">
+                {/* Image with Parallax-like scale effect on active */}
+                <div className="absolute inset-0">
+                  <motion.img 
+                    src={slide.image} 
+                    alt={slide.title}
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: index === selectedIndex ? 1 : 1.1 }}
+                    transition={{ duration: 6, ease: "easeOut" }}
+                    className="w-full h-full object-cover opacity-60"
+                  />
+                  {/* Cinematic Grading Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8 animate-in slide-in-from-left duration-700">
-            <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary tracking-wide uppercase">
-              <Shield className="h-3 w-3 mr-2" />
-              Locally Owned & Operated
-            </div>
-            <h1 className="text-5xl md:text-7xl font-display font-bold leading-[0.9] text-foreground tracking-tight">
-              SAFETY FIRST.<br />
-              <span className="text-primary">SERVICE ALWAYS.</span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed">
-              We provide premier commercial hauling and construction logistics for the Bay Area and beyond. 24/7 dispatch, dedicated lanes, and a "no excuses" commitment to getting the job done.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/tracking">
-                <Button size="lg" className="h-14 px-8 text-base font-bold uppercase tracking-wider w-full sm:w-auto shadow-lg shadow-primary/20">
-                  Track Your Load
-                </Button>
-              </Link>
-              <Button size="lg" variant="outline" className="h-14 px-8 text-base font-bold uppercase tracking-wider bg-background/50 backdrop-blur border-primary/50 hover:bg-primary/10 w-full sm:w-auto">
-                Request Quote
-              </Button>
+        {/* Floating Content Layer */}
+        <div className="absolute inset-0 z-10 flex items-center">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl space-y-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedIndex}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 50 }}
+                  transition={{ duration: 0.5, ease: "circOut" }}
+                  className="space-y-6"
+                >
+                  <div className="inline-flex items-center gap-3 border-l-4 border-primary pl-4">
+                    <span className="text-primary font-bold tracking-widest uppercase text-sm">Since 1849</span>
+                    <span className="text-white/60 font-medium text-sm">Legacy of Excellence</span>
+                  </div>
+                  
+                  <h1 className="text-6xl md:text-8xl font-display font-bold leading-[0.9] text-white uppercase tracking-tight drop-shadow-2xl">
+                    {slides[selectedIndex].title.split(" ").map((word, i) => (
+                      <span key={i} className={i === 1 ? "text-stroke-white text-transparent block" : "block"}>
+                        {word}{" "}
+                      </span>
+                    ))}
+                  </h1>
+                  
+                  <p className="text-xl text-white/80 max-w-xl font-light leading-relaxed border-l border-white/20 pl-6 py-2">
+                    {slides[selectedIndex].subtitle}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-4 pt-4">
+                    <Link href={slides[selectedIndex].link}>
+                      <Button size="lg" className="h-16 px-10 text-lg font-bold uppercase tracking-widest rounded-none bg-primary text-black hover:bg-white hover:text-black transition-all duration-300">
+                        {slides[selectedIndex].cta} <ChevronRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                    <Button size="lg" variant="outline" className="h-16 px-10 text-lg font-bold uppercase tracking-widest rounded-none border-white/30 text-white hover:bg-white hover:text-black backdrop-blur-sm transition-all duration-300">
+                      Contact Us
+                    </Button>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
-          
-          {/* Quick Quote Widget - New Addition */}
-          <div className="hidden md:block bg-card/95 backdrop-blur p-6 rounded-xl border border-border shadow-2xl animate-in fade-in duration-1000 delay-300 max-w-sm ml-auto">
-             <h3 className="font-display text-xl font-bold mb-4 flex items-center gap-2">
-               <Truck className="text-primary h-5 w-5" />
-               Quick Rate Request
-             </h3>
-             <div className="space-y-3">
-               <div className="grid grid-cols-2 gap-2">
-                 <input className="bg-muted px-3 py-2 rounded text-sm border-none" placeholder="Pickup Zip" />
-                 <input className="bg-muted px-3 py-2 rounded text-sm border-none" placeholder="Delivery Zip" />
-               </div>
-               <select className="w-full bg-muted px-3 py-2 rounded text-sm border-none text-muted-foreground">
-                 <option>Dry Van</option>
-                 <option>Flatbed</option>
-                 <option>Refrigerated</option>
-               </select>
-               <input className="w-full bg-muted px-3 py-2 rounded text-sm border-none" placeholder="Email Address" />
-               <Button className="w-full font-bold">Get Estimate</Button>
-             </div>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-12 right-12 z-20 flex gap-4">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => emblaApi?.scrollTo(index)}
+              className={`h-1 transition-all duration-500 ${
+                index === selectedIndex ? "w-16 bg-primary" : "w-8 bg-white/30 hover:bg-white/60"
+              }`}
+            />
+          ))}
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pb-8 animate-bounce hidden md:block">
+           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-primary to-transparent" />
+        </div>
+      </section>
+
+      {/* Quick Stats Strip */}
+      <section className="bg-primary text-black py-12 relative z-20 -mt-2">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-black/10">
+            {[
+              { label: "Loads Delivered", value: "50K+" },
+              { label: "Safety Rating", value: "A+" },
+              { label: "Fleet Size", value: "120+" },
+              { label: "States Covered", value: "48" }
+            ].map((stat, i) => (
+              <div key={i} className="text-center px-4">
+                <h3 className="text-4xl md:text-5xl font-display font-bold leading-none mb-1">{stat.value}</h3>
+                <p className="text-sm font-bold uppercase tracking-widest opacity-80">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Trust Bar */}
-      <section className="bg-secondary border-y border-border py-8">
-        <div className="container mx-auto px-4">
-           <div className="flex flex-wrap justify-center md:justify-between items-center gap-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-             {/* Simple text logos for trust indicators */}
-             <div className="flex items-center gap-2 font-display font-bold text-xl text-white"><BadgeCheck className="text-primary"/> SMARTWAY PARTNER</div>
-             <div className="flex items-center gap-2 font-display font-bold text-xl text-white"><BadgeCheck className="text-primary"/> CTPAT CERTIFIED</div>
-             <div className="flex items-center gap-2 font-display font-bold text-xl text-white"><BadgeCheck className="text-primary"/> FMCSA COMPLIANT</div>
-             <div className="flex items-center gap-2 font-display font-bold text-xl text-white"><BadgeCheck className="text-primary"/> TWIC APPROVED</div>
-           </div>
-        </div>
-      </section>
-
-      {/* Services Section - Updated Content */}
-      <section id="services" className="py-24 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <h2 className="text-4xl font-display font-bold">SPECIALIZED HAULING SOLUTIONS</h2>
-            <p className="text-lg text-muted-foreground">
-              We specialize in commercial construction logistics and dedicated freight lanes. Our fleet is equipped to handle everything from raw materials to finished goods.
-            </p>
+      {/* Services Grid */}
+      <section id="services" className="py-32 bg-background relative overflow-hidden">
+        {/* Background Texture */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+            <div className="max-w-2xl">
+              <span className="text-primary font-bold tracking-widest uppercase mb-4 block">Our Expertise</span>
+              <h2 className="text-5xl md:text-6xl font-display font-bold text-secondary uppercase leading-[0.9]">
+                Logistics <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/50">Redefined</span>
+              </h2>
+            </div>
+            <Button variant="outline" className="h-14 px-8 rounded-none border-secondary text-secondary hover:bg-secondary hover:text-white uppercase font-bold tracking-widest">
+              View All Services
+            </Button>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-card border-none shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-              <CardContent className="p-8 space-y-4">
-                <div className="h-14 w-14 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <HardHat size={28} />
+            {[
+              { 
+                icon: HardHat, 
+                title: "Construction Logistics", 
+                desc: "Heavy-duty transport for raw materials and equipment. We handle the weight so you can build the future.",
+                bg: "bg-neutral-100"
+              },
+              { 
+                icon: Warehouse, 
+                title: "Dedicated Supply Chain", 
+                desc: "Integrated fleet solutions acting as an extension of your business. Guaranteed capacity, fixed rates.",
+                bg: "bg-neutral-100"
+              },
+              { 
+                icon: Clock, 
+                title: "Expedited Freight", 
+                desc: "Time-critical delivery services with 24/7 monitoring. When tomorrow is too late, we deliver today.",
+                bg: "bg-neutral-100"
+              }
+            ].map((service, i) => (
+              <div key={i} className="group relative bg-white border border-border p-8 md:p-12 hover:border-primary transition-colors duration-500 shadow-sm hover:shadow-xl">
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-500 transform group-hover:scale-110">
+                  <service.icon size={120} />
                 </div>
-                <h3 className="text-xl font-bold font-display">Construction Logistics</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Reliable transport for construction materials, equipment, and aggregate. We understand the tight schedules of job sites and deliver accordingly.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card border-none shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-              <CardContent className="p-8 space-y-4">
-                <div className="h-14 w-14 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <Warehouse size={28} />
+                
+                <div className="relative z-10 h-full flex flex-col">
+                  <div className="h-16 w-16 bg-secondary text-primary flex items-center justify-center mb-8">
+                    <service.icon size={32} />
+                  </div>
+                  
+                  <h3 className="text-2xl font-display font-bold uppercase mb-4 group-hover:text-primary transition-colors">{service.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-8 flex-grow">
+                    {service.desc}
+                  </p>
+                  
+                  <a href="#" className="inline-flex items-center text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors mt-auto group/link">
+                    Learn More <ArrowRight className="ml-2 h-4 w-4 transform group-hover/link:translate-x-1 transition-transform" />
+                  </a>
                 </div>
-                <h3 className="text-xl font-bold font-display">Dedicated Lanes</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Consistent, contract-based hauling for manufacturers and distributors. We become an extension of your supply chain with guaranteed capacity.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card border-none shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-              <CardContent className="p-8 space-y-4">
-                <div className="h-14 w-14 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <Clock size={28} />
-                </div>
-                <h3 className="text-xl font-bold font-display">Expedited & JIT</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Just-In-Time delivery services for time-sensitive cargo. Our 24/7 dispatch team ensures constant communication for high-priority loads.
-                </p>
-              </CardContent>
-            </Card>
+                
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* About / Fleet Section - Updated Content */}
-      <section id="about" className="py-24 overflow-hidden">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8 order-2 md:order-1">
-            <h2 className="text-4xl md:text-5xl font-display font-bold leading-tight">
-              MORE THAN JUST<br />
-              <span className="text-primary">A TRUCKING COMPANY</span>
-            </h2>
-            <div className="prose prose-lg text-muted-foreground">
-              <p>
-                FortyninerTrucking was founded on a simple principle: <strong>No Excuses.</strong> We are a locally owned and operated carrier that brings institutional-grade reliability to every haul.
-              </p>
-              <p>
-                Our drivers are the backbone of our operation. Unlike mega-carriers, we treat every member of our team like family, which translates to better service for our customers. When you call us at 2 AM, you get a real person, not a machine.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-6 pt-4">
-              <div className="bg-muted/30 p-4 rounded-lg border-l-4 border-primary">
-                <h4 className="font-bold font-display text-lg">24/7 Dispatch</h4>
-                <p className="text-sm text-muted-foreground">Real-time problem solving, day or night.</p>
-              </div>
-              <div className="bg-muted/30 p-4 rounded-lg border-l-4 border-primary">
-                <h4 className="font-bold font-display text-lg">Financial Guarantee</h4>
-                <p className="text-sm text-muted-foreground">Backed by strong institutional partners.</p>
-              </div>
-            </div>
-
-            <Button size="lg" className="mt-4">
-              Drive For Us
-            </Button>
-          </div>
-          
-          <div className="relative order-1 md:order-2">
-            <div className="aspect-[4/5] rounded-2xl bg-secondary overflow-hidden relative z-10 shadow-2xl">
-               {/* Pattern overlay */}
-               <div className="absolute inset-0 bg-secondary/80 flex items-center justify-center">
-                 {/* This would ideally be another image, using a placeholder/pattern for now */}
-                 <div className="text-center p-8">
-                   <Shield size={80} className="text-primary mx-auto mb-6 opacity-80" />
-                   <h3 className="text-2xl font-bold text-white font-display mb-2">SAFETY EXCELLENCE AWARD 2025</h3>
-                   <p className="text-gray-400">Recognized for maintaining a zero-accident record in high-risk construction zones.</p>
-                 </div>
-               </div>
-            </div>
-            {/* Decorative elements */}
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary rounded-lg z-0 opacity-20" />
-            <div className="absolute -top-6 -right-6 w-32 h-32 border-4 border-primary rounded-lg z-0 opacity-20" />
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 bg-secondary text-secondary-foreground relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10 text-center space-y-8">
-          <h2 className="text-4xl md:text-5xl font-display font-bold">READY TO PARTNER UP?</h2>
-          <p className="text-xl text-secondary-foreground/80 max-w-2xl mx-auto">
-            Experience the difference of a carrier that puts your schedule first.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="h-14 px-8 text-lg font-bold">
-              Get A Quote
-            </Button>
-            <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold bg-transparent border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground">
-              <Phone className="mr-2 h-5 w-5" />
-              (925) 555-0149
-            </Button>
-          </div>
+      {/* CTA Section - Dark Mode style */}
+      <section className="py-32 bg-secondary text-white relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-10 grayscale mix-blend-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/80 to-transparent" />
         </div>
         
-        {/* Abstract background */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent" />
+        <div className="container mx-auto px-6 relative z-10 text-center">
+          <h2 className="text-5xl md:text-7xl font-display font-bold mb-8 uppercase tracking-tight">
+            Ready to <span className="text-primary">Move?</span>
+          </h2>
+          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12 font-light">
+            Join the hundreds of businesses that trust FortyninerTrucking for their critical logistics needs.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <Button size="lg" className="h-16 px-12 text-lg font-bold uppercase tracking-widest rounded-none bg-primary text-black hover:bg-white transition-all w-full sm:w-auto">
+              Get A Quote
+            </Button>
+            <div className="flex items-center gap-3 text-white">
+              <div className="h-12 w-12 border border-white/20 flex items-center justify-center rounded-full">
+                <Phone className="h-5 w-5" />
+              </div>
+              <div className="text-left">
+                <p className="text-xs uppercase tracking-widest text-white/50">24/7 Dispatch</p>
+                <p className="text-xl font-display font-bold tracking-wide">(800) 555-0149</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-background border-t border-border pt-16 pb-8">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <img src={Logo} alt="Logo" className="h-8 w-8 object-contain" />
-                <span className="font-display text-xl font-bold">FORTYNINER</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Premier commercial hauling and logistics for the modern age. Safety first, service always.
+      {/* Minimal Footer */}
+      <footer className="bg-black text-white py-16 border-t border-white/10">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+              <img src={Logo} alt="Logo" className="h-10 w-10 object-contain mb-6 opacity-80" />
+              <p className="text-white/40 max-w-xs text-sm leading-relaxed">
+                FortyninerTrucking is a premier logistics provider committed to safety, reliability, and innovation in the freight industry.
               </p>
             </div>
             
-            <div>
-              <h4 className="font-bold mb-4">Services</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-primary">Commercial Hauling</a></li>
-                <li><a href="#" className="hover:text-primary">Construction Logistics</a></li>
-                <li><a href="#" className="hover:text-primary">Dedicated Lanes</a></li>
-                <li><a href="#" className="hover:text-primary">Warehousing</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-primary">About Us</a></li>
-                <li><a href="#" className="hover:text-primary">Drive For Us</a></li>
-                <li><a href="#" className="hover:text-primary">Safety Record</a></li>
-                <li><a href="#" className="hover:text-primary">Contact</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4">Contact Dispatch</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <MapPin size={16} className="mt-0.5 text-primary" />
-                  <span>123 Industrial Parkway<br/>Pittsburg, CA 94565</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Phone size={16} className="text-primary" />
-                  <span>(925) 555-0149</span>
-                </li>
-                <li className="flex items-center gap-2 text-primary font-bold">
-                  <Clock size={16} />
-                  <span>24/7 Support Available</span>
-                </li>
-              </ul>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-12 text-sm">
+              <div className="space-y-4">
+                <h4 className="font-bold text-primary uppercase tracking-widest">Navigation</h4>
+                <ul className="space-y-2 text-white/60">
+                  <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
+                  <li><a href="#" className="hover:text-white transition-colors">Services</a></li>
+                  <li><a href="#" className="hover:text-white transition-colors">Fleet</a></li>
+                  <li><a href="#" className="hover:text-white transition-colors">Tracking</a></li>
+                </ul>
+              </div>
+              <div className="space-y-4">
+                <h4 className="font-bold text-primary uppercase tracking-widest">Legal</h4>
+                <ul className="space-y-2 text-white/60">
+                  <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                  <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+                  <li><a href="#" className="hover:text-white transition-colors">Cookie Policy</a></li>
+                </ul>
+              </div>
             </div>
           </div>
           
-          <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-muted-foreground">
-              © 2026 FortyninerTrucking. All rights reserved.
-            </p>
-            <div className="flex gap-4 text-xs text-muted-foreground">
-              <a href="#" className="hover:text-foreground">Privacy Policy</a>
-              <a href="#" className="hover:text-foreground">Terms of Service</a>
-            </div>
+          <div className="border-t border-white/10 mt-16 pt-8 flex justify-between items-center text-xs text-white/30 uppercase tracking-widest">
+            <p>© 2026 FortyninerTrucking.</p>
+            <p>Designed with Precision.</p>
           </div>
         </div>
       </footer>
