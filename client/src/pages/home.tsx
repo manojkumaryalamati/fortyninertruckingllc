@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Check, Shield, Clock, MapPin, Truck, Phone, HardHat, Warehouse, BadgeCheck, ChevronRight, ArrowRight, Menu, X } from "lucide-react";
+import { Check, Shield, Clock, MapPin, Truck, Phone, HardHat, Warehouse, ChevronRight, ArrowRight, Menu, X, Star } from "lucide-react";
 import Logo from "@/assets/logo.png";
 import HeroSlide1 from "@/assets/hero-slide-1.jpg";
 import HeroSlide2 from "@/assets/hero-slide-2.jpg";
@@ -12,9 +12,10 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 20 }, [Autoplay({ delay: 6000 })]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 25 }, [Autoplay({ delay: 6000 })]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -26,6 +27,13 @@ export default function Home() {
     emblaApi.on("select", onSelect);
     onSelect();
   }, [emblaApi, onSelect]);
+
+  // Handle scroll for navbar styling
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const slides = [
     {
@@ -59,37 +67,42 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-primary selection:text-black">
-      {/* Cinematic Navigation - Transparent until scrolled */}
-      <nav className="absolute top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-sm">
-        <div className="container mx-auto px-6 h-24 flex items-center justify-between">
+    <div className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-primary/20 selection:text-foreground">
+      
+      {/* Navbar - Premium Glassmorphism */}
+      <nav 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/50 py-3 shadow-sm" : "bg-transparent py-6"
+        }`}
+      >
+        <div className="container mx-auto px-6 flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center gap-3 cursor-pointer group">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
-                <img src={Logo} alt="FortyninerTrucking Logo" className="h-12 w-12 object-contain relative z-10" />
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-gradient-to-br from-primary to-orange-600 flex items-center justify-center shadow-lg shadow-primary/20">
+                <span className="text-white font-bold text-lg">49</span>
               </div>
-              <div className="flex flex-col">
-                <span className="font-display text-2xl font-bold tracking-tight text-white leading-none">
-                  FORTYNINER
-                </span>
-                <span className="font-display text-sm font-bold tracking-[0.2em] text-primary leading-none">
-                  TRUCKING
-                </span>
+              <div className={`flex flex-col transition-colors duration-300 ${scrolled ? "text-foreground" : "text-white"}`}>
+                <span className="font-bold text-lg tracking-tight leading-none">Fortyniner</span>
+                <span className="text-xs font-medium opacity-80 uppercase tracking-widest">Trucking</span>
               </div>
             </div>
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm font-bold uppercase tracking-widest text-white/80 hover:text-primary transition-colors relative group">
+              <a 
+                key={item.name} 
+                href={item.href} 
+                className={`text-sm font-medium transition-colors hover:opacity-100 ${
+                  scrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"
+                }`}
+              >
                 {item.name}
-                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             <Link href="/tracking">
-               <Button className="font-bold bg-primary hover:bg-primary/90 text-black border-none rounded-none px-6 h-10 clip-path-slant uppercase tracking-wider">
+               <Button className="font-semibold shadow-lg shadow-primary/20 bg-primary hover:bg-primary/90 text-white rounded-full px-6 transition-all hover:scale-105 active:scale-95">
                  Track Load
                </Button>
             </Link>
@@ -97,10 +110,12 @@ export default function Home() {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden text-white hover:text-primary transition-colors"
+            className={`md:hidden p-2 rounded-full transition-colors ${
+              scrolled ? "text-foreground hover:bg-secondary" : "text-white hover:bg-white/10"
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
@@ -108,23 +123,24 @@ export default function Home() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div 
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-24 left-0 right-0 bg-black/95 border-b border-white/10 p-6 md:hidden flex flex-col gap-6 shadow-2xl"
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 right-0 bg-background border-b border-border shadow-2xl p-6 md:hidden flex flex-col gap-4"
             >
               {navLinks.map((item) => (
                 <a 
                   key={item.name} 
                   href={item.href} 
-                  className="text-lg font-bold uppercase tracking-widest text-white hover:text-primary transition-colors"
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors py-2 border-b border-border/50 last:border-0"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
                 </a>
               ))}
               <Link href="/tracking">
-                 <Button className="w-full font-bold bg-primary hover:bg-primary/90 text-black border-none rounded-none h-12 uppercase tracking-wider">
+                 <Button className="w-full font-bold bg-primary text-white rounded-xl h-12 shadow-lg shadow-primary/20 mt-2">
                    Track Load
                  </Button>
               </Link>
@@ -133,131 +149,123 @@ export default function Home() {
         </AnimatePresence>
       </nav>
 
-      {/* Immersive Hero Slider */}
-      <section className="relative h-screen min-h-[700px] bg-black overflow-hidden group">
+      {/* Hero Section - Apple/Stripe Style Slider */}
+      <section className="relative h-screen min-h-[700px] w-full overflow-hidden bg-black">
         <div className="absolute inset-0 z-0" ref={emblaRef}>
           <div className="flex h-full">
             {slides.map((slide, index) => (
               <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full">
-                {/* Image with Parallax-like scale effect on active */}
-                <div className="absolute inset-0">
-                  <motion.img 
+                <motion.div 
+                   className="absolute inset-0"
+                   initial={{ scale: 1.1 }}
+                   animate={{ scale: index === selectedIndex ? 1 : 1.1 }}
+                   transition={{ duration: 10, ease: "easeOut" }}
+                >
+                  <img 
                     src={slide.image} 
                     alt={slide.title}
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: index === selectedIndex ? 1 : 1.1 }}
-                    transition={{ duration: 6, ease: "easeOut" }}
                     className="w-full h-full object-cover opacity-60"
                   />
-                  {/* Cinematic Grading Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
-                </div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80" />
+                </motion.div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Floating Content Layer */}
-        <div className="absolute inset-0 z-10 flex items-center">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl space-y-8">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={selectedIndex}
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 50 }}
-                  transition={{ duration: 0.5, ease: "circOut" }}
-                  className="space-y-6"
-                >
-                  <div className="inline-flex items-center gap-3 border-l-4 border-primary pl-4">
-                    <span className="text-primary font-bold tracking-widest uppercase text-sm">Since 1849</span>
-                    <span className="text-white/60 font-medium text-sm">Legacy of Excellence</span>
-                  </div>
-                  
-                  <h1 className="text-6xl md:text-8xl font-display font-bold leading-[0.9] text-white uppercase tracking-tight drop-shadow-2xl">
-                    {slides[selectedIndex].title.split(" ").map((word, i) => (
-                      <span key={i} className={i === 1 ? "text-stroke-white text-transparent block" : "block"}>
-                        {word}{" "}
-                      </span>
-                    ))}
-                  </h1>
-                  
-                  <p className="text-xl text-white/80 max-w-xl font-light leading-relaxed border-l border-white/20 pl-6 py-2">
-                    {slides[selectedIndex].subtitle}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-4 pt-4">
-                    <Link href={slides[selectedIndex].link}>
-                      <Button size="lg" className="h-16 px-10 text-lg font-bold uppercase tracking-widest rounded-none bg-primary text-black hover:bg-white hover:text-black transition-all duration-300">
-                        {slides[selectedIndex].cta} <ChevronRight className="ml-2 h-5 w-5" />
-                      </Button>
-                    </Link>
-                    <Button size="lg" variant="outline" className="h-16 px-10 text-lg font-bold uppercase tracking-widest rounded-none border-white/30 text-white hover:bg-white hover:text-black backdrop-blur-sm transition-all duration-300">
-                      Contact Us
+        <div className="absolute inset-0 z-10 flex items-center justify-center text-center">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedIndex}
+                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="space-y-8"
+              >
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mx-auto">
+                  <Star size={14} className="text-primary fill-primary" />
+                  <span>Trusted by 500+ Enterprise Clients</span>
+                </div>
+                
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1] text-balance">
+                  {slides[selectedIndex].title}
+                </h1>
+                
+                <p className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto font-light leading-relaxed text-balance">
+                  {slides[selectedIndex].subtitle}
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                  <Link href={slides[selectedIndex].link}>
+                    <Button size="lg" className="h-14 px-8 text-base font-semibold bg-white text-black hover:bg-white/90 rounded-full transition-all hover:scale-105 active:scale-95 shadow-xl">
+                      {slides[selectedIndex].cta} <ChevronRight className="ml-2 h-4 w-4" />
                     </Button>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                  </Link>
+                  <Button size="lg" variant="outline" className="h-14 px-8 text-base font-semibold bg-white/5 backdrop-blur-sm border-white/20 text-white hover:bg-white/10 rounded-full transition-all hover:scale-105 active:scale-95">
+                    Contact Sales
+                  </Button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-12 right-12 z-20 flex gap-4">
+        <div className="absolute bottom-12 left-0 right-0 z-20 flex justify-center gap-3">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => emblaApi?.scrollTo(index)}
-              className={`h-1 transition-all duration-500 ${
-                index === selectedIndex ? "w-16 bg-primary" : "w-8 bg-white/30 hover:bg-white/60"
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                index === selectedIndex ? "w-8 bg-white" : "w-2 bg-white/30 hover:bg-white/50"
               }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
-        
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pb-8 animate-bounce hidden md:block">
-           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-primary to-transparent" />
-        </div>
       </section>
 
-      {/* Quick Stats Strip */}
-      <section className="bg-primary text-black py-12 relative z-20 -mt-2">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-black/10">
+      {/* Stats - Floating Card Style */}
+      <section className="relative z-20 -mt-24 pb-24 px-6 pointer-events-none">
+        <div className="container mx-auto">
+          <div className="bg-background/80 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-2xl rounded-3xl p-8 md:p-12 grid grid-cols-2 md:grid-cols-4 gap-8 pointer-events-auto">
             {[
               { label: "Loads Delivered", value: "50K+" },
-              { label: "Safety Rating", value: "A+" },
-              { label: "Fleet Size", value: "120+" },
-              { label: "States Covered", value: "48" }
+              { label: "On-Time Rate", value: "99.9%" },
+              { label: "Active Fleet", value: "120+" },
+              { label: "Coverage", value: "Nationwide" }
             ].map((stat, i) => (
-              <div key={i} className="text-center px-4">
-                <h3 className="text-4xl md:text-5xl font-display font-bold leading-none mb-1">{stat.value}</h3>
-                <p className="text-sm font-bold uppercase tracking-widest opacity-80">{stat.label}</p>
+              <div key={i} className="text-center space-y-2 group cursor-default">
+                <p className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300 origin-center">
+                  {stat.value}
+                </p>
+                <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section id="services" className="py-32 bg-background relative overflow-hidden">
-        {/* Background Texture */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]" />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-            <div className="max-w-2xl">
-              <span className="text-primary font-bold tracking-widest uppercase mb-4 block">Our Expertise</span>
-              <h2 className="text-5xl md:text-6xl font-display font-bold text-secondary uppercase leading-[0.9]">
-                Logistics <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/50">Redefined</span>
+      {/* Expertise Section - Minimal Grid */}
+      <section id="services" className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="space-y-4 max-w-2xl">
+              <span className="text-primary font-semibold tracking-wider uppercase text-sm">Our Expertise</span>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground text-balance">
+                Logistics engineered for <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500">
+                  maximum efficiency.
+                </span>
               </h2>
             </div>
-            <Button variant="outline" className="h-14 px-8 rounded-none border-secondary text-secondary hover:bg-secondary hover:text-white uppercase font-bold tracking-widest">
-              View All Services
-            </Button>
+            <Link href="#contact">
+              <Button variant="outline" className="rounded-full px-6 font-medium group">
+                View All Services <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -265,183 +273,163 @@ export default function Home() {
               { 
                 icon: HardHat, 
                 title: "Construction Logistics", 
-                desc: "Heavy-duty transport for raw materials and equipment. We handle the weight so you can build the future.",
-                bg: "bg-neutral-100"
+                desc: "Specialized heavy haul for raw materials and equipment. We keep your job site moving on schedule."
               },
               { 
                 icon: Warehouse, 
                 title: "Dedicated Supply Chain", 
-                desc: "Integrated fleet solutions acting as an extension of your business. Guaranteed capacity, fixed rates.",
-                bg: "bg-neutral-100"
+                desc: "Integrated fleet solutions acting as an extension of your business with guaranteed capacity."
               },
               { 
                 icon: Clock, 
                 title: "Expedited Freight", 
-                desc: "Time-critical delivery services with 24/7 monitoring. When tomorrow is too late, we deliver today.",
-                bg: "bg-neutral-100"
+                desc: "Time-critical delivery services with 24/7 monitoring for high-value and urgent shipments."
               }
             ].map((service, i) => (
-              <div key={i} className="group relative bg-white border border-border p-8 md:p-12 hover:border-primary transition-colors duration-500 shadow-sm hover:shadow-xl">
-                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-500 transform group-hover:scale-110">
-                  <service.icon size={120} />
+              <div 
+                key={i} 
+                className="group p-8 rounded-3xl bg-secondary/30 hover:bg-secondary/60 border border-transparent hover:border-border transition-all duration-300"
+              >
+                <div className="h-14 w-14 rounded-2xl bg-white dark:bg-white/10 shadow-sm flex items-center justify-center text-foreground mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <service.icon size={28} strokeWidth={1.5} />
                 </div>
-                
-                <div className="relative z-10 h-full flex flex-col">
-                  <div className="h-16 w-16 bg-secondary text-primary flex items-center justify-center mb-8">
-                    <service.icon size={32} />
-                  </div>
-                  
-                  <h3 className="text-2xl font-display font-bold uppercase mb-4 group-hover:text-primary transition-colors">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-8 flex-grow">
-                    {service.desc}
-                  </p>
-                  
-                  <a href="#" className="inline-flex items-center text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors mt-auto group/link">
-                    Learn More <ArrowRight className="ml-2 h-4 w-4 transform group-hover/link:translate-x-1 transition-transform" />
-                  </a>
+                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  {service.desc}
+                </p>
+                <div className="flex items-center text-sm font-semibold text-foreground group-hover:text-primary transition-colors cursor-pointer">
+                  Learn More <ChevronRight className="ml-1 h-4 w-4" />
                 </div>
-                
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Fleet Section - Added for Link Compatibility */}
-      <section id="fleet" className="py-24 bg-muted/30">
-        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-          <div className="order-2 md:order-1 relative h-[600px] w-full overflow-hidden group">
-             <img 
-               src={HeroSlide2} 
-               alt="Fleet Truck" 
-               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" 
-             />
-             <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
-          </div>
-          <div className="order-1 md:order-2 space-y-8">
-            <span className="text-primary font-bold tracking-widest uppercase block">Our Fleet</span>
-            <h2 className="text-5xl md:text-6xl font-display font-bold text-secondary uppercase leading-[0.9]">
-              Modern <span className="text-primary">&</span><br/> Reliable
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Our fleet of late-model Kenworth and Peterbilt trucks ensures reliability on every mile. Equipped with the latest safety technology and GPS tracking, we maintain a 99.9% uptime record.
-            </p>
-            <ul className="space-y-4">
-               {["GPS Real-time Tracking", "Collision Mitigation Systems", "EPA SmartWay Certified", "Average Age < 3 Years"].map((item, i) => (
-                 <li key={i} className="flex items-center gap-3 font-medium">
-                   <Check className="text-primary" /> {item}
-                 </li>
-               ))}
-            </ul>
+      {/* Fleet Section - Immersive Split Layout */}
+      <section id="fleet" className="py-24 bg-foreground text-background overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 rounded-l-[100px] hidden md:block" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="order-2 md:order-1 relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] group">
+               <img 
+                 src={HeroSlide2} 
+                 alt="Fleet Truck" 
+                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
+               <div className="absolute bottom-6 left-6 text-white">
+                 <p className="font-bold text-lg">Kenworth T680</p>
+                 <p className="text-sm opacity-80">Latest Addition to Fleet</p>
+               </div>
+            </div>
+            
+            <div className="order-1 md:order-2 space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-medium text-white">
+                <Truck size={12} />
+                <span>Modern Fleet Technology</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+                Reliability isn't an accident.<br/>
+                It's engineered.
+              </h2>
+              <p className="text-lg text-white/70 leading-relaxed font-light">
+                Our fleet of late-model Kenworth and Peterbilt trucks ensures uptime on every mile. Equipped with the latest collision mitigation and GPS telematics, we deliver safety and visibility.
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                 {[
+                   "Real-time GPS Tracking", 
+                   "Collision Mitigation", 
+                   "EPA SmartWay Certified", 
+                   "Avg Age < 3 Years"
+                 ].map((item, i) => (
+                   <div key={i} className="flex items-center gap-3 text-white/90">
+                     <div className="h-2 w-2 rounded-full bg-primary" />
+                     <span className="font-medium">{item}</span>
+                   </div>
+                 ))}
+              </div>
+              
+              <Button className="mt-4 rounded-full bg-white text-black hover:bg-white/90 font-semibold px-8 h-12">
+                Explore Our Fleet
+              </Button>
+            </div>
           </div>
         </div>
       </section>
       
-      {/* Safety Section - Added for Link Compatibility */}
-      <section id="safety" className="py-24 bg-black text-white">
-        <div className="container mx-auto px-6 text-center">
-           <h2 className="text-5xl font-display font-bold uppercase mb-6">Safety Is Our DNA</h2>
-           <p className="max-w-2xl mx-auto text-white/60 text-lg mb-12">
-             We invest in our drivers and technology to ensure every load arrives safely. Zero compromises.
-           </p>
-           <div className="grid md:grid-cols-3 gap-8">
-              <div className="p-8 border border-white/10 hover:border-primary/50 transition-colors">
-                <BadgeCheck className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold uppercase mb-2">FMCSA Compliant</h3>
-                <p className="text-white/40 text-sm">Exceeding all federal safety regulations.</p>
-              </div>
-              <div className="p-8 border border-white/10 hover:border-primary/50 transition-colors">
-                <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold uppercase mb-2">Ongoing Training</h3>
-                <p className="text-white/40 text-sm">Monthly safety workshops for all drivers.</p>
-              </div>
-              <div className="p-8 border border-white/10 hover:border-primary/50 transition-colors">
-                <Truck className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold uppercase mb-2">24/7 Monitoring</h3>
-                <p className="text-white/40 text-sm">Round-the-clock fleet supervision.</p>
-              </div>
-           </div>
-        </div>
-      </section>
-
-      {/* Careers Section - Added for Link Compatibility */}
-      <section id="careers" className="py-24 bg-primary text-black">
-         <div className="container mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-display font-bold uppercase mb-8">Drive For The Best</h2>
-            <Button size="lg" className="h-16 px-12 text-lg font-bold uppercase bg-black text-white hover:bg-black/80">
-              View Open Positions
-            </Button>
-         </div>
-      </section>
-
-      {/* CTA Section - Dark Mode style */}
-      <section id="contact" className="py-32 bg-secondary text-white relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-10 grayscale mix-blend-overlay" />
-          <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/80 to-transparent" />
-        </div>
-        
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-5xl md:text-7xl font-display font-bold mb-8 uppercase tracking-tight">
-            Ready to <span className="text-primary">Move?</span>
+      {/* Call to Action - Clean & Minimal */}
+      <section id="contact" className="py-32 bg-background relative">
+        <div className="container mx-auto px-6 max-w-4xl text-center space-y-8">
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground">
+            Ready to move?
           </h2>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12 font-light">
-            Join the hundreds of businesses that trust FortyninerTrucking for their critical logistics needs.
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
+            Join hundreds of enterprise shippers who trust FortyninerTrucking for their critical logistics needs.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button size="lg" className="h-16 px-12 text-lg font-bold uppercase tracking-widest rounded-none bg-primary text-black hover:bg-white transition-all w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+            <Button size="lg" className="h-14 px-10 text-base font-semibold rounded-full bg-foreground text-background hover:bg-foreground/90 shadow-xl w-full sm:w-auto">
               Get A Quote
             </Button>
-            <div className="flex items-center gap-3 text-white">
-              <div className="h-12 w-12 border border-white/20 flex items-center justify-center rounded-full">
-                <Phone className="h-5 w-5" />
-              </div>
-              <div className="text-left">
-                <p className="text-xs uppercase tracking-widest text-white/50">24/7 Dispatch</p>
-                <p className="text-xl font-display font-bold tracking-wide">(800) 555-0149</p>
-              </div>
+            <div className="h-14 px-10 flex items-center justify-center rounded-full border border-border hover:bg-secondary transition-colors cursor-pointer w-full sm:w-auto gap-2 text-foreground font-medium">
+              <Phone size={18} />
+              (800) 555-0149
             </div>
           </div>
         </div>
       </section>
 
-      {/* Minimal Footer */}
-      <footer className="bg-black text-white py-16 border-t border-white/10">
+      {/* Footer - Minimalist */}
+      <footer className="bg-background border-t border-border py-16">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-12">
-            <div>
-              <img src={Logo} alt="Logo" className="h-10 w-10 object-contain mb-6 opacity-80" />
-              <p className="text-white/40 max-w-xs text-sm leading-relaxed">
-                FortyninerTrucking is a premier logistics provider committed to safety, reliability, and innovation in the freight industry.
+          <div className="grid md:grid-cols-4 gap-12 mb-16">
+            <div className="space-y-6">
+              <div className="flex items-center gap-2">
+                <div className="h-8 w-8 rounded-lg bg-foreground text-background flex items-center justify-center font-bold text-sm">49</div>
+                <span className="font-bold text-lg tracking-tight">Fortyniner</span>
+              </div>
+              <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
+                Premier logistics provider committed to safety, reliability, and innovation in the freight industry.
               </p>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-12 text-sm">
-              <div className="space-y-4">
-                <h4 className="font-bold text-primary uppercase tracking-widest">Navigation</h4>
-                <ul className="space-y-2 text-white/60">
-                  <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Services</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Fleet</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Tracking</a></li>
+            <div className="col-span-2 md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
+              <div>
+                <h4 className="font-semibold mb-4 text-foreground">Services</h4>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li><a href="#" className="hover:text-primary transition-colors">Construction Logistics</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Dedicated Fleet</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Expedited Freight</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Warehousing</a></li>
                 </ul>
               </div>
-              <div className="space-y-4">
-                <h4 className="font-bold text-primary uppercase tracking-widest">Legal</h4>
-                <ul className="space-y-2 text-white/60">
-                  <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Cookie Policy</a></li>
+              <div>
+                <h4 className="font-semibold mb-4 text-foreground">Company</h4>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li><a href="#" className="hover:text-primary transition-colors">About Us</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Safety Record</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-4 text-foreground">Legal</h4>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
                 </ul>
               </div>
             </div>
           </div>
           
-          <div className="border-t border-white/10 mt-16 pt-8 flex justify-between items-center text-xs text-white/30 uppercase tracking-widest">
-            <p>© 2026 FortyninerTrucking.</p>
-            <p>Designed with Precision.</p>
+          <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+            <p>© 2026 FortyninerTrucking Inc.</p>
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-2"><div className="h-2 w-2 rounded-full bg-green-500"></div> Systems Operational</span>
+            </div>
           </div>
         </div>
       </footer>
