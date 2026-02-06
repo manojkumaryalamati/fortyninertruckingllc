@@ -11,6 +11,12 @@ import AdminDashboard from "@/pages/admin";
 import DriversManagement from "@/pages/admin/drivers";
 import TrucksManagement from "@/pages/admin/trucks";
 import TripsManagement from "@/pages/admin/trips";
+import DocumentsCenter from "@/pages/admin/documents";
+
+// ... inside Router function, add:
+      <Route path="/admin/documents">
+         {() => <ProtectedRoute component={DocumentsCenter} />}
+      </Route>
 import Services from "@/pages/services";
 import Fleet from "@/pages/fleet";
 import Careers from "@/pages/careers";
@@ -34,6 +40,9 @@ function Router() {
       </Route>
       <Route path="/admin/trips">
          {() => <ProtectedRoute component={TripsManagement} />}
+      </Route>
+      <Route path="/admin/documents">
+         {() => <ProtectedRoute component={DocumentsCenter} />}
       </Route>
 
       <Route path="/services" component={Services} />
