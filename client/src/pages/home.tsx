@@ -101,11 +101,6 @@ export default function Home() {
                 {item.name}
               </a>
             ))}
-            <Link href="/tracking">
-               <Button className="font-semibold shadow-lg shadow-primary/20 bg-primary hover:bg-primary/90 text-white rounded-full px-6 transition-all hover:scale-105 active:scale-95">
-                 Track Load
-               </Button>
-            </Link>
             <Link href="/admin">
                <Button variant="ghost" className={`font-medium ${scrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"}`}>
                  Login
@@ -144,11 +139,6 @@ export default function Home() {
                   {item.name}
                 </a>
               ))}
-              <Link href="/tracking">
-                 <Button className="w-full font-bold bg-primary text-white rounded-xl h-12 shadow-lg shadow-primary/20 mt-2">
-                   Track Load
-                 </Button>
-              </Link>
               <Link href="/admin">
                  <Button variant="outline" className="w-full font-bold rounded-xl h-12 mt-2">
                    Portal Login
