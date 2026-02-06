@@ -4,11 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Search, Plus, MoreHorizontal, Phone, Mail, FileText, Truck } from "lucide-react";
+import { Search, Plus, MoreHorizontal, Phone, Mail, FileText, Truck, X, Upload } from "lucide-react";
 import { Link } from "wouter";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 
 // Mock Drivers Data
-const mockDrivers = [
+const initialDrivers = [
   { id: "DRV-001", name: "Michael Rodriguez", status: "Active", phone: "(555) 123-4567", email: "m.rodriguez@49trucking.com", license: "CDL-A 829102", truck: "T-680 #409", joinDate: "Jan 12, 2022" },
   { id: "DRV-002", name: "Sarah Jenkins", status: "Active", phone: "(555) 987-6543", email: "s.jenkins@49trucking.com", license: "CDL-A 192834", truck: "T-680 #410", joinDate: "Mar 04, 2023" },
   { id: "DRV-003", name: "David Chen", status: "On Leave", phone: "(555) 456-7890", email: "d.chen@49trucking.com", license: "CDL-A 564738", truck: "Unassigned", joinDate: "Nov 15, 2021" },
@@ -17,12 +21,31 @@ const mockDrivers = [
 ];
 
 export default function DriversManagement() {
+  const [drivers, setDrivers] = useState(initialDrivers);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const filteredDrivers = mockDrivers.filter(driver => 
+  const filteredDrivers = drivers.filter(driver => 
     driver.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
     driver.id.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleAddDriver = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const newDriver = {
+      id: `DRV-00${drivers.length + 1}`,
+      name: formData.get("name") as string,
+      status: "Active",
+      phone: formData.get("phone") as string,
+      email: formData.get("email") as string,
+      license: formData.get("license") as string,
+      truck: "Unassigned",
+      joinDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
+    };
+    setDrivers([...drivers, newDriver]);
+    setIsAddModalOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
@@ -38,7 +61,68 @@ export default function DriversManagement() {
              <Link href="/admin">
                <Button variant="outline">Back to Dashboard</Button>
              </Link>
-             <Button className="gap-2"><Plus size={16} /> Add Driver</Button>
+             
+             <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
+               <DialogTrigger asChild>
+                 <Button className="gap-2"><Plus size={16} /> Add Driver</Button>
+               </DialogTrigger>
+               <DialogContent className="sm:max-w-[600px]">
+                 <DialogHeader>
+                   <DialogTitle>Add New Driver</DialogTitle>
+                 </DialogHeader>
+                 <form onSubmit={handleAddDriver} className="space-y-6 py-4">
+                   <div className="grid grid-cols-2 gap-4">
+                     <div className="space-y-2">
+                       <Label htmlFor="name">Full Name</Label>
+                       <Input id="name" name="name" placeholder="John Doe" required />
+                     </div>
+                     <div className="space-y-2">
+                       <Label htmlFor="phone">Phone Number</Label>
+                       <Input id="phone" name="phone" placeholder="(555) 000-0000" required />
+                     </div>
+                   </div>
+                   
+                   <div className="space-y-2">
+                     <Label htmlFor="email">Email Address</Label>
+                     <Input id="email" name="email" type="email" placeholder="john@49trucking.com" required />
+                   </div>
+
+                   <div className="grid grid-cols-2 gap-4">
+                     <div className="space-y-2">
+                       <Label htmlFor="license">CDL Number</Label>
+                       <Input id="license" name="license" placeholder="CDL-A 123456" required />
+                     </div>
+                     <div className="space-y-2">
+                       <Label htmlFor="status">Initial Status</Label>
+                       <Select name="status" defaultValue="Active">
+                         <SelectTrigger>
+                           <SelectValue placeholder="Select status" />
+                         </SelectTrigger>
+                         <SelectContent>
+                           <SelectItem value="Active">Active</SelectItem>
+                           <SelectItem value="On Leave">On Leave</SelectItem>
+                           <SelectItem value="Suspended">Suspended</SelectItem>
+                         </SelectContent>
+                       </Select>
+                     </div>
+                   </div>
+
+                   <div className="space-y-2">
+                     <Label>Upload Documents</Label>
+                     <div className="border-2 border-dashed border-border rounded-xl p-6 text-center hover:bg-secondary/50 transition-colors cursor-pointer">
+                       <Upload className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
+                       <p className="text-sm font-medium">Click to upload CDL or Medical Card</p>
+                       <p className="text-xs text-muted-foreground">PDF, JPG up to 10MB</p>
+                     </div>
+                   </div>
+
+                   <DialogFooter>
+                     <Button type="button" variant="outline" onClick={() => setIsAddModalOpen(false)}>Cancel</Button>
+                     <Button type="submit">Create Profile</Button>
+                   </DialogFooter>
+                 </form>
+               </DialogContent>
+             </Dialog>
           </div>
         </div>
 
