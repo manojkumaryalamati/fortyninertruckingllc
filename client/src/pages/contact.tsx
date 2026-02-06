@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 
+import Footer from "@/components/Footer";
+
 export default function Contact() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -190,6 +192,7 @@ export default function Contact() {
            </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

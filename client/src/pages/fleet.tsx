@@ -6,6 +6,8 @@ import { Filter, X, ChevronRight, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 
+import Footer from "@/components/Footer";
+
 const fleetData = [
   { id: 1, name: "10-Wheel Dump Truck", type: "Standard Haul", specs: "16-18 Ton Capacity", image: "https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
   { id: 2, name: "Super Dump", type: "Heavy Haul", specs: "20-22 Ton Capacity", image: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
@@ -197,6 +199,7 @@ export default function Fleet() {
            )}
         </DialogContent>
       </Dialog>
+      <Footer />
     </div>
   );
 }
