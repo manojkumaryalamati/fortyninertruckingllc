@@ -9,6 +9,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
+import heroImage from "@/assets/hero-truck-main.jpg";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
@@ -19,17 +21,52 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
            <img 
-             src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop" 
-             alt="Global Logistics Fleet" 
+             src={heroImage}
+             alt="FortyNiner Trucking Fleet" 
              className="w-full h-full object-cover"
            />
-           {/* Dark Overlay for text readability */}
-           <div className="absolute inset-0 bg-black/40 z-10" />
+           {/* Gradient Overlay for text readability */}
+           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10" />
         </div>
 
         {/* Hero Content */}
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
-          
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-3xl space-y-6"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 text-white font-bold tracking-wide">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+              </span>
+              Reliable Hauling Solutions
+            </div>
+            
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-[0.9]">
+              HEAVY HAULING <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">DONE RIGHT.</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-white/80 max-w-2xl font-light leading-relaxed">
+              Premier construction material transport and heavy equipment logistics across California. We deliver power, precision, and performance.
+            </p>
+            
+            <div className="pt-8 flex flex-col sm:flex-row gap-4">
+              <Link href="/contact">
+                <Button className="rounded-full bg-primary hover:bg-primary/90 px-10 h-16 text-lg font-bold text-white shadow-xl shadow-primary/20 transition-all hover:scale-105">
+                  Get a Free Quote
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button variant="outline" className="rounded-full border-white/20 text-white hover:bg-white hover:text-background h-16 px-10 text-lg font-bold backdrop-blur-sm bg-white/5 transition-all hover:scale-105">
+                  Our Services
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
