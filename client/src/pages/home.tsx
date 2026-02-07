@@ -51,8 +51,8 @@ export default function Home() {
               </div>
               
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white leading-[0.85] drop-shadow-2xl">
-                MOVE <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-primary bg-[length:200%_auto] animate-gradient">MOUNTAINS.</span>
+                HEAVY HAULING <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-primary bg-[length:200%_auto] animate-gradient">DONE RIGHT.</span>
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 max-w-xl font-medium leading-relaxed border-l-4 border-primary pl-6">
