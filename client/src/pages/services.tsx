@@ -21,7 +21,7 @@ export default function Services() {
            <div className="absolute inset-0 bg-[#0F3F40]/80 z-10" />
         </div>
         
-        <div className="relative z-20 container mx-auto px-6 text-center space-y-6">
+        <div className="relative z-20 container mx-auto px-4 text-center space-y-6">
            <motion.div
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ export default function Services() {
         {/* Background decorative elements */}
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4">
           <div className="space-y-32">
              {/* Service 1 */}
              <motion.div 
@@ -219,7 +219,7 @@ export default function Services() {
       
       {/* CTA Section */}
       <section className="bg-card border-t border-white/10 py-24 text-center">
-        <div className="container mx-auto px-6 max-w-3xl space-y-8">
+        <div className="container mx-auto px-4 max-w-3xl space-y-8">
           <h2 className="text-4xl font-black text-white">Have a specialized hauling need?</h2>
           <p className="text-white/60 text-xl font-medium">We adapt to your project requirements. Let's discuss your logistics plan.</p>
           <div className="flex justify-center gap-4 pt-4">
