@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Footer from "@/components/Footer";
+import { Logo } from "@/components/Logo";
 
 export default function Services() {
   const [scrolled, setScrolled] = useState(false);
@@ -37,7 +38,7 @@ export default function Services() {
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center cursor-pointer">
-              <img src="/logo.png" alt="FortyNiner Trucking" className="h-20 w-auto object-contain" />
+              <Logo className="h-20" />
             </div>
           </Link>
           

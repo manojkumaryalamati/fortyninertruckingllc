@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 
 import Footer from "@/components/Footer";
+import { Logo } from "@/components/Logo";
 
 const fleetData = [
   { id: 1, name: "10-Wheel Dump Truck", type: "Standard Haul", specs: "16-18 Ton Capacity", image: "https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
@@ -52,7 +53,7 @@ export default function Fleet() {
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center cursor-pointer">
-              <img src="/logo.png" alt="FortyNiner Trucking" className="h-20 w-auto object-contain" />
+              <Logo className="h-20" />
             </div>
           </Link>
           
