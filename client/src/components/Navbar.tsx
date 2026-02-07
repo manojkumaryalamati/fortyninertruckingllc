@@ -38,7 +38,7 @@ export function Navbar() {
         <div className="px-6 py-3 flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center cursor-pointer hover:opacity-80 transition-opacity">
-              <Logo className="h-10 md:h-12" /> 
+              <Logo className="h-16 md:h-20" /> 
             </div>
           </Link>
           
