@@ -46,8 +46,8 @@
 :root {
   /* FAANG-style Design Tokens */
   
-  /* Primary: A sophisticated, high-contrast amber/gold */
-  --primary: 35 92% 52%;
+  /* Primary: Strong Red/Orange from new reference */
+  --primary: 4 90% 58%; 
   --primary-foreground: 0 0% 100%;
 
   /* Background: Pure white for clarity, subtle off-white for depth */
