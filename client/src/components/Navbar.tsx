@@ -26,44 +26,56 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-8 flex items-center justify-between pointer-events-none">
-        {/* Left: Logo */}
-        <div className="pointer-events-auto">
-          <Link href="/">
-            <div className="cursor-pointer hover:opacity-80 transition-opacity">
-              <Logo className="h-12 text-white" /> 
-            </div>
-          </Link>
-        </div>
-
-        {/* Center: Navigation Pill */}
-        <div className="hidden md:flex pointer-events-auto absolute left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md rounded-full px-2 py-1.5 items-center gap-1 border border-white/10 shadow-xl">
-          {navLinks.map((item) => (
-            <Link key={item.name} href={item.href}>
-              <a className={`px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                location === item.href 
-                  ? "bg-white text-black font-bold shadow-sm" 
-                  : "text-white/80 hover:bg-white/10 hover:text-white"
-              }`}>
-                {item.name}
-              </a>
+      <nav className="fixed top-0 left-0 right-0 z-50 w-full px-4 md:px-8 py-6">
+        <div className="flex items-center justify-between relative max-w-[1920px] mx-auto">
+          {/* Left: Logo */}
+          <div className="z-10 flex-shrink-0">
+            <Link href="/">
+              <div className="cursor-pointer hover:opacity-80 transition-opacity">
+                <Logo className="h-10 md:h-12 text-white" /> 
+              </div>
             </Link>
-          ))}
-        </div>
+          </div>
 
-        {/* Right: Actions */}
-        <div className="flex items-center gap-3 pointer-events-auto">
-           <Button variant="outline" size="icon" className="rounded-full h-10 w-10 bg-white/10 backdrop-blur border-white/20 text-white hover:bg-white/20">
-             <span className="text-xs font-bold">EN</span>
-           </Button>
-           <Button 
-             variant="outline" 
-             size="icon" 
-             className="rounded-full h-10 w-10 bg-white/10 backdrop-blur border-white/20 text-white hover:bg-white/20"
-             onClick={() => setIsMobileMenuOpen(true)}
-           >
-             <Menu size={20} />
-           </Button>
+          {/* Center: Navigation Pill - Absolute centered on large screens, hidden on small */}
+          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+            <div className="bg-black/40 backdrop-blur-md rounded-full px-1.5 py-1.5 flex items-center gap-1 border border-white/10 shadow-lg">
+              {navLinks.map((item) => (
+                <Link key={item.name} href={item.href}>
+                  <a className={`px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-300 ${
+                    location === item.href 
+                      ? "bg-white text-black font-bold shadow-sm" 
+                      : "text-white/90 hover:bg-white/10 hover:text-white"
+                  }`}>
+                    {item.name}
+                  </a>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Actions */}
+          <div className="flex items-center gap-3 z-10 flex-shrink-0">
+             <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 bg-white/10 backdrop-blur-md border border-white/10 text-white hover:bg-white/20">
+               <span className="text-xs font-bold">EN</span>
+             </Button>
+             <Button 
+               variant="ghost" 
+               size="icon" 
+               className="rounded-full h-10 w-10 bg-white/10 backdrop-blur-md border border-white/10 text-white hover:bg-white/20 lg:hidden"
+               onClick={() => setIsMobileMenuOpen(true)}
+             >
+               <Menu size={20} />
+             </Button>
+             {/* Extra menu button for desktop if needed, or just keep mobile menu for consistency */}
+             <Button 
+               variant="ghost" 
+               size="icon" 
+               className="rounded-full h-10 w-10 bg-white/10 backdrop-blur-md border border-white/10 text-white hover:bg-white/20 hidden lg:flex"
+             >
+               <Menu size={20} />
+             </Button>
+          </div>
         </div>
       </nav>
 
@@ -75,7 +87,7 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-black text-white p-6 md:hidden"
+            className="fixed inset-0 z-[60] bg-black text-white p-6 lg:hidden"
           >
             <div className="flex justify-between items-center mb-12">
               <Logo className="h-10 text-white" />
