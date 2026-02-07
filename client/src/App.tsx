@@ -9,10 +9,8 @@ import Home from "@/pages/home";
 import Login from "@/pages/login";
 import AdminDashboard from "@/pages/admin";
 import DriversManagement from "@/pages/admin/drivers";
-import TrucksManagement from "@/pages/admin/trucks";
 import TripsManagement from "@/pages/admin/trips";
 import DocumentsCenter from "@/pages/admin/documents";
-import AdminSettings from "@/pages/admin/settings";
 import Certifications from "@/pages/certifications";
 import Services from "@/pages/services";
 import Fleet from "@/pages/fleet";
@@ -35,17 +33,11 @@ function Router() {
       <Route path="/admin/drivers">
         {() => <ProtectedRoute component={DriversManagement} />}
       </Route>
-      <Route path="/admin/trucks">
-         {() => <ProtectedRoute component={TrucksManagement} />}
-      </Route>
       <Route path="/admin/trips">
          {() => <ProtectedRoute component={TripsManagement} />}
       </Route>
       <Route path="/admin/documents">
          {() => <ProtectedRoute component={DocumentsCenter} />}
-      </Route>
-      <Route path="/admin/settings">
-         {() => <ProtectedRoute component={AdminSettings} />}
       </Route>
 
       <Route path="/services" component={Services} />

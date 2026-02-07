@@ -47,19 +47,9 @@ export function AdminSidebar() {
             <Users size={18} /> Drivers
           </Button>
         </Link>
-        <Link href="/admin/trucks">
-          <Button variant={location === "/admin/trucks" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
-            <Truck size={18} /> Trucks & Fleet
-          </Button>
-        </Link>
         <Link href="/admin/documents">
           <Button variant={location === "/admin/documents" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
             <FileText size={18} /> Documents
-          </Button>
-        </Link>
-        <Link href="/admin/settings">
-          <Button variant={location === "/admin/settings" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
-            <Settings size={18} /> Settings
           </Button>
         </Link>
       </nav>
@@ -135,19 +125,9 @@ export function AdminMobileHeader() {
                   <Users size={18} /> Drivers
                 </Button>
               </Link>
-              <Link href="/admin/trucks">
-                <Button variant={location === "/admin/trucks" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setOpen(false)}>
-                  <Truck size={18} /> Trucks & Fleet
-                </Button>
-              </Link>
               <Link href="/admin/documents">
                 <Button variant={location === "/admin/documents" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setOpen(false)}>
                   <FileText size={18} /> Documents
-                </Button>
-              </Link>
-              <Link href="/admin/settings">
-                <Button variant={location === "/admin/settings" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setOpen(false)}>
-                  <Settings size={18} /> Settings
                 </Button>
               </Link>
             </nav>
