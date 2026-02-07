@@ -11,7 +11,7 @@ export default function About() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] w-full overflow-hidden mt-20">
+      <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden mt-0">
         <div className="absolute inset-0 z-0">
            <img 
              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" 
