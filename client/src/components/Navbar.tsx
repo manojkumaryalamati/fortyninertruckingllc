@@ -44,13 +44,13 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-10">
             {navLinks.map((item) => (
               <Link key={item.name} href={item.href}>
-                <a className={`text-sm font-medium tracking-wide transition-colors ${
+                <span className={`text-sm font-medium tracking-wide transition-colors cursor-pointer ${
                   location === item.href 
                     ? "text-primary font-bold" 
                     : "text-white/80 hover:text-white"
                 }`}>
                   {item.name}
-                </a>
+                </span>
               </Link>
             ))}
           </div>
@@ -90,12 +90,12 @@ export function Navbar() {
             <div className="flex flex-col gap-6">
               {navLinks.map((item) => (
                 <Link key={item.name} href={item.href}>
-                  <a 
-                    className="text-2xl font-bold hover:text-primary transition-colors py-2 border-b border-gray-100"
+                  <span 
+                    className="text-2xl font-bold hover:text-primary transition-colors py-2 border-b border-gray-100 cursor-pointer"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
-                  </a>
+                  </span>
                 </Link>
               ))}
               <div className="mt-8">

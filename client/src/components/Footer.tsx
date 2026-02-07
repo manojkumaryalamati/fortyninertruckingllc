@@ -45,7 +45,7 @@ export default function Footer() {
               ].map(link => (
                 <li key={link.name}>
                   <Link href={link.href}>
-                    <a className="text-white/70 hover:text-primary transition-colors">{link.name}</a>
+                    <span className="text-white/70 hover:text-primary transition-colors cursor-pointer">{link.name}</span>
                   </Link>
                 </li>
               ))}
