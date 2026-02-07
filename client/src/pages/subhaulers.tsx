@@ -16,7 +16,7 @@ export default function Subhaulers() {
     <div className="min-h-screen bg-background text-foreground font-sans pt-24 pb-24">
       <Navbar />
 
-      <div className="container mx-auto px-4">
+      <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="space-y-8">
             <h1 className="text-5xl font-bold tracking-tight">Partner With Us.</h1>
