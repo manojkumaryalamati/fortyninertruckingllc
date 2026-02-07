@@ -89,29 +89,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Leadership / Team Strip */}
-      <section className="bg-[#FDFBF7] py-24">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-black uppercase tracking-tight mb-16">
-            Meet The <span className="text-primary">Team</span>
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white p-6 pb-8 shadow-lg hover:shadow-xl transition-shadow group">
-                <div className="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 border-4 border-primary/20 group-hover:border-primary transition-colors">
-                  <img src={`https://i.pravatar.cc/300?img=${i+10}`} className="w-full h-full object-cover" />
-                </div>
-                <h3 className="text-xl font-black uppercase">John Doe</h3>
-                <p className="text-primary font-bold text-sm uppercase mb-4">Operations Manager</p>
-                <p className="text-muted-foreground text-sm">
-                  Dedicated to ensuring every fleet movement is coordinated perfectly.
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="py-24 bg-primary text-white text-center">
