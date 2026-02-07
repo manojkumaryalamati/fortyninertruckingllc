@@ -23,10 +23,10 @@ export default function About() {
 
         <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center">
           <div className="max-w-3xl space-y-6">
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-              DRIVING <br />
-              <span className="text-primary">EXCELLENCE</span> <br />
-              IN HAULING
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.9]">
+              Driving <br />
+              <span className="text-primary">Excellence</span> <br />
+              in Hauling
             </h1>
             <div className="h-1 w-24 bg-primary" />
             <p className="text-xl text-white/90 leading-relaxed max-w-xl font-medium">
@@ -41,8 +41,8 @@ export default function About() {
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-primary">Our Mission</h2>
-              <h3 className="text-4xl font-black uppercase tracking-tight text-foreground">
+              <h2 className="text-sm font-bold tracking-widest text-primary">Our Mission</h2>
+              <h3 className="text-4xl font-black tracking-tight text-foreground">
                 Commitment to <span className="text-primary">Safety</span> & Service
               </h3>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
@@ -66,7 +66,7 @@ export default function About() {
                       <item.icon size={24} />
                     </div>
                     <div>
-                      <h4 className="font-bold uppercase">{item.title}</h4>
+                      <h4 className="font-bold">{item.title}</h4>
                       <p className="text-sm text-muted-foreground">{item.desc}</p>
                     </div>
                   </div>
@@ -81,7 +81,7 @@ export default function About() {
                />
                <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
                <div className="absolute bottom-0 left-0 p-8 bg-black/60 backdrop-blur-sm text-white w-full">
-                 <p className="text-3xl font-black">10M+ MILES</p>
+                 <p className="text-3xl font-black">10M+ Miles</p>
                  <p className="text-sm font-bold opacity-80 uppercase">Safely Traveled across California</p>
                </div>
             </div>
@@ -93,13 +93,13 @@ export default function About() {
       {/* CTA */}
       <section className="py-24 bg-primary text-white text-center">
         <div className="container mx-auto px-6 max-w-4xl space-y-8">
-          <h2 className="text-4xl md:text-5xl font-black uppercase">Ready to Partner With Us?</h2>
+          <h2 className="text-4xl md:text-5xl font-black">Ready to Partner With Us?</h2>
           <p className="text-xl font-medium opacity-90">
             Join the hundreds of contractors who trust FortyNinerTrucking for their logistical needs.
           </p>
           <div className="flex justify-center gap-4 pt-4">
              <Link href="/contact">
-               <Button size="lg" className="rounded-full bg-white text-primary hover:bg-gray-100 font-bold px-10 h-14 uppercase">
+               <Button size="lg" className="rounded-full bg-white text-primary hover:bg-gray-100 font-bold px-10 h-14">
                  Get in Touch
                </Button>
              </Link>
