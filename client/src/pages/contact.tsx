@@ -40,7 +40,7 @@ export default function Contact() {
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center cursor-pointer">
-              <Logo className="h-20 md:h-24 lg:h-28" />
+              <Logo className="h-24 md:h-32 lg:h-36" />
             </div>
           </Link>
           
