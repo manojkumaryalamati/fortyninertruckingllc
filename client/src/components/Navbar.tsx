@@ -28,25 +28,25 @@ export function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-4' : 'bg-white/90 backdrop-blur-sm py-6'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4 border-b border-border/50' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Left: Logo */}
           <div className="flex-shrink-0">
             <Link href="/">
               <div className="cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="text-2xl font-bold tracking-tighter">FortyNinerTrucking</span>
+                <span className="text-xl font-bold tracking-tight text-foreground">FortyNinerTrucking</span>
               </div>
             </Link>
           </div>
 
           {/* Center: Navigation Links */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-10">
             {navLinks.map((item) => (
               <Link key={item.name} href={item.href}>
-                <a className={`text-sm font-bold uppercase tracking-wider transition-colors ${
+                <a className={`text-sm font-medium tracking-wide transition-colors ${
                   location === item.href 
-                    ? "text-primary" 
-                    : "text-foreground hover:text-primary"
+                    ? "text-primary font-semibold" 
+                    : "text-muted-foreground hover:text-foreground"
                 }`}>
                   {item.name}
                 </a>
@@ -56,8 +56,8 @@ export function Navbar() {
 
           {/* Right: Actions */}
           <div className="flex items-center gap-4">
-             <Button className="rounded-full bg-primary hover:bg-primary/90 text-white font-bold px-6 h-12 hidden md:flex items-center gap-2 shadow-lg shadow-primary/20">
-               <Phone size={18} fill="currentColor" />
+             <Button className="rounded-full font-bold px-6 h-11 hidden md:flex items-center gap-2 shadow-sm hover:shadow-md transition-all">
+               <Phone size={18} />
                <span>123-456-7890</span>
              </Button>
 
