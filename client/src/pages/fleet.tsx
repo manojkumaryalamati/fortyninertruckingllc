@@ -51,14 +51,8 @@ export default function Fleet() {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link href="/">
-            <div className="flex items-center gap-3 cursor-pointer group">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-gradient-to-br from-primary to-orange-600 flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-white font-bold text-lg">49</span>
-              </div>
-              <div className="flex flex-col text-foreground">
-                <span className="font-bold text-lg tracking-tight leading-none">FortyNiner</span>
-                <span className="text-xs font-medium opacity-80 uppercase tracking-widest">Trucking LLC</span>
-              </div>
+            <div className="flex items-center cursor-pointer">
+              <img src="/logo.png" alt="FortyNiner Trucking" className="h-14 w-auto object-contain" />
             </div>
           </Link>
           
