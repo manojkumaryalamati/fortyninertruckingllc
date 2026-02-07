@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Shield, Clock, Users, ArrowRight, Truck, HardHat, Scale, Menu, X } from "lucide-react";
+import { Check, Shield, Clock, Users, ArrowRight, Truck, HardHat, Scale, Menu, X, Globe, Zap, BarChart3, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -15,178 +15,210 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/40 z-10" />
-          <img 
-            src="https://images.unsplash.com/photo-1503754928629-bd661a4773c3?q=80&w=2940&auto=format&fit=crop" 
-            alt="Construction Hauling Fleet" 
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <section className="relative pt-24 px-4 pb-4">
+        <div className="relative rounded-[2.5rem] overflow-hidden h-[85vh] min-h-[600px] w-full mx-auto max-w-[1920px]">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+             <div className="absolute inset-0 bg-black/40 z-10" />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
+             <img 
+               src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop" 
+               alt="Global Logistics Fleet" 
+               className="w-full h-full object-cover"
+             />
+          </div>
 
-        <div className="container mx-auto px-6 relative z-20">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-3xl space-y-8"
-          >
-            <Badge variant="outline" className="px-4 py-1.5 text-sm border-primary/30 bg-primary/10 text-primary backdrop-blur-md rounded-full mb-4">
-              Premier Construction Logistics
-            </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
-              Precision Hauling.<br />
-              <span className="text-primary">Built on Reliability.</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-2xl">
-              We deliver heavy hauling solutions for contractors, municipalities, and infrastructure projects. On time. Every time. Safety first.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/contact">
-                <Button size="lg" className="rounded-full h-14 px-8 text-base font-bold shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
-                  Request a Quote
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button size="lg" variant="outline" className="rounded-full h-14 px-8 text-base font-bold bg-background/50 backdrop-blur-sm border-2 hover:bg-background transition-colors">
-                  Talk to Dispatch
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* About Us Section */}
-      <section className="py-24 bg-secondary/30">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-primary">Who We Are</h2>
-              <h3 className="text-3xl md:text-4xl font-bold tracking-tight">Driving Progress for America’s Infrastructure.</h3>
-              <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-                <p>
-                  FortyNinerTrucking LLC is a full-service trucking and hauling company dedicated to the construction and material transport industry. We don't just move dirt and material; we move projects forward.
-                </p>
-                <p>
-                  With years of experience in the field, we have built a reputation for operational excellence, adhering to the highest standards of safety and compliance. We treat every job site with professionalism and every deadline as a commitment.
-                </p>
-                <p>
-                  We believe in building long-term partnerships, not just completing one-off hauls. When you contract with us, you gain a logistics partner invested in the success of your project.
-                </p>
+          {/* Hero Content */}
+          <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center items-center text-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="max-w-4xl space-y-8"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-4">
+                <Star size={16} className="text-primary fill-primary" />
+                <span className="text-sm font-medium">Your Global Logistics Partner</span>
               </div>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-3xl transform rotate-3" />
-              <img 
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" 
-                alt="Trucking Operations" 
-                className="relative rounded-3xl shadow-2xl z-10 w-full h-[500px] object-cover"
-              />
-            </div>
+              
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1] drop-shadow-lg">
+                Smart Logistics Solutions <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">
+                  That Move the World.
+                </span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+                Reliable, efficient, and technology-driven logistics services that keep your business moving forward.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+                <Link href="/contact">
+                  <Button size="lg" className="rounded-full h-16 px-10 text-lg font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/20 hover:scale-105 transition-all">
+                    Get a Quote
+                  </Button>
+                </Link>
+                <Link href="/services">
+                  <Button size="lg" variant="outline" className="rounded-full h-16 px-10 text-lg font-bold bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 border-2">
+                    Learn More <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Floating Stats Cards */}
+          <div className="absolute bottom-10 left-10 hidden md:block z-20">
+             <div className="flex -space-x-4 mb-3">
+               {[1,2,3,4].map(i => (
+                 <div key={i} className="h-12 w-12 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
+                   <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Client" />
+                 </div>
+               ))}
+               <div className="h-12 w-12 rounded-full border-2 border-white bg-primary flex items-center justify-center text-white text-xs font-bold">
+                 500+
+               </div>
+             </div>
+             <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl text-sm font-bold shadow-lg">
+               Trusted by Business Clients
+             </div>
+          </div>
+
+          <div className="absolute bottom-10 right-10 hidden md:block z-20">
+             <div className="bg-white p-4 rounded-3xl shadow-xl flex items-center gap-4 max-w-xs">
+               <div className="h-16 w-24 rounded-xl overflow-hidden">
+                 <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop" className="w-full h-full object-cover" />
+               </div>
+               <div>
+                 <p className="text-2xl font-bold">10,000+</p>
+                 <p className="text-sm text-muted-foreground">Successful Shipments</p>
+               </div>
+             </div>
           </div>
         </div>
       </section>
 
-      {/* Core Values */}
+      {/* Partners Logos */}
+      <section className="py-12 border-b border-border/50">
+        <div className="container mx-auto px-6">
+           <p className="text-center text-sm font-bold text-muted-foreground uppercase tracking-widest mb-8">Our Trusted Partners</p>
+           <div className="flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+             {["Construction Corp", "BuildRight", "HeavyHaul Inc", "Global Logistics", "Metro Builders"].map((partner, i) => (
+               <div key={i} className="flex items-center gap-2 text-xl font-bold font-display">
+                 <div className="h-8 w-8 bg-foreground rounded-full" />
+                 {partner}
+               </div>
+             ))}
+           </div>
+        </div>
+      </section>
+
+      {/* About / Bento Grid */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Our Core Values</h2>
-            <p className="text-muted-foreground text-lg">The principles that drive our fleet and define our service.</p>
+          <div className="mb-16">
+            <Badge variant="secondary" className="mb-4">About FortyNiner</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Your Trusted Partner in <br />Global Logistics</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl">
+              We deliver more than just shipments—we deliver confidence, precision, and smart technology that moves businesses forward.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { icon: Shield, title: "Safety", desc: "We compromise on nothing when it comes to the safety of our drivers, our cargo, and the public." },
-              { icon: Clock, title: "Reliability", desc: "We deliver on our promises. When we say we'll be there, we are there, ready to work." },
-              { icon: HardHat, title: "Expertise", desc: "Our team brings deep industry knowledge to solve complex hauling challenges efficiently." },
-              { icon: Scale, title: "Accountability", desc: "We take ownership of our work, ensuring transparency and integrity in every mile." }
-            ].map((value, i) => (
-              <Card key={i} className="border-none shadow-lg shadow-black/5 hover:shadow-xl transition-shadow">
-                <CardContent className="p-8 space-y-4">
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
-                    <value.icon size={24} />
-                  </div>
-                  <h3 className="text-xl font-bold">{value.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {value.desc}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Card 1: Dark */}
+            <Card className="bg-[#111] text-white border-none rounded-[2rem] overflow-hidden relative md:col-span-1 min-h-[400px]">
+              <CardContent className="p-8 flex flex-col h-full justify-between relative z-10">
+                 <div className="h-14 w-14 rounded-full bg-white/10 flex items-center justify-center mb-4">
+                   <Shield size={28} />
+                 </div>
+                 <div>
+                   <h3 className="text-2xl font-bold mb-2">Delivering Excellence Every Mile</h3>
+                   <p className="text-gray-400">
+                     We're committed to providing efficient, transparent, and technology-driven logistics services.
+                   </p>
+                 </div>
+              </CardContent>
+              {/* Abstract decorative circles */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-white/5 rounded-full" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/5 rounded-full" />
+            </Card>
+
+            {/* Card 2: Light */}
+            <Card className="bg-[#F8F9FA] border-none rounded-[2rem] overflow-hidden md:col-span-1 min-h-[400px]">
+              <CardContent className="p-8 flex flex-col h-full justify-between">
+                 <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center mb-4 text-primary">
+                   <Globe size={28} />
+                 </div>
+                 <div>
+                   <h3 className="text-2xl font-bold mb-2">Shaping the Future of Global Logistics</h3>
+                   <p className="text-muted-foreground">
+                     Our vision is to build a smarter logistics ecosystem powered by innovation and seamless global connectivity.
+                   </p>
+                 </div>
+              </CardContent>
+            </Card>
+
+             {/* Card 3: Form/Calculator Style */}
+            <Card className="bg-white border shadow-xl rounded-[2rem] overflow-hidden md:col-span-1 min-h-[400px] relative">
+               <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover" />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+               <CardContent className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                 <h3 className="text-3xl font-bold mb-1">Fleet Ready</h3>
+                 <p className="text-white/80">Available for Dispatch Today</p>
+                 <Button className="w-full mt-6 rounded-full bg-white text-black hover:bg-white/90">
+                   Check Availability
+                 </Button>
+               </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Safety & Compliance */}
-      <section className="py-24 bg-foreground text-background">
+      {/* Services Grid */}
+      <section className="py-24 bg-secondary/30">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="order-last lg:order-first">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4 mt-8">
-                  <img src="https://images.unsplash.com/photo-1616432043562-3671ea2e5242?q=80&w=2940&auto=format&fit=crop" className="rounded-2xl shadow-lg" alt="Safety Inspection" />
-                  <div className="bg-primary p-6 rounded-2xl">
-                    <h4 className="font-bold text-2xl mb-2">100%</h4>
-                    <p className="opacity-90">DOT Compliance Focus</p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="bg-background/10 p-6 rounded-2xl backdrop-blur-sm border border-white/10">
-                    <CheckCircle2 size={32} className="text-primary mb-4" />
-                    <h4 className="font-bold text-xl mb-2">Rigorous Training</h4>
-                    <p className="text-sm opacity-80">Continuous driver education programs.</p>
-                  </div>
-                  <img src="https://images.unsplash.com/photo-1605218427306-635ba2439af2?q=80&w=2940&auto=format&fit=crop" className="rounded-2xl shadow-lg" alt="Truck Maintenance" />
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Delivering Excellence Through<br/>Reliability and Innovation</h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: "Expert Logistics Team", image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2940&auto=format&fit=crop" },
+              { title: "Reliable Delivery", image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop" },
+              { title: "Smart Tracking", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2940&auto=format&fit=crop" }
+            ].map((service, i) => (
+              <div key={i} className="group relative rounded-[2rem] overflow-hidden aspect-[4/5] cursor-pointer">
+                <img src={service.image} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 p-8">
+                  <h3 className="text-2xl font-bold text-white mb-2">{service.title}</h3>
+                  <div className="h-1 w-12 bg-primary rounded-full" />
                 </div>
               </div>
-            </div>
-            <div className="space-y-8">
-              <Badge className="bg-primary text-foreground hover:bg-primary px-4 py-1">Safety First Culture</Badge>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Compliance is our Cornerstone.</h2>
-              <p className="text-xl opacity-80 leading-relaxed">
-                We maintain a rigorous safety culture that goes beyond basic regulations. Our fleet undergoes strict maintenance schedules, and our drivers are trained to uphold the highest industry standards.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Full DOT & FMCSA Compliance",
-                  "Regular Fleet Safety Inspections",
-                  "Comprehensive Driver Vetting",
-                  "Digital Documentation & Tracking"
-                ].map(item => (
-                  <li key={item} className="flex items-center gap-3 text-lg font-medium">
-                    <div className="h-6 w-6 rounded-full bg-primary flex items-center justify-center text-foreground shrink-0">
-                      <Check size={14} />
-                    </div>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-24 bg-background">
-        <div className="container mx-auto px-6 max-w-4xl text-center space-y-8">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Ready to Move Your Project Forward?</h2>
-          <p className="text-xl text-muted-foreground">
-            Contact us today for reliable dispatch and expert hauling solutions. We respond fast to keep your job site moving.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-            <Link href="/contact">
-              <Button size="lg" className="rounded-full h-14 px-10 text-lg font-bold shadow-xl shadow-primary/20">
-                Get a Quote
-              </Button>
-            </Link>
-            <Link href="/services">
-              <Button size="lg" variant="outline" className="rounded-full h-14 px-10 text-lg font-bold">
-                View Services
-              </Button>
-            </Link>
+        <div className="container mx-auto px-6">
+          <div className="bg-[#111] rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
+            
+            <div className="relative z-10 max-w-3xl mx-auto space-y-8">
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white">Ready to Move Smarter?</h2>
+              <p className="text-xl text-gray-400">
+                Get your quote today and experience the difference of a true logistics partnership.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+                <Link href="/contact">
+                  <Button size="lg" className="rounded-full h-16 px-12 text-lg font-bold bg-primary hover:bg-primary/90 text-primary-foreground">
+                    Get a Quote
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
