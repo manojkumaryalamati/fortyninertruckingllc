@@ -17,10 +17,8 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About Us", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Fleet", href: "/fleet" },
-    { name: "Compliance", href: "/certifications" },
     { name: "Careers", href: "/careers" },
     { name: "Subhaulers", href: "/subhaulers" },
     { name: "Contact Us", href: "/contact" }
@@ -56,11 +54,6 @@ export function Navbar() {
 
           {/* Right: Actions */}
           <div className="flex items-center gap-4">
-             <Button className="rounded-full font-bold px-6 h-11 hidden md:flex items-center gap-2 shadow-sm hover:shadow-md transition-all">
-               <Phone size={18} />
-               <span>123-456-7890</span>
-             </Button>
-
              <button 
                className="lg:hidden p-2 text-foreground"
                onClick={() => setIsMobileMenuOpen(true)}
