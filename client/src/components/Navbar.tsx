@@ -30,13 +30,13 @@ export function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${isTransparent ? 'bg-transparent py-6' : `bg-[#0F3F40] shadow-sm ${scrolled ? 'py-4' : 'py-6'} border-b border-white/10`}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${isTransparent ? 'bg-transparent py-4' : `bg-[#0F3F40] shadow-sm ${scrolled ? 'py-2' : 'py-3'} border-b border-white/10`}`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Left: Logo */}
           <div className="flex-shrink-0">
             <Link href="/">
               <div className="cursor-pointer hover:opacity-80 transition-opacity">
-                <img src={logo} alt="FortyNiner Trucking" className="h-16 w-auto object-contain" />
+                <img src={logo} alt="FortyNiner Trucking" className="h-24 w-auto object-contain" />
               </div>
             </Link>
           </div>
@@ -79,7 +79,7 @@ export function Navbar() {
             className="fixed inset-0 z-[60] bg-[#0F3F40] text-white p-6 lg:hidden"
           >
             <div className="flex justify-between items-center mb-12">
-              <div className="h-12 w-auto">
+              <div className="h-20 w-auto">
                 <img src={logo} alt="FortyNiner Trucking" className="h-full w-auto object-contain" />
               </div>
               <button 
