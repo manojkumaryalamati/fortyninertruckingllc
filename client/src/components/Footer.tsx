@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="space-y-6">
             <Link href="/">
               <div className="block cursor-pointer">
-                <Logo className="h-40" variant="light" />
+                <Logo className="h-24 md:h-32 lg:h-40" variant="light" />
               </div>
             </Link>
             <p className="text-background/70 leading-relaxed">
