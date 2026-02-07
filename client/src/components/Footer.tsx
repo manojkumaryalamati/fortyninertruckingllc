@@ -8,13 +8,11 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center text-foreground font-bold">49</div>
-              <div className="flex flex-col">
-                <span className="font-bold text-lg tracking-tight leading-none">FortyNiner</span>
-                <span className="text-xs font-medium opacity-80 uppercase tracking-widest">Trucking LLC</span>
+            <Link href="/">
+              <div className="block cursor-pointer">
+                <img src="/logo.png" alt="FortyNiner Trucking" className="h-16 w-auto object-contain" />
               </div>
-            </div>
+            </Link>
             <p className="text-background/70 leading-relaxed">
               Premier construction hauling and logistics solutions. Building strong partnerships through reliability, safety, and operational excellence.
             </p>
