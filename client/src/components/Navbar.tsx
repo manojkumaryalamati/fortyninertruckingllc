@@ -62,15 +62,15 @@ export function Navbar() {
             <Link href="/">
               <div className="cursor-pointer hover:opacity-90 transition-opacity relative group">
                 {/* Logo breaking out of container */}
-                <div className={`absolute left-0 transition-all duration-300 ${scrolled ? '-top-8 w-24' : '-top-10 w-32'} drop-shadow-xl z-10`}>
+                <div className={`absolute left-0 transition-all duration-300 ${scrolled ? '-top-10 w-32' : '-top-12 w-40'} drop-shadow-xl z-10`}>
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
-                    className="w-full h-auto object-contain"
+                    className="w-full h-auto object-contain drop-shadow-md"
                   />
                 </div>
                 {/* Invisible spacer to maintain layout */}
-                <div className={`${scrolled ? 'w-24' : 'w-32'} h-full`} />
+                <div className={`${scrolled ? 'w-32' : 'w-40'} h-full`} />
               </div>
             </Link>
           </div>
