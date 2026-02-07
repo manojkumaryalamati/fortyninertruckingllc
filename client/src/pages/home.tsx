@@ -29,8 +29,8 @@ export default function Home() {
              className="w-full h-full object-cover object-center"
            />
            {/* Sophisticated Gradient Overlay */}
-           <div className="absolute inset-0 bg-gradient-to-r from-[#0F3F40]/90 via-[#0F3F40]/40 to-transparent z-10" />
-           <div className="absolute inset-0 bg-gradient-to-t from-[#0F3F40] via-transparent to-transparent z-10" />
+           <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/90 via-zinc-950/40 to-transparent z-10" />
+           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent z-10" />
         </div>
 
         {/* Hero Content */}
@@ -64,7 +64,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link href="/services">
-                  <Button variant="outline" className="rounded-none skew-x-[-12deg] border-2 border-white/30 text-white hover:bg-white hover:text-[#0F3F40] h-16 px-10 text-lg font-black backdrop-blur-sm bg-white/5 transition-all hover:skew-x-0 hover:scale-105">
+                  <Button variant="outline" className="rounded-none skew-x-[-12deg] border-2 border-white/30 text-white hover:bg-white hover:text-black h-16 px-10 text-lg font-black backdrop-blur-sm bg-white/5 transition-all hover:skew-x-0 hover:scale-105">
                     <span className="skew-x-[12deg]">
                       EXPLORE SERVICES
                     </span>

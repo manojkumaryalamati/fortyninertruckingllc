@@ -28,13 +28,13 @@ export function Navbar() {
   const isHome = location === "/";
   // Always solid background when scrolled, transparent only at very top of home
   const navbarClasses = scrolled 
-    ? "bg-[#0F3F40]/90 backdrop-blur-md shadow-md py-2 border-b border-white/10" 
+    ? "bg-zinc-950/90 backdrop-blur-md shadow-md py-2 border-b border-white/10" 
     : "bg-transparent py-4 border-b border-white/5";
 
   return (
     <>
       {/* Top Bar - Hidden on mobile, visible on desktop */}
-      <div className={`hidden lg:block fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} h-10 bg-[#0a2c2d] text-white/80 border-b border-white/5`}>
+      <div className={`hidden lg:block fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} h-10 bg-black text-white/80 border-b border-white/5`}>
         <div className="w-full max-w-[1800px] mx-auto px-8 h-full flex justify-between items-center text-xs font-medium tracking-wide">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
@@ -114,7 +114,7 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-[#0F3F40] text-white p-0 lg:hidden flex flex-col"
+            className="fixed inset-0 z-[60] bg-zinc-950 text-white p-0 lg:hidden flex flex-col"
           >
             <div className="flex justify-between items-center p-6 border-b border-white/10">
               <div className="h-16 w-auto relative">

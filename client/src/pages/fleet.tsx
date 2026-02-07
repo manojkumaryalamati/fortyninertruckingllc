@@ -16,7 +16,7 @@ export default function Fleet() {
              alt="Fleet Hero" 
              className="w-full h-full object-cover opacity-50"
            />
-           <div className="absolute inset-0 bg-[#0F3F40]/90 z-10" />
+           <div className="absolute inset-0 bg-black/70 z-10" />
         </div>
 
         {/* Sliding Content */}
