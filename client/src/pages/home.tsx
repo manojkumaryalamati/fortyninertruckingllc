@@ -72,23 +72,8 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Trust Indicators */}
-              <div className="pt-12 flex items-center gap-8 text-white/60">
-                <div className="flex flex-col">
-                   <span className="text-3xl font-black text-white">15+</span>
-                   <span className="text-xs uppercase tracking-wider">Years Active</span>
-                </div>
-                <div className="w-px h-10 bg-white/20"></div>
-                <div className="flex flex-col">
-                   <span className="text-3xl font-black text-white">5k+</span>
-                   <span className="text-xs uppercase tracking-wider">Successful Loads</span>
-                </div>
-                <div className="w-px h-10 bg-white/20"></div>
-                <div className="flex flex-col">
-                   <span className="text-3xl font-black text-white">100%</span>
-                   <span className="text-xs uppercase tracking-wider">Safety Record</span>
-                </div>
-              </div>
+              {/* Trust Indicators Removed */}
+              <div className="pt-12"></div>
             </motion.div>
 
             {/* Right side - decorative glass card or just space for the truck image to shine */}
