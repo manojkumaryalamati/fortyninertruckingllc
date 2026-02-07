@@ -17,7 +17,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[800px] w-full overflow-hidden">
+      <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden">
         {/* Background Image with Parallax Effect */}
         <div className="absolute inset-0 z-0">
            <motion.img 
