@@ -13,32 +13,31 @@ import { Navbar } from "@/components/Navbar";
 
 export default function Careers() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans pt-24 pb-24">
+    <div className="min-h-screen bg-background text-foreground font-sans pt-32 md:pt-40 pb-24">
       <Navbar />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
-        <div className="grid lg:grid-cols-2 gap-16">
-          <div className="space-y-8">
-            <h1 className="text-5xl font-bold tracking-tight">Join Our Professional Fleet.</h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              At FortyNinerTrucking LLC, we respect our drivers as the backbone of our operation. We offer a professional work environment, well-maintained equipment, and a safety-focused culture that prioritizes your well-being.
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="space-y-6">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Join Our Professional Fleet.</h1>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              We respect our drivers as the backbone of our operation. We offer a professional environment, well-maintained equipment, and a safety-first culture.
             </p>
             
-            <div className="space-y-6 pt-8">
-               <h3 className="text-2xl font-bold">Why Drive With Us?</h3>
+            <div className="space-y-4 pt-4">
+               <h3 className="text-xl font-bold">Why Drive With Us?</h3>
                {[
-                 { title: "Professional Environment", desc: "We value respect and open communication." },
-                 { title: "Well-Maintained Equipment", desc: "Drive safe, compliant, and reliable trucks." },
-                 { title: "Safety Culture", desc: "Your safety is our absolute priority, every mile." },
-                 { title: "Steady Opportunities", desc: "Consistent work with reputable contractors." }
+                 { title: "Professional Environment", desc: "Respect and open communication." },
+                 { title: "Well-Maintained Equipment", desc: "Safe, compliant, and reliable trucks." },
+                 { title: "Safety Culture", desc: "Your safety is our priority." },
                ].map((benefit, i) => (
-                 <div key={i} className="flex gap-4">
-                   <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                     <Check size={20} />
+                 <div key={i} className="flex gap-3 items-center">
+                   <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                     <Check size={16} />
                    </div>
                    <div>
-                     <h3 className="font-bold text-lg">{benefit.title}</h3>
-                     <p className="text-muted-foreground">{benefit.desc}</p>
+                     <h3 className="font-bold text-base">{benefit.title}</h3>
+                     <p className="text-sm text-muted-foreground">{benefit.desc}</p>
                    </div>
                    
                  </div>
@@ -46,7 +45,7 @@ export default function Careers() {
             </div>
           </div>
 
-          <Card className="border-none shadow-2xl bg-secondary/30">
+          <Card className="border-none shadow-xl bg-secondary/30">
             <CardContent className="p-8 md:p-10">
               <h2 className="text-2xl font-bold mb-6">Driver Application</h2>
               <form className="space-y-6">
