@@ -24,6 +24,9 @@ export function Navbar() {
     { name: "Contact Us", href: "/contact" }
   ];
 
+  const isHome = location === "/";
+  const isTransparent = isHome && !scrolled;
+
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4 border-b border-border/50' : 'bg-transparent py-6'}`}>
@@ -32,7 +35,7 @@ export function Navbar() {
           <div className="flex-shrink-0">
             <Link href="/">
               <div className="cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="text-xl font-bold tracking-tight text-foreground">FortyNinerTrucking</span>
+                <span className={`text-xl font-bold tracking-tight ${isTransparent ? 'text-white' : 'text-foreground'}`}>FortyNinerTrucking</span>
               </div>
             </Link>
           </div>
@@ -44,7 +47,9 @@ export function Navbar() {
                 <a className={`text-sm font-medium tracking-wide transition-colors ${
                   location === item.href 
                     ? "text-primary font-semibold" 
-                    : "text-muted-foreground hover:text-foreground"
+                    : isTransparent 
+                      ? "text-white/80 hover:text-white" 
+                      : "text-muted-foreground hover:text-foreground"
                 }`}>
                   {item.name}
                 </a>
@@ -55,7 +60,7 @@ export function Navbar() {
           {/* Right: Actions */}
           <div className="flex items-center gap-4">
              <button 
-               className="lg:hidden p-2 text-foreground"
+               className={`lg:hidden p-2 ${isTransparent ? 'text-white' : 'text-foreground'}`}
                onClick={() => setIsMobileMenuOpen(true)}
              >
                <Menu size={28} />
