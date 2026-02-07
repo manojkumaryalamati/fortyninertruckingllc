@@ -26,11 +26,11 @@ export default function About() {
             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
               DRIVING <br />
               <span className="text-primary">EXCELLENCE</span> <br />
-              SINCE 2010
+              IN HAULING
             </h1>
             <div className="h-1 w-24 bg-primary" />
             <p className="text-xl text-white/90 leading-relaxed max-w-xl font-medium">
-              We are more than just a trucking company. We are your strategic partner in logistics and infrastructure development.
+              FortyNinerTrucking LLC is your strategic partner in logistics, delivering safety and reliability since inception.
             </p>
           </div>
         </div>
@@ -47,10 +47,10 @@ export default function About() {
               </h3>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  At FortyNinerTrucking, our mission is to provide safe, reliable, and efficient transportation solutions that empower our clients to build the future.
+                  FortyNinerTrucking LLC is a full-service trucking and hauling company dedicated to supporting the construction and infrastructure industries. We specialize in moving materials efficiently, safely, and on schedule.
                 </p>
                 <p>
-                  We believe in transparency, integrity, and operational excellence. Every mile we drive is a promise kept to our partners in construction, municipal services, and heavy industry.
+                  We believe in building lasting relationships with our clients through transparency and integrity. Our team of experienced professionals ensures that every project, from small site clearings to major developments, receives the same level of attention and care.
                 </p>
               </div>
               
