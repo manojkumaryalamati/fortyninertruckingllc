@@ -19,7 +19,9 @@ import {
   Map,
   BarChart3,
   LogOut,
-  FileText
+  FileText,
+  DollarSign,
+  ShieldCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -118,21 +120,28 @@ export default function AdminDashboard() {
 
         <div className="p-6 space-y-8 max-w-[1600px] mx-auto">
           {/* Key Metrics */}
-          <section className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
+          <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
             {[
-              { label: "Active Loads", value: "48", change: "+4", trend: "up", icon: Package },
-              { label: "On-Time Delivery", value: "98.2%", change: "-0.4%", trend: "down", icon: ClockIcon },
+              { label: "Active Drivers", value: "42", change: "+2", trend: "up", icon: Users },
+              { label: "Trucks on Road", value: "38", change: "-1", trend: "down", icon: Truck },
+              { label: "Today's Revenue", value: "$12,450", change: "+15%", trend: "up", icon: DollarSign },
+              { label: "Safety Score", value: "98/100", change: "+1", trend: "up", icon: ShieldCheck },
             ].map((stat, i) => (
               <Card key={i} className="shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
-                    <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
+                    <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                      <stat.icon size={20} />
+                    </div>
                     <span className={`flex items-center text-xs font-semibold ${stat.trend === "up" ? "text-green-600 bg-green-100 dark:bg-green-900/30 dark:text-green-400" : "text-red-600 bg-red-100 dark:bg-red-900/30 dark:text-red-400"} px-2 py-0.5 rounded-full`}>
                       {stat.change}
                     </span>
                   </div>
-                  <div className="text-3xl font-bold tracking-tight">{stat.value}</div>
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground mb-1">{stat.label}</p>
+                    <div className="text-2xl font-bold tracking-tight">{stat.value}</div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
