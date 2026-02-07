@@ -39,7 +39,7 @@ export default function Home() {
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center cursor-pointer">
-              <Logo className="h-20" />
+              <Logo className="h-28" />
             </div>
           </Link>
           
