@@ -77,16 +77,6 @@ export default function Certifications() {
           </div>
         </div>
 
-        {/* Insurance Section */}
-        <div className="mt-20 bg-primary text-primary-foreground rounded-3xl p-10 md:p-16 text-center">
-           <h2 className="text-3xl font-bold mb-6">Fully Insured & Bonded</h2>
-           <p className="text-xl opacity-90 max-w-2xl mx-auto mb-10">
-             We carry comprehensive liability, cargo, and workers' compensation insurance exceeding industry standards to ensure total peace of mind for our partners.
-           </p>
-           <Button variant="secondary" size="lg" className="font-bold">
-             Request COI
-           </Button>
-        </div>
       </div>
       <Footer />
     </div>
