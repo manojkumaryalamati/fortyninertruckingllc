@@ -15,12 +15,12 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-24 px-4 pb-4">
-        <div className="relative rounded-[2.5rem] overflow-hidden h-[85vh] min-h-[600px] w-full mx-auto max-w-[1920px]">
+      <section className="relative px-4 pt-4 pb-4 bg-background">
+        <div className="relative rounded-[2.5rem] overflow-hidden h-[95vh] min-h-[700px] w-full mx-auto max-w-[1920px]">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
-             <div className="absolute inset-0 bg-black/40 z-10" />
-             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
+             <div className="absolute inset-0 bg-black/30 z-10" />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
              <img 
                src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop" 
                alt="Global Logistics Fleet" 
@@ -34,32 +34,37 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="max-w-4xl space-y-8"
+              className="max-w-6xl space-y-8 mt-16"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-4">
-                <Star size={16} className="text-primary fill-primary" />
-                <span className="text-sm font-medium">Your Global Logistics Partner</span>
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-4 shadow-lg">
+                <div className="bg-primary rounded-full p-1">
+                  <Star size={12} className="text-white fill-white" />
+                </div>
+                <span className="text-sm font-semibold tracking-wide uppercase">Your Global Logistics Partner</span>
               </div>
               
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1] drop-shadow-lg">
+              <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight text-white leading-[1.1] drop-shadow-xl">
                 Smart Logistics Solutions <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">
-                  That Move the World.
+                <span className="inline-flex items-center align-middle gap-4 mx-2">
+                   <div className="h-[0.8em] w-[1.5em] rounded-full overflow-hidden border-2 border-white/20 relative hidden lg:inline-block">
+                     <img src="https://images.unsplash.com/photo-1494412574643-35d324698420?q=80&w=500&auto=format&fit=crop" className="w-full h-full object-cover" />
+                   </div>
+                   That Move the
+                   <div className="h-[0.8em] w-[1.5em] rounded-full overflow-hidden border-2 border-white/20 relative hidden lg:inline-block">
+                     <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=500&auto=format&fit=crop" className="w-full h-full object-cover" />
+                   </div>
+                   World.
                 </span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
-                Reliable, efficient, and technology-driven logistics services that keep your business moving forward.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-10">
                 <Link href="/contact">
-                  <Button size="lg" className="rounded-full h-16 px-10 text-lg font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/20 hover:scale-105 transition-all">
+                  <Button size="lg" className="rounded-full h-16 px-12 text-lg font-bold bg-[#FF5500] hover:bg-[#FF5500]/90 text-white shadow-xl shadow-orange-900/20 hover:scale-105 transition-all border-none">
                     Get a Quote
                   </Button>
                 </Link>
                 <Link href="/services">
-                  <Button size="lg" variant="outline" className="rounded-full h-16 px-10 text-lg font-bold bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 border-2">
+                  <Button size="lg" variant="outline" className="rounded-full h-16 px-12 text-lg font-bold bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20 transition-all">
                     Learn More <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
@@ -68,30 +73,32 @@ export default function Home() {
           </div>
 
           {/* Floating Stats Cards */}
-          <div className="absolute bottom-10 left-10 hidden md:block z-20">
-             <div className="flex -space-x-4 mb-3">
-               {[1,2,3,4].map(i => (
-                 <div key={i} className="h-12 w-12 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-                   <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Client" />
+          <div className="absolute bottom-12 left-12 hidden md:block z-20">
+             <div className="bg-white p-2 pr-6 rounded-full shadow-2xl flex items-center gap-4">
+               <div className="flex -space-x-3">
+                 {[1,2,3].map(i => (
+                   <div key={i} className="h-10 w-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
+                     <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Client" />
+                   </div>
+                 ))}
+                 <div className="h-10 w-10 rounded-full border-2 border-white bg-black flex items-center justify-center text-white text-xs font-bold">
+                   500+
                  </div>
-               ))}
-               <div className="h-12 w-12 rounded-full border-2 border-white bg-primary flex items-center justify-center text-white text-xs font-bold">
-                 500+
                </div>
-             </div>
-             <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl text-sm font-bold shadow-lg">
-               Trusted by Business Clients
+               <div className="text-sm font-bold text-black">
+                 Business Clients
+               </div>
              </div>
           </div>
 
-          <div className="absolute bottom-10 right-10 hidden md:block z-20">
-             <div className="bg-white p-4 rounded-3xl shadow-xl flex items-center gap-4 max-w-xs">
-               <div className="h-16 w-24 rounded-xl overflow-hidden">
+          <div className="absolute bottom-12 right-12 hidden md:block z-20">
+             <div className="bg-white p-3 rounded-2xl shadow-2xl flex items-center gap-4 min-w-[240px]">
+               <div className="h-16 w-20 rounded-xl overflow-hidden shrink-0">
                  <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop" className="w-full h-full object-cover" />
                </div>
                <div>
-                 <p className="text-2xl font-bold">10,000+</p>
-                 <p className="text-sm text-muted-foreground">Successful Shipments</p>
+                 <p className="text-xl font-extrabold text-black">10,000+</p>
+                 <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Successful Shipments</p>
                </div>
              </div>
           </div>
