@@ -44,76 +44,76 @@
 }
 
 :root {
-  /* FAANG-style Design Tokens - Refined for Premium Feel */
+  /* FortyNinerTrucking - Dark Teal Theme */
   
-  /* Primary: Strong, confident brand color (Deep Orange/Red) */
+  /* Primary: Deep Orange/Red (Contrast against teal) */
   --primary: 15 90% 55%; 
   --primary-foreground: 0 0% 100%;
 
-  /* Background: Pure white vs Off-white for depth */
-  --background: 0 0% 100%;
-  --foreground: 220 15% 10%; /* Deep charcoal, not black */
+  /* Background: Deep Teal #0F3F40 */
+  --background: 181 62% 15%;
+  --foreground: 0 0% 100%;
 
-  /* Card: Pure white floating on background */
-  --card: 0 0% 100%;
-  --card-foreground: 220 15% 10%;
+  /* Card: Slightly lighter teal for depth */
+  --card: 181 50% 18%;
+  --card-foreground: 0 0% 100%;
 
   /* Popover */
-  --popover: 0 0% 100%;
-  --popover-foreground: 220 15% 10%;
+  --popover: 181 62% 15%;
+  --popover-foreground: 0 0% 100%;
 
-  /* Secondary: Very subtle cool gray (Apple-like) */
-  --secondary: 210 20% 97%;
-  --secondary-foreground: 220 15% 10%;
+  /* Secondary: Teal-tinted surface */
+  --secondary: 181 30% 22%;
+  --secondary-foreground: 0 0% 100%;
 
   /* Muted: For secondary text */
-  --muted: 210 20% 96%;
-  --muted-foreground: 220 10% 45%;
+  --muted: 181 30% 22%;
+  --muted-foreground: 181 20% 70%;
 
-  /* Accent: Hover states (slightly darker than secondary) */
-  --accent: 210 20% 94%;
-  --accent-foreground: 220 15% 10%;
+  /* Accent: Hover states */
+  --accent: 181 40% 25%;
+  --accent-foreground: 0 0% 100%;
 
   /* Destructive */
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
 
-  /* Borders & Inputs - Very subtle */
-  --border: 220 13% 90%;
-  --input: 220 13% 90%;
-  --ring: 15 90% 55%; /* Matches primary */
+  /* Borders & Inputs */
+  --border: 181 30% 25%;
+  --input: 181 30% 25%;
+  --ring: 15 90% 55%;
 
-  --radius: 0.75rem; /* 12px - Modern standard */
+  --radius: 0.75rem;
 }
 
 .dark {
-  /* Dark Mode: Deep, rich slate (Linear-like) */
-  --background: 224 25% 8%; 
-  --foreground: 210 20% 98%;
-
-  --card: 224 25% 10%;
-  --card-foreground: 210 20% 98%;
-
-  --popover: 224 25% 10%;
-  --popover-foreground: 210 20% 98%;
-
+  /* Dark Mode is now the default, but we keep this for consistency if needed */
+  --background: 181 62% 15%;
+  --foreground: 0 0% 100%;
+  
+  --card: 181 50% 18%;
+  --card-foreground: 0 0% 100%;
+  
+  --popover: 181 62% 15%;
+  --popover-foreground: 0 0% 100%;
+  
   --primary: 15 90% 55%;
   --primary-foreground: 0 0% 100%;
-
-  --secondary: 224 20% 16%;
-  --secondary-foreground: 210 20% 98%;
-
-  --muted: 224 20% 16%;
-  --muted-foreground: 215 15% 65%;
-
-  --accent: 224 20% 18%;
-  --accent-foreground: 210 20% 98%;
-
+  
+  --secondary: 181 30% 22%;
+  --secondary-foreground: 0 0% 100%;
+  
+  --muted: 181 30% 22%;
+  --muted-foreground: 181 20% 70%;
+  
+  --accent: 181 40% 25%;
+  --accent-foreground: 0 0% 100%;
+  
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
-
-  --border: 224 20% 18%;
-  --input: 224 20% 18%;
+  
+  --border: 181 30% 25%;
+  --input: 181 30% 25%;
   --ring: 15 90% 55%;
 }
 
@@ -137,19 +137,19 @@
   
   /* Premium Glassmorphism */
   .glass {
-    @apply bg-background/70 backdrop-blur-lg border-b border-white/20 dark:border-white/5 supports-[backdrop-filter]:bg-background/60;
+    @apply bg-background/70 backdrop-blur-lg border-b border-white/10;
   }
   
   /* Soft Shadows */
   .shadow-soft {
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 
-                0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 
+                0 4px 6px -1px rgba(0, 0, 0, 0.3);
   }
   
   .shadow-card {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03),
-                0 2px 8px rgba(0, 0, 0, 0.04),
-                0 8px 24px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05),
+                0 2px 8px rgba(0, 0, 0, 0.2),
+                0 8px 24px rgba(0, 0, 0, 0.2);
   }
 
   /* Micro-interactions */

@@ -106,37 +106,37 @@ export default function Contact() {
 
              {/* Form */}
              <div className="lg:col-span-7">
-               <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-border relative overflow-hidden">
+               <div className="bg-card rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-white/10 relative overflow-hidden">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-10 -mt-10" />
                  
-                 <h3 className="text-2xl font-bold mb-8 relative z-10">Send us a Message</h3>
+                 <h3 className="text-2xl font-bold mb-8 relative z-10 text-foreground">Send us a Message</h3>
                  
                  <form className="space-y-8 relative z-10">
                    <div className="grid md:grid-cols-2 gap-8">
                      <div className="space-y-2">
                        <Label htmlFor="firstName" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">First Name</Label>
-                       <Input id="firstName" placeholder="John" className="h-14 bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg px-4" />
+                       <Input id="firstName" placeholder="John" className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" />
                      </div>
                      <div className="space-y-2">
                        <Label htmlFor="lastName" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Last Name</Label>
-                       <Input id="lastName" placeholder="Doe" className="h-14 bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg px-4" />
+                       <Input id="lastName" placeholder="Doe" className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" />
                      </div>
                    </div>
 
                    <div className="grid md:grid-cols-2 gap-8">
                      <div className="space-y-2">
                        <Label htmlFor="email" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Email Address</Label>
-                       <Input id="email" type="email" placeholder="john@company.com" className="h-14 bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg px-4" />
+                       <Input id="email" type="email" placeholder="john@company.com" className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" />
                      </div>
                      <div className="space-y-2">
                        <Label htmlFor="phone" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Phone Number</Label>
-                       <Input id="phone" type="tel" placeholder="(555) 123-4567" className="h-14 bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg px-4" />
+                       <Input id="phone" type="tel" placeholder="(555) 123-4567" className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" />
                      </div>
                    </div>
                    
                    <div className="space-y-2">
                      <Label htmlFor="subject" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">I'm interested in</Label>
-                     <select className="w-full h-14 rounded-xl border-transparent bg-secondary/30 px-4 py-2 text-lg focus:bg-white focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                     <select className="w-full h-14 rounded-xl border-transparent bg-secondary/30 px-4 py-2 text-lg focus:bg-background focus:ring-2 focus:ring-primary focus:outline-none transition-all text-foreground">
                        <option>Requesting a Quote</option>
                        <option>Becoming a Subhauler</option>
                        <option>Driver Opportunities</option>
@@ -146,7 +146,7 @@ export default function Contact() {
 
                    <div className="space-y-2">
                      <Label htmlFor="message" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Message</Label>
-                     <Textarea id="message" placeholder="Tell us more about your project or inquiry..." className="min-h-[200px] bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg p-4 resize-none" />
+                     <Textarea id="message" placeholder="Tell us more about your project or inquiry..." className="min-h-[200px] bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg p-4 resize-none" />
                    </div>
 
                    <Button size="lg" className="w-full h-16 text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all flex items-center justify-center gap-2">
