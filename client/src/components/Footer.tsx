@@ -4,29 +4,29 @@ import { Button } from "@/components/ui/button";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0F3F40] text-background py-16">
+    <footer className="bg-[#0F3F40] text-white py-16">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           <div className="space-y-6">
             <Link href="/">
               <div className="block cursor-pointer">
-                <span className="text-2xl font-bold text-background">FortyNinerTrucking</span>
+                <span className="text-2xl font-bold text-white">FortyNinerTrucking</span>
               </div>
             </Link>
-            <p className="text-background/70 leading-relaxed">
+            <p className="text-white/70 leading-relaxed">
               Premier construction hauling and logistics solutions. Building strong partnerships through reliability, safety, and operational excellence.
             </p>
             <div className="flex gap-4">
-              <Button variant="ghost" size="icon" className="hover:bg-primary hover:text-foreground rounded-full h-10 w-10">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-primary hover:text-white rounded-full h-10 w-10">
                 <Facebook size={20} />
               </Button>
-              <Button variant="ghost" size="icon" className="hover:bg-primary hover:text-foreground rounded-full h-10 w-10">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-primary hover:text-white rounded-full h-10 w-10">
                 <Twitter size={20} />
               </Button>
-              <Button variant="ghost" size="icon" className="hover:bg-primary hover:text-foreground rounded-full h-10 w-10">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-primary hover:text-white rounded-full h-10 w-10">
                 <Instagram size={20} />
               </Button>
-              <Button variant="ghost" size="icon" className="hover:bg-primary hover:text-foreground rounded-full h-10 w-10">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-primary hover:text-white rounded-full h-10 w-10">
                 <Linkedin size={20} />
               </Button>
             </div>
@@ -45,7 +45,7 @@ export default function Footer() {
               ].map(link => (
                 <li key={link.name}>
                   <Link href={link.href}>
-                    <a className="text-background/70 hover:text-primary transition-colors">{link.name}</a>
+                    <a className="text-white/70 hover:text-primary transition-colors">{link.name}</a>
                   </Link>
                 </li>
               ))}
@@ -55,15 +55,15 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-6 text-primary">Contact Info</h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-background/70">
+              <li className="flex items-start gap-3 text-white/70">
                 <MapPin size={20} className="text-primary shrink-0 mt-1" />
                 <span>28 Glen Canyon Court<br />Pittsburg, CA 94565</span>
               </li>
-              <li className="flex items-center gap-3 text-background/70">
+              <li className="flex items-center gap-3 text-white/70">
                 <Phone size={20} className="text-primary shrink-0" />
                 <span>(925) 250-4605</span>
               </li>
-              <li className="flex items-center gap-3 text-background/70">
+              <li className="flex items-center gap-3 text-white/70">
                 <Mail size={20} className="text-primary shrink-0" />
                 <span>fortyninertrucking@gmail.com</span>
               </li>
@@ -71,7 +71,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-background/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-background/50">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
           <p>&copy; {new Date().getFullYear()} FortyNinerTrucking LLC. All rights reserved.</p>
           <div className="flex gap-8">
             <span className="hover:text-primary cursor-pointer transition-colors">Privacy Policy</span>
