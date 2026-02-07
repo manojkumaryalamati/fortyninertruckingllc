@@ -27,7 +27,7 @@ export function AdminSidebar() {
       <div className="p-6 border-b border-border">
         <Link href="/admin">
           <div className="flex items-center gap-2 cursor-pointer">
-            <Logo className="h-16" />
+            <Logo className="h-24" />
           </div>
         </Link>
       </div>
@@ -93,7 +93,7 @@ export function AdminMobileHeader() {
   return (
     <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-background sticky top-0 z-50">
       <div className="flex items-center gap-2">
-        <Logo className="h-12" />
+        <Logo className="h-16" />
       </div>
       
       <Sheet open={open} onOpenChange={setOpen}>
@@ -106,7 +106,7 @@ export function AdminMobileHeader() {
           <div className="flex flex-col h-full">
             <div className="p-6 border-b border-border">
               <div className="flex items-center gap-2">
-                <Logo className="h-16" />
+                <Logo className="h-24" />
               </div>
             </div>
             
