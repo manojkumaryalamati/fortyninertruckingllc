@@ -21,7 +21,7 @@ export default function About() {
            <div className="absolute inset-0 bg-black/50 z-10" />
         </div>
 
-        <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center">
+        <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center">
           <div className="max-w-3xl space-y-6">
             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.9]">
               Driving <br />
@@ -38,7 +38,7 @@ export default function About() {
 
       {/* Mission Section */}
       <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <h2 className="text-sm font-bold tracking-widest text-primary">Our Mission</h2>
@@ -92,7 +92,7 @@ export default function About() {
 
       {/* CTA */}
       <section className="py-24 bg-primary text-white text-center">
-        <div className="container mx-auto px-6 max-w-4xl space-y-8">
+        <div className="container mx-auto px-4 max-w-4xl space-y-8">
           <h2 className="text-4xl md:text-5xl font-black">Ready to Partner With Us?</h2>
           <p className="text-xl font-medium opacity-90">
             Join the hundreds of contractors who trust FortyNinerTrucking for their logistical needs.

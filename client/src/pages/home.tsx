@@ -28,14 +28,14 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center">
+        <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center">
           
         </div>
       </section>
 
       {/* Value Prop Strip */}
       <section className="bg-card py-16 border-b border-white/10">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4">
            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
              <div className="md:w-1/2">
                 <h3 className="text-3xl font-black text-foreground leading-tight">
@@ -53,7 +53,7 @@ export default function Home() {
 
       {/* Who We Are - Split Layout */}
       <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
               <h2 className="text-sm font-bold tracking-widest text-primary">About Us</h2>
@@ -100,7 +100,7 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -mr-32 -mt-32 opacity-20" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -ml-32 -mb-32 opacity-20" />
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="space-y-4 max-w-2xl">
               <h2 className="text-sm font-bold tracking-[0.2em] text-primary">Capabilities</h2>
@@ -167,7 +167,7 @@ export default function Home() {
 
       {/* Easy Process Section */}
       <section className="py-24 bg-card border-t border-white/5">
-         <div className="container mx-auto px-6">
+         <div className="container mx-auto px-4">
            <div className="max-w-4xl mx-auto text-center mb-16">
              <h2 className="text-4xl font-black tracking-tight mb-4 text-foreground">
                Core <span className="text-primary">Values</span>

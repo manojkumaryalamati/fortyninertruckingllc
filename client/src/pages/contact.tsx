@@ -13,7 +13,7 @@ export default function Contact() {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-secondary/30">
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6">
               Let's Start a <br />
@@ -32,7 +32,7 @@ export default function Contact() {
       </section>
 
       <section className="py-24 bg-background relative">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-24">
              {/* Contact Info */}
              <div className="lg:col-span-5 space-y-16">
