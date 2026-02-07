@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function Contact() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -45,11 +46,12 @@ export default function Contact() {
           description: "Firebase is not configured. Check console for data.",
         });
       } else {
-        await addDoc(collection(db, "contacts"), {
+        const docRef = await addDoc(collection(db, "contacts"), {
           ...formData,
           createdAt: serverTimestamp(),
           status: "new"
         });
+        console.log("Document written with ID: ", docRef.id);
         
         toast({
           title: "Message Sent",
@@ -65,6 +67,7 @@ export default function Contact() {
         subject: "Requesting a Quote",
         message: ""
       });
+      setIsSuccess(true);
     } catch (error: any) {
       console.error("Error submitting form:", error);
       toast({
@@ -181,6 +184,24 @@ export default function Contact() {
                  
                  <h3 className="text-2xl font-bold mb-8 relative z-10 text-foreground">Send us a Message</h3>
                  
+                 {isSuccess ? (
+                   <div className="relative z-10 flex flex-col items-center justify-center py-20 text-center space-y-6">
+                     <div className="h-20 w-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
+                       <CheckCircle2 className="w-10 h-10" />
+                     </div>
+                     <h3 className="text-2xl font-bold">Message Sent Successfully!</h3>
+                     <p className="text-muted-foreground max-w-md">
+                       Thank you for contacting FortyNinerTrucking. We have received your message and will be in touch shortly.
+                     </p>
+                     <Button 
+                       onClick={() => setIsSuccess(false)}
+                       variant="outline"
+                       className="mt-6"
+                     >
+                       Send Another Message
+                     </Button>
+                   </div>
+                 ) : (
                  <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
                    <div className="grid md:grid-cols-2 gap-8">
                      <div className="space-y-2">
@@ -269,6 +290,7 @@ export default function Contact() {
                      )}
                    </Button>
                  </form>
+                 )}
                </div>
              </div>
           </div>
@@ -278,4 +300,24 @@ export default function Contact() {
       <Footer />
     </div>
   );
+}
+
+function CheckCircle2(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  )
 }
