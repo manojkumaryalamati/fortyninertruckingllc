@@ -29,35 +29,7 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-3xl space-y-6"
-          >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-              BUILDING <br />
-              <span className="text-primary">AMERICA'S</span> <br />
-              FUTURE
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-xl font-medium border-l-4 border-primary pl-6">
-              FortyNinerTrucking LLC delivers premier construction hauling and logistics solutions for major infrastructure projects across the nation.
-            </p>
-            
-            <div className="pt-8 flex flex-col sm:flex-row gap-4">
-              <Link href="/contact">
-                <Button size="lg" className="rounded-full h-14 px-10 text-lg font-bold bg-primary hover:bg-primary/90 text-white shadow-xl hover:scale-105 transition-all border-none uppercase tracking-wide">
-                  Request a Quote <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                 <Button size="lg" variant="outline" className="rounded-full h-14 px-10 text-lg font-bold bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-md uppercase tracking-wide">
-                   Talk to Dispatch
-                 </Button>
-              </Link>
-            </div>
-          </motion.div>
+          
         </div>
       </section>
 
