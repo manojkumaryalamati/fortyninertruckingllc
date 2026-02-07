@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo_v4.png";
+import logo from "@/assets/logo_v5.png";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -60,17 +60,12 @@ export function Navbar() {
           {/* Logo Area */}
           <div className="flex-shrink-0 relative h-full flex items-center">
             <Link href="/">
-              <div className="cursor-pointer hover:opacity-90 transition-opacity relative group">
-                {/* Logo breaking out of container */}
-                <div className={`absolute left-0 transition-all duration-300 ${scrolled ? '-top-10 w-32' : '-top-12 w-40'} drop-shadow-xl z-10`}>
+              <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center">
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
-                    className="w-full h-auto object-contain drop-shadow-md"
+                    className={`transition-all duration-300 ${scrolled ? 'w-24' : 'w-28'} object-contain drop-shadow-md`}
                   />
-                </div>
-                {/* Invisible spacer to maintain layout */}
-                <div className={`${scrolled ? 'w-32' : 'w-40'} h-full`} />
               </div>
             </Link>
           </div>
