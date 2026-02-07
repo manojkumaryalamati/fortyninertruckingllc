@@ -36,7 +36,7 @@ export default function Services() {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link href="/">
-            <div className="block cursor-pointer">
+            <div className="flex items-center cursor-pointer">
               <img src="/logo.png" alt="FortyNiner Trucking" className="h-14 w-auto object-contain" />
             </div>
           </Link>
