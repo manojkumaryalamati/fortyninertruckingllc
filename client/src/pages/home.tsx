@@ -15,7 +15,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[700px] w-full overflow-hidden mt-20">
+      <section className="relative h-screen min-h-[700px] w-full overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
            <img 
