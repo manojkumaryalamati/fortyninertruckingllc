@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/Logo";
@@ -26,55 +26,45 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 w-full px-4 md:px-8 py-6">
-        <div className="flex items-center justify-between relative max-w-[1920px] mx-auto">
+      <nav className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-4' : 'bg-white/90 backdrop-blur-sm py-6'}`}>
+        <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Left: Logo */}
-          <div className="z-10 flex-shrink-0">
+          <div className="flex-shrink-0">
             <Link href="/">
               <div className="cursor-pointer hover:opacity-80 transition-opacity">
-                <Logo className="h-10 md:h-12 text-white" /> 
+                <Logo className="h-12 text-black" /> 
               </div>
             </Link>
           </div>
 
-          {/* Center: Navigation Pill - Absolute centered on large screens, hidden on small */}
-          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-            <div className="bg-black/40 backdrop-blur-md rounded-full px-1.5 py-1.5 flex items-center gap-1 border border-white/10 shadow-lg">
-              {navLinks.map((item) => (
-                <Link key={item.name} href={item.href}>
-                  <a className={`px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-300 ${
-                    location === item.href 
-                      ? "bg-white text-black font-bold shadow-sm" 
-                      : "text-white/90 hover:bg-white/10 hover:text-white"
-                  }`}>
-                    {item.name}
-                  </a>
-                </Link>
-              ))}
-            </div>
+          {/* Center: Navigation Links */}
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((item) => (
+              <Link key={item.name} href={item.href}>
+                <a className={`text-sm font-bold uppercase tracking-wider transition-colors ${
+                  location === item.href 
+                    ? "text-primary" 
+                    : "text-foreground hover:text-primary"
+                }`}>
+                  {item.name}
+                </a>
+              </Link>
+            ))}
           </div>
 
           {/* Right: Actions */}
-          <div className="flex items-center gap-3 z-10 flex-shrink-0">
-             <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 bg-white/10 backdrop-blur-md border border-white/10 text-white hover:bg-white/20">
-               <span className="text-xs font-bold">EN</span>
+          <div className="flex items-center gap-4">
+             <Button className="rounded-full bg-primary hover:bg-primary/90 text-white font-bold px-6 h-12 hidden md:flex items-center gap-2 shadow-lg shadow-primary/20">
+               <Phone size={18} fill="currentColor" />
+               <span>123-456-7890</span>
              </Button>
-             <Button 
-               variant="ghost" 
-               size="icon" 
-               className="rounded-full h-10 w-10 bg-white/10 backdrop-blur-md border border-white/10 text-white hover:bg-white/20 lg:hidden"
+
+             <button 
+               className="lg:hidden p-2 text-foreground"
                onClick={() => setIsMobileMenuOpen(true)}
              >
-               <Menu size={20} />
-             </Button>
-             {/* Extra menu button for desktop if needed, or just keep mobile menu for consistency */}
-             <Button 
-               variant="ghost" 
-               size="icon" 
-               className="rounded-full h-10 w-10 bg-white/10 backdrop-blur-md border border-white/10 text-white hover:bg-white/20 hidden lg:flex"
-             >
-               <Menu size={20} />
-             </Button>
+               <Menu size={28} />
+             </button>
           </div>
         </div>
       </nav>
@@ -87,23 +77,23 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-black text-white p-6 lg:hidden"
+            className="fixed inset-0 z-[60] bg-white text-black p-6 lg:hidden"
           >
             <div className="flex justify-between items-center mb-12">
-              <Logo className="h-10 text-white" />
+              <Logo className="h-10 text-black" />
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
               >
                 <X size={24} />
               </button>
             </div>
             
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               {navLinks.map((item) => (
                 <Link key={item.name} href={item.href}>
                   <a 
-                    className="text-3xl font-bold hover:text-primary transition-colors py-2 border-b border-white/10"
+                    className="text-2xl font-bold hover:text-primary transition-colors py-2 border-b border-gray-100"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
@@ -111,8 +101,9 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="mt-8">
-                 <Button className="w-full rounded-full py-6 text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90">
-                   Get a Quote
+                 <Button className="w-full rounded-full py-6 text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center gap-2">
+                   <Phone size={20} fill="currentColor" />
+                   Call Now
                  </Button>
               </div>
             </div>
