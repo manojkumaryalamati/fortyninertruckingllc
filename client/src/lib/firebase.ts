@@ -2,15 +2,15 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// TODO: Replace with your Firebase project configuration
-// You can get these details from the Firebase Console > Project settings > General > Your apps
+// Firebase configuration provided by user
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "YOUR_API_KEY",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "YOUR_PROJECT_ID",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "YOUR_MESSAGING_SENDER_ID",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "YOUR_APP_ID"
+  apiKey: "AIzaSyBPf09YcCVNU7hIza3i1Ylw-gDrGfQsafE",
+  authDomain: "fortyninertruckingllc.firebaseapp.com",
+  projectId: "fortyninertruckingllc",
+  storageBucket: "fortyninertruckingllc.firebasestorage.app",
+  messagingSenderId: "131233292817",
+  appId: "1:131233292817:web:9ae8616d76a1a0580b07b0",
+  measurementId: "G-LLP5KP62RD"
 };
 
 // Initialize Firebase
