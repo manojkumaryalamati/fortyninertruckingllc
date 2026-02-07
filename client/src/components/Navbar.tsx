@@ -25,63 +25,69 @@ export function Navbar() {
   ];
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-xl border-b border-border/50 py-2 shadow-sm" : "bg-background/80 backdrop-blur-md py-4 border-b border-border/20"
-      }`}
-    >
-      <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
-        <Link href="/">
-          <div className="flex items-center cursor-pointer hover:opacity-90 transition-opacity">
-            <Logo className="h-20 md:h-24" /> 
-          </div>
-        </Link>
-        
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((item) => (
-            <Link key={item.name} href={item.href}>
-              <a className={`px-4 py-2 text-sm font-semibold rounded-full transition-all ${
-                location === item.href 
-                  ? "bg-primary/10 text-primary" 
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-              }`}>
-                {item.name}
-              </a>
-            </Link>
-          ))}
-          <div className="w-px h-6 bg-border mx-2" />
-          <Link href="/admin">
-             <Button variant="ghost" size="sm" className="font-semibold text-muted-foreground hover:text-foreground">
-               Login
-             </Button>
+    <>
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className={`fixed top-4 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:w-[95%] max-w-7xl z-50 rounded-full transition-all duration-300 ${
+          scrolled || isMobileMenuOpen 
+            ? "bg-white/90 dark:bg-black/90 backdrop-blur-xl shadow-lg border border-white/20" 
+            : "bg-white/80 dark:bg-black/50 backdrop-blur-md border border-white/10"
+        }`}
+      >
+        <div className="px-6 py-3 flex items-center justify-between">
+          <Link href="/">
+            <div className="flex items-center cursor-pointer hover:opacity-80 transition-opacity">
+              <Logo className="h-10 md:h-12" /> 
+            </div>
           </Link>
+          
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-2">
+            {navLinks.map((item) => (
+              <Link key={item.name} href={item.href}>
+                <a className={`px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-300 ${
+                  location === item.href 
+                    ? "bg-primary text-primary-foreground shadow-md" 
+                    : "text-foreground/80 hover:bg-secondary hover:text-foreground"
+                }`}>
+                  {item.name}
+                </a>
+              </Link>
+            ))}
+            <div className="w-px h-6 bg-border mx-2 opacity-50" />
+            <Link href="/contact">
+               <Button className="rounded-full px-6 font-semibold shadow-lg shadow-primary/20">
+                 Get Quote
+               </Button>
+            </Link>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="md:hidden p-2 rounded-full hover:bg-secondary transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+      </motion.nav>
 
-        {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden p-2 rounded-full transition-colors text-foreground hover:bg-secondary"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-b border-border bg-background overflow-hidden"
+            className="fixed top-24 left-4 right-4 z-40 bg-card border border-border rounded-3xl shadow-2xl overflow-hidden md:hidden"
           >
             <div className="p-4 flex flex-col gap-2">
               {navLinks.map((item) => (
                 <Link key={item.name} href={item.href}>
                   <a 
-                    className={`text-base font-medium px-4 py-3 rounded-lg transition-colors ${
+                    className={`text-lg font-medium px-6 py-4 rounded-2xl transition-colors ${
                       location === item.href
                         ? "bg-primary/10 text-primary"
                         : "text-foreground hover:bg-secondary"
@@ -93,15 +99,20 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="h-px bg-border my-2" />
+              <Link href="/contact">
+                 <Button className="w-full rounded-xl py-6 text-lg font-bold shadow-lg">
+                   Get a Quote
+                 </Button>
+              </Link>
               <Link href="/admin">
-                 <Button variant="secondary" className="w-full font-bold justify-start px-4">
-                   Portal Login
+                 <Button variant="ghost" className="w-full rounded-xl py-6 text-muted-foreground">
+                   Admin Login
                  </Button>
               </Link>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }
