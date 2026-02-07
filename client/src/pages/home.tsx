@@ -17,57 +17,101 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[700px] w-full overflow-hidden">
-        {/* Background Image */}
+      <section className="relative h-screen min-h-[800px] w-full overflow-hidden">
+        {/* Background Image with Parallax Effect */}
         <div className="absolute inset-0 z-0">
-           <img 
+           <motion.img 
+             initial={{ scale: 1.1 }}
+             animate={{ scale: 1 }}
+             transition={{ duration: 10, ease: "easeOut" }}
              src={heroImage}
              alt="FortyNiner Trucking Fleet" 
-             className="w-full h-full object-cover"
+             className="w-full h-full object-cover object-center"
            />
-           {/* Gradient Overlay for text readability */}
-           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10" />
+           {/* Sophisticated Gradient Overlay */}
+           <div className="absolute inset-0 bg-gradient-to-r from-[#0F3F40]/90 via-[#0F3F40]/40 to-transparent z-10" />
+           <div className="absolute inset-0 bg-gradient-to-t from-[#0F3F40] via-transparent to-transparent z-10" />
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-3xl space-y-6"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 text-white font-bold tracking-wide">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-              </span>
-              Reliable Hauling Solutions
+        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 h-full flex items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center w-full pt-20">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-8"
+            >
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold tracking-widest text-sm uppercase shadow-lg">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                </span>
+                Serving All of California
+              </div>
+              
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white leading-[0.85] drop-shadow-2xl">
+                MOVE <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-primary bg-[length:200%_auto] animate-gradient">MOUNTAINS.</span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-white/90 max-w-xl font-medium leading-relaxed border-l-4 border-primary pl-6">
+                The premier partner for heavy hauling and construction logistics. Precision, power, and safety in every mile.
+              </p>
+              
+              <div className="pt-8 flex flex-col sm:flex-row gap-5">
+                <Link href="/contact">
+                  <Button className="rounded-none skew-x-[-12deg] bg-primary hover:bg-primary/90 px-10 h-16 text-lg font-black text-white shadow-[0_0_30px_rgba(var(--primary),0.4)] transition-all hover:skew-x-0 hover:scale-105 border-2 border-primary">
+                    <span className="skew-x-[12deg] inline-flex items-center gap-3">
+                      GET A QUOTE <ArrowRight className="w-6 h-6" />
+                    </span>
+                  </Button>
+                </Link>
+                <Link href="/services">
+                  <Button variant="outline" className="rounded-none skew-x-[-12deg] border-2 border-white/30 text-white hover:bg-white hover:text-[#0F3F40] h-16 px-10 text-lg font-black backdrop-blur-sm bg-white/5 transition-all hover:skew-x-0 hover:scale-105">
+                    <span className="skew-x-[12deg]">
+                      EXPLORE SERVICES
+                    </span>
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="pt-12 flex items-center gap-8 text-white/60">
+                <div className="flex flex-col">
+                   <span className="text-3xl font-black text-white">15+</span>
+                   <span className="text-xs uppercase tracking-wider">Years Active</span>
+                </div>
+                <div className="w-px h-10 bg-white/20"></div>
+                <div className="flex flex-col">
+                   <span className="text-3xl font-black text-white">5k+</span>
+                   <span className="text-xs uppercase tracking-wider">Successful Loads</span>
+                </div>
+                <div className="w-px h-10 bg-white/20"></div>
+                <div className="flex flex-col">
+                   <span className="text-3xl font-black text-white">100%</span>
+                   <span className="text-xs uppercase tracking-wider">Safety Record</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right side - decorative glass card or just space for the truck image to shine */}
+            <div className="hidden lg:block relative h-full">
+               {/* This space is intentionally left clear to show the truck from the background image */}
             </div>
-            
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-[0.9]">
-              HEAVY HAULING <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">DONE RIGHT.</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-white/80 max-w-2xl font-light leading-relaxed">
-              Premier construction material transport and heavy equipment logistics across California. We deliver power, precision, and performance.
-            </p>
-            
-            <div className="pt-8 flex flex-col sm:flex-row gap-4">
-              <Link href="/contact">
-                <Button className="rounded-full bg-primary hover:bg-primary/90 px-10 h-16 text-lg font-bold text-white shadow-xl shadow-primary/20 transition-all hover:scale-105">
-                  Get a Free Quote
-                </Button>
-              </Link>
-              <Link href="/services">
-                <Button variant="outline" className="rounded-full border-white/20 text-white hover:bg-white hover:text-background h-16 px-10 text-lg font-bold backdrop-blur-sm bg-white/5 transition-all hover:scale-105">
-                  Our Services
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+          </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 text-white/50 flex flex-col items-center gap-2"
+        >
+          <span className="text-[10px] uppercase tracking-[0.3em]">Scroll Down</span>
+          <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent"></div>
+        </motion.div>
       </section>
 
       {/* Value Prop Strip */}
