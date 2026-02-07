@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
@@ -12,109 +12,153 @@ export default function Contact() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[40vh] min-h-[300px] w-full overflow-hidden mt-20">
-        <div className="absolute inset-0 z-0">
-           <img 
-             src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2940&auto=format&fit=crop" 
-             alt="Contact Hero" 
-             className="w-full h-full object-cover"
-           />
-           <div className="absolute inset-0 bg-black/60 z-10" />
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-secondary/30">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6">
+              Let's Start a <br />
+              <span className="text-primary">Conversation.</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
+              Whether you need a quote for a major project or want to join our fleet, 
+              our team is ready to help you move forward.
+            </p>
+          </div>
         </div>
-        <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center">
-           <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-            GET IN <br/>
-            <span className="text-primary">TOUCH</span>
-           </h1>
-        </div>
+        
+        {/* Background Elements */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent hidden lg:block" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-background relative">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-24">
              {/* Contact Info */}
-             <div className="space-y-12">
+             <div className="lg:col-span-5 space-y-16">
                <div>
-                 <h2 className="text-4xl font-black uppercase mb-6">Contact Us</h2>
-                 <p className="text-xl text-muted-foreground">
-                   Contractors, subhaulers, and partners – reach out to our dispatch team for reliable service.
-                 </p>
+                 <h2 className="text-3xl font-bold tracking-tight mb-8">Get in Touch</h2>
+                 <div className="space-y-8">
+                   <div className="flex items-start gap-5 group">
+                     <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+                       <Phone size={24} />
+                     </div>
+                     <div>
+                       <h3 className="text-lg font-bold mb-1">Phone Support</h3>
+                       <p className="text-muted-foreground mb-2">24/7 Dispatch Availability</p>
+                       <a href="tel:9252504605" className="text-xl font-semibold hover:text-primary transition-colors">(925) 250-4605</a>
+                     </div>
+                   </div>
+
+                   <div className="flex items-start gap-5 group">
+                     <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+                       <Mail size={24} />
+                     </div>
+                     <div>
+                       <h3 className="text-lg font-bold mb-1">Email</h3>
+                       <p className="text-muted-foreground mb-2">For quotes and bids</p>
+                       <a href="mailto:fortyninertrucking@gmail.com" className="text-xl font-semibold hover:text-primary transition-colors">fortyninertrucking@gmail.com</a>
+                     </div>
+                   </div>
+
+                   <div className="flex items-start gap-5 group">
+                     <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+                       <MapPin size={24} />
+                     </div>
+                     <div>
+                       <h3 className="text-lg font-bold mb-1">Headquarters</h3>
+                       <p className="text-muted-foreground mb-2">Main Terminal & Office</p>
+                       <address className="text-xl font-semibold not-italic text-foreground">
+                         28 Glen Canyon Court<br/>
+                         Pittsburg, CA 94565
+                       </address>
+                     </div>
+                   </div>
+
+                   <div className="flex items-start gap-5 group">
+                     <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+                       <Clock size={24} />
+                     </div>
+                     <div>
+                       <h3 className="text-lg font-bold mb-1">Hours of Operation</h3>
+                       <p className="text-muted-foreground mb-2">Office Hours</p>
+                       <p className="text-xl font-semibold">Mon - Fri: 7:00 AM - 5:00 PM</p>
+                       <p className="text-muted-foreground mt-1">Dispatch available 24/7</p>
+                     </div>
+                   </div>
+                 </div>
                </div>
 
-               <div className="space-y-8">
-                 <div className="flex items-start gap-6">
-                   <div className="h-16 w-16 bg-primary flex items-center justify-center text-white shrink-0">
-                     <Phone size={32} />
-                   </div>
-                   <div>
-                     <h3 className="text-xl font-black uppercase">Call Dispatch</h3>
-                     <p className="text-muted-foreground mb-1">Immediate Assistance 24/7</p>
-                     <p className="text-2xl font-bold text-primary">(925) 250-4605</p>
-                   </div>
-                 </div>
-
-                 <div className="flex items-start gap-6">
-                   <div className="h-16 w-16 bg-primary flex items-center justify-center text-white shrink-0">
-                     <Mail size={32} />
-                   </div>
-                   <div>
-                     <h3 className="text-xl font-black uppercase">Email Us</h3>
-                     <p className="text-muted-foreground mb-1">Quotes & Bids</p>
-                     <p className="text-xl font-bold text-primary">fortyninertrucking@gmail.com</p>
-                   </div>
-                 </div>
-
-                 <div className="flex items-start gap-6">
-                   <div className="h-16 w-16 bg-primary flex items-center justify-center text-white shrink-0">
-                     <MapPin size={32} />
-                   </div>
-                   <div>
-                     <h3 className="text-xl font-black uppercase">Visit HQ</h3>
-                     <p className="text-muted-foreground mb-1">Main Terminal</p>
-                     <p className="text-xl font-bold">28 Glen Canyon Court<br/>Pittsburg CA 94565</p>
-                   </div>
-                 </div>
+               {/* Map Card */}
+               <div className="rounded-3xl overflow-hidden shadow-sm border border-border h-[300px] relative bg-secondary/30">
+                 <iframe 
+                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.418648834645!2d-121.8988654242686!3d38.0175829719246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808560b4576394e1%3A0xc3f833777f985440!2s28%20Glen%20Canyon%20Ct%2C%20Pittsburg%2C%20CA%2094565!5e0!3m2!1sen!2sus!4v1707360000000!5m2!1sen!2sus" 
+                   width="100%" 
+                   height="100%" 
+                   style={{ border: 0 }} 
+                   allowFullScreen 
+                   loading="lazy" 
+                   referrerPolicy="no-referrer-when-downgrade"
+                   className="grayscale hover:grayscale-0 transition-all duration-500"
+                 ></iframe>
                </div>
              </div>
 
              {/* Form */}
-             <div className="bg-[#FDFBF7] p-8 md:p-12 shadow-xl border-t-4 border-primary">
-               <h3 className="text-2xl font-black uppercase mb-8">Send a Message</h3>
-               <form className="space-y-6">
-                 <div className="grid md:grid-cols-2 gap-6">
-                   <div className="space-y-2">
-                     <Label htmlFor="name" className="uppercase font-bold">Name</Label>
-                     <Input id="name" placeholder="YOUR NAME" className="bg-white border-gray-200 h-12" />
-                   </div>
-                   <div className="space-y-2">
-                     <Label htmlFor="email" className="uppercase font-bold">Email</Label>
-                     <Input id="email" type="email" placeholder="EMAIL@COMPANY.COM" className="bg-white border-gray-200 h-12" />
-                   </div>
-                 </div>
+             <div className="lg:col-span-7">
+               <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-border relative overflow-hidden">
+                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-10 -mt-10" />
                  
-                 <div className="space-y-2">
-                   <Label htmlFor="subject" className="uppercase font-bold">Subject</Label>
-                   <select className="w-full h-12 rounded-md border border-gray-200 bg-white px-3 py-2 text-sm">
-                     <option>Request a Quote</option>
-                     <option>Subhauler Inquiry</option>
-                     <option>Driver Application</option>
-                     <option>General Information</option>
-                   </select>
-                 </div>
+                 <h3 className="text-2xl font-bold mb-8 relative z-10">Send us a Message</h3>
+                 
+                 <form className="space-y-8 relative z-10">
+                   <div className="grid md:grid-cols-2 gap-8">
+                     <div className="space-y-2">
+                       <Label htmlFor="firstName" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">First Name</Label>
+                       <Input id="firstName" placeholder="John" className="h-14 bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg px-4" />
+                     </div>
+                     <div className="space-y-2">
+                       <Label htmlFor="lastName" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Last Name</Label>
+                       <Input id="lastName" placeholder="Doe" className="h-14 bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg px-4" />
+                     </div>
+                   </div>
 
-                 <div className="space-y-2">
-                   <Label htmlFor="message" className="uppercase font-bold">Message</Label>
-                   <Textarea id="message" placeholder="HOW CAN WE HELP YOU?" className="min-h-[150px] bg-white border-gray-200" />
-                 </div>
+                   <div className="grid md:grid-cols-2 gap-8">
+                     <div className="space-y-2">
+                       <Label htmlFor="email" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Email Address</Label>
+                       <Input id="email" type="email" placeholder="john@company.com" className="h-14 bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg px-4" />
+                     </div>
+                     <div className="space-y-2">
+                       <Label htmlFor="phone" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Phone Number</Label>
+                       <Input id="phone" type="tel" placeholder="(555) 123-4567" className="h-14 bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg px-4" />
+                     </div>
+                   </div>
+                   
+                   <div className="space-y-2">
+                     <Label htmlFor="subject" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">I'm interested in</Label>
+                     <select className="w-full h-14 rounded-xl border-transparent bg-secondary/30 px-4 py-2 text-lg focus:bg-white focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                       <option>Requesting a Quote</option>
+                       <option>Becoming a Subhauler</option>
+                       <option>Driver Opportunities</option>
+                       <option>General Inquiry</option>
+                     </select>
+                   </div>
 
-                 <Button size="lg" className="w-full bg-primary hover:bg-primary/90 h-14 uppercase font-bold text-white tracking-widest">
-                   Send Message
-                 </Button>
-               </form>
+                   <div className="space-y-2">
+                     <Label htmlFor="message" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Message</Label>
+                     <Textarea id="message" placeholder="Tell us more about your project or inquiry..." className="min-h-[200px] bg-secondary/30 border-transparent focus:bg-white transition-all rounded-xl text-lg p-4 resize-none" />
+                   </div>
+
+                   <Button size="lg" className="w-full h-16 text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all flex items-center justify-center gap-2">
+                     Send Message <ArrowRight size={20} />
+                   </Button>
+                 </form>
+               </div>
              </div>
           </div>
         </div>
       </section>
+
       <Footer />
     </div>
   );
