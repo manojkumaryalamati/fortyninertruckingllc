@@ -5,13 +5,18 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Link } from "wouter";
-import { Lock, AlertCircle } from "lucide-react";
+import { Lock, AlertCircle, Loader2 } from "lucide-react";
+import { isFirebaseConfigured, auth } from "@/lib/firebase";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isResetting, setIsResetting] = useState(false);
   const { login, error: authError } = useAuth();
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +31,35 @@ export default function Login() {
       await login(email, password);
     } catch (err: any) {
       setError(err.message || "Failed to login");
+    }
+  };
+
+  const handleForgotPassword = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!email) {
+      setError("Please enter your email address to reset password");
+      return;
+    }
+
+    setIsResetting(true);
+    try {
+      if (isFirebaseConfigured()) {
+        await sendPasswordResetEmail(auth, email);
+        toast({
+          title: "Reset Email Sent",
+          description: "Check your inbox for password reset instructions.",
+        });
+      } else {
+        toast({
+          title: "Mock Reset",
+          description: "Password reset simulated (Firebase not configured).",
+        });
+      }
+    } catch (err: any) {
+      console.error("Reset error:", err);
+      setError(err.message || "Failed to send reset email");
+    } finally {
+      setIsResetting(false);
     }
   };
 
@@ -57,7 +91,14 @@ export default function Login() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <a href="#" className="text-xs text-primary hover:underline">Forgot password?</a>
+                  <button 
+                    type="button"
+                    onClick={handleForgotPassword}
+                    className="text-xs text-primary hover:underline bg-transparent border-none p-0 cursor-pointer"
+                    disabled={isResetting}
+                  >
+                    {isResetting ? "Sending..." : "Forgot password?"}
+                  </button>
                 </div>
                 <div className="relative">
                   <Input 
@@ -92,9 +133,11 @@ export default function Login() {
           </CardContent>
         </Card>
         
-        <div className="text-center text-xs text-muted-foreground">
-          <p>Mock Credentials: Use any email and password "admin123"</p>
-        </div>
+        {!isFirebaseConfigured() && (
+          <div className="text-center text-xs text-muted-foreground">
+            <p>Mock Credentials: Use any email and password "admin123"</p>
+          </div>
+        )}
       </div>
     </div>
   );
