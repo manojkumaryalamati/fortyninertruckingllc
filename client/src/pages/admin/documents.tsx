@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { 
@@ -17,7 +17,9 @@ import {
   MoreVertical,
   Upload,
   BarChart3,
-  LogOut
+  LogOut,
+  Loader2,
+  Trash2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,46 +30,107 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { AdminSidebar, AdminMobileHeader } from "@/components/AdminSidebar";
-
-// Mock Documents Data
-const initialDocs = [
-  { id: "DOC-101", name: "CDL License - M. Rodriguez", type: "Driver License", entity: "Michael Rodriguez", expiry: "Mar 15, 2026", status: "Valid", category: "Driver" },
-  { id: "DOC-102", name: "Medical Card - S. Jenkins", type: "Medical Cert", entity: "Sarah Jenkins", expiry: "Feb 28, 2026", status: "Expiring Soon", category: "Driver" },
-  { id: "DOC-103", name: "Registration - TRK-409", type: "Vehicle Reg", entity: "TRK-409", expiry: "Jun 30, 2026", status: "Valid", category: "Truck" },
-  { id: "DOC-104", name: "Insurance Cert - Fleet", type: "Insurance", entity: "All Fleet", expiry: "Jan 01, 2027", status: "Valid", category: "Company" },
-  { id: "DOC-105", name: "IFTA Permit 2025", type: "Permit", entity: "TRK-205", expiry: "Dec 31, 2025", status: "Expired", category: "Truck" },
-  { id: "DOC-106", name: "CDL License - D. Chen", type: "Driver License", entity: "David Chen", expiry: "Apr 10, 2026", status: "Valid", category: "Driver" },
-];
+import { db, isFirebaseConfigured } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc } from "firebase/firestore";
+import { useToast } from "@/hooks/use-toast";
 
 export default function DocumentsCenter() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
-  const [documents, setDocuments] = useState(initialDocs);
+  const { toast } = useToast();
+  const [documents, setDocuments] = useState<any[]>([]);
   const [filter, setFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch Documents
+  useEffect(() => {
+    if (!isFirebaseConfigured()) {
+      setDocuments([
+        { id: "mock-101", name: "CDL License - M. Rodriguez", type: "Driver License", entity: "Michael Rodriguez", expiry: "Mar 15, 2026", status: "Valid", category: "Driver" },
+        { id: "mock-102", name: "Medical Card - S. Jenkins", type: "Medical Cert", entity: "Sarah Jenkins", expiry: "Feb 28, 2026", status: "Expiring Soon", category: "Driver" },
+      ]);
+      setIsLoading(false);
+      return;
+    }
+
+    const q = query(collection(db, "documents"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const docsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setDocuments(docsData);
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const filteredDocs = documents.filter(doc => {
     const matchesFilter = filter === "All" || doc.category === filter;
-    const matchesSearch = doc.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          doc.entity.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = doc.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          doc.entity?.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
-  const handleUpload = (e: React.FormEvent) => {
+  const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const formData = new FormData(e.target as HTMLFormElement);
+    
+    // Determine status based on expiration date (simple logic)
+    const expiryDate = new Date(formData.get("expiry") as string);
+    const today = new Date();
+    const threeMonthsFromNow = new Date();
+    threeMonthsFromNow.setMonth(today.getMonth() + 3);
+    
+    let status = "Valid";
+    if (expiryDate < today) status = "Expired";
+    else if (expiryDate < threeMonthsFromNow) status = "Expiring Soon";
+
     const newDoc = {
-      id: `DOC-${Math.floor(Math.random() * 900) + 100}`,
       name: formData.get("fileName") as string,
       type: formData.get("docType") as string,
       entity: formData.get("entity") as string,
-      expiry: new Date(formData.get("expiry") as string).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
-      status: "Valid",
-      category: formData.get("category") as string
+      expiry: expiryDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+      status: status,
+      category: formData.get("category") as string,
+      createdAt: serverTimestamp()
     };
-    setDocuments([newDoc, ...documents]);
-    setIsUploadModalOpen(false);
+
+    try {
+      if (isFirebaseConfigured()) {
+        await addDoc(collection(db, "documents"), newDoc);
+        toast({ title: "Document Uploaded", description: "File record created successfully." });
+      } else {
+        setDocuments([{ id: `mock-${Date.now()}`, ...newDoc }, ...documents]);
+        toast({ title: "Document Uploaded (Mock)", description: "Firebase not configured." });
+      }
+      setIsUploadModalOpen(false);
+    } catch (error) {
+      console.error("Error adding document:", error);
+      toast({ title: "Error", description: "Failed to upload document record.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteDoc = async (id: string) => {
+    if (!confirm("Delete this document record?")) return;
+    try {
+      if (isFirebaseConfigured()) {
+        await deleteDoc(doc(db, "documents", id));
+        toast({ title: "Document Deleted", description: "Record removed." });
+      } else {
+        setDocuments(documents.filter(d => d.id !== id));
+      }
+    } catch (error) {
+      console.error("Error deleting document:", error);
+      toast({ title: "Error", description: "Failed to delete document.", variant: "destructive" });
+    }
   };
 
   return (
@@ -157,7 +220,9 @@ export default function DocumentsCenter() {
 
                      <DialogFooter>
                        <Button type="button" variant="outline" onClick={() => setIsUploadModalOpen(false)}>Cancel</Button>
-                       <Button type="submit">Upload & Save</Button>
+                       <Button type="submit" disabled={isSubmitting}>
+                         {isSubmitting ? <Loader2 className="animate-spin" /> : "Upload & Save"}
+                       </Button>
                      </DialogFooter>
                    </form>
                  </DialogContent>
@@ -171,7 +236,7 @@ export default function DocumentsCenter() {
                <CardContent className="p-4 flex items-center justify-between">
                  <div>
                    <p className="text-xs font-bold uppercase text-green-700 mb-1">Compliant</p>
-                   <p className="text-2xl font-bold text-green-800">42</p>
+                   <p className="text-2xl font-bold text-green-800">{documents.filter(d => d.status === "Valid").length}</p>
                  </div>
                  <div className="h-8 w-8 rounded-full bg-green-200 flex items-center justify-center text-green-700"><CheckCircle2 size={16} /></div>
                </CardContent>
@@ -180,7 +245,7 @@ export default function DocumentsCenter() {
                <CardContent className="p-4 flex items-center justify-between">
                  <div>
                    <p className="text-xs font-bold uppercase text-yellow-700 mb-1">Expiring Soon</p>
-                   <p className="text-2xl font-bold text-yellow-800">5</p>
+                   <p className="text-2xl font-bold text-yellow-800">{documents.filter(d => d.status === "Expiring Soon").length}</p>
                  </div>
                  <div className="h-8 w-8 rounded-full bg-yellow-200 flex items-center justify-center text-yellow-700"><Clock size={16} /></div>
                </CardContent>
@@ -189,7 +254,7 @@ export default function DocumentsCenter() {
                <CardContent className="p-4 flex items-center justify-between">
                  <div>
                    <p className="text-xs font-bold uppercase text-red-700 mb-1">Expired</p>
-                   <p className="text-2xl font-bold text-red-800">1</p>
+                   <p className="text-2xl font-bold text-red-800">{documents.filter(d => d.status === "Expired").length}</p>
                  </div>
                  <div className="h-8 w-8 rounded-full bg-red-200 flex items-center justify-center text-red-700"><AlertTriangle size={16} /></div>
                </CardContent>
@@ -198,7 +263,7 @@ export default function DocumentsCenter() {
                <CardContent className="p-4 flex items-center justify-between">
                  <div>
                    <p className="text-xs font-bold uppercase text-primary mb-1">Total Docs</p>
-                   <p className="text-2xl font-bold">48</p>
+                   <p className="text-2xl font-bold">{documents.length}</p>
                  </div>
                  <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary"><FileText size={16} /></div>
                </CardContent>
@@ -232,6 +297,9 @@ export default function DocumentsCenter() {
                <Button variant="outline" size="sm" className="ml-auto"><Filter className="mr-2 h-4 w-4" /> Filter</Button>
              </div>
              
+             {isLoading ? (
+               <div className="p-12 flex justify-center"><Loader2 className="animate-spin text-primary" /></div>
+             ) : (
              <div className="overflow-x-auto">
                <table className="w-full text-sm text-left">
                  <thead className="bg-secondary/30 text-muted-foreground font-medium border-b border-border">
@@ -247,7 +315,7 @@ export default function DocumentsCenter() {
                  </thead>
                  <tbody className="divide-y divide-border">
                    {filteredDocs.map(doc => (
-                     <tr key={doc.id} className="hover:bg-secondary/20 transition-colors">
+                     <tr key={doc.id} className="hover:bg-secondary/20 transition-colors group">
                        <td className="px-6 py-4 font-bold flex items-center gap-2">
                          <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
                            <FileText size={14} />
@@ -271,19 +339,25 @@ export default function DocumentsCenter() {
                        </td>
                        <td className="px-6 py-4 text-right">
                          <div className="flex items-center justify-end gap-2">
-                           <Button variant="ghost" size="icon" className="h-8 w-8">
+                           <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
                              <Download size={16} />
                            </Button>
-                           <Button variant="ghost" size="icon" className="h-8 w-8">
-                             <MoreVertical size={16} />
+                           <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => handleDeleteDoc(doc.id)}>
+                             <Trash2 size={16} />
                            </Button>
                          </div>
                        </td>
                      </tr>
                    ))}
+                   {filteredDocs.length === 0 && (
+                     <tr>
+                       <td colSpan={7} className="text-center p-8 text-muted-foreground">No documents found</td>
+                     </tr>
+                   )}
                  </tbody>
                </table>
              </div>
+             )}
           </Card>
         </div>
         </main>

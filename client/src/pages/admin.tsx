@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { 
@@ -39,7 +39,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { updatePassword, updateProfile } from "firebase/auth";
-import { auth, isFirebaseConfigured } from "@/lib/firebase";
+import { auth, db, isFirebaseConfigured } from "@/lib/firebase";
+import { collection, onSnapshot, query, where, getCountFromServer } from "firebase/firestore";
 
 // Mock Data for Charts
 const weeklyData = [
@@ -87,8 +88,8 @@ const revenueDataMap = {
   yearly: yearlyData,
 };
 
-// Mock Data for Table
-const recentShipments = [
+// Mock Data for Table (Fallback)
+const mockShipments = [
   { id: "FT-9281", customer: "Tesla Gigafactory", destination: "Austin, TX", status: "In Transit", driver: "M. Rodriguez", eta: "2h 15m", value: "$4,200" },
   { id: "FT-9282", customer: "Amazon fulfillment", destination: "Reno, NV", status: "Delivered", driver: "J. Smith", eta: "Arrived", value: "$1,850" },
   { id: "FT-9283", customer: "Home Depot HQ", destination: "Atlanta, GA", status: "Pending", driver: "Unassigned", eta: "Tom. 8am", value: "$3,100" },
@@ -102,12 +103,66 @@ export default function AdminDashboard() {
   const { toast } = useToast();
   const [revenueFilter, setRevenueFilter] = useState<keyof typeof revenueDataMap>("weekly");
   
+  // Real-time Data States
+  const [stats, setStats] = useState({
+    activeDrivers: 42,
+    trucksOnRoad: 38,
+    revenue: "$12,450",
+    safetyScore: "98/100"
+  });
+  const [recentShipments, setRecentShipments] = useState(mockShipments);
+  const [isLoading, setIsLoading] = useState(true);
+
   // Profile Update State
   const [isUpdateProfileOpen, setIsUpdateProfileOpen] = useState(false);
   const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
+
+  // Fetch Stats and Recent Trips
+  useEffect(() => {
+    if (!isFirebaseConfigured()) {
+      setIsLoading(false);
+      return;
+    }
+
+    // Subscribe to Drivers count
+    const unsubscribeDrivers = onSnapshot(collection(db, "drivers"), (snapshot) => {
+       const activeCount = snapshot.docs.filter(d => d.data().status === "Active").length;
+       setStats(prev => ({ ...prev, activeDrivers: activeCount || 42 })); // Fallback to mock if 0 for demo visual
+    });
+
+    // Subscribe to Trips
+    const unsubscribeTrips = onSnapshot(collection(db, "trips"), (snapshot) => {
+       const trips = snapshot.docs.map(doc => {
+         const data = doc.data();
+         return {
+            id: doc.id,
+            customer: data.customer,
+            destination: data.route?.split("→")[1]?.trim() || "Unknown",
+            status: data.status === "In Progress" ? "In Transit" : data.status,
+            driver: data.driver,
+            eta: "Unknown", // Would need real tracking for this
+            value: data.rate
+         };
+       });
+       
+       if (trips.length > 0) {
+         setRecentShipments(trips.slice(0, 5));
+         setStats(prev => ({ 
+           ...prev, 
+           trucksOnRoad: trips.filter(t => t.status === "In Transit" || t.status === "In Progress").length 
+         }));
+       }
+       setIsLoading(false);
+    });
+
+    return () => {
+      unsubscribeDrivers();
+      unsubscribeTrips();
+    };
+  }, []);
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -282,10 +337,10 @@ export default function AdminDashboard() {
           <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
             {[
-              { label: "Active Drivers", value: "42", change: "+2", trend: "up", icon: Users },
-              { label: "Trucks on Road", value: "38", change: "-1", trend: "down", icon: Truck },
-              { label: "Today's Revenue", value: "$12,450", change: "+15%", trend: "up", icon: DollarSign },
-              { label: "Safety Score", value: "98/100", change: "+1", trend: "up", icon: ShieldCheck },
+              { label: "Active Drivers", value: stats.activeDrivers, change: "+2", trend: "up", icon: Users },
+              { label: "Trucks on Road", value: stats.trucksOnRoad, change: "-1", trend: "down", icon: Truck },
+              { label: "Today's Revenue", value: stats.revenue, change: "+15%", trend: "up", icon: DollarSign },
+              { label: "Safety Score", value: stats.safetyScore, change: "+1", trend: "up", icon: ShieldCheck },
             ].map((stat, i) => (
               <Card key={i} className="shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-6">
@@ -337,7 +392,7 @@ export default function AdminDashboard() {
                   <tbody className="divide-y divide-border">
                     {recentShipments.map((load) => (
                       <tr key={load.id} className="hover:bg-secondary/20 transition-colors group">
-                        <td className="px-6 py-4 font-medium">{load.id}</td>
+                        <td className="px-6 py-4 font-medium">{load.id.substring(0, 8)}...</td>
                         <td className="px-6 py-4">{load.customer}</td>
                         <td className="px-6 py-4">{load.destination}</td>
                         <td className="px-6 py-4">
@@ -351,7 +406,7 @@ export default function AdminDashboard() {
                           </Badge>
                         </td>
                         <td className="px-6 py-4 flex items-center gap-2">
-                           {load.driver !== "Unassigned" && <div className="h-6 w-6 rounded-full bg-secondary flex items-center justify-center text-xs font-bold">{load.driver.charAt(0)}</div>}
+                           {load.driver !== "Unassigned" && <div className="h-6 w-6 rounded-full bg-secondary flex items-center justify-center text-xs font-bold">{load.driver ? load.driver.charAt(0) : "U"}</div>}
                            {load.driver}
                         </td>
                         <td className="px-6 py-4 text-muted-foreground">{load.eta}</td>

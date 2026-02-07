@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { 
@@ -16,11 +16,13 @@ import {
   MapPin, 
   User, 
   DollarSign, 
-  Upload
+  Upload,
+  Loader2,
+  Trash2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
@@ -28,36 +30,90 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { AdminSidebar, AdminMobileHeader } from "@/components/AdminSidebar";
-
-const initialTrips = [
-  { id: "TRP-9281", date: "Feb 09, 2026", customer: "Tesla Gigafactory", route: "Sacramento → Austin", driver: "M. Rodriguez", truck: "TRK-409", status: "In Progress", rate: "$4,200", material: "Steel Coils" },
-  { id: "TRP-9282", date: "Feb 09, 2026", customer: "Amazon", route: "Reno → Salt Lake City", driver: "S. Jenkins", truck: "TRK-410", status: "Scheduled", rate: "$1,850", material: "Palletized Goods" },
-  { id: "TRP-9283", date: "Feb 08, 2026", customer: "Home Depot", route: "Oakland → Fresno", driver: "R. Johnson", truck: "TRK-205", status: "Completed", rate: "$950", material: "Lumber" },
-  { id: "TRP-9284", date: "Feb 08, 2026", customer: "Granite Construction", route: "Local Quarry → Job Site A", driver: "D. Chen", truck: "TRK-882", status: "Completed", rate: "$1,200", material: "Aggregate" },
-];
+import { db, isFirebaseConfigured } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc } from "firebase/firestore";
+import { useToast } from "@/hooks/use-toast";
 
 export default function TripsManagement() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
-  const [trips, setTrips] = useState(initialTrips);
+  const { toast } = useToast();
+  const [trips, setTrips] = useState<any[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleAddTrip = (e: React.FormEvent) => {
+  // Fetch Trips
+  useEffect(() => {
+    if (!isFirebaseConfigured()) {
+      setTrips([
+        { id: "mock-1", date: "Feb 09, 2026", customer: "Tesla Gigafactory", route: "Sacramento → Austin", driver: "M. Rodriguez", truck: "TRK-409", status: "In Progress", rate: "$4,200", material: "Steel Coils" },
+        { id: "mock-2", date: "Feb 09, 2026", customer: "Amazon", route: "Reno → Salt Lake City", driver: "S. Jenkins", truck: "TRK-410", status: "Scheduled", rate: "$1,850", material: "Palletized Goods" },
+      ]);
+      setIsLoading(false);
+      return;
+    }
+
+    const q = query(collection(db, "trips"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const tripsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setTrips(tripsData);
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleAddTrip = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const formData = new FormData(e.target as HTMLFormElement);
+    
     const newTrip = {
-      id: `TRP-${Math.floor(Math.random() * 9000) + 1000}`,
-      date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+      date: formData.get("date") as string,
       customer: formData.get("customer") as string,
       route: `${formData.get("pickup")} → ${formData.get("dropoff")}`,
       driver: formData.get("driver") as string,
       truck: formData.get("truck") as string,
       status: "Scheduled",
       rate: `$${formData.get("rate")}`,
-      material: formData.get("material") as string
+      material: formData.get("material") as string,
+      createdAt: serverTimestamp()
     };
-    setTrips([newTrip, ...trips]);
-    setIsAddModalOpen(false);
+
+    try {
+      if (isFirebaseConfigured()) {
+        await addDoc(collection(db, "trips"), newTrip);
+        toast({ title: "Trip Dispatched", description: "Load assignment created successfully." });
+      } else {
+        setTrips([{ id: `mock-${Date.now()}`, ...newTrip }, ...trips]);
+        toast({ title: "Trip Dispatched (Mock)", description: "Firebase not configured." });
+      }
+      setIsAddModalOpen(false);
+    } catch (error) {
+      console.error("Error adding trip:", error);
+      toast({ title: "Error", description: "Failed to dispatch trip.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteTrip = async (id: string) => {
+    if (!confirm("Delete this trip?")) return;
+    try {
+      if (isFirebaseConfigured()) {
+        await deleteDoc(doc(db, "trips", id));
+        toast({ title: "Trip Deleted", description: "Trip removed from board." });
+      } else {
+        setTrips(trips.filter(t => t.id !== id));
+      }
+    } catch (error) {
+      console.error("Error deleting trip:", error);
+      toast({ title: "Error", description: "Failed to delete trip.", variant: "destructive" });
+    }
   };
 
   return (
@@ -173,7 +229,9 @@ export default function TripsManagement() {
 
                    <DialogFooter>
                      <Button type="button" variant="outline" onClick={() => setIsAddModalOpen(false)}>Cancel</Button>
-                     <Button type="submit">Dispatch Load</Button>
+                     <Button type="submit" disabled={isSubmitting}>
+                       {isSubmitting ? <Loader2 className="animate-spin" /> : "Dispatch Load"}
+                     </Button>
                    </DialogFooter>
                  </form>
                </DialogContent>
@@ -193,12 +251,15 @@ export default function TripsManagement() {
                      <Input placeholder="Search trips..." className="h-8 w-48" />
                   </div>
                 </div>
+                {isLoading ? (
+                  <div className="p-12 flex justify-center"><Loader2 className="animate-spin text-primary" /></div>
+                ) : (
                 <div className="divide-y divide-border">
                   {trips.filter(t => t.status !== "Completed").map(trip => (
-                     <div key={trip.id} className="p-4 hover:bg-secondary/20 transition-colors flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+                     <div key={trip.id} className="p-4 hover:bg-secondary/20 transition-colors flex flex-col md:flex-row gap-4 justify-between items-start md:items-center group">
                         <div className="space-y-2">
                            <div className="flex items-center gap-2">
-                              <span className="font-mono text-xs text-muted-foreground font-bold">{trip.id}</span>
+                              <span className="font-mono text-xs text-muted-foreground font-bold truncate w-20">#{trip.id}</span>
                               <Badge variant={trip.status === "In Progress" ? "default" : "outline"}>{trip.status}</Badge>
                               <span className="text-xs text-muted-foreground flex items-center gap-1"><Calendar size={12} /> {trip.date}</span>
                            </div>
@@ -215,11 +276,15 @@ export default function TripsManagement() {
                         </div>
                         <div className="flex flex-col gap-2">
                            <Button size="sm" variant="secondary">View Details</Button>
-                           <Button size="sm" variant="ghost" className="text-muted-foreground"><FileText size={14} className="mr-1"/> BOL</Button>
+                           <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10" onClick={() => handleDeleteTrip(trip.id)}><Trash2 size={14} className="mr-1"/> Delete</Button>
                         </div>
                      </div>
                   ))}
+                  {trips.filter(t => t.status !== "Completed").length === 0 && (
+                    <div className="p-8 text-center text-muted-foreground">No active trips</div>
+                  )}
                 </div>
+                )}
               </Card>
 
               <Card>
@@ -233,7 +298,10 @@ export default function TripsManagement() {
                            <p className="font-bold">{trip.customer}</p>
                            <p className="text-xs text-muted-foreground">{trip.route}</p>
                         </div>
-                        <Badge variant="secondary" className="bg-green-100 text-green-700">Completed</Badge>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700">Completed</Badge>
+                          <Button size="icon" variant="ghost" className="h-6 w-6 text-destructive" onClick={() => handleDeleteTrip(trip.id)}><Trash2 size={12} /></Button>
+                        </div>
                      </div>
                   ))}
                 </div>

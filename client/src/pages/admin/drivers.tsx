@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { 
@@ -15,7 +15,10 @@ import {
   MoreHorizontal, 
   Phone, 
   Mail, 
-  Upload
+  Upload,
+  Loader2,
+  Trash2,
+  Edit
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,43 +30,99 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { AdminSidebar, AdminMobileHeader } from "@/components/AdminSidebar";
-
-// Mock Drivers Data
-const initialDrivers = [
-  { id: "DRV-001", name: "Michael Rodriguez", status: "Active", phone: "(555) 123-4567", email: "m.rodriguez@49trucking.com", license: "CDL-A 829102", truck: "T-680 #409", joinDate: "Jan 12, 2022" },
-  { id: "DRV-002", name: "Sarah Jenkins", status: "Active", phone: "(555) 987-6543", email: "s.jenkins@49trucking.com", license: "CDL-A 192834", truck: "T-680 #410", joinDate: "Mar 04, 2023" },
-  { id: "DRV-003", name: "David Chen", status: "On Leave", phone: "(555) 456-7890", email: "d.chen@49trucking.com", license: "CDL-A 564738", truck: "Unassigned", joinDate: "Nov 15, 2021" },
-  { id: "DRV-004", name: "Robert Johnson", status: "Active", phone: "(555) 234-5678", email: "r.johnson@49trucking.com", license: "CDL-A 918273", truck: "P-389 #205", joinDate: "Jun 20, 2020" },
-  { id: "DRV-005", name: "Emily Davis", status: "Suspended", phone: "(555) 876-5432", email: "e.davis@49trucking.com", license: "CDL-A 736451", truck: "Unassigned", joinDate: "Aug 10, 2023" },
-];
+import { db, isFirebaseConfigured } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { useToast } from "@/hooks/use-toast";
 
 export default function DriversManagement() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
-  const [drivers, setDrivers] = useState(initialDrivers);
+  const { toast } = useToast();
+  const [drivers, setDrivers] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch Drivers from Firestore
+  useEffect(() => {
+    if (!isFirebaseConfigured()) {
+      // Use mock data if Firebase not configured
+      setDrivers([
+        { id: "mock-1", name: "Michael Rodriguez", status: "Active", phone: "(555) 123-4567", email: "m.rodriguez@49trucking.com", license: "CDL-A 829102", truck: "T-680 #409", joinDate: "Jan 12, 2022" },
+        { id: "mock-2", name: "Sarah Jenkins", status: "Active", phone: "(555) 987-6543", email: "s.jenkins@49trucking.com", license: "CDL-A 192834", truck: "T-680 #410", joinDate: "Mar 04, 2023" },
+      ]);
+      setIsLoading(false);
+      return;
+    }
+
+    const q = query(collection(db, "drivers"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const driversData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setDrivers(driversData);
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const filteredDrivers = drivers.filter(driver => 
-    driver.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    driver.id.toLowerCase().includes(searchTerm.toLowerCase())
+    driver.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    driver.id?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleAddDriver = (e: React.FormEvent) => {
+  const handleAddDriver = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const formData = new FormData(e.target as HTMLFormElement);
+    
     const newDriver = {
-      id: `DRV-00${drivers.length + 1}`,
       name: formData.get("name") as string,
-      status: "Active",
+      status: formData.get("status") as string,
       phone: formData.get("phone") as string,
       email: formData.get("email") as string,
       license: formData.get("license") as string,
-      truck: "Unassigned",
-      joinDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
+      truck: "Unassigned", // Default truck assignment
+      joinDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+      createdAt: serverTimestamp()
     };
-    setDrivers([...drivers, newDriver]);
-    setIsAddModalOpen(false);
+
+    try {
+      if (isFirebaseConfigured()) {
+        await addDoc(collection(db, "drivers"), newDriver);
+        toast({ title: "Driver Added", description: "New driver profile created successfully." });
+      } else {
+        // Mock add
+        setDrivers([ { id: `mock-${Date.now()}`, ...newDriver }, ...drivers ]);
+        toast({ title: "Driver Added (Mock)", description: "Firebase not configured." });
+      }
+      setIsAddModalOpen(false);
+    } catch (error) {
+      console.error("Error adding driver:", error);
+      toast({ title: "Error", description: "Failed to add driver.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteDriver = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this driver?")) return;
+    
+    try {
+      if (isFirebaseConfigured()) {
+        await deleteDoc(doc(db, "drivers", id));
+        toast({ title: "Driver Deleted", description: "Driver profile removed." });
+      } else {
+        setDrivers(drivers.filter(d => d.id !== id));
+        toast({ title: "Driver Deleted (Mock)", description: "Removed from list." });
+      }
+    } catch (error) {
+      console.error("Error deleting driver:", error);
+      toast({ title: "Error", description: "Failed to delete driver.", variant: "destructive" });
+    }
   };
 
   return (
@@ -141,7 +200,9 @@ export default function DriversManagement() {
 
                    <DialogFooter>
                      <Button type="button" variant="outline" onClick={() => setIsAddModalOpen(false)}>Cancel</Button>
-                     <Button type="submit">Create Profile</Button>
+                     <Button type="submit" disabled={isSubmitting}>
+                       {isSubmitting ? <Loader2 className="animate-spin" /> : "Create Profile"}
+                     </Button>
                    </DialogFooter>
                  </form>
                </DialogContent>
@@ -168,22 +229,29 @@ export default function DriversManagement() {
         </div>
 
         {/* Drivers Grid */}
+        {isLoading ? (
+          <div className="flex justify-center p-12">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        ) : (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredDrivers.map(driver => (
             <Card key={driver.id} className="shadow-sm hover:shadow-md transition-shadow group">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-10 w-10 border border-border">
-                    <AvatarFallback className="bg-primary/10 text-primary font-bold">{driver.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="bg-primary/10 text-primary font-bold">{driver.name?.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <div>
                     <CardTitle className="text-base font-bold">{driver.name}</CardTitle>
-                    <p className="text-xs text-muted-foreground">{driver.id}</p>
+                    <p className="text-xs text-muted-foreground font-mono truncate w-24">#{driver.id.slice(0, 6)}</p>
                   </div>
                 </div>
-                <Button variant="ghost" size="icon" className="h-8 w-8">
-                  <MoreHorizontal size={16} />
-                </Button>
+                <div className="flex gap-1">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10" onClick={() => handleDeleteDriver(driver.id)}>
+                    <Trash2 size={16} />
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent className="space-y-4 pt-4">
                 <div className="grid grid-cols-2 gap-4 text-sm">
@@ -226,6 +294,7 @@ export default function DriversManagement() {
             </Card>
           ))}
         </div>
+        )}
           </div>
         </main>
       </div>
