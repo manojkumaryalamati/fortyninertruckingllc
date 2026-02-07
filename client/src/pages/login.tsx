@@ -35,9 +35,6 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-secondary/30 px-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <div className="mx-auto h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-orange-600 flex items-center justify-center shadow-lg shadow-primary/20 mb-4">
-            <span className="text-white font-bold text-lg">49</span>
-          </div>
           <h2 className="text-3xl font-bold tracking-tight">Admin Portal</h2>
           <p className="text-muted-foreground mt-2">Sign in to manage your fleet</p>
         </div>
