@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 
 import Footer from "@/components/Footer";
-import { Logo } from "@/components/Logo";
+import { Navbar } from "@/components/Navbar";
 
 const fleetData = [
   { id: 1, name: "10-Wheel Dump Truck", type: "Standard Haul", specs: "16-18 Ton Capacity", image: "https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
@@ -21,22 +21,6 @@ const categories = ["All", "Construction", "Trailers"];
 export default function Fleet() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedTruck, setSelectedTruck] = useState<any>(null);
-  const [scrolled, setScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navLinks = [
-    { name: "Services", href: "/services" },
-    { name: "Fleet", href: "/fleet" },
-    { name: "Careers", href: "/careers" },
-    { name: "Subhaulers", href: "/subhaulers" },
-    { name: "Contact", href: "/contact" }
-  ];
 
   const filteredFleet = activeCategory === "All" 
     ? fleetData 
@@ -44,67 +28,7 @@ export default function Fleet() {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans pt-24 pb-24">
-      {/* Shared Navbar */}
-      <nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/50 py-3 shadow-sm" : "bg-background/80 backdrop-blur-md py-4 border-b border-border/20"
-        }`}
-      >
-        <div className="container mx-auto px-6 flex items-center justify-between">
-          <Link href="/">
-            <div className="flex items-center cursor-pointer">
-              <Logo className="h-24 md:h-32 lg:h-36" />
-            </div>
-          </Link>
-          
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <a className="text-sm font-medium transition-colors text-muted-foreground hover:text-foreground cursor-pointer">
-                  {item.name}
-                </a>
-              </Link>
-            ))}
-            <Link href="/admin">
-               <Button variant="ghost" className="font-medium text-muted-foreground hover:text-foreground">
-                 Login
-               </Button>
-            </Link>
-          </div>
-
-          <button 
-            className="md:hidden p-2 rounded-full transition-colors text-foreground hover:bg-secondary"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 bg-background border-b border-border shadow-2xl p-6 md:hidden flex flex-col gap-4"
-            >
-              {navLinks.map((item) => (
-                <Link key={item.name} href={item.href}>
-                  <a className="text-lg font-medium text-foreground hover:text-primary transition-colors py-2 border-b border-border/50 last:border-0" onClick={() => setIsMobileMenuOpen(false)}>
-                    {item.name}
-                  </a>
-                </Link>
-              ))}
-              <Link href="/admin">
-                 <Button variant="outline" className="w-full font-bold rounded-xl h-12 mt-2">
-                   Portal Login
-                 </Button>
-              </Link>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+      <Navbar />
 
       <div className="container mx-auto px-6">
         <div className="mb-12">
