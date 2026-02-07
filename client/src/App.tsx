@@ -22,11 +22,13 @@ import Fleet from "@/pages/fleet";
 import Careers from "@/pages/careers";
 import Subhaulers from "@/pages/subhaulers";
 import Contact from "@/pages/contact";
+import About from "@/pages/about";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
       <Route path="/login" component={Login} />
       
       {/* Protected Routes */}
