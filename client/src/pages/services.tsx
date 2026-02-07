@@ -18,7 +18,7 @@ export default function Services() {
              alt="Services Hero" 
              className="w-full h-full object-cover opacity-60"
            />
-           <div className="absolute inset-0 bg-[#0F3F40]/80 z-10" />
+           <div className="absolute inset-0 bg-black/60 z-10" />
         </div>
         
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 text-center space-y-10">
