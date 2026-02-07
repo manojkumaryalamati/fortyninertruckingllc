@@ -43,11 +43,6 @@ export function AdminSidebar() {
             <Package size={18} /> Trips & Loads
           </Button>
         </Link>
-        <Link href="/admin/trucks">
-          <Button variant={location === "/admin/trucks" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
-            <Truck size={18} /> Fleet Management
-          </Button>
-        </Link>
         <Link href="/admin/drivers">
           <Button variant={location === "/admin/drivers" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1">
             <Users size={18} /> Drivers
@@ -58,15 +53,9 @@ export function AdminSidebar() {
             <FileText size={18} /> Documents
           </Button>
         </Link>
-        <Button variant="ghost" className="w-full justify-start gap-3 mb-1">
-          <BarChart3 size={18} /> Analytics
-        </Button>
       </nav>
 
       <div className="p-4 border-t border-border">
-        <Button variant="ghost" className="w-full justify-start gap-3 mb-2">
-          <Settings size={18} /> Settings
-        </Button>
         <Button 
           variant="ghost" 
           className="w-full justify-start gap-3 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 mb-4"
@@ -134,11 +123,6 @@ export function AdminMobileHeader() {
                   <Package size={18} /> Trips & Loads
                 </Button>
               </Link>
-              <Link href="/admin/trucks">
-                <Button variant={location === "/admin/trucks" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setOpen(false)}>
-                  <Truck size={18} /> Fleet Management
-                </Button>
-              </Link>
               <Link href="/admin/drivers">
                 <Button variant={location === "/admin/drivers" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setOpen(false)}>
                   <Users size={18} /> Drivers
@@ -149,15 +133,9 @@ export function AdminMobileHeader() {
                   <FileText size={18} /> Documents
                 </Button>
               </Link>
-              <Button variant="ghost" className="w-full justify-start gap-3 mb-1">
-                <BarChart3 size={18} /> Analytics
-              </Button>
             </nav>
 
             <div className="p-4 border-t border-border">
-              <Button variant="ghost" className="w-full justify-start gap-3 mb-2">
-                <Settings size={18} /> Settings
-              </Button>
               <Button 
                 variant="ghost" 
                 className="w-full justify-start gap-3 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 mb-4"

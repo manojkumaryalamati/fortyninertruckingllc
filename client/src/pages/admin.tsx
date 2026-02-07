@@ -118,13 +118,11 @@ export default function AdminDashboard() {
 
         <div className="p-6 space-y-8 max-w-[1600px] mx-auto">
           {/* Key Metrics */}
-          <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <section className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
 
             {[
-              { label: "Total Revenue", value: "$128,420", change: "+12.5%", trend: "up", icon: ArrowUpRight },
               { label: "Active Loads", value: "48", change: "+4", trend: "up", icon: Package },
-              { label: "On-Time Delivery", value: "98.2%", change: "-0.4%", trend: "down", icon: Clock },
-              { label: "Fleet Utilization", value: "87%", change: "+2.1%", trend: "up", icon: Truck },
+              { label: "On-Time Delivery", value: "98.2%", change: "-0.4%", trend: "down", icon: ClockIcon },
             ].map((stat, i) => (
               <Card key={i} className="shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-6">
@@ -138,85 +136,6 @@ export default function AdminDashboard() {
                 </CardContent>
               </Card>
             ))}
-          </section>
-
-          {/* Charts & Map Area */}
-          <section className="grid lg:grid-cols-3 gap-6">
-            <Card className="lg:col-span-2 shadow-sm">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <div className="space-y-1">
-                  <CardTitle>Revenue Overview</CardTitle>
-                  <CardDescription>Performance trends over time</CardDescription>
-                </div>
-                <Select 
-                  value={revenueFilter} 
-                  onValueChange={(val: any) => setRevenueFilter(val)}
-                >
-                  <SelectTrigger className="w-[140px] h-8 text-xs">
-                    <SelectValue placeholder="Period" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="weekly">Weekly</SelectItem>
-                    <SelectItem value="monthly">Monthly</SelectItem>
-                    <SelectItem value="quarterly">Quarterly</SelectItem>
-                    <SelectItem value="yearly">Yearly</SelectItem>
-                  </SelectContent>
-                </Select>
-              </CardHeader>
-              <CardContent>
-                <div className="h-[300px] w-full pt-4">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={revenueDataMap[revenueFilter]}>
-                      <defs>
-                        <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
-                          <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tickMargin={10} fontSize={12} stroke="hsl(var(--muted-foreground))" />
-                      <YAxis axisLine={false} tickLine={false} tickMargin={10} fontSize={12} stroke="hsl(var(--muted-foreground))" tickFormatter={(value) => `$${value/1000}k`} />
-                      <Tooltip 
-                        contentStyle={{ backgroundColor: "hsl(var(--card))", borderRadius: "8px", border: "1px solid hsl(var(--border))" }}
-                        itemStyle={{ color: "hsl(var(--foreground))" }}
-                      />
-                      <Area type="monotone" dataKey="value" stroke="hsl(var(--primary))" strokeWidth={2} fillOpacity={1} fill="url(#colorValue)" />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-sm">
-              <CardHeader>
-                <CardTitle>Fleet Status</CardTitle>
-                <CardDescription>Real-time vehicle distribution</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  {[
-                    { label: "In Transit", count: 28, color: "bg-blue-500" },
-                    { label: "Available", count: 12, color: "bg-green-500" },
-                    { label: "Maintenance", count: 4, color: "bg-orange-500" },
-                    { label: "Out of Service", count: 2, color: "bg-red-500" },
-                  ].map((status, i) => (
-                    <div key={i} className="space-y-2">
-                      <div className="flex justify-between text-sm font-medium">
-                        <span>{status.label}</span>
-                        <span>{status.count}</span>
-                      </div>
-                      <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
-                        <div className={`h-full ${status.color}`} style={{ width: `${(status.count / 46) * 100}%` }} />
-                      </div>
-                    </div>
-                  ))}
-                  
-                  <div className="pt-6 mt-6 border-t border-border">
-                    <Button variant="outline" className="w-full">View Fleet Map <Map className="ml-2 h-4 w-4" /></Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </section>
 
           {/* Recent Shipments Table */}
@@ -288,7 +207,7 @@ export default function AdminDashboard() {
   );
 }
 
-function Clock(props: any) {
+function ClockIcon(props: any) {
   return (
     <svg
       {...props}
