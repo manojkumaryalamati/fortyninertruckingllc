@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="space-y-6">
             <Link href="/">
               <div className="block cursor-pointer">
-                <img src="/logo.png" alt="FortyNiner Trucking" className="h-16 w-auto object-contain" />
+                <img src="/logo.png" alt="FortyNiner Trucking" className="h-24 w-auto object-contain" />
               </div>
             </Link>
             <p className="text-background/70 leading-relaxed">
