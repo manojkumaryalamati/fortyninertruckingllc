@@ -3,15 +3,83 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Check, Upload, Menu, X, Truck, Handshake, ShieldCheck, Briefcase } from "lucide-react";
+import { Check, Upload, Menu, X, Truck, Handshake, ShieldCheck, Briefcase, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { db, isFirebaseConfigured } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Subhaulers() {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    companyName: "",
+    contactName: "",
+    email: "",
+    phone: "",
+    truckType: "",
+    fleetSize: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      if (!formData.companyName || !formData.contactName || !formData.email || !formData.phone) {
+        throw new Error("Please fill in all required fields");
+      }
+
+      if (!isFirebaseConfigured()) {
+        console.log("Mock submission:", formData);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        toast({
+          title: "Registration Sent (Mock)",
+          description: "Firebase is not configured. Check console for data.",
+        });
+      } else {
+        await addDoc(collection(db, "subhaulers"), {
+          ...formData,
+          createdAt: serverTimestamp(),
+          status: "new"
+        });
+        
+        toast({
+          title: "Registration Sent",
+          description: "We've received your registration and will contact you soon.",
+        });
+      }
+
+      setFormData({
+        companyName: "",
+        contactName: "",
+        email: "",
+        phone: "",
+        truckType: "",
+        fleetSize: ""
+      });
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to submit registration. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans pt-32 md:pt-40 pb-24">
       <Navbar />
@@ -47,39 +115,41 @@ export default function Subhaulers() {
           <Card className="border-none shadow-xl bg-secondary/30">
             <CardContent className="p-8 md:p-10">
               <h2 className="text-2xl font-bold mb-6">Subhauler Registration</h2>
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="companyName">Company Name</Label>
-                    <Input id="companyName" placeholder="Your Trucking Co." className="bg-background" />
+                    <Input id="companyName" value={formData.companyName} onChange={handleChange} placeholder="Your Trucking Co." className="bg-background" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="contactName">Contact Person</Label>
-                    <Input id="contactName" placeholder="Full Name" className="bg-background" />
+                    <Input id="contactName" value={formData.contactName} onChange={handleChange} placeholder="Full Name" className="bg-background" />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
-                  <Input id="email" type="email" placeholder="dispatch@example.com" className="bg-background" />
+                  <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="dispatch@example.com" className="bg-background" />
                 </div>
                 
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" type="tel" placeholder="(555) 000-0000" className="bg-background" />
+                  <Input id="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(555) 000-0000" className="bg-background" />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="truckType">Truck Types Available</Label>
-                  <Input id="truckType" placeholder="e.g. Super Dumps, Transfers" className="bg-background" />
+                  <Input id="truckType" value={formData.truckType} onChange={handleChange} placeholder="e.g. Super Dumps, Transfers" className="bg-background" />
                 </div>
                 
                 <div className="space-y-2">
                   <Label htmlFor="fleetSize">Fleet Size</Label>
-                  <Input id="fleetSize" type="number" placeholder="Number of units" className="bg-background" />
+                  <Input id="fleetSize" type="number" value={formData.fleetSize} onChange={handleChange} placeholder="Number of units" className="bg-background" />
                 </div>
 
-                <Button size="lg" className="w-full rounded-full h-12 text-base font-bold">Submit Registration</Button>
+                <Button type="submit" disabled={isSubmitting} size="lg" className="w-full rounded-full h-12 text-base font-bold">
+                  {isSubmitting ? <Loader2 className="animate-spin" /> : "Submit Registration"}
+                </Button>
               </form>
             </CardContent>
           </Card>
