@@ -117,9 +117,8 @@ export function Navbar() {
             className="fixed inset-0 z-[60] bg-zinc-950 text-white p-0 lg:hidden flex flex-col"
           >
             <div className="flex justify-between items-center p-6 border-b border-white/10">
-              <div className="h-16 w-auto relative">
-                 {/* Simplified logo for mobile menu header */}
-                 <span className="font-black text-2xl tracking-tighter">FORTY<span className="text-primary">NINER</span></span>
+              <div className="h-12 w-auto relative flex items-center">
+                 <img src={logo} alt="FortyNiner Trucking" className="h-full w-auto object-contain" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -136,7 +135,7 @@ export function Navbar() {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className={`text-3xl font-black uppercase tracking-tight py-4 border-b border-white/5 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-white'}`}
+                    className={`text-lg font-bold uppercase tracking-widest py-4 border-b border-white/5 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-white/80'}`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
@@ -152,7 +151,7 @@ export function Navbar() {
                     className="mt-8"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                   <Button className="w-full h-16 text-xl font-bold bg-primary text-white uppercase tracking-widest rounded-none">
+                   <Button className="w-full h-14 text-sm font-bold bg-primary text-white uppercase tracking-widest rounded-none">
                      Get a Quote
                    </Button>
                   </motion.div>
