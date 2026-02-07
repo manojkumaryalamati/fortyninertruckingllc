@@ -21,7 +21,11 @@ import {
   LogOut,
   FileText,
   DollarSign,
-  ShieldCheck
+  ShieldCheck,
+  UserCog,
+  Key,
+  Mail,
+  Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,6 +35,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { AdminSidebar, AdminMobileHeader } from "@/components/AdminSidebar";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { updatePassword, updateProfile } from "firebase/auth";
+import { auth, isFirebaseConfigured } from "@/lib/firebase";
 
 // Mock Data for Charts
 const weeklyData = [
@@ -90,7 +99,80 @@ const recentShipments = [
 export default function AdminDashboard() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
+  const { toast } = useToast();
   const [revenueFilter, setRevenueFilter] = useState<keyof typeof revenueDataMap>("weekly");
+  
+  // Profile Update State
+  const [isUpdateProfileOpen, setIsUpdateProfileOpen] = useState(false);
+  const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const handleUpdateProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsUpdating(true);
+    
+    try {
+      if (!user) throw new Error("No user logged in");
+      
+      const updates = [];
+      let messages = [];
+
+      // Update Display Name
+      if (newDisplayName && newDisplayName !== user.displayName) {
+        if (!isFirebaseConfigured()) {
+          // Mock update
+          console.log("Mock update profile:", newDisplayName);
+        } else {
+          await updateProfile(user, { displayName: newDisplayName });
+        }
+        messages.push("Profile name updated");
+      }
+
+      // Update Password
+      if (newPassword) {
+        if (newPassword !== confirmPassword) {
+          throw new Error("Passwords do not match");
+        }
+        if (newPassword.length < 6) {
+          throw new Error("Password must be at least 6 characters");
+        }
+        
+        if (!isFirebaseConfigured()) {
+          console.log("Mock update password");
+        } else {
+          await updatePassword(user, newPassword);
+        }
+        messages.push("Password updated");
+      }
+
+      if (messages.length > 0) {
+        toast({
+          title: "Success",
+          description: messages.join(" and "),
+        });
+        setIsUpdateProfileOpen(false);
+        setNewPassword("");
+        setConfirmPassword("");
+      } else {
+        toast({
+          title: "No changes",
+          description: "No fields were modified.",
+          variant: "default"
+        });
+      }
+    } catch (error: any) {
+      console.error("Error updating profile:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to update profile",
+        variant: "destructive"
+      });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex">
@@ -108,6 +190,83 @@ export default function AdminDashboard() {
             />
           </div>
           <div className="flex items-center gap-4">
+            <Dialog open={isUpdateProfileOpen} onOpenChange={setIsUpdateProfileOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2">
+                  <UserCog size={14} />
+                  Settings
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Profile Settings</DialogTitle>
+                  <DialogDescription>
+                    Update your account details and password here.
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleUpdateProfile} className="space-y-4 py-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <div className="relative">
+                      <Input id="email" value={user?.email || ""} disabled className="pl-9 bg-muted" />
+                      <Mail className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="displayName">Display Name</Label>
+                    <div className="relative">
+                      <Input 
+                        id="displayName" 
+                        value={newDisplayName} 
+                        onChange={(e) => setNewDisplayName(e.target.value)}
+                        placeholder="Your Name" 
+                        className="pl-9"
+                      />
+                      <Users className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 pt-2 border-t">
+                    <Label htmlFor="newPassword">New Password</Label>
+                    <div className="relative">
+                      <Input 
+                        id="newPassword" 
+                        type="password"
+                        value={newPassword} 
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        placeholder="Leave blank to keep current" 
+                        className="pl-9"
+                      />
+                      <Key className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">Confirm Password</Label>
+                    <div className="relative">
+                      <Input 
+                        id="confirmPassword" 
+                        type="password"
+                        value={confirmPassword} 
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="Confirm new password" 
+                        className="pl-9"
+                      />
+                      <Key className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                    </div>
+                  </div>
+
+                  <DialogFooter className="pt-4">
+                    <Button type="submit" disabled={isUpdating}>
+                      {isUpdating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                      Save Changes
+                    </Button>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
+
             <Button variant="ghost" size="icon" className="relative">
               <Bell size={18} />
               <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full" />
