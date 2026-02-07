@@ -34,7 +34,7 @@ export default function Home() {
       </section>
 
       {/* Value Prop Strip */}
-      <section className="bg-[#FDFBF7] py-16 border-b border-border/10">
+      <section className="bg-card py-16 border-b border-white/10">
         <div className="container mx-auto px-6">
            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
              <div className="md:w-1/2">
@@ -52,7 +52,7 @@ export default function Home() {
       </section>
 
       {/* Who We Are - Split Layout */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
@@ -69,7 +69,7 @@ export default function Home() {
                 We don't just move materials; we build long-term partnerships with contractors, municipalities, and developers. Our commitment to safety and compliance ensures that every job is completed to the highest standards.
               </p>
             </div>
-            <div className="pt-8 grid grid-cols-3 gap-8 border-t border-border/20">
+            <div className="pt-8 grid grid-cols-3 gap-8 border-t border-white/10">
               <div className="space-y-1">
                 <h4 className="text-4xl font-black text-primary">15+</h4>
                 <p className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Years Experience</p>
@@ -95,21 +95,21 @@ export default function Home() {
       </section>
 
       {/* Featured Services (Modern Interactive Grid) */}
-      <section className="py-24 bg-foreground text-background overflow-hidden relative">
+      <section className="py-24 bg-background overflow-hidden relative">
         {/* Abstract Background Elements */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -mr-32 -mt-32 opacity-50" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -ml-32 -mb-32 opacity-30" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -mr-32 -mt-32 opacity-20" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -ml-32 -mb-32 opacity-20" />
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="space-y-4 max-w-2xl">
               <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Capabilities</h2>
-              <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9]">
+              <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-white">
                 Engineered for <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">Heavy Loads</span>
               </h3>
             </div>
             <Link href="/services">
-               <Button variant="outline" className="rounded-full border-white/20 text-white hover:bg-white hover:text-foreground h-12 px-6 uppercase tracking-wider font-bold group">
+               <Button variant="outline" className="rounded-full border-white/20 text-white hover:bg-white hover:text-background h-12 px-6 uppercase tracking-wider font-bold group">
                  View All Services <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                </Button>
             </Link>
@@ -166,45 +166,45 @@ export default function Home() {
       </section>
 
       {/* Easy Process Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-card border-t border-white/5">
          <div className="container mx-auto px-6">
            <div className="max-w-4xl mx-auto text-center mb-16">
-             <h2 className="text-4xl font-black uppercase tracking-tight mb-4">
+             <h2 className="text-4xl font-black uppercase tracking-tight mb-4 text-foreground">
                Core <span className="text-primary">Values</span>
              </h2>
              <p className="text-xl text-muted-foreground">The principles that drive every mile we travel.</p>
            </div>
            
            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-               <div className="bg-[#FDFBF7] p-8 rounded-3xl border border-border/50 hover:border-primary/50 transition-colors group">
+               <div className="bg-background p-8 rounded-3xl border border-white/5 hover:border-primary/50 transition-colors group">
                  <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                    <Shield size={28} />
                  </div>
-                 <h3 className="text-xl font-bold uppercase mb-3">Safety</h3>
+                 <h3 className="text-xl font-bold uppercase mb-3 text-foreground">Safety</h3>
                  <p className="text-muted-foreground leading-relaxed">The foundation of everything we do. We protect our drivers, our partners, and the motoring public.</p>
                </div>
 
-               <div className="bg-[#FDFBF7] p-8 rounded-3xl border border-border/50 hover:border-primary/50 transition-colors group">
+               <div className="bg-background p-8 rounded-3xl border border-white/5 hover:border-primary/50 transition-colors group">
                  <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                    <Clock size={28} />
                  </div>
-                 <h3 className="text-xl font-bold uppercase mb-3">Reliability</h3>
+                 <h3 className="text-xl font-bold uppercase mb-3 text-foreground">Reliability</h3>
                  <p className="text-muted-foreground leading-relaxed">When we say we will be there, we are there. We deliver on our promises, every single time.</p>
                </div>
 
-               <div className="bg-[#FDFBF7] p-8 rounded-3xl border border-border/50 hover:border-primary/50 transition-colors group">
+               <div className="bg-background p-8 rounded-3xl border border-white/5 hover:border-primary/50 transition-colors group">
                  <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                    <Star size={28} />
                  </div>
-                 <h3 className="text-xl font-bold uppercase mb-3">Expertise</h3>
+                 <h3 className="text-xl font-bold uppercase mb-3 text-foreground">Expertise</h3>
                  <p className="text-muted-foreground leading-relaxed">Our team brings deep industry knowledge to solve complex logistical challenges.</p>
                </div>
 
-               <div className="bg-[#FDFBF7] p-8 rounded-3xl border border-border/50 hover:border-primary/50 transition-colors group">
+               <div className="bg-background p-8 rounded-3xl border border-white/5 hover:border-primary/50 transition-colors group">
                  <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                    <Check size={28} />
                  </div>
-                 <h3 className="text-xl font-bold uppercase mb-3">Accountability</h3>
+                 <h3 className="text-xl font-bold uppercase mb-3 text-foreground">Accountability</h3>
                  <p className="text-muted-foreground leading-relaxed">We take ownership of our work and maintain transparent communication at all levels.</p>
                </div>
            </div>
@@ -279,14 +279,14 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-white text-center">
+      <section className="py-24 bg-background text-center">
         <div className="container mx-auto px-6 max-w-4xl">
            <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4">Testimonials</h2>
-           <h3 className="text-4xl font-black uppercase mb-16">
+           <h3 className="text-4xl font-black uppercase mb-16 text-foreground">
              Trusted by hundreds of <br/> <span className="text-primary">Happy Customers</span>
            </h3>
 
-           <div className="bg-[#FDFBF7] p-12 rounded-[3rem] relative border border-border/50">
+           <div className="bg-card p-12 rounded-[3rem] relative border border-white/5">
              <div className="flex flex-col items-center gap-8">
                <div className="text-center space-y-6">
                  <div className="flex justify-center gap-1 text-primary">
