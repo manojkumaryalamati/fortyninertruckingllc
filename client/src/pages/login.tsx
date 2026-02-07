@@ -11,9 +11,9 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { login, error: authError } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -22,12 +22,10 @@ export default function Login() {
       return;
     }
 
-    // Mock authentication logic
-    // Accept any valid email and 'password' as password for demo
-    if (password === "admin123" || password === "password") {
-      login(email);
-    } else {
-      setError("Invalid credentials. Try 'admin123'");
+    try {
+      await login(email, password);
+    } catch (err: any) {
+      setError(err.message || "Failed to login");
     }
   };
 

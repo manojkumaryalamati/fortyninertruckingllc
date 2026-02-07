@@ -1,12 +1,82 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ArrowRight, Loader2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { db, isFirebaseConfigured } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "Requesting a Quote",
+    message: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      if (!formData.email || !formData.message) {
+        throw new Error("Please fill in all required fields");
+      }
+
+      if (!isFirebaseConfigured()) {
+        // Mock submission
+        console.log("Mock submission:", formData);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        toast({
+          title: "Message Sent (Mock)",
+          description: "Firebase is not configured. Check console for data.",
+        });
+      } else {
+        await addDoc(collection(db, "contacts"), {
+          ...formData,
+          createdAt: serverTimestamp(),
+          status: "new"
+        });
+        
+        toast({
+          title: "Message Sent",
+          description: "We've received your message and will get back to you soon.",
+        });
+      }
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        subject: "Requesting a Quote",
+        message: ""
+      });
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
       <Navbar />
@@ -111,32 +181,63 @@ export default function Contact() {
                  
                  <h3 className="text-2xl font-bold mb-8 relative z-10 text-foreground">Send us a Message</h3>
                  
-                 <form className="space-y-8 relative z-10">
+                 <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
                    <div className="grid md:grid-cols-2 gap-8">
                      <div className="space-y-2">
                        <Label htmlFor="firstName" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">First Name</Label>
-                       <Input id="firstName" placeholder="John" className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" />
+                       <Input 
+                         id="firstName" 
+                         value={formData.firstName}
+                         onChange={handleChange}
+                         placeholder="John" 
+                         className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" 
+                       />
                      </div>
                      <div className="space-y-2">
                        <Label htmlFor="lastName" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Last Name</Label>
-                       <Input id="lastName" placeholder="Doe" className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" />
+                       <Input 
+                         id="lastName" 
+                         value={formData.lastName}
+                         onChange={handleChange}
+                         placeholder="Doe" 
+                         className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" 
+                       />
                      </div>
                    </div>
 
                    <div className="grid md:grid-cols-2 gap-8">
                      <div className="space-y-2">
                        <Label htmlFor="email" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Email Address</Label>
-                       <Input id="email" type="email" placeholder="john@company.com" className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" />
+                       <Input 
+                         id="email" 
+                         type="email" 
+                         value={formData.email}
+                         onChange={handleChange}
+                         placeholder="john@company.com" 
+                         className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" 
+                       />
                      </div>
                      <div className="space-y-2">
                        <Label htmlFor="phone" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Phone Number</Label>
-                       <Input id="phone" type="tel" placeholder="(555) 123-4567" className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" />
+                       <Input 
+                         id="phone" 
+                         type="tel" 
+                         value={formData.phone}
+                         onChange={handleChange}
+                         placeholder="(555) 123-4567" 
+                         className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" 
+                       />
                      </div>
                    </div>
                    
                    <div className="space-y-2">
                      <Label htmlFor="subject" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">I'm interested in</Label>
-                     <select className="w-full h-14 rounded-xl border-transparent bg-secondary/30 px-4 py-2 text-lg focus:bg-background focus:ring-2 focus:ring-primary focus:outline-none transition-all text-foreground">
+                     <select 
+                       id="subject"
+                       value={formData.subject}
+                       onChange={handleChange}
+                       className="w-full h-14 rounded-xl border-transparent bg-secondary/30 px-4 py-2 text-lg focus:bg-background focus:ring-2 focus:ring-primary focus:outline-none transition-all text-foreground"
+                     >
                        <option>Requesting a Quote</option>
                        <option>Becoming a Subhauler</option>
                        <option>Driver Opportunities</option>
@@ -146,11 +247,26 @@ export default function Contact() {
 
                    <div className="space-y-2">
                      <Label htmlFor="message" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Message</Label>
-                     <Textarea id="message" placeholder="Tell us more about your project or inquiry..." className="min-h-[200px] bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg p-4 resize-none" />
+                     <Textarea 
+                       id="message" 
+                       value={formData.message}
+                       onChange={handleChange}
+                       placeholder="Tell us more about your project or inquiry..." 
+                       className="min-h-[200px] bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg p-4 resize-none" 
+                     />
                    </div>
 
-                   <Button size="lg" className="w-full h-16 text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all flex items-center justify-center gap-2">
-                     Send Message <ArrowRight size={20} />
+                   <Button 
+                     type="submit" 
+                     disabled={isSubmitting}
+                     size="lg" 
+                     className="w-full h-16 text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all flex items-center justify-center gap-2"
+                   >
+                     {isSubmitting ? (
+                       <>Sending... <Loader2 className="animate-spin" size={20} /></>
+                     ) : (
+                       <>Send Message <ArrowRight size={20} /></>
+                     )}
                    </Button>
                  </form>
                </div>
