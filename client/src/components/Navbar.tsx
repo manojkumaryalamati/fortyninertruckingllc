@@ -21,6 +21,9 @@ export function Navbar() {
     { name: "About Us", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Fleet", href: "/fleet" },
+    { name: "Compliance", href: "/certifications" },
+    { name: "Careers", href: "/careers" },
+    { name: "Subhaulers", href: "/subhaulers" },
     { name: "Contact Us", href: "/contact" }
   ];
 

@@ -12,11 +12,7 @@ import DriversManagement from "@/pages/admin/drivers";
 import TrucksManagement from "@/pages/admin/trucks";
 import TripsManagement from "@/pages/admin/trips";
 import DocumentsCenter from "@/pages/admin/documents";
-
-// ... inside Router function, add:
-      <Route path="/admin/documents">
-         {() => <ProtectedRoute component={DocumentsCenter} />}
-      </Route>
+import Certifications from "@/pages/certifications";
 import Services from "@/pages/services";
 import Fleet from "@/pages/fleet";
 import Careers from "@/pages/careers";
@@ -50,6 +46,7 @@ function Router() {
 
       <Route path="/services" component={Services} />
       <Route path="/fleet" component={Fleet} />
+      <Route path="/certifications" component={Certifications} />
       <Route path="/careers" component={Careers} />
       <Route path="/subhaulers" component={Subhaulers} />
       <Route path="/contact" component={Contact} />
