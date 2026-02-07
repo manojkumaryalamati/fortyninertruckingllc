@@ -1,7 +1,6 @@
 import { Link } from "wouter";
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/Logo";
 
 export default function Footer() {
   return (
@@ -11,7 +10,7 @@ export default function Footer() {
           <div className="space-y-6">
             <Link href="/">
               <div className="block cursor-pointer">
-                <Logo className="h-32 md:h-48 lg:h-56" variant="light" />
+                <span className="text-2xl font-bold text-background">FortyNinerTrucking</span>
               </div>
             </Link>
             <p className="text-background/70 leading-relaxed">

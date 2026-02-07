@@ -16,7 +16,6 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useState } from "react";
-import { Logo } from "@/components/Logo";
 
 export function AdminSidebar() {
   const [location] = useLocation();
@@ -27,7 +26,7 @@ export function AdminSidebar() {
       <div className="p-6 border-b border-border">
         <Link href="/admin">
           <div className="flex items-center gap-2 cursor-pointer">
-            <Logo className="h-28" />
+            <span className="text-xl font-bold tracking-tight">FortyNiner Admin</span>
           </div>
         </Link>
       </div>
@@ -93,7 +92,7 @@ export function AdminMobileHeader() {
   return (
     <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-background sticky top-0 z-50">
       <div className="flex items-center gap-2">
-        <Logo className="h-20" />
+        <span className="text-lg font-bold">FortyNiner Admin</span>
       </div>
       
       <Sheet open={open} onOpenChange={setOpen}>
@@ -106,7 +105,7 @@ export function AdminMobileHeader() {
           <div className="flex flex-col h-full">
             <div className="p-6 border-b border-border">
               <div className="flex items-center gap-2">
-                <Logo className="h-28" />
+                <span className="text-xl font-bold">FortyNiner Admin</span>
               </div>
             </div>
             
