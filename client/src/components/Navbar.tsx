@@ -94,13 +94,6 @@ export function Navbar() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-4">
-            <Link href="/contact">
-              <Button className="hidden lg:flex rounded-none skew-x-[-12deg] bg-primary hover:bg-primary/90 font-black text-white px-8 h-12 border-l-4 border-white/20 transition-all hover:skew-x-0 hover:rounded-sm shadow-[0_0_20px_rgba(var(--primary),0.3)]">
-                <span className="skew-x-[12deg] group-hover:skew-x-0 transition-transform inline-flex items-center gap-2">
-                  WORK WITH US <span className="bg-white text-primary rounded-full p-0.5"><Phone size={12} fill="currentColor" /></span>
-                </span>
-              </Button>
-            </Link>
             
              <button 
                className="lg:hidden p-2 text-white hover:bg-white/10 rounded-md transition-colors"
