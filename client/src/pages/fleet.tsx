@@ -20,7 +20,7 @@ export default function Fleet() {
         </div>
 
         {/* Sliding Content */}
-        <div className="relative z-20 container mx-auto px-4 overflow-hidden">
+        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 overflow-hidden">
           <motion.div 
             initial={{ x: "-100%", opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
