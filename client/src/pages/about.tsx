@@ -22,14 +22,14 @@ export default function About() {
         </div>
 
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
-          <div className="max-w-3xl space-y-6">
+          <div className="max-w-3xl space-y-10">
             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.9]">
               Driving <br />
               <span className="text-primary">Excellence</span> <br />
               in Hauling
             </h1>
-            <div className="h-1 w-24 bg-primary" />
-            <p className="text-xl text-white/90 leading-relaxed max-w-xl font-medium">
+            <div className="h-1 w-24 bg-primary my-8" />
+            <p className="text-xl text-white/90 leading-relaxed max-w-xl font-medium mt-8">
               FortyNinerTrucking LLC is your strategic partner in logistics, delivering safety and reliability since inception.
             </p>
           </div>

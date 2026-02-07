@@ -21,18 +21,19 @@ export default function Services() {
            <div className="absolute inset-0 bg-[#0F3F40]/80 z-10" />
         </div>
         
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 text-center space-y-6">
+        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 text-center space-y-10">
            <motion.div
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.6 }}
+             className="space-y-8"
            >
-             <h2 className="text-primary font-bold tracking-widest text-sm mb-4">Our Expertise</h2>
-             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-none mb-6">
+             <h2 className="text-primary font-bold tracking-widest text-sm mb-6">Our Expertise</h2>
+             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-none mb-8">
               Specialized <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">Hauling Solutions</span>
              </h1>
-             <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
+             <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed mt-8">
                Comprehensive logistics and transport services tailored for the modern construction industry.
              </p>
            </motion.div>

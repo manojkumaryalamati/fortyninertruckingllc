@@ -86,13 +86,13 @@ export default function Subhaulers() {
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Partner With Us.</h1>
+          <div className="space-y-10">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Partner With Us.</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               We seek reliable owner-operators and subhaulers for long-term partnership. We offer fair dispatch and consistent opportunities.
             </p>
             
-            <div className="grid sm:grid-cols-2 gap-4 pt-4">
+            <div className="grid sm:grid-cols-2 gap-4 pt-8">
                {[
                  { icon: Handshake, title: "Fair Dispatch", desc: "Equitable loads." },
                  { icon: ShieldCheck, title: "Clear Terms", desc: "Transparent agreements." },
