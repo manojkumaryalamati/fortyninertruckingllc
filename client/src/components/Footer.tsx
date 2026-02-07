@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Footer() {
   return (
-    <footer className="bg-foreground text-background py-16">
+    <footer className="bg-[#0F3F40] text-background py-16">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           <div className="space-y-6">
