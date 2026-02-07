@@ -226,6 +226,7 @@ export default function DriversManagement() {
             </Card>
           ))}
         </div>
+          </div>
         </main>
       </div>
     </div>
