@@ -35,7 +35,7 @@ export default function Fleet() {
               <Truck size={48} strokeWidth={1.5} />
             </div>
 
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white uppercase leading-none">
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none">
               Coming <br/>
               <span className="text-primary text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">Soon</span>
             </h1>

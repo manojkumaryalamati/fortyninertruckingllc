@@ -27,8 +27,8 @@ export default function Services() {
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.6 }}
            >
-             <h2 className="text-primary font-bold tracking-widest uppercase text-sm mb-4">Our Expertise</h2>
-             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none mb-6">
+             <h2 className="text-primary font-bold tracking-widest text-sm mb-4">Our Expertise</h2>
+             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-none mb-6">
               Specialized <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">Hauling Solutions</span>
              </h1>
@@ -67,7 +67,7 @@ export default function Services() {
                        <ShieldCheck size={24} />
                      </div>
                      <div>
-                       <p className="text-xs text-muted-foreground uppercase font-bold">Compliance</p>
+                       <p className="text-xs text-muted-foreground font-bold">Compliance</p>
                        <p className="font-bold text-white">100% Certified</p>
                      </div>
                    </div>
@@ -79,7 +79,7 @@ export default function Services() {
                    <HardHat size={32} />
                  </div>
                  <div>
-                   <h3 className="text-4xl font-black uppercase text-white mb-4">Construction Material Hauling</h3>
+                   <h3 className="text-4xl font-black text-white mb-4">Construction Material Hauling</h3>
                    <p className="text-lg text-white/60 leading-relaxed">
                      We provide reliable transport solutions for all types of construction materials. From aggregates and sand to asphalt and gravel, our fleet ensures a consistent supply chain for your job site.
                    </p>
@@ -89,13 +89,13 @@ export default function Services() {
                    {["Consistent Material Flow", "Job Site Coordination", "Diverse Material Handling", "Schedule Adherence"].map(item => (
                      <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
                        <Check size={16} className="text-primary" /> 
-                       <span className="text-sm font-bold uppercase text-white/80">{item}</span>
+                       <span className="text-sm font-bold text-white/80">{item}</span>
                      </div>
                    ))}
                  </div>
                  
                  <Link href="/contact">
-                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white mt-4 group">
+                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 font-bold text-white mt-4 group">
                      Request Service <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                    </Button>
                  </Link>
@@ -115,7 +115,7 @@ export default function Services() {
                    <Truck size={32} />
                  </div>
                  <div>
-                   <h3 className="text-4xl font-black uppercase text-white mb-4">Dump Truck Services</h3>
+                   <h3 className="text-4xl font-black text-white mb-4">Dump Truck Services</h3>
                    <p className="text-lg text-white/60 leading-relaxed">
                      Our fleet of high-capacity dump trucks is equipped to handle heavy loads with ease. We support excavation, grading, and paving projects with precision dumping and rapid turnaround times.
                    </p>
@@ -125,13 +125,13 @@ export default function Services() {
                    {["Excavation Support", "Site Grading", "Paving Operations", "Debris Removal"].map(item => (
                      <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
                        <Check size={16} className="text-primary" /> 
-                       <span className="text-sm font-bold uppercase text-white/80">{item}</span>
+                       <span className="text-sm font-bold text-white/80">{item}</span>
                      </div>
                    ))}
                  </div>
                  
                  <Link href="/contact">
-                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white mt-4 group">
+                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 font-bold text-white mt-4 group">
                      Request Service <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                    </Button>
                  </Link>
@@ -150,7 +150,7 @@ export default function Services() {
                        <Clock size={24} />
                      </div>
                      <div>
-                       <p className="text-xs text-muted-foreground uppercase font-bold">Availability</p>
+                       <p className="text-xs text-muted-foreground font-bold">Availability</p>
                        <p className="font-bold text-white">24/7 Dispatch</p>
                      </div>
                    </div>
@@ -179,7 +179,7 @@ export default function Services() {
                        <MapPin size={24} />
                      </div>
                      <div>
-                       <p className="text-xs text-muted-foreground uppercase font-bold">Coverage</p>
+                       <p className="text-xs text-muted-foreground font-bold">Coverage</p>
                        <p className="font-bold text-white">Statewide CA</p>
                      </div>
                    </div>
@@ -191,7 +191,7 @@ export default function Services() {
                    <Briefcase size={32} />
                  </div>
                  <div>
-                   <h3 className="text-4xl font-black uppercase text-white mb-4">Project Logistics</h3>
+                   <h3 className="text-4xl font-black text-white mb-4">Project Logistics</h3>
                    <p className="text-lg text-white/60 leading-relaxed">
                      For large-scale infrastructure and development projects, we offer comprehensive logistics planning. We coordinate fleet movements to maximize efficiency and minimize downtime.
                    </p>
@@ -201,13 +201,13 @@ export default function Services() {
                    {["Route Planning", "Fleet Management", "On-Site Coordination", "Efficiency Optimization"].map(item => (
                      <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
                        <Check size={16} className="text-primary" /> 
-                       <span className="text-sm font-bold uppercase text-white/80">{item}</span>
+                       <span className="text-sm font-bold text-white/80">{item}</span>
                      </div>
                    ))}
                  </div>
                  
                  <Link href="/contact">
-                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white mt-4 group">
+                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 font-bold text-white mt-4 group">
                      Request Service <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                    </Button>
                  </Link>
@@ -220,11 +220,11 @@ export default function Services() {
       {/* CTA Section */}
       <section className="bg-card border-t border-white/10 py-24 text-center">
         <div className="container mx-auto px-6 max-w-3xl space-y-8">
-          <h2 className="text-4xl font-black uppercase text-white">Have a specialized hauling need?</h2>
+          <h2 className="text-4xl font-black text-white">Have a specialized hauling need?</h2>
           <p className="text-white/60 text-xl font-medium">We adapt to your project requirements. Let's discuss your logistics plan.</p>
           <div className="flex justify-center gap-4 pt-4">
             <Link href="/contact">
-              <Button size="lg" className="rounded-full h-14 px-10 font-bold bg-white text-primary hover:bg-gray-100 uppercase text-lg shadow-xl shadow-white/5">
+              <Button size="lg" className="rounded-full h-14 px-10 font-bold bg-white text-primary hover:bg-gray-100 text-lg shadow-xl shadow-white/5">
                 Contact Sales
               </Button>
             </Link>
