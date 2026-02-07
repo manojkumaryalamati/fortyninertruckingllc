@@ -219,64 +219,6 @@ export default function Home() {
          </div>
       </section>
 
-      {/* Red CTA / Quote Section */}
-      <section className="bg-primary py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-             <div className="space-y-8 text-white">
-               <div className="space-y-2">
-                 <h2 className="text-4xl md:text-5xl font-black uppercase">Need a Quick Quote?</h2>
-                 <p className="text-xl font-medium opacity-90">We're just a call away.</p>
-               </div>
-               
-               <div className="bg-white rounded-3xl p-8 text-foreground shadow-2xl space-y-6 max-w-md">
-                 <div className="flex items-center gap-4">
-                   <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                     <Phone size={24} />
-                   </div>
-                   <div>
-                     <p className="text-xs font-bold text-muted-foreground uppercase">Phone</p>
-                     <p className="text-lg font-bold">123-456-7890</p>
-                   </div>
-                 </div>
-                 
-                 <div className="flex items-center gap-4">
-                   <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                     <Mail size={24} />
-                   </div>
-                   <div>
-                     <p className="text-xs font-bold text-muted-foreground uppercase">Email</p>
-                     <p className="text-lg font-bold">support@fortyniner.com</p>
-                   </div>
-                 </div>
-
-                 <div className="flex items-center gap-4">
-                   <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                     <MapPin size={24} />
-                   </div>
-                   <div>
-                     <p className="text-xs font-bold text-muted-foreground uppercase">Office</p>
-                     <p className="text-lg font-bold">123 Logistics Way, CA</p>
-                   </div>
-                 </div>
-               </div>
-             </div>
-
-             <div className="hidden lg:flex flex-col justify-center items-center text-white/90 space-y-8">
-                <div className="text-center space-y-4 max-w-md">
-                  <h3 className="text-3xl font-black uppercase leading-tight">Ready to Haul?</h3>
-                  <p className="text-xl">Our dispatch team is standing by to assist with your project needs.</p>
-                  <Link href="/contact">
-                    <Button size="lg" variant="secondary" className="rounded-full h-14 px-10 text-lg font-bold uppercase mt-4 w-full">
-                      Contact Dispatch Now
-                    </Button>
-                  </Link>
-                </div>
-             </div>
-          </div>
-        </div>
-      </section>
 
       {/* Testimonials */}
       <section className="py-24 bg-background text-center">
