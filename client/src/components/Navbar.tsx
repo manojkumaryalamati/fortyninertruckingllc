@@ -75,13 +75,13 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-white text-black p-6 lg:hidden"
+            className="fixed inset-0 z-[60] bg-[#0F3F40] text-white p-6 lg:hidden"
           >
             <div className="flex justify-between items-center mb-12">
               <span className="text-xl font-bold">FortyNinerTrucking</span>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
               >
                 <X size={24} />
               </button>
@@ -91,7 +91,7 @@ export function Navbar() {
               {navLinks.map((item) => (
                 <Link key={item.name} href={item.href}>
                   <span 
-                    className="text-2xl font-bold hover:text-primary transition-colors py-2 border-b border-gray-100 cursor-pointer"
+                    className="text-2xl font-bold hover:text-primary transition-colors py-2 border-b border-white/10 cursor-pointer"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
