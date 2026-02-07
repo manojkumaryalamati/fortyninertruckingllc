@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-foreground text-background py-16">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           <div className="space-y-6">
             <Link href="/">
               <div className="block cursor-pointer">
@@ -49,17 +49,6 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-lg mb-6 text-primary">Services</h3>
-            <ul className="space-y-4">
-              <li className="text-background/70">Construction Hauling</li>
-              <li className="text-background/70">Dump Truck Services</li>
-              <li className="text-background/70">Aggregate Delivery</li>
-              <li className="text-background/70">Site Clearing</li>
-              <li className="text-background/70">Project Logistics</li>
             </ul>
           </div>
 
