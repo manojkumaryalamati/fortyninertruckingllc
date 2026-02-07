@@ -10,9 +10,9 @@ export default function Certifications() {
       <Navbar />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h1 className="text-5xl font-bold tracking-tight mb-6">Compliance & Certifications</h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">
+        <div className="max-w-4xl mx-auto text-center mb-24 space-y-8">
+          <h1 className="text-5xl font-bold tracking-tight mb-8">Compliance & Certifications</h1>
+          <p className="text-xl text-muted-foreground leading-relaxed mt-6">
             FortyNinerTrucking LLC is committed to the highest standards of safety, compliance, and professional excellence. We maintain all necessary permits and certifications to operate efficiently and legally across all our service areas.
           </p>
         </div>

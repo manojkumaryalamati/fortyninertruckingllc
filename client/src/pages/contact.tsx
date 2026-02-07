@@ -84,12 +84,12 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-secondary/30">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 relative z-10">
-          <div className="max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6">
+          <div className="max-w-4xl space-y-8">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-8">
               Let's Start a <br />
               <span className="text-primary">Conversation.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed mt-6">
               Whether you need a quote for a major project or want to join our fleet, 
               our team is ready to help you move forward.
             </p>

@@ -29,13 +29,13 @@ export default function Fleet() {
               ease: [0.22, 1, 0.36, 1], // Custom easing for smooth slide
               delay: 0.2 
             }}
-            className="flex flex-col items-center text-center space-y-8"
+            className="flex flex-col items-center text-center space-y-12"
           >
-            <div className="h-24 w-24 rounded-3xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 shadow-2xl mb-4">
+            <div className="h-24 w-24 rounded-3xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 shadow-2xl mb-8">
               <Truck size={48} strokeWidth={1.5} />
             </div>
 
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none">
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none mb-8">
               Coming <br/>
               <span className="text-primary text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">Soon</span>
             </h1>
@@ -44,10 +44,10 @@ export default function Fleet() {
               initial={{ width: 0 }}
               animate={{ width: "100px" }}
               transition={{ duration: 1, delay: 1 }}
-              className="h-1 bg-white/30 rounded-full"
+              className="h-1 bg-white/30 rounded-full my-8"
             />
 
-            <p className="text-xl md:text-2xl text-white/70 max-w-2xl font-light tracking-wide">
+            <p className="text-xl md:text-2xl text-white/70 max-w-2xl font-light tracking-wide mt-8">
               We are currently updating our fleet gallery with our newest equipment. Check back shortly to view our full inventory of trucks and trailers.
             </p>
           </motion.div>

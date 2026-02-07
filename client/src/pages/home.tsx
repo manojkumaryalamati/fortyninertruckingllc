@@ -40,9 +40,9 @@ export default function Home() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="space-y-8"
+              className="space-y-12"
             >
-              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold tracking-widest text-sm uppercase shadow-lg">
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold tracking-widest text-sm uppercase shadow-lg mb-4">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
@@ -51,11 +51,11 @@ export default function Home() {
               </div>
               
               
-              <p className="text-xl md:text-2xl text-white/90 max-w-xl font-medium leading-relaxed border-l-4 border-primary pl-6">
+              <p className="text-xl md:text-2xl text-white/90 max-w-xl font-medium leading-relaxed border-l-4 border-primary pl-8 py-2">
                 The premier partner for heavy hauling and construction logistics. Precision, power, and safety in every mile.
               </p>
               
-              <div className="pt-8 flex flex-col sm:flex-row gap-5">
+              <div className="pt-10 flex flex-col sm:flex-row gap-6">
                 <Link href="/contact">
                   <Button className="rounded-none skew-x-[-12deg] bg-primary hover:bg-primary/90 px-10 h-16 text-lg font-black text-white shadow-[0_0_30px_rgba(var(--primary),0.4)] transition-all hover:skew-x-0 hover:scale-105 border-2 border-primary">
                     <span className="skew-x-[12deg] inline-flex items-center gap-3">
