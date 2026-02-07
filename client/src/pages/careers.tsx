@@ -27,10 +27,10 @@ export default function Careers() {
             <div className="space-y-6 pt-8">
                <h3 className="text-2xl font-bold">Why Drive With Us?</h3>
                {[
-                 { title: "Professional Environment", desc: "Work with a team that values communication and respect." },
-                 { title: "Quality Equipment", desc: "Operate well-maintained, compliant vehicles." },
-                 { title: "Safety Culture", desc: "Your safety on the road is our number one priority." },
-                 { title: "Consistent Work", desc: "Steady projects with reputable contractors." }
+                 { title: "Professional Environment", desc: "We value respect and open communication." },
+                 { title: "Well-Maintained Equipment", desc: "Drive safe, compliant, and reliable trucks." },
+                 { title: "Safety Culture", desc: "Your safety is our absolute priority, every mile." },
+                 { title: "Steady Opportunities", desc: "Consistent work with reputable contractors." }
                ].map((benefit, i) => (
                  <div key={i} className="flex gap-4">
                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">

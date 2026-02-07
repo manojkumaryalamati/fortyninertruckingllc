@@ -38,18 +38,20 @@ export default function Services() {
                  </div>
                  <h3 className="text-3xl font-black uppercase">Construction Material Hauling</h3>
                  <p className="text-lg text-muted-foreground leading-relaxed">
-                   Reliable transport for aggregates, asphalt, sand, and gravel. We ensure a steady flow of materials to keep your job site operational and on schedule.
+                   We provide reliable transport solutions for all types of construction materials. From aggregates and sand to asphalt and gravel, our fleet ensures a consistent supply chain for your job site.
                  </p>
                  <ul className="space-y-3 pt-4">
-                   {["End Dump Services", "Aggregate Delivery", "Site Clearing Support", "Permit Compliant Routing"].map(item => (
+                   {["Consistent Material Flow", "Job Site Coordination", "Diverse Material Handling", "Schedule Adherence"].map(item => (
                      <li key={item} className="flex items-center gap-3 font-bold uppercase text-sm">
                        <Check size={18} className="text-primary" /> {item}
                      </li>
                    ))}
                  </ul>
-                 <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white mt-4">
-                   Book This Service
-                 </Button>
+                 <Link href="/contact">
+                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white mt-4">
+                     Request Service
+                   </Button>
+                 </Link>
                </div>
                <div className="md:w-1/2 h-[400px] w-full">
                  <img src="https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop" className="w-full h-full object-cover shadow-2xl border-4 border-white" alt="Construction Hauling" />
@@ -64,21 +66,51 @@ export default function Services() {
                  </div>
                  <h3 className="text-3xl font-black uppercase">Dump Truck Services</h3>
                  <p className="text-lg text-muted-foreground leading-relaxed">
-                   Our fleet includes Super Dumps and Standard 10-Wheelers ready for heavy loads. Perfect for excavation projects, paving operations, and dirt removal.
+                   Our fleet of high-capacity dump trucks is equipped to handle heavy loads with ease. We support excavation, grading, and paving projects with precision dumping and rapid turnaround times.
                  </p>
                  <ul className="space-y-3 pt-4">
-                   {["Super Dump Capabilities", "High-Volume Dirt Removal", "Paving Support", "Precision Dumping"].map(item => (
+                   {["Excavation Support", "Site Grading", "Paving Operations", "Debris Removal"].map(item => (
                      <li key={item} className="flex items-center gap-3 font-bold uppercase text-sm">
                        <Check size={18} className="text-primary" /> {item}
                      </li>
                    ))}
                  </ul>
-                 <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white mt-4">
-                   Book This Service
-                 </Button>
+                 <Link href="/contact">
+                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white mt-4">
+                     Request Service
+                   </Button>
+                 </Link>
                </div>
                <div className="md:w-1/2 h-[400px] w-full">
                  <img src="https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop" className="w-full h-full object-cover shadow-2xl border-4 border-white" alt="Dump Truck" />
+               </div>
+             </div>
+
+             {/* Service 3 */}
+             <div className="bg-white p-8 md:p-12 shadow-xl flex flex-col md:flex-row gap-12 items-center">
+               <div className="md:w-1/2 space-y-6">
+                 <div className="h-16 w-16 bg-primary/10 flex items-center justify-center text-primary">
+                   <Briefcase size={32} />
+                 </div>
+                 <h3 className="text-3xl font-black uppercase">Project Logistics</h3>
+                 <p className="text-lg text-muted-foreground leading-relaxed">
+                   For large-scale infrastructure and development projects, we offer comprehensive logistics planning. We coordinate fleet movements to maximize efficiency and minimize downtime.
+                 </p>
+                 <ul className="space-y-3 pt-4">
+                   {["Route Planning", "Fleet Management", "On-Site Coordination", "Efficiency Optimization"].map(item => (
+                     <li key={item} className="flex items-center gap-3 font-bold uppercase text-sm">
+                       <Check size={18} className="text-primary" /> {item}
+                     </li>
+                   ))}
+                 </ul>
+                 <Link href="/contact">
+                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white mt-4">
+                     Request Service
+                   </Button>
+                 </Link>
+               </div>
+               <div className="md:w-1/2 h-[400px] w-full">
+                 <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" className="w-full h-full object-cover shadow-2xl border-4 border-white" alt="Project Logistics" />
                </div>
              </div>
           </div>

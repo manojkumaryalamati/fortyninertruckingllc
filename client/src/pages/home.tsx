@@ -36,20 +36,25 @@ export default function Home() {
             className="max-w-3xl space-y-6"
           >
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-              A HASSLE FREE <br />
-              <span className="text-primary">LOGISTICS</span> <br />
-              SERVICE
+              BUILDING <br />
+              <span className="text-primary">AMERICA'S</span> <br />
+              FUTURE
             </h1>
             
             <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-xl font-medium border-l-4 border-primary pl-6">
-              From moving cargo to hauling equipment – we've got the perfect fleet for you.
+              FortyNinerTrucking LLC delivers premier construction hauling and logistics solutions for major infrastructure projects across the nation.
             </p>
             
-            <div className="pt-8">
+            <div className="pt-8 flex flex-col sm:flex-row gap-4">
               <Link href="/contact">
                 <Button size="lg" className="rounded-full h-14 px-10 text-lg font-bold bg-primary hover:bg-primary/90 text-white shadow-xl hover:scale-105 transition-all border-none uppercase tracking-wide">
-                  Book Now <ArrowRight className="ml-2 h-5 w-5" />
+                  Request a Quote <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
+              </Link>
+              <Link href="/contact">
+                 <Button size="lg" variant="outline" className="rounded-full h-14 px-10 text-lg font-bold bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-md uppercase tracking-wide">
+                   Talk to Dispatch
+                 </Button>
               </Link>
             </div>
           </motion.div>
@@ -62,16 +67,13 @@ export default function Home() {
            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
              <div className="md:w-1/2">
                 <h3 className="text-3xl font-black uppercase text-foreground leading-tight">
-                  We offer a wide selection of <span className="text-primary">trailers</span> to suit every type of hauling requirement.
+                  Safety, Reliability, and <span className="text-primary">Expertise</span> in every load.
                 </h3>
              </div>
              <div className="md:w-1/2 flex flex-col sm:flex-row items-start sm:items-center gap-6">
                 <p className="text-muted-foreground leading-relaxed">
-                  Our logistics services are designed to fit your budget. Whether you need a truck for a few hours, a day, or a week, we have flexible plans to suit your schedule.
+                  We are committed to operational excellence. Our fleet and team adhere to the strictest safety protocols to ensure your project stays on track and compliant.
                 </p>
-                <Button className="rounded-full bg-primary text-white font-bold px-8 h-12 uppercase shrink-0">
-                  Book Now
-                </Button>
              </div>
            </div>
         </div>
@@ -85,20 +87,22 @@ export default function Home() {
               <div className="space-y-4">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-primary">About Us</h2>
                 <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground">
-                  Who We <span className="text-primary">Are</span>
+                  The <span className="text-primary">Standard</span> in Hauling
                 </h3>
               </div>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  FortyNinerTrucking LLC is your trusted partner for logistics and material transport. Whether you need a truck for personal use, business transport, or heavy-duty hauling, our fleet is ready to move your load safely and efficiently.
+                  FortyNinerTrucking LLC is a premier logistics provider specializing in construction material transport and heavy hauling. With years of industry experience, we have built a reputation for reliability, safety, and operational precision.
                 </p>
                 <p>
-                  Our intention is simple – to deliver safe, reliable, and cost-effective hauling solutions tailored to your needs.
+                  We don't just move materials; we build long-term partnerships with contractors, municipalities, and developers. Our commitment to safety and compliance ensures that every job is completed to the highest standards.
                 </p>
               </div>
-              <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white shadow-lg">
-                Read More
-              </Button>
+              <Link href="/about">
+                <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 uppercase font-bold text-white shadow-lg">
+                  Read More
+                </Button>
+              </Link>
             </div>
             
             <div className="relative p-6">
@@ -139,19 +143,19 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
              {[
                { 
-                 title: "Utility Hauling", 
-                 desc: "Perfect for moving small loads, equipment, or furniture.",
-                 image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop"
+                 title: "Construction Material Hauling", 
+                 desc: "Efficient transport of aggregates, sand, gravel, and asphalt for job sites of all sizes.",
+                 image: "https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop"
                },
                { 
-                 title: "Cargo Transport", 
-                 desc: "Enclosed transport for secure and weather-protected delivery.",
+                 title: "Dump Truck Services", 
+                 desc: "High-capacity removal and delivery with our fleet of Super Dumps and End Dumps.",
+                 image: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop"
+               },
+               { 
+                 title: "Project-Based Solutions", 
+                 desc: "Comprehensive logistics planning and execution for large-scale infrastructure projects.",
                  image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop"
-               },
-               { 
-                 title: "Heavy Equipment", 
-                 desc: "Designed for moving vehicles, machinery and construction gear safely.",
-                 image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop"
                }
              ].map((service, i) => (
                <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all duration-300">
@@ -165,9 +169,11 @@ export default function Home() {
                    <p className="text-muted-foreground text-sm leading-relaxed">
                      {service.desc}
                    </p>
-                   <Button className="w-full rounded-full bg-primary hover:bg-primary/90 text-white font-bold uppercase mt-4">
-                     Book Now
-                   </Button>
+                   <Link href="/services">
+                    <Button className="w-full rounded-full bg-primary hover:bg-primary/90 text-white font-bold uppercase mt-4">
+                      Learn More
+                    </Button>
+                   </Link>
                  </div>
                </div>
              ))}
@@ -185,14 +191,31 @@ export default function Home() {
              </div>
              <div className="space-y-6">
                <h2 className="text-4xl font-black uppercase tracking-tight">
-                 We make logistics <span className="text-primary">EASY</span>
+                 Core <span className="text-primary">Values</span>
                </h2>
-               <p className="text-lg text-muted-foreground leading-relaxed">
-                 Our fleet is well-maintained, safe, and road-ready, ensuring you can focus on your job without worrying about breakdowns or delays. With simple booking, flexible rental periods, and unbeatable customer service, we make transportation stress-free.
-               </p>
-               <Button className="rounded-full bg-primary hover:bg-primary/90 px-10 h-14 uppercase font-bold text-white shadow-xl shadow-primary/20">
-                 Book Now
-               </Button>
+               <div className="space-y-6">
+                 <div>
+                   <h3 className="text-xl font-bold uppercase mb-2">Safety</h3>
+                   <p className="text-muted-foreground">The foundation of everything we do. We protect our drivers, our partners, and the motoring public.</p>
+                 </div>
+                 <div>
+                   <h3 className="text-xl font-bold uppercase mb-2">Reliability</h3>
+                   <p className="text-muted-foreground">When we say we will be there, we are there. We deliver on our promises, every single time.</p>
+                 </div>
+                 <div>
+                   <h3 className="text-xl font-bold uppercase mb-2">Expertise</h3>
+                   <p className="text-muted-foreground">Our team brings deep industry knowledge to solve complex logistical challenges.</p>
+                 </div>
+                 <div>
+                   <h3 className="text-xl font-bold uppercase mb-2">Accountability</h3>
+                   <p className="text-muted-foreground">We take ownership of our work and maintain transparent communication at all levels.</p>
+                 </div>
+               </div>
+               <Link href="/contact">
+                <Button className="rounded-full bg-primary hover:bg-primary/90 px-10 h-14 uppercase font-bold text-white shadow-xl shadow-primary/20">
+                  Partner With Us
+                </Button>
+               </Link>
              </div>
            </div>
          </div>

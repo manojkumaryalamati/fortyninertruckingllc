@@ -21,15 +21,15 @@ export default function Subhaulers() {
           <div className="space-y-8">
             <h1 className="text-5xl font-bold tracking-tight">Partner With Us.</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              We are always looking for reliable owner-operators and subhaulers to join our network. FortyNinerTrucking LLC offers fair dispatch practices, consistent work, and transparent communication.
+              Join a network of professionals. FortyNinerTrucking LLC seeks reliable owner-operators and subhaulers for long-term partnership. We offer fair dispatch, transparent terms, and consistent opportunities.
             </p>
             
             <div className="grid sm:grid-cols-2 gap-6 pt-4">
                {[
-                 { icon: Handshake, title: "Fair Dispatch", desc: "Equitable distribution of loads and routes." },
-                 { icon: ShieldCheck, title: "Clear Terms", desc: "Transparent payment schedules and agreements." },
-                 { icon: Briefcase, title: "Long-term Work", desc: "Access to ongoing construction projects." },
-                 { icon: Truck, title: "Diverse Fleet", desc: "Opportunities for various truck types." }
+                 { icon: Handshake, title: "Fair Dispatch", desc: "Equitable load distribution." },
+                 { icon: ShieldCheck, title: "Clear Terms", desc: "Transparent agreements." },
+                 { icon: Briefcase, title: "Consistent Work", desc: "Access to ongoing projects." },
+                 { icon: Truck, title: "Compliance Focused", desc: "Safety-first partnerships." }
                ].map((item, i) => (
                  <Card key={i} className="bg-secondary/30 border-none">
                    <CardContent className="p-6 space-y-3">

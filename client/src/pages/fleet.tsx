@@ -7,10 +7,10 @@ import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
 const fleetData = [
-  { id: 1, name: "10-Wheel Dump Truck", type: "Standard Haul", specs: "16-18 Ton Capacity", image: "https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
-  { id: 2, name: "Super Dump", type: "Heavy Haul", specs: "20-22 Ton Capacity", image: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
-  { id: 3, name: "End Dump Trailer", type: "Material Transport", specs: "High Volume, Rapid Unload", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop", category: "Trailers" },
-  { id: 4, name: "Transfer Truck", type: "Aggregates", specs: "Max Payload Efficiency", image: "https://images.unsplash.com/photo-1605218427306-635ba2439af2?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
+  { id: 1, name: "10-Wheel Dump Truck", type: "Standard Haul", specs: "Versatile maneuverability for urban sites", image: "https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
+  { id: 2, name: "Super Dump", type: "Heavy Haul", specs: "Maximized payload with trailing axle", image: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
+  { id: 3, name: "End Dump Trailer", type: "Material Transport", specs: "Rapid unloading for stockpiling", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop", category: "Trailers" },
+  { id: 4, name: "Transfer Truck", type: "Aggregates", specs: "Double trailer efficiency", image: "https://images.unsplash.com/photo-1605218427306-635ba2439af2?q=80&w=2940&auto=format&fit=crop", category: "Construction" },
 ];
 
 const categories = ["All", "Construction", "Trailers"];
