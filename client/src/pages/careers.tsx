@@ -19,7 +19,6 @@ export default function Careers() {
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">CDL DRIVERS WANTED</h1>
             <div className="text-lg text-muted-foreground leading-relaxed space-y-4">
               <p>
                 FortyNinerTrucking is looking to add Drivers to Our Team. We are looking for Commercial Drivers for Long Haul and Daily Local Driving jobs.
