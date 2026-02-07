@@ -219,42 +219,6 @@ export default function Home() {
          </div>
       </section>
 
-
-      {/* Testimonials */}
-      <section className="py-24 bg-background text-center">
-        <div className="container mx-auto px-6 max-w-4xl">
-           <h2 className="text-sm font-bold tracking-widest text-muted-foreground mb-4">Testimonials</h2>
-           <h3 className="text-4xl font-black mb-16 text-foreground">
-             Trusted by hundreds of <br/> <span className="text-primary">Happy Customers</span>
-           </h3>
-
-           <div className="bg-card p-12 rounded-[3rem] relative border border-white/5">
-             <div className="flex flex-col items-center gap-8">
-               <div className="text-center space-y-6">
-                 <div className="flex justify-center gap-1 text-primary">
-                    {[1,2,3,4,5].map(i => <Star key={i} fill="currentColor" size={24} />)}
-                 </div>
-                 <p className="text-2xl font-medium italic text-muted-foreground leading-relaxed">
-                   "I rented a cargo trailer for moving my office equipment, and the experience was seamless. The trailer was clean, sturdy, and the booking process was so simple. Highly recommend!"
-                 </p>
-                 <div>
-                   <p className="text-xl font-bold text-foreground">Nathalie Gibson</p>
-                   <p className="text-sm text-primary font-bold tracking-wider">Business Owner</p>
-                 </div>
-               </div>
-             </div>
-           </div>
-           
-           <div className="mt-12">
-             <Link href="/contact">
-              <Button className="rounded-full bg-primary hover:bg-primary/90 px-10 h-14 font-bold text-white shadow-xl shadow-primary/20">
-                View All Reviews
-              </Button>
-             </Link>
-           </div>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
