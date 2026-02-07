@@ -6,7 +6,7 @@ import { Navbar } from "@/components/Navbar";
 
 export default function Certifications() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans pt-24 pb-24">
+    <div className="min-h-screen bg-background text-foreground font-sans pt-32 md:pt-40 pb-24">
       <Navbar />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
