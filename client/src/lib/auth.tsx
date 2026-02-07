@@ -97,13 +97,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const updateProfile = async (displayName?: string) => {
-    if (user && displayName) {
-       // Note: updateProfile is imported from firebase/auth
-       // We need to import it at the top level
-    }
-  }
-
   return (
     <AuthContext.Provider value={{ user, login, logout, isLoading, error }}>
       {children}
