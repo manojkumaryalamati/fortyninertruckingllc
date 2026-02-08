@@ -37,6 +37,11 @@ export function AdminSidebar() {
             <LayoutDashboard size={18} /> Overview
           </Button>
         </Link>
+        <Link href="/admin/trucks">
+          <Button variant={location === "/admin/trucks" ? "secondary" : "ghost"} className={`w-full justify-start gap-3 mb-1 font-medium ${location === "/admin/trucks" ? "bg-zinc-100 text-zinc-900" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+            <Truck size={18} /> Trucks
+          </Button>
+        </Link>
         <Link href="/admin/trips">
           <Button variant={location === "/admin/trips" ? "secondary" : "ghost"} className={`w-full justify-start gap-3 mb-1 font-medium ${location === "/admin/trips" ? "bg-zinc-100 text-zinc-900" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
             <Package size={18} /> Trips & Loads
@@ -113,6 +118,11 @@ export function AdminMobileHeader() {
               <Link href="/admin">
                 <Button variant={location === "/admin" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setOpen(false)}>
                   <LayoutDashboard size={18} /> Overview
+                </Button>
+              </Link>
+              <Link href="/admin/trucks">
+                <Button variant={location === "/admin/trucks" ? "secondary" : "ghost"} className="w-full justify-start gap-3 mb-1" onClick={() => setOpen(false)}>
+                  <Truck size={18} /> Trucks
                 </Button>
               </Link>
               <Link href="/admin/trips">

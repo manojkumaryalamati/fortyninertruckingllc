@@ -8,6 +8,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Login from "@/pages/login";
 import AdminDashboard from "@/pages/admin";
+import TrucksManagement from "@/pages/admin/trucks";
 import DriversManagement from "@/pages/admin/drivers";
 import TripsManagement from "@/pages/admin/trips";
 import DocumentsCenter from "@/pages/admin/documents";
@@ -29,6 +30,9 @@ function Router() {
       {/* Protected Routes */}
       <Route path="/admin">
         {() => <ProtectedRoute component={AdminDashboard} />}
+      </Route>
+      <Route path="/admin/trucks">
+        {() => <ProtectedRoute component={TrucksManagement} />}
       </Route>
       <Route path="/admin/drivers">
         {() => <ProtectedRoute component={DriversManagement} />}
