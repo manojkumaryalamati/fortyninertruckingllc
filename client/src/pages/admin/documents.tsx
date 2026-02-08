@@ -51,12 +51,7 @@ export default function DocumentsCenter() {
   // Fetch Documents
   useEffect(() => {
     if (!isFirebaseConfigured()) {
-      setDocuments([
-        { id: "1", name: "CDL - John Doe", entity: "John Doe", type: "License", expiry: "May 15, 2026", status: "Valid", category: "Driver", createdAt: new Date() },
-        { id: "2", name: "Medical Cert - John Doe", entity: "John Doe", type: "Medical", expiry: "Dec 10, 2024", status: "Expired", category: "Driver", createdAt: new Date() },
-        { id: "3", name: "Insurance Policy 2025", entity: "Fleet", type: "Insurance", expiry: "Jan 01, 2026", status: "Valid", category: "Company", createdAt: new Date() },
-        { id: "4", name: "Annual Inspection - TRK-409", entity: "TRK-409", type: "Inspection", expiry: "Mar 20, 2026", status: "Expiring Soon", category: "Truck", createdAt: new Date() }
-      ]);
+      toast({ title: "Configuration Missing", description: "Firebase is not configured.", variant: "destructive" });
       setIsLoading(false);
       return;
     }
@@ -127,8 +122,7 @@ export default function DocumentsCenter() {
         await addDoc(collection(db, "documents"), newDoc);
         toast({ title: "Document Uploaded", description: "File record created successfully." });
       } else {
-        setDocuments([{ id: `mock-${Date.now()}`, ...newDoc }, ...documents]);
-        toast({ title: "Document Uploaded (Mock)", description: "Firebase not configured." });
+         throw new Error("Firebase not configured");
       }
       setIsUploadModalOpen(false);
       setSelectedFile(null);
@@ -147,8 +141,6 @@ export default function DocumentsCenter() {
       if (isFirebaseConfigured()) {
         await deleteDoc(doc(db, "documents", id));
         toast({ title: "Document Deleted", description: "Record removed." });
-      } else {
-        setDocuments(documents.filter(d => d.id !== id));
       }
     } catch (error) {
       console.error("Error deleting document:", error);

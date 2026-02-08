@@ -9,8 +9,7 @@ import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage
  */
 export const uploadFile = async (file: File, path: string): Promise<string> => {
   if (!isFirebaseConfigured()) {
-    console.log("Mock upload:", file.name);
-    return `https://fake-url.com/${file.name}`;
+    throw new Error("Firebase is not configured. Cannot upload file.");
   }
 
   // Create a reference to 'path/filename'

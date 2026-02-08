@@ -49,11 +49,7 @@ export default function TripsManagement() {
   // Fetch Trips
   useEffect(() => {
     if (!isFirebaseConfigured()) {
-      setTrips([
-        { id: "TRP-1001", date: "2025-05-15", customer: "Acme Logistics", route: "Dallas, TX → Houston, TX", driver: "John Doe", truck: "TRK-409", status: "In Progress", rate: "$850", material: "General Freight", bolUrl: "", createdAt: new Date() },
-        { id: "TRP-1002", date: "2025-05-16", customer: "BuildRight Construction", route: "San Antonio, TX → Austin, TX", driver: "Mike Johnson", truck: "TRK-410", status: "Scheduled", rate: "$600", material: "Lumber", bolUrl: "", createdAt: new Date() },
-        { id: "TRP-0998", date: "2025-05-10", customer: "TechParts Inc.", route: "Austin, TX → Dallas, TX", driver: "John Doe", truck: "TRK-409", status: "Completed", rate: "$900", material: "Electronics", bolUrl: "", createdAt: new Date() }
-      ]);
+      toast({ title: "Configuration Missing", description: "Firebase is not configured.", variant: "destructive" });
       setIsLoading(false);
       return;
     }
@@ -102,8 +98,7 @@ export default function TripsManagement() {
         await addDoc(collection(db, "trips"), newTrip);
         toast({ title: "Trip Dispatched", description: "Load assignment created successfully." });
       } else {
-        setTrips([{ id: `mock-${Date.now()}`, ...newTrip }, ...trips]);
-        toast({ title: "Trip Dispatched (Mock)", description: "Firebase not configured." });
+        throw new Error("Firebase not configured");
       }
       setIsAddModalOpen(false);
       setSelectedFile(null);
@@ -121,8 +116,6 @@ export default function TripsManagement() {
       if (isFirebaseConfigured()) {
         await deleteDoc(doc(db, "trips", id));
         toast({ title: "Trip Deleted", description: "Trip removed from board." });
-      } else {
-        setTrips(trips.filter(t => t.id !== id));
       }
     } catch (error) {
       console.error("Error deleting trip:", error);
