@@ -65,7 +65,7 @@ export function Navbar() {
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
-                    className={`transition-all duration-300 ${scrolled ? 'w-24' : 'w-28'} object-contain drop-shadow-md`}
+                    className={`transition-all duration-300 ${scrolled ? 'w-24 brightness-0' : 'w-28 brightness-0 invert'} object-contain drop-shadow-md`}
                   />
               </div>
             </Link>
@@ -121,7 +121,7 @@ export function Navbar() {
           >
             <div className="flex justify-between items-center p-6 border-b border-white/10">
               <div className="h-12 w-auto relative flex items-center">
-                 <img src={logo} alt="FortyNiner Trucking" className="h-full w-auto object-contain" />
+                 <img src={logo} alt="FortyNiner Trucking" className="h-full w-auto object-contain brightness-0 invert" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}

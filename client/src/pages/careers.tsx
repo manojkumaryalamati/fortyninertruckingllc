@@ -81,26 +81,26 @@ export default function Careers() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans pt-40 md:pt-56 pb-32">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans pt-40 md:pt-56 pb-32">
       <Navbar />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-6">
-            <div className="text-lg text-muted-foreground leading-relaxed space-y-4">
+            <div className="text-lg text-zinc-600 leading-relaxed space-y-4">
               <p>
                 FortyNinerTrucking is looking to add Drivers to Our Team. We are looking for Commercial Drivers for Long Haul and Daily Local Driving jobs.
               </p>
               <p>
                 Weekends are not mandatory, maybe necessary for Long haul projects.
               </p>
-              <p className="font-bold text-foreground">
+              <p className="font-bold text-zinc-900">
                 Class A or Class B license (CDL) required to apply for multiple positions available.
               </p>
             </div>
             
             <div className="space-y-4 pt-4">
-               <h3 className="text-xl font-bold">Why Drive With Us?</h3>
+               <h3 className="text-xl font-bold text-zinc-900">Why Drive With Us?</h3>
                {[
                  { title: "Professional Environment", desc: "Respect and open communication." },
                  { title: "Well-Maintained Equipment", desc: "Safe, compliant, and reliable trucks." },
@@ -111,8 +111,8 @@ export default function Careers() {
                      <Check size={16} />
                    </div>
                    <div>
-                     <h3 className="font-bold text-base">{benefit.title}</h3>
-                     <p className="text-sm text-muted-foreground">{benefit.desc}</p>
+                     <h3 className="font-bold text-base text-zinc-900">{benefit.title}</h3>
+                     <p className="text-sm text-zinc-500">{benefit.desc}</p>
                    </div>
                    
                  </div>
@@ -120,34 +120,34 @@ export default function Careers() {
             </div>
           </div>
 
-          <Card className="border-none shadow-xl bg-secondary/30">
+          <Card className="border-none shadow-xl bg-white border border-zinc-200">
             <CardContent className="p-8 md:p-10">
-              <h2 className="text-2xl font-bold mb-6">Driver Application</h2>
+              <h2 className="text-2xl font-bold mb-6 text-zinc-900">Driver Application</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input id="firstName" value={formData.firstName} onChange={handleChange} placeholder="John" className="bg-background" />
+                    <Label htmlFor="firstName" className="text-zinc-700">First Name</Label>
+                    <Input id="firstName" value={formData.firstName} onChange={handleChange} placeholder="John" className="bg-zinc-50 border-zinc-200" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input id="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" className="bg-background" />
+                    <Label htmlFor="lastName" className="text-zinc-700">Last Name</Label>
+                    <Input id="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" className="bg-zinc-50 border-zinc-200" />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" className="bg-background" />
+                  <Label htmlFor="email" className="text-zinc-700">Email Address</Label>
+                  <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" className="bg-zinc-50 border-zinc-200" />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(555) 000-0000" className="bg-background" />
+                  <Label htmlFor="phone" className="text-zinc-700">Phone Number</Label>
+                  <Input id="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(555) 000-0000" className="bg-zinc-50 border-zinc-200" />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="experience">Years of Commercial Driving</Label>
-                  <select id="experience" value={formData.experience} onChange={handleChange} className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm">
+                  <Label htmlFor="experience" className="text-zinc-700">Years of Commercial Driving</Label>
+                  <select id="experience" value={formData.experience} onChange={handleChange} className="w-full h-10 rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm">
                     <option>Less than 1 year</option>
                     <option>1-3 years</option>
                     <option>3-5 years</option>
@@ -156,17 +156,17 @@ export default function Careers() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="license">CDL Number</Label>
-                  <Input id="license" value={formData.license} onChange={handleChange} placeholder="Enter License #" className="bg-background" />
+                  <Label htmlFor="license" className="text-zinc-700">CDL Number</Label>
+                  <Input id="license" value={formData.license} onChange={handleChange} placeholder="Enter License #" className="bg-zinc-50 border-zinc-200" />
                 </div>
 
-                <div className="border-2 border-dashed border-border rounded-xl p-8 text-center space-y-2 hover:bg-background/50 transition-colors cursor-pointer">
-                  <Upload className="mx-auto text-muted-foreground" />
-                  <p className="text-sm font-medium">Upload Resume (Optional)</p>
-                  <p className="text-xs text-muted-foreground">PDF, JPG, PNG up to 5MB</p>
+                <div className="border-2 border-dashed border-zinc-200 rounded-xl p-8 text-center space-y-2 hover:bg-zinc-50 transition-colors cursor-pointer">
+                  <Upload className="mx-auto text-zinc-400" />
+                  <p className="text-sm font-medium text-zinc-700">Upload Resume (Optional)</p>
+                  <p className="text-xs text-zinc-500">PDF, JPG, PNG up to 5MB</p>
                 </div>
 
-                <Button type="submit" disabled={isSubmitting} size="lg" className="w-full rounded-full h-12 text-base font-bold">
+                <Button type="submit" disabled={isSubmitting} size="lg" className="w-full rounded-full h-12 text-base font-bold bg-primary text-white hover:bg-primary/90">
                   {isSubmitting ? <Loader2 className="animate-spin" /> : "Submit Application"}
                 </Button>
               </form>

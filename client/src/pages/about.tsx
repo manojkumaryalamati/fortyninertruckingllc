@@ -7,7 +7,7 @@ import { Navbar } from "@/components/Navbar";
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans">
       <Navbar />
 
       {/* Hero Section */}
@@ -42,10 +42,10 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <h2 className="text-sm font-bold tracking-widest text-primary">Our Mission</h2>
-              <h3 className="text-4xl font-black tracking-tight text-foreground">
+              <h3 className="text-4xl font-black tracking-tight text-zinc-900">
                 Commitment to <span className="text-primary">Safety</span> & Service
               </h3>
-              <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+              <div className="space-y-4 text-lg text-zinc-600 leading-relaxed">
                 <p>
                   FortyNinerTrucking LLC is a full-service trucking and hauling company dedicated to supporting the construction and infrastructure industries. We specialize in moving materials efficiently, safely, and on schedule.
                 </p>
@@ -66,15 +66,15 @@ export default function About() {
                       <item.icon size={24} />
                     </div>
                     <div>
-                      <h4 className="font-bold">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                      <h4 className="font-bold text-zinc-900">{item.title}</h4>
+                      <p className="text-sm text-zinc-500">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="relative h-[600px] bg-secondary rounded-lg overflow-hidden">
+            <div className="relative h-[600px] bg-zinc-100 rounded-lg overflow-hidden">
                <img 
                  src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop" 
                  className="absolute inset-0 w-full h-full object-cover"
