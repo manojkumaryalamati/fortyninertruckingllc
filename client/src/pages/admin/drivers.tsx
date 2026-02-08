@@ -34,6 +34,8 @@ import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 
+import { uploadFile } from "@/lib/storage-utils";
+
 export default function DriversManagement() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
@@ -43,14 +45,15 @@ export default function DriversManagement() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // Fetch Drivers from Firestore
   useEffect(() => {
     if (!isFirebaseConfigured()) {
-      // Use mock data if Firebase not configured
       setDrivers([
-        { id: "mock-1", name: "Michael Rodriguez", status: "Active", phone: "(555) 123-4567", email: "m.rodriguez@49trucking.com", license: "CDL-A 829102", truck: "T-680 #409", joinDate: "Jan 12, 2022" },
-        { id: "mock-2", name: "Sarah Jenkins", status: "Active", phone: "(555) 987-6543", email: "s.jenkins@49trucking.com", license: "CDL-A 192834", truck: "T-680 #410", joinDate: "Mar 04, 2023" },
+        { id: "DRV-001", name: "John Doe", status: "Active", phone: "(555) 123-4567", email: "john@example.com", license: "CDL-A 12345678", truck: "TRK-409", joinDate: "Jan 15, 2023", documentUrl: "", createdAt: new Date() },
+        { id: "DRV-002", name: "Jane Smith", status: "On Leave", phone: "(555) 987-6543", email: "jane@example.com", license: "CDL-A 87654321", truck: "Unassigned", joinDate: "Mar 10, 2024", documentUrl: "", createdAt: new Date() },
+        { id: "DRV-003", name: "Mike Johnson", status: "Active", phone: "(555) 555-5555", email: "mike@example.com", license: "CDL-A 11223344", truck: "TRK-410", joinDate: "Jun 20, 2022", documentUrl: "", createdAt: new Date() }
       ]);
       setIsLoading(false);
       return;
@@ -58,11 +61,8 @@ export default function DriversManagement() {
 
     const q = query(collection(db, "drivers"), orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const driversData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setDrivers(driversData);
+      const driverList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setDrivers(driverList);
       setIsLoading(false);
     });
 
@@ -70,27 +70,39 @@ export default function DriversManagement() {
   }, []);
 
   const filteredDrivers = drivers.filter(driver => 
-    driver.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    driver.id?.toLowerCase().includes(searchTerm.toLowerCase())
+    driver.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    driver.id.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
 
   const handleAddDriver = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData(e.target as HTMLFormElement);
     
-    const newDriver = {
-      name: formData.get("name") as string,
-      status: formData.get("status") as string,
-      phone: formData.get("phone") as string,
-      email: formData.get("email") as string,
-      license: formData.get("license") as string,
-      truck: "Unassigned", // Default truck assignment
-      joinDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
-      createdAt: serverTimestamp()
-    };
-
     try {
+      let fileUrl = "";
+      if (selectedFile) {
+        fileUrl = await uploadFile(selectedFile, "drivers/documents");
+      }
+
+      const newDriver = {
+        name: formData.get("name") as string,
+        status: formData.get("status") as string,
+        phone: formData.get("phone") as string,
+        email: formData.get("email") as string,
+        license: formData.get("license") as string,
+        truck: "Unassigned", // Default truck assignment
+        joinDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        documentUrl: fileUrl,
+        createdAt: serverTimestamp()
+      };
+
       if (isFirebaseConfigured()) {
         await addDoc(collection(db, "drivers"), newDriver);
         toast({ title: "Driver Added", description: "New driver profile created successfully." });
@@ -100,6 +112,7 @@ export default function DriversManagement() {
         toast({ title: "Driver Added (Mock)", description: "Firebase not configured." });
       }
       setIsAddModalOpen(false);
+      setSelectedFile(null);
     } catch (error) {
       console.error("Error adding driver:", error);
       toast({ title: "Error", description: "Failed to add driver.", variant: "destructive" });
@@ -191,9 +204,17 @@ export default function DriversManagement() {
 
                    <div className="space-y-2">
                      <Label>Upload Documents</Label>
-                     <div className="border-2 border-dashed border-border rounded-xl p-6 text-center hover:bg-secondary/50 transition-colors cursor-pointer">
+                     <div className="border-2 border-dashed border-border rounded-xl p-6 text-center hover:bg-secondary/50 transition-colors cursor-pointer relative">
+                       <input 
+                         type="file" 
+                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                         onChange={handleFileChange}
+                         accept=".pdf,.jpg,.jpeg,.png"
+                       />
                        <Upload className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
-                       <p className="text-sm font-medium">Click to upload CDL or Medical Card</p>
+                       <p className="text-sm font-medium">
+                         {selectedFile ? selectedFile.name : "Click to upload CDL or Medical Card"}
+                       </p>
                        <p className="text-xs text-muted-foreground">PDF, JPG up to 10MB</p>
                      </div>
                    </div>

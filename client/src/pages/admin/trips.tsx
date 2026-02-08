@@ -34,6 +34,8 @@ import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 
+import { uploadFile } from "@/lib/storage-utils";
+
 export default function TripsManagement() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
@@ -42,13 +44,15 @@ export default function TripsManagement() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // Fetch Trips
   useEffect(() => {
     if (!isFirebaseConfigured()) {
       setTrips([
-        { id: "mock-1", date: "Feb 09, 2026", customer: "Tesla Gigafactory", route: "Sacramento → Austin", driver: "M. Rodriguez", truck: "TRK-409", status: "In Progress", rate: "$4,200", material: "Steel Coils" },
-        { id: "mock-2", date: "Feb 09, 2026", customer: "Amazon", route: "Reno → Salt Lake City", driver: "S. Jenkins", truck: "TRK-410", status: "Scheduled", rate: "$1,850", material: "Palletized Goods" },
+        { id: "TRP-1001", date: "2025-05-15", customer: "Acme Logistics", route: "Dallas, TX → Houston, TX", driver: "John Doe", truck: "TRK-409", status: "In Progress", rate: "$850", material: "General Freight", bolUrl: "", createdAt: new Date() },
+        { id: "TRP-1002", date: "2025-05-16", customer: "BuildRight Construction", route: "San Antonio, TX → Austin, TX", driver: "Mike Johnson", truck: "TRK-410", status: "Scheduled", rate: "$600", material: "Lumber", bolUrl: "", createdAt: new Date() },
+        { id: "TRP-0998", date: "2025-05-10", customer: "TechParts Inc.", route: "Austin, TX → Dallas, TX", driver: "John Doe", truck: "TRK-409", status: "Completed", rate: "$900", material: "Electronics", bolUrl: "", createdAt: new Date() }
       ]);
       setIsLoading(false);
       return;
@@ -56,35 +60,44 @@ export default function TripsManagement() {
 
     const q = query(collection(db, "trips"), orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const tripsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setTrips(tripsData);
+      const tripsList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setTrips(tripsList);
       setIsLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
   const handleAddTrip = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData(e.target as HTMLFormElement);
     
-    const newTrip = {
-      date: formData.get("date") as string,
-      customer: formData.get("customer") as string,
-      route: `${formData.get("pickup")} → ${formData.get("dropoff")}`,
-      driver: formData.get("driver") as string,
-      truck: formData.get("truck") as string,
-      status: "Scheduled",
-      rate: `$${formData.get("rate")}`,
-      material: formData.get("material") as string,
-      createdAt: serverTimestamp()
-    };
-
     try {
+      let fileUrl = "";
+      if (selectedFile) {
+        fileUrl = await uploadFile(selectedFile, "trips/bol");
+      }
+
+      const newTrip = {
+        date: formData.get("date") as string,
+        customer: formData.get("customer") as string,
+        route: `${formData.get("pickup")} → ${formData.get("dropoff")}`,
+        driver: formData.get("driver") as string,
+        truck: formData.get("truck") as string,
+        status: "Scheduled",
+        rate: `$${formData.get("rate")}`,
+        material: formData.get("material") as string,
+        bolUrl: fileUrl,
+        createdAt: serverTimestamp()
+      };
+
       if (isFirebaseConfigured()) {
         await addDoc(collection(db, "trips"), newTrip);
         toast({ title: "Trip Dispatched", description: "Load assignment created successfully." });
@@ -93,6 +106,7 @@ export default function TripsManagement() {
         toast({ title: "Trip Dispatched (Mock)", description: "Firebase not configured." });
       }
       setIsAddModalOpen(false);
+      setSelectedFile(null);
     } catch (error) {
       console.error("Error adding trip:", error);
       toast({ title: "Error", description: "Failed to dispatch trip.", variant: "destructive" });
@@ -221,9 +235,17 @@ export default function TripsManagement() {
 
                    <div className="space-y-2">
                      <Label>Upload BOL / Rate Confirmation</Label>
-                     <div className="border-2 border-dashed border-border rounded-xl p-4 text-center hover:bg-secondary/50 transition-colors cursor-pointer">
+                     <div className="border-2 border-dashed border-border rounded-xl p-4 text-center hover:bg-secondary/50 transition-colors cursor-pointer relative">
+                       <input 
+                         type="file" 
+                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                         onChange={handleFileChange}
+                         accept=".pdf,.jpg,.jpeg,.png"
+                       />
                        <Upload className="mx-auto h-6 w-6 text-muted-foreground mb-1" />
-                       <p className="text-sm font-medium">Upload Documents</p>
+                       <p className="text-sm font-medium">
+                         {selectedFile ? selectedFile.name : "Upload Documents"}
+                       </p>
                      </div>
                    </div>
 

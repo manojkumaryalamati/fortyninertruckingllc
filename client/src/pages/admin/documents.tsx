@@ -34,6 +34,8 @@ import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 
+import { uploadFile } from "@/lib/storage-utils";
+
 export default function DocumentsCenter() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
@@ -44,13 +46,16 @@ export default function DocumentsCenter() {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // Fetch Documents
   useEffect(() => {
     if (!isFirebaseConfigured()) {
       setDocuments([
-        { id: "mock-101", name: "CDL License - M. Rodriguez", type: "Driver License", entity: "Michael Rodriguez", expiry: "Mar 15, 2026", status: "Valid", category: "Driver" },
-        { id: "mock-102", name: "Medical Card - S. Jenkins", type: "Medical Cert", entity: "Sarah Jenkins", expiry: "Feb 28, 2026", status: "Expiring Soon", category: "Driver" },
+        { id: "1", name: "CDL - John Doe", entity: "John Doe", type: "License", expiry: "May 15, 2026", status: "Valid", category: "Driver", createdAt: new Date() },
+        { id: "2", name: "Medical Cert - John Doe", entity: "John Doe", type: "Medical", expiry: "Dec 10, 2024", status: "Expired", category: "Driver", createdAt: new Date() },
+        { id: "3", name: "Insurance Policy 2025", entity: "Fleet", type: "Insurance", expiry: "Jan 01, 2026", status: "Valid", category: "Company", createdAt: new Date() },
+        { id: "4", name: "Annual Inspection - TRK-409", entity: "TRK-409", type: "Inspection", expiry: "Mar 20, 2026", status: "Expiring Soon", category: "Truck", createdAt: new Date() }
       ]);
       setIsLoading(false);
       return;
@@ -58,11 +63,8 @@ export default function DocumentsCenter() {
 
     const q = query(collection(db, "documents"), orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const docsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setDocuments(docsData);
+      const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setDocuments(docs);
       setIsLoading(false);
     });
 
@@ -71,17 +73,28 @@ export default function DocumentsCenter() {
 
   const filteredDocs = documents.filter(doc => {
     const matchesFilter = filter === "All" || doc.category === filter;
-    const matchesSearch = doc.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          doc.entity?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = doc.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          doc.entity.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!selectedFile && isFirebaseConfigured()) {
+       toast({ title: "Error", description: "Please select a file to upload.", variant: "destructive" });
+       return;
+    }
+
     setIsSubmitting(true);
     const formData = new FormData(e.target as HTMLFormElement);
     
-    // Determine status based on expiration date (simple logic)
+    // Determine status based on expiration date
     const expiryDate = new Date(formData.get("expiry") as string);
     const today = new Date();
     const threeMonthsFromNow = new Date();
@@ -91,17 +104,25 @@ export default function DocumentsCenter() {
     if (expiryDate < today) status = "Expired";
     else if (expiryDate < threeMonthsFromNow) status = "Expiring Soon";
 
-    const newDoc = {
-      name: formData.get("fileName") as string,
-      type: formData.get("docType") as string,
-      entity: formData.get("entity") as string,
-      expiry: expiryDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
-      status: status,
-      category: formData.get("category") as string,
-      createdAt: serverTimestamp()
-    };
-
     try {
+      let fileUrl = "";
+      if (selectedFile) {
+        // Upload to "documents/{category}/"
+        const category = formData.get("category") as string;
+        fileUrl = await uploadFile(selectedFile, `documents/${category.toLowerCase()}`);
+      }
+
+      const newDoc = {
+        name: formData.get("fileName") as string,
+        type: formData.get("docType") as string,
+        entity: formData.get("entity") as string,
+        expiry: expiryDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        status: status,
+        category: formData.get("category") as string,
+        fileUrl: fileUrl,
+        createdAt: serverTimestamp()
+      };
+
       if (isFirebaseConfigured()) {
         await addDoc(collection(db, "documents"), newDoc);
         toast({ title: "Document Uploaded", description: "File record created successfully." });
@@ -110,6 +131,7 @@ export default function DocumentsCenter() {
         toast({ title: "Document Uploaded (Mock)", description: "Firebase not configured." });
       }
       setIsUploadModalOpen(false);
+      setSelectedFile(null);
     } catch (error) {
       console.error("Error adding document:", error);
       toast({ title: "Error", description: "Failed to upload document record.", variant: "destructive" });
@@ -117,6 +139,7 @@ export default function DocumentsCenter() {
       setIsSubmitting(false);
     }
   };
+
 
   const handleDeleteDoc = async (id: string) => {
     if (!confirm("Delete this document record?")) return;
@@ -211,9 +234,17 @@ export default function DocumentsCenter() {
 
                      <div className="space-y-2">
                        <Label>File Upload</Label>
-                       <div className="border-2 border-dashed border-border rounded-xl p-8 text-center hover:bg-secondary/50 transition-colors cursor-pointer">
+                       <div className="border-2 border-dashed border-border rounded-xl p-8 text-center hover:bg-secondary/50 transition-colors cursor-pointer relative">
+                         <input 
+                           type="file" 
+                           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                           onChange={handleFileChange}
+                           accept=".pdf,.jpg,.jpeg,.png"
+                         />
                          <Upload className="mx-auto h-10 w-10 text-muted-foreground mb-2" />
-                         <p className="text-sm font-medium">Drag & Drop or Click to Upload</p>
+                         <p className="text-sm font-medium">
+                           {selectedFile ? selectedFile.name : "Drag & Drop or Click to Upload"}
+                         </p>
                          <p className="text-xs text-muted-foreground mt-1">Supported: PDF, JPG, PNG (Max 15MB)</p>
                        </div>
                      </div>
