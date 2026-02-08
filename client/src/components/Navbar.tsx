@@ -28,8 +28,8 @@ export function Navbar() {
   const isHome = location === "/";
   // Always solid background when scrolled, transparent only at very top of home
   const navbarClasses = scrolled 
-    ? "bg-zinc-950/90 backdrop-blur-md shadow-md py-2 border-b border-white/10" 
-    : "bg-transparent py-4 border-b border-white/5";
+    ? "bg-white/90 backdrop-blur-md shadow-sm py-2 border-b border-zinc-200" 
+    : "bg-transparent py-4 border-b border-white/10";
 
   return (
     <>
@@ -77,13 +77,16 @@ export function Navbar() {
               <Link key={item.name} href={item.href}>
                 <div className={`
                   relative px-5 py-2 rounded-full cursor-pointer transition-all duration-300 group
-                  ${location === item.href ? "text-white font-bold bg-white/10" : "text-white/80 hover:text-white hover:bg-white/5"}
+                  ${location === item.href 
+                    ? (scrolled ? "text-primary font-bold bg-primary/10" : "text-white font-bold bg-white/10") 
+                    : (scrolled ? "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100" : "text-white/80 hover:text-white hover:bg-white/5")
+                  }
                 `}>
                   <span className="text-sm tracking-wide uppercase font-semibold">{item.name}</span>
                   {location === item.href && (
                     <motion.div
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full border border-primary/50"
+                      className={`absolute inset-0 rounded-full border ${scrolled ? "border-primary/50" : "border-primary/50"}`}
                       initial={false}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
@@ -97,7 +100,7 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             
              <button 
-               className="lg:hidden p-2 text-white hover:bg-white/10 rounded-md transition-colors"
+               className={`lg:hidden p-2 rounded-md transition-colors ${scrolled ? "text-zinc-900 hover:bg-zinc-100" : "text-white hover:bg-white/10"}`}
                onClick={() => setIsMobileMenuOpen(true)}
              >
                <Menu size={32} />
