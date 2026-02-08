@@ -41,9 +41,9 @@ export default function Services() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-24 bg-background relative overflow-hidden">
+      <section className="py-24 bg-zinc-50 relative overflow-hidden">
         {/* Background decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent" />
         
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
           <div className="space-y-32">
@@ -56,41 +56,41 @@ export default function Services() {
                className="grid md:grid-cols-2 gap-16 items-center"
              >
                <div className="order-2 md:order-1 relative">
-                 <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl opacity-50" />
+                 <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl opacity-50" />
                  <img 
                    src="https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop" 
-                   className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/10" 
+                   className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/50" 
                    alt="Construction Hauling" 
                  />
-                 <div className="absolute -bottom-6 -right-6 bg-card p-6 rounded-2xl border border-white/10 shadow-xl hidden lg:block">
+                 <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl border border-zinc-100 shadow-xl hidden lg:block">
                    <div className="flex items-center gap-4">
-                     <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                        <ShieldCheck size={24} />
                      </div>
                      <div>
                        <p className="text-xs text-muted-foreground font-bold">Compliance</p>
-                       <p className="font-bold text-white">100% Certified</p>
+                       <p className="font-bold text-zinc-900">100% Certified</p>
                      </div>
                    </div>
                  </div>
                </div>
                
                <div className="order-1 md:order-2 space-y-8">
-                 <div className="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-primary border border-white/10">
+                 <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20">
                    <HardHat size={32} />
                  </div>
                  <div>
-                   <h3 className="text-4xl font-black text-white mb-4">Construction Material Hauling</h3>
-                   <p className="text-lg text-white/60 leading-relaxed">
+                   <h3 className="text-4xl font-black text-zinc-900 mb-4">Construction Material Hauling</h3>
+                   <p className="text-lg text-zinc-600 leading-relaxed">
                      We provide reliable transport solutions for all types of construction materials. From aggregates and sand to asphalt and gravel, our fleet ensures a consistent supply chain for your job site.
                    </p>
                  </div>
                  
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                    {["Consistent Material Flow", "Job Site Coordination", "Diverse Material Handling", "Schedule Adherence"].map(item => (
-                     <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
+                     <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white border border-zinc-200 shadow-sm">
                        <Check size={16} className="text-primary" /> 
-                       <span className="text-sm font-bold text-white/80">{item}</span>
+                       <span className="text-sm font-bold text-zinc-700">{item}</span>
                      </div>
                    ))}
                  </div>
@@ -112,21 +112,21 @@ export default function Services() {
                className="grid md:grid-cols-2 gap-16 items-center"
              >
                <div className="space-y-8">
-                 <div className="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-primary border border-white/10">
+                 <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20">
                    <Truck size={32} />
                  </div>
                  <div>
-                   <h3 className="text-4xl font-black text-white mb-4">Dump Truck Services</h3>
-                   <p className="text-lg text-white/60 leading-relaxed">
+                   <h3 className="text-4xl font-black text-zinc-900 mb-4">Dump Truck Services</h3>
+                   <p className="text-lg text-zinc-600 leading-relaxed">
                      Our fleet of high-capacity dump trucks is equipped to handle heavy loads with ease. We support excavation, grading, and paving projects with precision dumping and rapid turnaround times.
                    </p>
                  </div>
                  
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                    {["Excavation Support", "Site Grading", "Paving Operations", "Debris Removal"].map(item => (
-                     <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
+                     <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white border border-zinc-200 shadow-sm">
                        <Check size={16} className="text-primary" /> 
-                       <span className="text-sm font-bold text-white/80">{item}</span>
+                       <span className="text-sm font-bold text-zinc-700">{item}</span>
                      </div>
                    ))}
                  </div>
@@ -139,20 +139,20 @@ export default function Services() {
                </div>
                
                <div className="relative">
-                 <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl opacity-50" />
+                 <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl opacity-50" />
                  <img 
                    src="https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop" 
-                   className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/10" 
+                   className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/50" 
                    alt="Dump Truck" 
                  />
-                 <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-2xl border border-white/10 shadow-xl hidden lg:block">
+                 <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl border border-zinc-100 shadow-xl hidden lg:block">
                    <div className="flex items-center gap-4">
-                     <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                        <Clock size={24} />
                      </div>
                      <div>
                        <p className="text-xs text-muted-foreground font-bold">Availability</p>
-                       <p className="font-bold text-white">24/7 Dispatch</p>
+                       <p className="font-bold text-zinc-900">24/7 Dispatch</p>
                      </div>
                    </div>
                  </div>
@@ -168,41 +168,41 @@ export default function Services() {
                className="grid md:grid-cols-2 gap-16 items-center"
              >
                <div className="order-2 md:order-1 relative">
-                 <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl opacity-50" />
+                 <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl opacity-50" />
                  <img 
                    src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" 
-                   className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/10" 
+                   className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/50" 
                    alt="Project Logistics" 
                  />
-                 <div className="absolute -bottom-6 -right-6 bg-card p-6 rounded-2xl border border-white/10 shadow-xl hidden lg:block">
+                 <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl border border-zinc-100 shadow-xl hidden lg:block">
                    <div className="flex items-center gap-4">
-                     <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                        <MapPin size={24} />
                      </div>
                      <div>
                        <p className="text-xs text-muted-foreground font-bold">Coverage</p>
-                       <p className="font-bold text-white">Statewide CA</p>
+                       <p className="font-bold text-zinc-900">Statewide CA</p>
                      </div>
                    </div>
                  </div>
                </div>
                
                <div className="order-1 md:order-2 space-y-8">
-                 <div className="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-primary border border-white/10">
+                 <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20">
                    <Briefcase size={32} />
                  </div>
                  <div>
-                   <h3 className="text-4xl font-black text-white mb-4">Project Logistics</h3>
-                   <p className="text-lg text-white/60 leading-relaxed">
+                   <h3 className="text-4xl font-black text-zinc-900 mb-4">Project Logistics</h3>
+                   <p className="text-lg text-zinc-600 leading-relaxed">
                      For large-scale infrastructure and development projects, we offer comprehensive logistics planning. We coordinate fleet movements to maximize efficiency and minimize downtime.
                    </p>
                  </div>
                  
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                    {["Route Planning", "Fleet Management", "On-Site Coordination", "Efficiency Optimization"].map(item => (
-                     <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
+                     <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white border border-zinc-200 shadow-sm">
                        <Check size={16} className="text-primary" /> 
-                       <span className="text-sm font-bold text-white/80">{item}</span>
+                       <span className="text-sm font-bold text-zinc-700">{item}</span>
                      </div>
                    ))}
                  </div>
@@ -219,13 +219,13 @@ export default function Services() {
       </section>
       
       {/* CTA Section */}
-      <section className="bg-card border-t border-white/10 py-24 text-center">
+      <section className="bg-white border-t border-zinc-200 py-24 text-center">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 max-w-3xl space-y-8">
-          <h2 className="text-4xl font-black text-white">Have a specialized hauling need?</h2>
-          <p className="text-white/60 text-xl font-medium">We adapt to your project requirements. Let's discuss your logistics plan.</p>
+          <h2 className="text-4xl font-black text-zinc-900">Have a specialized hauling need?</h2>
+          <p className="text-zinc-600 text-xl font-medium">We adapt to your project requirements. Let's discuss your logistics plan.</p>
           <div className="flex justify-center gap-4 pt-4">
             <Link href="/contact">
-              <Button size="lg" className="rounded-full h-14 px-10 font-bold bg-white text-primary hover:bg-gray-100 text-lg shadow-xl shadow-white/5">
+              <Button size="lg" className="rounded-full h-14 px-10 font-bold bg-primary text-white hover:bg-primary/90 text-lg shadow-xl shadow-primary/20">
                 Contact Sales
               </Button>
             </Link>
