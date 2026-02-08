@@ -74,16 +74,16 @@ export default function Home() {
       </section>
 
       {/* Value Prop Strip */}
-      <section className="bg-card py-16 border-b border-white/10">
+      <section className="bg-white py-16 border-b border-zinc-100">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
              <div className="md:w-1/2">
-                <h3 className="text-3xl font-black text-foreground leading-tight">
+                <h3 className="text-3xl font-black text-zinc-900 leading-tight">
                   Safety, Reliability, and <span className="text-primary">Expertise</span> in every load.
                 </h3>
              </div>
              <div className="md:w-1/2 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-zinc-600 leading-relaxed">
                   We are committed to operational excellence. Our fleet and team adhere to the strictest safety protocols to ensure your project stays on track and compliant.
                 </p>
              </div>
@@ -92,16 +92,16 @@ export default function Home() {
       </section>
 
       {/* Who We Are - Split Layout */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-zinc-50">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
               <h2 className="text-sm font-bold tracking-widest text-primary">About Us</h2>
-              <h3 className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
+              <h3 className="text-4xl md:text-5xl font-black tracking-tight text-zinc-900">
                 The <span className="text-primary">Standard</span> in Hauling
               </h3>
             </div>
-            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+            <div className="space-y-4 text-lg text-zinc-600 leading-relaxed">
               <p>
                 FortyNinerTrucking LLC is a premier logistics provider specializing in construction material transport and heavy hauling. With years of industry experience, we have built a reputation for reliability, safety, and operational precision.
               </p>
@@ -109,18 +109,18 @@ export default function Home() {
                 We don't just move materials; we build long-term partnerships with contractors, municipalities, and developers. Our commitment to safety and compliance ensures that every job is completed to the highest standards.
               </p>
             </div>
-            <div className="pt-8 grid grid-cols-3 gap-8 border-t border-white/10">
+            <div className="pt-8 grid grid-cols-3 gap-8 border-t border-zinc-200">
               <div className="space-y-1">
                 <h4 className="text-4xl font-black text-primary">15+</h4>
-                <p className="text-sm font-bold tracking-wider text-muted-foreground">Years Experience</p>
+                <p className="text-sm font-bold tracking-wider text-zinc-500">Years Experience</p>
               </div>
               <div className="space-y-1">
                 <h4 className="text-4xl font-black text-primary">5k+</h4>
-                <p className="text-sm font-bold tracking-wider text-muted-foreground">Loads Delivered</p>
+                <p className="text-sm font-bold tracking-wider text-zinc-500">Loads Delivered</p>
               </div>
               <div className="space-y-1">
                 <h4 className="text-4xl font-black text-primary">100%</h4>
-                <p className="text-sm font-bold tracking-wider text-muted-foreground">Safety Record</p>
+                <p className="text-sm font-bold tracking-wider text-zinc-500">Safety Record</p>
               </div>
             </div>
             <div className="pt-8">
@@ -135,21 +135,21 @@ export default function Home() {
       </section>
 
       {/* Featured Services (Modern Interactive Grid) */}
-      <section className="py-24 bg-background overflow-hidden relative">
+      <section className="py-24 bg-white overflow-hidden relative">
         {/* Abstract Background Elements */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -mr-32 -mt-32 opacity-20" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -mr-32 -mt-32 opacity-20" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -ml-32 -mb-32 opacity-20" />
 
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="space-y-4 max-w-2xl">
               <h2 className="text-sm font-bold tracking-[0.2em] text-primary">Capabilities</h2>
-              <h3 className="text-4xl md:text-5xl font-black tracking-tighter leading-[0.9] text-white">
+              <h3 className="text-4xl md:text-5xl font-black tracking-tighter leading-[0.9] text-zinc-900">
                 Engineered for <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">Heavy Loads</span>
               </h3>
             </div>
             <Link href="/services">
-               <Button variant="outline" className="rounded-full border-white/20 text-white hover:bg-white hover:text-background h-12 px-6 tracking-wider font-bold group">
+               <Button variant="outline" className="rounded-full border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 h-12 px-6 tracking-wider font-bold group">
                  View All Services <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                </Button>
             </Link>
@@ -179,22 +179,22 @@ export default function Home() {
                  icon: Scale
                }
              ].map((service, i) => (
-               <div key={i} className="group relative h-[300px] rounded-3xl overflow-hidden cursor-pointer border border-white/10 hover:border-primary/50 transition-all duration-500 bg-black/20">
+               <div key={i} className="group relative h-[300px] rounded-3xl overflow-hidden cursor-pointer border border-zinc-100 hover:border-primary/50 transition-all duration-500 bg-zinc-50">
                  {/* Content */}
                  <div className="absolute inset-0 p-8 flex flex-col justify-center items-center text-center">
                    <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-                     <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center text-primary mb-6 mx-auto group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                     <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 mx-auto group-hover:bg-primary group-hover:text-white transition-all duration-500">
                         <service.icon size={32} />
                      </div>
                      
-                     <h4 className="text-2xl font-black text-white mb-2 leading-none">{service.title}</h4>
+                     <h4 className="text-2xl font-black text-zinc-900 mb-2 leading-none">{service.title}</h4>
                      <p className="text-primary font-bold tracking-wider text-xs mb-4 opacity-80">{service.subtitle}</p>
                      
-                     <p className="text-white/70 leading-relaxed max-w-sm mx-auto mb-4">
+                     <p className="text-zinc-600 leading-relaxed max-w-sm mx-auto mb-4">
                        {service.desc}
                      </p>
                      
-                     <div className="inline-flex items-center gap-2 text-white font-bold tracking-widest text-xs border-b border-primary/0 group-hover:border-primary transition-all pb-1">
+                     <div className="inline-flex items-center gap-2 text-zinc-900 font-bold tracking-widest text-xs border-b border-primary/0 group-hover:border-primary transition-all pb-1">
                        Details <ArrowRight size={14} />
                      </div>
                    </div>
@@ -206,46 +206,46 @@ export default function Home() {
       </section>
 
       {/* Easy Process Section */}
-      <section className="py-24 bg-card border-t border-white/5">
+      <section className="py-24 bg-zinc-50 border-t border-zinc-100">
          <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
            <div className="max-w-4xl mx-auto text-center mb-16">
-             <h2 className="text-4xl font-black tracking-tight mb-4 text-foreground">
+             <h2 className="text-4xl font-black tracking-tight mb-4 text-zinc-900">
                Core <span className="text-primary">Values</span>
              </h2>
-             <p className="text-xl text-muted-foreground">The principles that drive every mile we travel.</p>
+             <p className="text-xl text-zinc-500">The principles that drive every mile we travel.</p>
            </div>
            
            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-               <div className="bg-background p-8 rounded-3xl border border-white/5 hover:border-primary/50 transition-colors group">
+               <div className="bg-white p-8 rounded-3xl border border-zinc-100 hover:border-primary/50 transition-colors group shadow-sm">
                  <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                    <Shield size={28} />
                  </div>
-                 <h3 className="text-xl font-bold mb-3 text-foreground">Safety</h3>
-                 <p className="text-muted-foreground leading-relaxed">The foundation of everything we do. We protect our drivers, our partners, and the motoring public.</p>
+                 <h3 className="text-xl font-bold mb-3 text-zinc-900">Safety</h3>
+                 <p className="text-zinc-500 leading-relaxed">The foundation of everything we do. We protect our drivers, our partners, and the motoring public.</p>
                </div>
 
-               <div className="bg-background p-8 rounded-3xl border border-white/5 hover:border-primary/50 transition-colors group">
+               <div className="bg-white p-8 rounded-3xl border border-zinc-100 hover:border-primary/50 transition-colors group shadow-sm">
                  <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                    <Clock size={28} />
                  </div>
-                 <h3 className="text-xl font-bold mb-3 text-foreground">Reliability</h3>
-                 <p className="text-muted-foreground leading-relaxed">When we say we will be there, we are there. We deliver on our promises, every single time.</p>
+                 <h3 className="text-xl font-bold mb-3 text-zinc-900">Reliability</h3>
+                 <p className="text-zinc-500 leading-relaxed">When we say we will be there, we are there. We deliver on our promises, every single time.</p>
                </div>
 
-               <div className="bg-background p-8 rounded-3xl border border-white/5 hover:border-primary/50 transition-colors group">
+               <div className="bg-white p-8 rounded-3xl border border-zinc-100 hover:border-primary/50 transition-colors group shadow-sm">
                  <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                    <Star size={28} />
                  </div>
-                 <h3 className="text-xl font-bold mb-3 text-foreground">Expertise</h3>
-                 <p className="text-muted-foreground leading-relaxed">Our team brings deep industry knowledge to solve complex logistical challenges.</p>
+                 <h3 className="text-xl font-bold mb-3 text-zinc-900">Expertise</h3>
+                 <p className="text-zinc-500 leading-relaxed">Our team brings deep industry knowledge to solve complex logistical challenges.</p>
                </div>
 
-               <div className="bg-background p-8 rounded-3xl border border-white/5 hover:border-primary/50 transition-colors group">
+               <div className="bg-white p-8 rounded-3xl border border-zinc-100 hover:border-primary/50 transition-colors group shadow-sm">
                  <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                    <Check size={28} />
                  </div>
-                 <h3 className="text-xl font-bold mb-3 text-foreground">Accountability</h3>
-                 <p className="text-muted-foreground leading-relaxed">We take ownership of our work and maintain transparent communication at all levels.</p>
+                 <h3 className="text-xl font-bold mb-3 text-zinc-900">Accountability</h3>
+                 <p className="text-zinc-500 leading-relaxed">We take ownership of our work and maintain transparent communication at all levels.</p>
                </div>
            </div>
            

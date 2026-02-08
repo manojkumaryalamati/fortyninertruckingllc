@@ -29,23 +29,37 @@ export function Navbar() {
   // Always solid background when scrolled, transparent only at very top of home
   const navbarClasses = scrolled 
     ? "bg-white/90 backdrop-blur-md shadow-sm py-2 border-b border-zinc-200" 
-    : "bg-transparent py-4 border-b border-white/10";
+    : (isHome ? "bg-transparent py-4 border-b border-white/10" : "bg-white py-4 border-b border-zinc-200");
+
+  const logoClasses = scrolled 
+    ? "w-24 brightness-0" 
+    : (isHome ? "w-28 brightness-0 invert" : "w-28 brightness-0");
+
+  const linkClasses = (href: string) => {
+    if (scrolled) return location === href ? "text-primary font-bold bg-primary/10" : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100";
+    if (isHome) return location === href ? "text-white font-bold bg-white/10" : "text-white/80 hover:text-white hover:bg-white/5";
+    return location === href ? "text-primary font-bold bg-primary/10" : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100";
+  };
+
+  const buttonClasses = scrolled 
+    ? "text-zinc-900 hover:bg-zinc-100" 
+    : (isHome ? "text-white hover:bg-white/10" : "text-zinc-900 hover:bg-zinc-100");
 
   return (
     <>
       {/* Top Bar - Hidden on mobile, visible on desktop */}
-      <div className={`hidden lg:block fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} h-10 bg-black text-white/80 border-b border-white/5`}>
+      <div className={`hidden lg:block fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} h-10 ${isHome ? 'bg-black text-white/80' : 'bg-zinc-100 text-zinc-600'} border-b border-white/5`}>
         <div className="w-full max-w-[1800px] mx-auto px-8 h-full flex justify-between items-center text-xs font-medium tracking-wide">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
+            <span className={`flex items-center gap-2 hover:text-primary transition-colors cursor-pointer ${!isHome && !scrolled ? 'text-zinc-600' : ''}`}>
               <Phone size={14} className="text-primary" /> (925) 250-4605
             </span>
-            <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
+            <span className={`flex items-center gap-2 hover:text-primary transition-colors cursor-pointer ${!isHome && !scrolled ? 'text-zinc-600' : ''}`}>
               <Mail size={14} className="text-primary" /> fortyninertrucking@gmail.com
             </span>
           </div>
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2">
+            <span className={`flex items-center gap-2 ${!isHome && !scrolled ? 'text-zinc-600' : ''}`}>
               <Clock size={14} className="text-primary" /> Mon - Fri: 7:00 AM - 5:00 PM
             </span>
             <Link href="/contact">
@@ -65,7 +79,7 @@ export function Navbar() {
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
-                    className={`transition-all duration-300 ${scrolled ? 'w-24 brightness-0' : 'w-28 brightness-0 invert'} object-contain drop-shadow-md`}
+                    className={`transition-all duration-300 ${logoClasses} object-contain drop-shadow-md`}
                   />
               </div>
             </Link>
@@ -77,16 +91,13 @@ export function Navbar() {
               <Link key={item.name} href={item.href}>
                 <div className={`
                   relative px-5 py-2 rounded-full cursor-pointer transition-all duration-300 group
-                  ${location === item.href 
-                    ? (scrolled ? "text-primary font-bold bg-primary/10" : "text-white font-bold bg-white/10") 
-                    : (scrolled ? "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100" : "text-white/80 hover:text-white hover:bg-white/5")
-                  }
+                  ${linkClasses(item.href)}
                 `}>
                   <span className="text-sm tracking-wide uppercase font-semibold">{item.name}</span>
                   {location === item.href && (
                     <motion.div
                       layoutId="nav-pill"
-                      className={`absolute inset-0 rounded-full border ${scrolled ? "border-primary/50" : "border-primary/50"}`}
+                      className="absolute inset-0 rounded-full border border-primary/50"
                       initial={false}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
@@ -100,7 +111,7 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             
              <button 
-               className={`lg:hidden p-2 rounded-md transition-colors ${scrolled ? "text-zinc-900 hover:bg-zinc-100" : "text-white hover:bg-white/10"}`}
+               className={`lg:hidden p-2 rounded-md transition-colors ${buttonClasses}`}
                onClick={() => setIsMobileMenuOpen(true)}
              >
                <Menu size={32} />
@@ -117,15 +128,15 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-zinc-950 text-white p-0 lg:hidden flex flex-col"
+            className="fixed inset-0 z-[60] bg-white text-zinc-900 p-0 lg:hidden flex flex-col"
           >
-            <div className="flex justify-between items-center p-6 border-b border-white/10">
+            <div className="flex justify-between items-center p-6 border-b border-zinc-100">
               <div className="h-12 w-auto relative flex items-center">
-                 <img src={logo} alt="FortyNiner Trucking" className="h-full w-auto object-contain brightness-0 invert" />
+                 <img src={logo} alt="FortyNiner Trucking" className="h-full w-auto object-contain brightness-0" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+                className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-colors text-zinc-900"
               >
                 <X size={24} />
               </button>
@@ -138,7 +149,7 @@ export function Navbar() {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className={`text-lg font-bold uppercase tracking-widest py-4 border-b border-white/5 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-white/80'}`}
+                    className={`text-lg font-bold uppercase tracking-widest py-4 border-b border-zinc-50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-zinc-600'}`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
@@ -161,9 +172,9 @@ export function Navbar() {
               </Link>
             </div>
             
-            <div className="p-8 bg-black/20 text-center space-y-4">
-               <p className="text-white/50 text-sm">Need immediate assistance?</p>
-               <a href="tel:9252504605" className="text-2xl font-black text-white block">(925) 250-4605</a>
+            <div className="p-8 bg-zinc-50 text-center space-y-4">
+               <p className="text-zinc-400 text-sm">Need immediate assistance?</p>
+               <a href="tel:9252504605" className="text-2xl font-black text-zinc-900 block">(925) 250-4605</a>
             </div>
           </motion.div>
         )}
