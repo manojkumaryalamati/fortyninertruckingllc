@@ -7,6 +7,7 @@ import { MapPin, Phone, Mail, Clock, ArrowRight, Loader2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
+import { sendEmail } from "@/lib/email";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 
@@ -61,6 +62,20 @@ export default function Contact() {
         createdAt: serverTimestamp(),
       });
       
+      // Send email notification (Mock)
+      await sendEmail({
+        to: "fortyninertrucking@gmail.com",
+        subject: `New Contact Form: ${formData.subject}`,
+        html: `
+          <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
+          <p><strong>Email:</strong> ${formData.email}</p>
+          <p><strong>Phone:</strong> ${formData.phone}</p>
+          <p><strong>Interest:</strong> ${formData.subject}</p>
+          <p><strong>Message:</strong></p>
+          <p>${formData.message}</p>
+        `
+      });
+
       toast({
         title: "Message Sent",
         description: "We've received your message and will get back to you soon.",
@@ -77,7 +92,7 @@ export default function Contact() {
       });
       setIsSuccess(true);
     } catch (error: any) {
-      console.error("Firestore submission error:", error);
+      console.error("Submission error:", error);
       toast({
         title: "Submission Failed",
         description: error.message || "Failed to send message. Please try again.",
