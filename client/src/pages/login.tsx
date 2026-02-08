@@ -107,7 +107,7 @@ export default function Login() {
                   placeholder="admin@49trucking.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 h-12 bg-zinc-50 border-zinc-200 focus:bg-white transition-all"
+                  className="pl-10 h-12 bg-zinc-50 border-zinc-200 focus:bg-white text-zinc-900 placeholder:text-zinc-400 transition-all"
                 />
                 <Mail className="absolute left-3 top-3.5 h-5 w-5 text-zinc-400" />
               </div>
@@ -159,7 +159,7 @@ export default function Login() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 h-12 bg-zinc-50 border-zinc-200 focus:bg-white transition-all"
+                  className="pl-10 h-12 bg-zinc-50 border-zinc-200 focus:bg-white text-zinc-900 placeholder:text-zinc-400 transition-all"
                 />
                 <Lock className="absolute left-3 top-3.5 h-5 w-5 text-zinc-400" />
               </div>

@@ -241,7 +241,7 @@ export default function AdminDashboard() {
             <Search className="text-muted-foreground h-4 w-4" />
             <Input 
               placeholder="Search shipments, drivers, or BOL..." 
-              className="bg-transparent border-none shadow-none focus-visible:ring-0 h-8 pl-0 placeholder:text-muted-foreground/70" 
+              className="bg-transparent border-none shadow-none focus-visible:ring-0 h-8 pl-0 text-zinc-900 placeholder:text-muted-foreground/70" 
             />
           </div>
           <div className="flex items-center gap-4">
