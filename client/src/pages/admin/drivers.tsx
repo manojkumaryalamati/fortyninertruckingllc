@@ -31,8 +31,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { AdminSidebar, AdminMobileHeader } from "@/components/AdminSidebar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy, deleteDoc, doc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
+import { createDriverWithDl } from "@/services/driverRegistration";
 
 import { uploadFile } from "@/lib/storage-utils";
 
@@ -82,25 +83,17 @@ export default function DriversManagement() {
     const formData = new FormData(e.target as HTMLFormElement);
     
     try {
-      let fileUrl = "";
-      if (selectedFile) {
-        fileUrl = await uploadFile(selectedFile, "drivers/documents");
-      }
-
-      const newDriver = {
-        name: formData.get("name") as string,
-        status: formData.get("status") as string,
-        phone: formData.get("phone") as string,
-        email: formData.get("email") as string,
-        license: formData.get("license") as string,
-        truck: "Unassigned", // Default truck assignment
-        joinDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
-        documentUrl: fileUrl,
-        createdAt: serverTimestamp()
-      };
-
       if (isFirebaseConfigured()) {
-        await addDoc(collection(db, "drivers"), newDriver);
+        await createDriverWithDl({
+          name: formData.get("name") as string,
+          status: formData.get("status") as string,
+          phone: formData.get("phone") as string,
+          email: formData.get("email") as string,
+          license: formData.get("license") as string,
+          joinDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+          dlFile: selectedFile || undefined,
+          docType: "DL" // Assuming this form uploads DL primarily
+        });
         toast({ title: "Driver Added", description: "New driver profile created successfully." });
       } else {
         throw new Error("Firebase not configured");
