@@ -50,11 +50,7 @@ export default function DriversManagement() {
   // Fetch Drivers from Firestore
   useEffect(() => {
     if (!isFirebaseConfigured()) {
-      setDrivers([
-        { id: "DRV-001", name: "John Doe", status: "Active", phone: "(555) 123-4567", email: "john@example.com", license: "CDL-A 12345678", truck: "TRK-409", joinDate: "Jan 15, 2023", documentUrl: "", createdAt: new Date() },
-        { id: "DRV-002", name: "Jane Smith", status: "On Leave", phone: "(555) 987-6543", email: "jane@example.com", license: "CDL-A 87654321", truck: "Unassigned", joinDate: "Mar 10, 2024", documentUrl: "", createdAt: new Date() },
-        { id: "DRV-003", name: "Mike Johnson", status: "Active", phone: "(555) 555-5555", email: "mike@example.com", license: "CDL-A 11223344", truck: "TRK-410", joinDate: "Jun 20, 2022", documentUrl: "", createdAt: new Date() }
-      ]);
+      toast({ title: "Configuration Missing", description: "Firebase is not configured.", variant: "destructive" });
       setIsLoading(false);
       return;
     }
@@ -107,9 +103,7 @@ export default function DriversManagement() {
         await addDoc(collection(db, "drivers"), newDriver);
         toast({ title: "Driver Added", description: "New driver profile created successfully." });
       } else {
-        // Mock add
-        setDrivers([ { id: `mock-${Date.now()}`, ...newDriver }, ...drivers ]);
-        toast({ title: "Driver Added (Mock)", description: "Firebase not configured." });
+        throw new Error("Firebase not configured");
       }
       setIsAddModalOpen(false);
       setSelectedFile(null);
@@ -128,9 +122,6 @@ export default function DriversManagement() {
       if (isFirebaseConfigured()) {
         await deleteDoc(doc(db, "drivers", id));
         toast({ title: "Driver Deleted", description: "Driver profile removed." });
-      } else {
-        setDrivers(drivers.filter(d => d.id !== id));
-        toast({ title: "Driver Deleted (Mock)", description: "Removed from list." });
       }
     } catch (error) {
       console.error("Error deleting driver:", error);

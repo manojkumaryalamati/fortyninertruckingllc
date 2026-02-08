@@ -46,12 +46,7 @@ export default function TrucksManagement() {
   // Fetch Trucks
   useEffect(() => {
     if (!isFirebaseConfigured()) {
-      // Mock Data
-      setTrucks([
-        { id: "1", truckNo: "FT-101", vin: "1M8GDM9A_HP045821", plate: "98217J1", status: "Active", createdAt: new Date() },
-        { id: "2", truckNo: "FT-102", vin: "1M8GDM9A_HP045822", plate: "98217J2", status: "Maintenance", createdAt: new Date() },
-        { id: "3", truckNo: "FT-103", vin: "1M8GDM9A_HP045823", plate: "98217J3", status: "Active", createdAt: new Date() },
-      ]);
+      toast({ title: "Configuration Missing", description: "Firebase is not configured.", variant: "destructive" });
       setIsLoading(false);
       return;
     }
@@ -72,12 +67,7 @@ export default function TrucksManagement() {
     e.preventDefault();
     try {
       if (!isFirebaseConfigured()) {
-        const newTruck = { 
-          id: Math.random().toString(), 
-          ...formData, 
-          createdAt: new Date() 
-        } as TruckType;
-        setTrucks([...trucks, newTruck]);
+        throw new Error("Firebase not configured");
       } else {
         await addDoc(collection(db, "trucks"), {
           ...formData,
@@ -99,7 +89,7 @@ export default function TrucksManagement() {
     
     try {
       if (!isFirebaseConfigured()) {
-        setTrucks(trucks.map(t => t.id === currentTruck.id ? { ...t, ...formData } : t));
+        throw new Error("Firebase not configured");
       } else {
         await updateDoc(doc(db, "trucks", currentTruck.id), formData);
       }
@@ -117,7 +107,7 @@ export default function TrucksManagement() {
     
     try {
       if (!isFirebaseConfigured()) {
-        setTrucks(trucks.filter(t => t.id !== id));
+        throw new Error("Firebase not configured");
       } else {
         await deleteDoc(doc(db, "trucks", id));
       }
