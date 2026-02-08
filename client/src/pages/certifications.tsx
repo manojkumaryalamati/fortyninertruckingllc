@@ -6,44 +6,44 @@ import { Navbar } from "@/components/Navbar";
 
 export default function Certifications() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans pt-40 md:pt-56 pb-32">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans pt-40 md:pt-56 pb-32">
       <Navbar />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
         <div className="max-w-4xl mx-auto text-center mb-32 space-y-8">
-          <h1 className="text-5xl font-bold tracking-tight mb-8">Compliance & Certifications</h1>
-          <p className="text-xl text-muted-foreground leading-relaxed mt-6">
+          <h1 className="text-5xl font-bold tracking-tight mb-8 text-zinc-900">Compliance & Certifications</h1>
+          <p className="text-xl text-zinc-600 leading-relaxed mt-6">
             FortyNinerTrucking LLC is committed to the highest standards of safety, compliance, and professional excellence. We maintain all necessary permits and certifications to operate efficiently and legally across all our service areas.
           </p>
         </div>
 
         {/* Primary Certifications */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
-          <Card className="border-none shadow-lg bg-secondary/20">
+          <Card className="border-none shadow-lg bg-white border border-zinc-200">
             <CardContent className="p-8 flex flex-col items-center text-center">
               <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
                 <ShieldCheck size={32} />
               </div>
-              <h2 className="text-2xl font-bold mb-4">DBE Certified</h2>
-              <p className="text-muted-foreground mb-6">
+              <h2 className="text-2xl font-bold mb-4 text-zinc-900">DBE Certified</h2>
+              <p className="text-zinc-600 mb-6">
                 Disadvantaged Business Enterprise certification, allowing us to participate in federally funded transportation projects.
               </p>
-              <div className="w-full bg-background rounded-lg p-4 text-sm font-mono text-muted-foreground border border-border">
+              <div className="w-full bg-zinc-50 rounded-lg p-4 text-sm font-mono text-zinc-600 border border-zinc-200">
                 Cert # DBE-29183-CA
               </div>
             </CardContent>
           </Card>
 
-          <Card className="border-none shadow-lg bg-secondary/20">
+          <Card className="border-none shadow-lg bg-white border border-zinc-200">
             <CardContent className="p-8 flex flex-col items-center text-center">
               <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
                 <Award size={32} />
               </div>
-              <h2 className="text-2xl font-bold mb-4">Small Business (SB)</h2>
-              <p className="text-muted-foreground mb-6">
+              <h2 className="text-2xl font-bold mb-4 text-zinc-900">Small Business (SB)</h2>
+              <p className="text-zinc-600 mb-6">
                 Certified Small Business Enterprise, supporting local economic growth and meeting specific project set-aside requirements.
               </p>
-              <div className="w-full bg-background rounded-lg p-4 text-sm font-mono text-muted-foreground border border-border">
+              <div className="w-full bg-zinc-50 rounded-lg p-4 text-sm font-mono text-zinc-600 border border-zinc-200">
                 Cert # SB-99281-CA
               </div>
             </CardContent>
@@ -52,7 +52,7 @@ export default function Certifications() {
 
         {/* Permits & Licenses List */}
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center">Operating Permits & Licenses</h2>
+          <h2 className="text-3xl font-bold mb-10 text-center text-zinc-900">Operating Permits & Licenses</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
              {[
                { title: "Motor Carrier Permit", id: "CA-99281", icon: TruckIcon },
@@ -62,13 +62,13 @@ export default function Certifications() {
                { title: "HazMat Certification", id: "HM-29182", icon: FlaskConicalIcon },
                { title: "SmartWay Partner", id: "Verified", icon: RecycleIcon }
              ].map((permit, i) => (
-               <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-border hover:border-primary/50 transition-colors bg-card">
-                 <div className="h-10 w-10 rounded-lg bg-secondary flex items-center justify-center text-foreground shrink-0">
+               <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-zinc-200 hover:border-primary/50 transition-colors bg-white shadow-sm">
+                 <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
                    <permit.icon size={20} />
                  </div>
                  <div>
-                   <h3 className="font-bold text-lg mb-1">{permit.title}</h3>
-                   <p className="text-sm text-muted-foreground font-mono bg-secondary/50 px-2 py-0.5 rounded inline-block">
+                   <h3 className="font-bold text-lg mb-1 text-zinc-900">{permit.title}</h3>
+                   <p className="text-sm text-zinc-500 font-mono bg-zinc-50 px-2 py-0.5 rounded inline-block">
                      {permit.id}
                    </p>
                  </div>

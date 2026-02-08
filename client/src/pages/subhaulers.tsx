@@ -81,14 +81,14 @@ export default function Subhaulers() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans pt-40 md:pt-56 pb-32">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans pt-40 md:pt-56 pb-32">
       <Navbar />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-10">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Partner With Us.</h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-zinc-900">Partner With Us.</h1>
+            <p className="text-lg text-zinc-600 leading-relaxed">
               We seek reliable owner-operators and subhaulers for long-term partnership. We offer fair dispatch and consistent opportunities.
             </p>
             
@@ -99,55 +99,55 @@ export default function Subhaulers() {
                  { icon: Briefcase, title: "Consistent Work", desc: "Ongoing projects." },
                  { icon: Truck, title: "Compliance", desc: "Safety-first." }
                ].map((item, i) => (
-                 <Card key={i} className="bg-secondary/30 border-none">
+                 <Card key={i} className="bg-white border border-zinc-200">
                    <CardContent className="p-5 space-y-2">
                      <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                        <item.icon size={16} />
                      </div>
-                     <h3 className="font-bold text-base">{item.title}</h3>
-                     <p className="text-xs text-muted-foreground">{item.desc}</p>
+                     <h3 className="font-bold text-base text-zinc-900">{item.title}</h3>
+                     <p className="text-xs text-zinc-500">{item.desc}</p>
                    </CardContent>
                  </Card>
                ))}
             </div>
           </div>
 
-          <Card className="border-none shadow-xl bg-secondary/30">
+          <Card className="border-none shadow-xl bg-white border border-zinc-200">
             <CardContent className="p-8 md:p-10">
-              <h2 className="text-2xl font-bold mb-6">Subhauler Registration</h2>
+              <h2 className="text-2xl font-bold mb-6 text-zinc-900">Subhauler Registration</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="companyName">Company Name</Label>
-                    <Input id="companyName" value={formData.companyName} onChange={handleChange} placeholder="Your Trucking Co." className="bg-background" />
+                    <Label htmlFor="companyName" className="text-zinc-700">Company Name</Label>
+                    <Input id="companyName" value={formData.companyName} onChange={handleChange} placeholder="Your Trucking Co." className="bg-zinc-50 border-zinc-200" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="contactName">Contact Person</Label>
-                    <Input id="contactName" value={formData.contactName} onChange={handleChange} placeholder="Full Name" className="bg-background" />
+                    <Label htmlFor="contactName" className="text-zinc-700">Contact Person</Label>
+                    <Input id="contactName" value={formData.contactName} onChange={handleChange} placeholder="Full Name" className="bg-zinc-50 border-zinc-200" />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="dispatch@example.com" className="bg-background" />
+                  <Label htmlFor="email" className="text-zinc-700">Email Address</Label>
+                  <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="dispatch@example.com" className="bg-zinc-50 border-zinc-200" />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(555) 000-0000" className="bg-background" />
+                  <Label htmlFor="phone" className="text-zinc-700">Phone Number</Label>
+                  <Input id="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(555) 000-0000" className="bg-zinc-50 border-zinc-200" />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="truckType">Truck Types Available</Label>
-                  <Input id="truckType" value={formData.truckType} onChange={handleChange} placeholder="e.g. Super Dumps, Transfers" className="bg-background" />
+                  <Label htmlFor="truckType" className="text-zinc-700">Truck Types Available</Label>
+                  <Input id="truckType" value={formData.truckType} onChange={handleChange} placeholder="e.g. Super Dumps, Transfers" className="bg-zinc-50 border-zinc-200" />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="fleetSize">Fleet Size</Label>
-                  <Input id="fleetSize" type="number" value={formData.fleetSize} onChange={handleChange} placeholder="Number of units" className="bg-background" />
+                  <Label htmlFor="fleetSize" className="text-zinc-700">Fleet Size</Label>
+                  <Input id="fleetSize" type="number" value={formData.fleetSize} onChange={handleChange} placeholder="Number of units" className="bg-zinc-50 border-zinc-200" />
                 </div>
 
-                <Button type="submit" disabled={isSubmitting} size="lg" className="w-full rounded-full h-12 text-base font-bold">
+                <Button type="submit" disabled={isSubmitting} size="lg" className="w-full rounded-full h-12 text-base font-bold bg-primary text-white hover:bg-primary/90">
                   {isSubmitting ? <Loader2 className="animate-spin" /> : "Submit Registration"}
                 </Button>
               </form>
