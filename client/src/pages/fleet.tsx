@@ -5,7 +5,7 @@ import { Truck } from "lucide-react";
 
 export default function Fleet() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans">
+    <div className="min-h-screen bg-white text-zinc-900 font-sans">
       <Navbar />
 
       <section className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center">
@@ -16,7 +16,7 @@ export default function Fleet() {
              alt="Fleet Hero" 
              className="w-full h-full object-cover opacity-50"
            />
-           <div className="absolute inset-0 bg-black/70 z-10" />
+           <div className="absolute inset-0 bg-black/60 z-10" />
         </div>
 
         {/* Sliding Content */}
