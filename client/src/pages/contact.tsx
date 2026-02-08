@@ -7,7 +7,7 @@ import { MapPin, Phone, Mail, Clock, ArrowRight, Loader2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
-import { sendEmail } from "@/lib/email";
+// import { sendEmail } from "@/lib/email"; // Removed client-side email sending
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 
@@ -62,18 +62,9 @@ export default function Contact() {
         createdAt: serverTimestamp(),
       });
       
-      // Send email notification (Real via EmailJS)
-      await sendEmail({
-        to: "fortyninertrucking@gmail.com",
-        subject: `New Contact Form: ${formData.subject}`,
-        html: "", // EmailJS uses template params, not raw HTML usually
-        // Pass individual fields for the template
-        from_name: `${formData.firstName} ${formData.lastName}`,
-        from_email: formData.email,
-        phone: formData.phone,
-        message: formData.message
-      });
-
+      // Note: Email notification will be handled by Firebase Functions (backend trigger)
+      // listening to the 'contact_submissions' collection.
+      
       toast({
         title: "Message Sent",
         description: "We've received your message and will get back to you soon.",
