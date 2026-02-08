@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useLocation } from "wouter";
-import { auth, isFirebaseConfigured } from "./firebase";
+import { auth, isFirebaseConfigured, db } from "./firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 interface AuthContextType {
   user: User | null;
+  isAdmin: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   isLoading: boolean;
@@ -15,15 +17,38 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    // If firebase is not configured, we might want to just stop loading or show an error
-    // For now, we'll try to listen to auth state
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      
+      if (currentUser && isFirebaseConfigured()) {
+        try {
+          // Verify admin role
+          const userDocRef = doc(db, "users", currentUser.uid);
+          const userSnap = await getDoc(userDocRef);
+          
+          if (userSnap.exists() && userSnap.data().role === "admin") {
+            setIsAdmin(true);
+          } else {
+            console.warn("User is not an admin");
+            setIsAdmin(false);
+            // Optional: Auto logout if strictly admin-only app
+            // await signOut(auth);
+            // setUser(null);
+          }
+        } catch (e) {
+          console.error("Error verifying admin role:", e);
+          setIsAdmin(false);
+        }
+      } else {
+        setIsAdmin(false);
+      }
+      
       setIsLoading(false);
     });
 
@@ -37,7 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // Fallback for mockup mode only if no keys provided
         if (password === "admin123") {
           console.log("Using mock login flow (No Firebase Config)");
-          // Create a fake user object that looks like a Firebase User
+          // ... (mock user creation)
           const mockUser = { 
             uid: "mock-uid-123", 
             email, 
@@ -66,6 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           } as unknown as User;
           
           setUser(mockUser);
+          setIsAdmin(true); // Mock admin is always admin
           setLocation("/admin");
           return;
         } else {
@@ -73,8 +99,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       }
 
-      await signInWithEmailAndPassword(auth, email, password);
-      setLocation("/admin");
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      
+      // Verify role immediately after login
+      const userDocRef = doc(db, "users", userCredential.user.uid);
+      const userSnap = await getDoc(userDocRef);
+      
+      if (userSnap.exists() && userSnap.data().role === "admin") {
+        setIsAdmin(true);
+        setLocation("/admin");
+      } else {
+        await signOut(auth);
+        throw new Error("Access Denied: Admin privileges required.");
+      }
+      
     } catch (err: any) {
       console.error("Login error:", err);
       setError(err.message || "Failed to login");
@@ -86,11 +124,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       if (!isFirebaseConfigured()) {
         setUser(null);
+        setIsAdmin(false);
         setLocation("/login");
         return;
       }
       
       await signOut(auth);
+      setIsAdmin(false);
       setLocation("/login");
     } catch (err: any) {
       console.error("Logout error:", err);
@@ -99,7 +139,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading, error }}>
+    <AuthContext.Provider value={{ user, isAdmin, login, logout, isLoading, error }}>
       {children}
     </AuthContext.Provider>
   );
