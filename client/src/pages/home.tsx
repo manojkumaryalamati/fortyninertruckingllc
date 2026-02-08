@@ -17,81 +17,59 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[95vh] min-h-[700px] w-full overflow-hidden">
-        {/* Background Image with Parallax Effect */}
+      <section className="relative h-screen w-full overflow-hidden">
+        {/* Background Image */}
         <div className="absolute inset-0 z-0">
-           <motion.img 
-             initial={{ scale: 1.1 }}
-             animate={{ scale: 1 }}
-             transition={{ duration: 10, ease: "easeOut" }}
+           <img 
              src={heroImage}
              alt="FortyNiner Trucking Fleet" 
              className="w-full h-full object-cover object-center"
            />
-           {/* Sophisticated Gradient Overlay */}
-           <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/90 via-zinc-950/40 to-transparent z-10" />
-           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent z-10" />
+           <div className="absolute inset-0 bg-black/60 z-10" />
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 h-full flex items-center">
-          <div className="grid lg:grid-cols-2 gap-12 items-center w-full pt-20">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="space-y-12"
-            >
-              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold tracking-widest text-sm uppercase shadow-lg mb-4">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-                </span>
-                Serving All of California
-              </div>
-              
-              
-              <p className="text-xl md:text-2xl text-white/90 max-w-xl font-medium leading-relaxed border-l-4 border-primary pl-8 py-2">
-                The premier partner for heavy hauling and construction logistics. Precision, power, and safety in every mile.
-              </p>
-              
-              <div className="pt-10 flex flex-col sm:flex-row gap-6">
-                <Link href="/contact">
-                  <Button className="rounded-none skew-x-[-12deg] bg-primary hover:bg-primary/90 px-10 h-16 text-lg font-black text-white shadow-[0_0_30px_rgba(var(--primary),0.4)] transition-all hover:skew-x-0 hover:scale-105 border-2 border-primary">
-                    <span className="skew-x-[12deg] inline-flex items-center gap-3">
-                      GET A QUOTE <ArrowRight className="w-6 h-6" />
-                    </span>
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button variant="outline" className="rounded-none skew-x-[-12deg] border-2 border-white/30 text-white hover:bg-white hover:text-black h-16 px-10 text-lg font-black backdrop-blur-sm bg-white/5 transition-all hover:skew-x-0 hover:scale-105">
-                    <span className="skew-x-[12deg]">
-                      EXPLORE SERVICES
-                    </span>
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Trust Indicators Removed */}
-              <div className="pt-12"></div>
-            </motion.div>
-
-            {/* Right side - decorative glass card or just space for the truck image to shine */}
-            <div className="hidden lg:block relative h-full">
-               {/* This space is intentionally left clear to show the truck from the background image */}
+        <div className="relative z-20 w-full h-full flex flex-col justify-center items-center text-center px-4 md:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-4xl mx-auto space-y-8"
+          >
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9]">
+              Heavy <span className="text-primary">Hauling</span> <br />
+              Done <span className="text-white">Right</span>
+            </h1>
+            
+            <p className="text-lg md:text-2xl text-white/80 font-medium max-w-2xl mx-auto leading-relaxed">
+              California's premier partner for construction logistics and material transport.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <Link href="/contact">
+                <Button className="h-14 px-8 text-lg font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white rounded-none min-w-[200px]">
+                  Get A Quote
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button variant="outline" className="h-14 px-8 text-lg font-bold uppercase tracking-widest border-2 border-white text-white hover:bg-white hover:text-black bg-transparent rounded-none min-w-[200px]">
+                  Our Services
+                </Button>
+              </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Simple Scroll Indicator */}
         <motion.div 
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 text-white/50 flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white/40"
         >
-          <span className="text-[10px] uppercase tracking-[0.3em]">Scroll Down</span>
-          <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent"></div>
+          <div className="w-[1px] h-16 bg-white/20 overflow-hidden">
+            <div className="w-full h-1/2 bg-white animate-movedown"></div>
+          </div>
         </motion.div>
       </section>
 
