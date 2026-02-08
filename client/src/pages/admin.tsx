@@ -342,7 +342,7 @@ export default function AdminDashboard() {
               { label: "Today's Revenue", value: stats.revenue, change: "+15%", trend: "up", icon: DollarSign },
               { label: "Safety Score", value: stats.safetyScore, change: "+1", trend: "up", icon: ShieldCheck },
             ].map((stat, i) => (
-              <Card key={i} className="shadow-sm hover:shadow-md transition-shadow">
+              <Card key={i} className="shadow-sm hover:shadow-md transition-shadow border-t-4 border-t-secondary">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div className="p-2 bg-primary/10 rounded-lg text-primary">
@@ -374,10 +374,10 @@ export default function AdminDashboard() {
               </div>
             </div>
             
-            <Card className="shadow-sm overflow-hidden">
+            <Card className="shadow-sm overflow-hidden border-t-4 border-t-primary">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
-                  <thead className="bg-secondary/50 text-muted-foreground font-medium border-b border-border">
+                  <thead className="bg-secondary/30 text-zinc-700 font-bold border-b border-border">
                     <tr>
                       <th className="px-6 py-4">Load ID</th>
                       <th className="px-6 py-4">Customer</th>
