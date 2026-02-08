@@ -33,32 +33,40 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      if (!formData.email || !formData.message) {
+      // Basic validation for required fields
+      if (!formData.email || !formData.message || !formData.firstName || !formData.lastName) {
         throw new Error("Please fill in all required fields");
       }
 
       if (!isFirebaseConfigured()) {
-        // Mock submission
-        console.log("Mock submission:", formData);
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        console.warn("Firebase is not configured. Submission blocked.");
         toast({
-          title: "Message Sent (Mock)",
-          description: "Firebase is not configured. Check console for data.",
+          title: "Configuration Error",
+          description: "Firebase environment variables are missing. Please check your setup.",
+          variant: "destructive"
         });
-      } else {
-        const docRef = await addDoc(collection(db, "contacts"), {
-          ...formData,
-          createdAt: serverTimestamp(),
-          status: "new"
-        });
-        console.log("Document written with ID: ", docRef.id);
-        
-        toast({
-          title: "Message Sent",
-          description: "We've received your message and will get back to you soon.",
-        });
+        return;
       }
 
+      // Submission to contact_submissions collection
+      // Firestore will create the collection automatically on first write
+      await addDoc(collection(db, "contact_submissions"), {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        interestedIn: formData.subject, // Map subject field to interestedIn as requested
+        message: formData.message,
+        status: "new",
+        createdAt: serverTimestamp(),
+      });
+      
+      toast({
+        title: "Message Sent",
+        description: "We've received your message and will get back to you soon.",
+      });
+
+      // Clear form and show success state
       setFormData({
         firstName: "",
         lastName: "",
@@ -69,9 +77,9 @@ export default function Contact() {
       });
       setIsSuccess(true);
     } catch (error: any) {
-      console.error("Error submitting form:", error);
+      console.error("Firestore submission error:", error);
       toast({
-        title: "Error",
+        title: "Submission Failed",
         description: error.message || "Failed to send message. Please try again.",
         variant: "destructive"
       });

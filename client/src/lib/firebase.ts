@@ -2,15 +2,18 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Firebase configuration provided by user
+/**
+ * Firebase configuration using environment variables for security.
+ * Ensure these variables are set in your Replit secrets or environment.
+ */
 const firebaseConfig = {
-  apiKey: "AIzaSyBPf09YcCVNU7hIza3i1Ylw-gDrGfQsafE",
-  authDomain: "fortyninertruckingllc.firebaseapp.com",
-  projectId: "fortyninertruckingllc",
-  storageBucket: "fortyninertruckingllc.firebasestorage.app",
-  messagingSenderId: "131233292817",
-  appId: "1:131233292817:web:9ae8616d76a1a0580b07b0",
-  measurementId: "G-LLP5KP62RD"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
@@ -20,9 +23,11 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-// Helper to check if Firebase is configured
+/**
+ * Helper to check if Firebase is properly configured.
+ * Checks for the presence of a non-empty API key.
+ */
 export const isFirebaseConfigured = () => {
-  return firebaseConfig.apiKey !== "YOUR_API_KEY" && 
-         firebaseConfig.apiKey !== undefined &&
-         firebaseConfig.apiKey !== "";
+  return !!import.meta.env.VITE_FIREBASE_API_KEY && 
+         import.meta.env.VITE_FIREBASE_API_KEY !== "YOUR_API_KEY";
 };
