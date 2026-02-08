@@ -224,27 +224,27 @@ export default function TrucksManagement() {
             </Dialog>
           </div>
 
-          <Card className="border-border shadow-sm">
+          <Card className="border-border shadow-sm border-t-4 border-t-primary">
             <CardContent className="p-0">
-              <div className="p-4 border-b border-border flex items-center gap-4">
+              <div className="p-4 border-b border-border flex items-center gap-4 bg-zinc-50/50">
                 <div className="relative flex-1 max-w-sm">
                   <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input 
                     placeholder="Search by truck #, VIN, or plate..." 
-                    className="pl-9 bg-muted/50"
+                    className="pl-9 bg-white border-zinc-200"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
                 <div className="flex gap-2 ml-auto">
-                  <Button variant="outline" size="sm"><Filter className="mr-2 h-4 w-4" /> Filter</Button>
-                  <Button variant="outline" size="sm"><Download className="mr-2 h-4 w-4" /> Export</Button>
+                  <Button variant="outline" size="sm" className="bg-white"><Filter className="mr-2 h-4 w-4" /> Filter</Button>
+                  <Button variant="outline" size="sm" className="bg-white"><Download className="mr-2 h-4 w-4" /> Export</Button>
                 </div>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
-                  <thead className="bg-secondary/20 text-muted-foreground font-medium border-b border-border">
+                  <thead className="bg-secondary/30 text-zinc-700 font-bold border-b border-border">
                     <tr>
                       <th className="px-6 py-4">Truck No.</th>
                       <th className="px-6 py-4">VIN</th>
