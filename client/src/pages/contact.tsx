@@ -62,18 +62,16 @@ export default function Contact() {
         createdAt: serverTimestamp(),
       });
       
-      // Send email notification (Mock)
+      // Send email notification (Real via EmailJS)
       await sendEmail({
         to: "fortyninertrucking@gmail.com",
         subject: `New Contact Form: ${formData.subject}`,
-        html: `
-          <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
-          <p><strong>Email:</strong> ${formData.email}</p>
-          <p><strong>Phone:</strong> ${formData.phone}</p>
-          <p><strong>Interest:</strong> ${formData.subject}</p>
-          <p><strong>Message:</strong></p>
-          <p>${formData.message}</p>
-        `
+        html: "", // EmailJS uses template params, not raw HTML usually
+        // Pass individual fields for the template
+        from_name: `${formData.firstName} ${formData.lastName}`,
+        from_email: formData.email,
+        phone: formData.phone,
+        message: formData.message
       });
 
       toast({
