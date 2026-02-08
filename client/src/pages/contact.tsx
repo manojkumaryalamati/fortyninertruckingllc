@@ -85,14 +85,14 @@ export default function Contact() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-32 md:pt-64 md:pb-48 overflow-hidden bg-secondary/30">
+      <section className="relative pt-40 pb-32 md:pt-64 md:pb-48 overflow-hidden bg-zinc-50">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 relative z-10">
           <div className="max-w-4xl space-y-8">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-8">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 mb-8">
               Let's Start a <br />
               <span className="text-primary">Conversation.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed mt-6">
+            <p className="text-xl md:text-2xl text-zinc-600 max-w-2xl leading-relaxed mt-6">
               Whether you need a quote for a major project or want to join our fleet, 
               our team is ready to help you move forward.
             </p>
@@ -104,22 +104,22 @@ export default function Contact() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
       </section>
 
-      <section className="py-24 bg-background relative">
+      <section className="py-24 bg-white relative">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-24">
              {/* Contact Info */}
              <div className="lg:col-span-5 space-y-16">
                <div>
-                 <h2 className="text-3xl font-bold tracking-tight mb-8">Get in Touch</h2>
+                 <h2 className="text-3xl font-bold tracking-tight mb-8 text-zinc-900">Get in Touch</h2>
                  <div className="space-y-8">
                    <div className="flex items-start gap-5 group">
                      <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
                        <Phone size={24} />
                      </div>
                      <div>
-                       <h3 className="text-lg font-bold mb-1">Phone Support</h3>
-                       <p className="text-muted-foreground mb-2">24/7 Dispatch Availability</p>
-                       <a href="tel:9252504605" className="text-xl font-semibold hover:text-primary transition-colors">(925) 250-4605</a>
+                       <h3 className="text-lg font-bold mb-1 text-zinc-900">Phone Support</h3>
+                       <p className="text-zinc-500 mb-2">24/7 Dispatch Availability</p>
+                       <a href="tel:9252504605" className="text-xl font-semibold hover:text-primary transition-colors text-zinc-700">(925) 250-4605</a>
                      </div>
                    </div>
 
@@ -128,9 +128,9 @@ export default function Contact() {
                        <Mail size={24} />
                      </div>
                      <div>
-                       <h3 className="text-lg font-bold mb-1">Email</h3>
-                       <p className="text-muted-foreground mb-2">For quotes and bids</p>
-                       <a href="mailto:fortyninertrucking@gmail.com" className="text-xl font-semibold hover:text-primary transition-colors">fortyninertrucking@gmail.com</a>
+                       <h3 className="text-lg font-bold mb-1 text-zinc-900">Email</h3>
+                       <p className="text-zinc-500 mb-2">For quotes and bids</p>
+                       <a href="mailto:fortyninertrucking@gmail.com" className="text-xl font-semibold hover:text-primary transition-colors text-zinc-700">fortyninertrucking@gmail.com</a>
                      </div>
                    </div>
 
@@ -139,9 +139,9 @@ export default function Contact() {
                        <MapPin size={24} />
                      </div>
                      <div>
-                       <h3 className="text-lg font-bold mb-1">Headquarters</h3>
-                       <p className="text-muted-foreground mb-2">Main Terminal & Office</p>
-                       <address className="text-xl font-semibold not-italic text-foreground">
+                       <h3 className="text-lg font-bold mb-1 text-zinc-900">Headquarters</h3>
+                       <p className="text-zinc-500 mb-2">Main Terminal & Office</p>
+                       <address className="text-xl font-semibold not-italic text-zinc-700">
                          28 Glen Canyon Court<br/>
                          Pittsburg, CA 94565
                        </address>
@@ -153,17 +153,17 @@ export default function Contact() {
                        <Clock size={24} />
                      </div>
                      <div>
-                       <h3 className="text-lg font-bold mb-1">Hours of Operation</h3>
-                       <p className="text-muted-foreground mb-2">Office Hours</p>
-                       <p className="text-xl font-semibold">Mon - Fri: 7:00 AM - 5:00 PM</p>
-                       <p className="text-muted-foreground mt-1">Dispatch available 24/7</p>
+                       <h3 className="text-lg font-bold mb-1 text-zinc-900">Hours of Operation</h3>
+                       <p className="text-zinc-500 mb-2">Office Hours</p>
+                       <p className="text-xl font-semibold text-zinc-700">Mon - Fri: 7:00 AM - 5:00 PM</p>
+                       <p className="text-zinc-500 mt-1">Dispatch available 24/7</p>
                      </div>
                    </div>
                  </div>
                </div>
 
                {/* Map Card */}
-               <div className="rounded-3xl overflow-hidden shadow-sm border border-border h-[300px] relative bg-secondary/30">
+               <div className="rounded-3xl overflow-hidden shadow-sm border border-zinc-200 h-[300px] relative bg-zinc-100">
                  <iframe 
                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.418648834645!2d-121.8988654242686!3d38.0175829719246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808560b4576394e1%3A0xc3f833777f985440!2s28%20Glen%20Canyon%20Ct%2C%20Pittsburg%2C%20CA%2094565!5e0!3m2!1sen!2sus!4v1707360000000!5m2!1sen!2sus" 
                    width="100%" 
@@ -179,24 +179,24 @@ export default function Contact() {
 
              {/* Form */}
              <div className="lg:col-span-7">
-               <div className="bg-card rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-white/10 relative overflow-hidden">
+               <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl border border-zinc-100 relative overflow-hidden">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-10 -mt-10" />
                  
-                 <h3 className="text-2xl font-bold mb-8 relative z-10 text-foreground">Send us a Message</h3>
+                 <h3 className="text-2xl font-bold mb-8 relative z-10 text-zinc-900">Send us a Message</h3>
                  
                  {isSuccess ? (
                    <div className="relative z-10 flex flex-col items-center justify-center py-20 text-center space-y-6">
                      <div className="h-20 w-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
                        <CheckCircle2 className="w-10 h-10" />
                      </div>
-                     <h3 className="text-2xl font-bold">Message Sent Successfully!</h3>
-                     <p className="text-muted-foreground max-w-md">
+                     <h3 className="text-2xl font-bold text-zinc-900">Message Sent Successfully!</h3>
+                     <p className="text-zinc-600 max-w-md">
                        Thank you for contacting FortyNinerTrucking. We have received your message and will be in touch shortly.
                      </p>
                      <Button 
                        onClick={() => setIsSuccess(false)}
                        variant="outline"
-                       className="mt-6"
+                       className="mt-6 border-zinc-200 hover:bg-zinc-50"
                      >
                        Send Another Message
                      </Button>
@@ -205,59 +205,59 @@ export default function Contact() {
                  <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
                    <div className="grid md:grid-cols-2 gap-8">
                      <div className="space-y-2">
-                       <Label htmlFor="firstName" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">First Name</Label>
+                       <Label htmlFor="firstName" className="text-sm font-semibold text-zinc-500 uppercase tracking-wider">First Name</Label>
                        <Input 
                          id="firstName" 
                          value={formData.firstName}
                          onChange={handleChange}
                          placeholder="John" 
-                         className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" 
+                         className="h-14 bg-zinc-50 border-transparent focus:bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all rounded-xl text-lg px-4 text-zinc-900 placeholder:text-zinc-400" 
                        />
                      </div>
                      <div className="space-y-2">
-                       <Label htmlFor="lastName" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Last Name</Label>
+                       <Label htmlFor="lastName" className="text-sm font-semibold text-zinc-500 uppercase tracking-wider">Last Name</Label>
                        <Input 
                          id="lastName" 
                          value={formData.lastName}
                          onChange={handleChange}
                          placeholder="Doe" 
-                         className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" 
+                         className="h-14 bg-zinc-50 border-transparent focus:bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all rounded-xl text-lg px-4 text-zinc-900 placeholder:text-zinc-400" 
                        />
                      </div>
                    </div>
 
                    <div className="grid md:grid-cols-2 gap-8">
                      <div className="space-y-2">
-                       <Label htmlFor="email" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Email Address</Label>
+                       <Label htmlFor="email" className="text-sm font-semibold text-zinc-500 uppercase tracking-wider">Email Address</Label>
                        <Input 
                          id="email" 
                          type="email" 
                          value={formData.email}
                          onChange={handleChange}
                          placeholder="john@company.com" 
-                         className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" 
+                         className="h-14 bg-zinc-50 border-transparent focus:bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all rounded-xl text-lg px-4 text-zinc-900 placeholder:text-zinc-400" 
                        />
                      </div>
                      <div className="space-y-2">
-                       <Label htmlFor="phone" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Phone Number</Label>
+                       <Label htmlFor="phone" className="text-sm font-semibold text-zinc-500 uppercase tracking-wider">Phone Number</Label>
                        <Input 
                          id="phone" 
                          type="tel" 
                          value={formData.phone}
                          onChange={handleChange}
                          placeholder="(555) 123-4567" 
-                         className="h-14 bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg px-4" 
+                         className="h-14 bg-zinc-50 border-transparent focus:bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all rounded-xl text-lg px-4 text-zinc-900 placeholder:text-zinc-400" 
                        />
                      </div>
                    </div>
                    
                    <div className="space-y-2">
-                     <Label htmlFor="subject" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">I'm interested in</Label>
+                     <Label htmlFor="subject" className="text-sm font-semibold text-zinc-500 uppercase tracking-wider">I'm interested in</Label>
                      <select 
                        id="subject"
                        value={formData.subject}
                        onChange={handleChange}
-                       className="w-full h-14 rounded-xl border-transparent bg-secondary/30 px-4 py-2 text-lg focus:bg-background focus:ring-2 focus:ring-primary focus:outline-none transition-all text-foreground"
+                       className="w-full h-14 rounded-xl border-transparent bg-zinc-50 px-4 py-2 text-lg focus:bg-white focus:ring-2 focus:ring-primary focus:outline-none transition-all text-zinc-900"
                      >
                        <option>Requesting a Quote</option>
                        <option>Becoming a Subhauler</option>
@@ -267,13 +267,13 @@ export default function Contact() {
                    </div>
 
                    <div className="space-y-2">
-                     <Label htmlFor="message" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Message</Label>
+                     <Label htmlFor="message" className="text-sm font-semibold text-zinc-500 uppercase tracking-wider">Message</Label>
                      <Textarea 
                        id="message" 
                        value={formData.message}
                        onChange={handleChange}
                        placeholder="Tell us more about your project or inquiry..." 
-                       className="min-h-[200px] bg-secondary/30 border-transparent focus:bg-background transition-all rounded-xl text-lg p-4 resize-none" 
+                       className="min-h-[200px] bg-zinc-50 border-transparent focus:bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all rounded-xl text-lg p-4 resize-none text-zinc-900 placeholder:text-zinc-400" 
                      />
                    </div>
 
