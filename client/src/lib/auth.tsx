@@ -33,45 +33,44 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string) => {
     setError(null);
     try {
-      // Allow mock login if specific mock credentials are used, 
-      // regardless of whether Firebase is configured or not.
-      if (password === "admin123") {
-        console.log("Using mock login flow");
-        // Create a fake user object that looks like a Firebase User
-        const mockUser = { 
-          uid: "mock-uid-123", 
-          email, 
-          displayName: "Admin User",
-          emailVerified: true,
-          isAnonymous: false,
-          metadata: {},
-          providerData: [],
-          refreshToken: "",
-          tenantId: null,
-          delete: async () => {},
-          getIdToken: async () => "mock-token",
-          getIdTokenResult: async () => ({
-            token: "mock-token",
-            signInProvider: "password",
-            claims: {},
-            authTime: Date.now().toString(),
-            issuedAtTime: Date.now().toString(),
-            expirationTime: (Date.now() + 3600000).toString(),
-          }),
-          reload: async () => {},
-          toJSON: () => ({}),
-          phoneNumber: null,
-          photoURL: null,
-          providerId: "firebase"
-        } as unknown as User;
-        
-        setUser(mockUser);
-        setLocation("/admin");
-        return;
-      }
-
       if (!isFirebaseConfigured()) {
-         throw new Error("Invalid credentials (Mock mode: use 'admin123')");
+        // Fallback for mockup mode only if no keys provided
+        if (password === "admin123") {
+          console.log("Using mock login flow (No Firebase Config)");
+          // Create a fake user object that looks like a Firebase User
+          const mockUser = { 
+            uid: "mock-uid-123", 
+            email, 
+            displayName: "Admin User",
+            emailVerified: true,
+            isAnonymous: false,
+            metadata: {},
+            providerData: [],
+            refreshToken: "",
+            tenantId: null,
+            delete: async () => {},
+            getIdToken: async () => "mock-token",
+            getIdTokenResult: async () => ({
+              token: "mock-token",
+              signInProvider: "password",
+              claims: {},
+              authTime: Date.now().toString(),
+              issuedAtTime: Date.now().toString(),
+              expirationTime: (Date.now() + 3600000).toString(),
+            }),
+            reload: async () => {},
+            toJSON: () => ({}),
+            phoneNumber: null,
+            photoURL: null,
+            providerId: "firebase"
+          } as unknown as User;
+          
+          setUser(mockUser);
+          setLocation("/admin");
+          return;
+        } else {
+           throw new Error("Invalid credentials (Mock mode: use 'admin123')");
+        }
       }
 
       await signInWithEmailAndPassword(auth, email, password);
