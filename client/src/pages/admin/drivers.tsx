@@ -37,6 +37,8 @@ import { createDriverWithDocs, updateDriverWithDocs } from "@/services/driverReg
 
 import { uploadFile } from "@/lib/storage-utils";
 
+import { TruckLoader } from "@/components/TruckLoader";
+
 export default function DriversManagement() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
@@ -294,9 +296,7 @@ export default function DriversManagement() {
 
         {/* Drivers Grid */}
         {isLoading ? (
-          <div className="flex justify-center p-12">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          </div>
+          <TruckLoader text="Loading drivers..." />
         ) : (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredDrivers.map(driver => (
