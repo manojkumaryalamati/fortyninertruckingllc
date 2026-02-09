@@ -37,8 +37,8 @@ export default function Home() {
             className="max-w-4xl mx-auto space-y-8"
           >
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-              Heavy <span className="text-primary">Hauling</span> <br />
-              Done <span className="text-white">Right</span>
+              <span className="text-primary">Reliable</span> Logistics <br />
+              <span className="text-white">Partner</span>
             </h1>
             
             <p className="text-base md:text-xl text-white/80 font-medium max-w-2xl mx-auto leading-relaxed">
