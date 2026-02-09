@@ -61,7 +61,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!isFirebaseConfigured()) {
         // Fallback for mockup mode only if no keys provided
         if (password === "admin123") {
-          console.log("Using mock login flow (No Firebase Config)");
           // ... (mock user creation)
           const mockUser = { 
             uid: "mock-uid-123", 

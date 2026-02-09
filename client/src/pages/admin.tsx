@@ -208,7 +208,7 @@ export default function AdminDashboard() {
       // Update Display Name
       if (newDisplayName && newDisplayName !== user.displayName) {
         if (!isFirebaseConfigured()) {
-          console.log("Mock update profile:", newDisplayName);
+          // Mock update profile
         } else {
           await updateProfile(user, { displayName: newDisplayName });
         }
@@ -225,7 +225,7 @@ export default function AdminDashboard() {
         }
         
         if (!isFirebaseConfigured()) {
-          console.log("Mock update password");
+          // Mock update password
         } else {
           await updatePassword(user, newPassword);
         }

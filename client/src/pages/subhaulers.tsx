@@ -41,7 +41,6 @@ export default function Subhaulers() {
       }
 
       if (!isFirebaseConfigured()) {
-        console.log("Mock submission:", formData);
         await new Promise(resolve => setTimeout(resolve, 1000));
         toast({
           title: "Registration Sent (Mock)",
