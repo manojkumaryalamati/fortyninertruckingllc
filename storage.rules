@@ -1,0 +1,22 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper function to check if user is admin via Firestore role
+    function isAdmin() {
+      return request.auth != null && 
+             firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    // Allow admins to read/write everything
+    match /{allPaths=**} {
+      allow read, write: if isAdmin();
+    }
+    
+    // Specific rule for driver documents matching the path structure
+    match /driver_documents/{driverId}/{docType}/{fileName} {
+      allow read: if request.auth != null; // Allow authenticated users to view
+      allow write: if isAdmin();
+    }
+  }
+}
