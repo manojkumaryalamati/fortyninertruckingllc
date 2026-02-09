@@ -29,6 +29,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { TruckLoader } from "@/components/TruckLoader";
+import { utils, writeFile } from "xlsx";
 
 // Mock data for fallback
 const mockApplications = [
@@ -196,6 +197,43 @@ export default function AdminApplications() {
     return matchesSearch && matchesStatus;
   });
 
+  const handleExport = () => {
+    if (filteredApplications.length === 0) {
+      toast({
+        title: "No Data",
+        description: "There is no data to export.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Format data for export
+    const exportData = filteredApplications.map(app => ({
+      "First Name": app.firstName,
+      "Last Name": app.lastName,
+      "Email": app.email,
+      "Phone": app.phone,
+      "Experience": app.yearsCommercialDriving || app.experience,
+      "CDL/License": app.license || "Not provided",
+      "Status": app.status,
+      "Has Resume": app.hasResume ? "Yes" : "No",
+      "Applied Date": app.createdAt ? format(new Date(app.createdAt.seconds * 1000), 'yyyy-MM-dd HH:mm:ss') : 'Unknown'
+    }));
+
+    const ws = utils.json_to_sheet(exportData);
+    const wb = utils.book_new();
+    utils.book_append_sheet(wb, ws, "Applications");
+    
+    // Generate filename with timestamp
+    const date = new Date().toISOString().split('T')[0];
+    writeFile(wb, `Driver_Applications_${date}.csv`, { bookType: "csv" });
+    
+    toast({
+      title: "Export Started",
+      description: "Your download should begin shortly."
+    });
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "new": return "bg-blue-100 text-blue-700 border-blue-200";
@@ -225,7 +263,7 @@ export default function AdminApplications() {
                 <p className="text-sm text-zinc-500 mt-1">Manage job applications and candidate pipeline.</p>
               </div>
               <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200">
+                <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200" onClick={handleExport}>
                   <Download className="mr-2 h-4 w-4" /> Export CSV
                 </Button>
               </div>
