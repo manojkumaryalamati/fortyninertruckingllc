@@ -37,10 +37,6 @@ export default function Fleet() {
               Modern Fleet Technology
             </div>
             
-            <h1 className="font-black tracking-tighter text-white leading-[1.05]" style={{ fontSize: 'clamp(40px, 6vw, 92px)' }}>
-              Power & <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">Precision</span>
-            </h1>
             
             <p className="text-zinc-300 font-light leading-relaxed" style={{ fontSize: 'clamp(16px, 2vw, 20px)', maxWidth: '560px' }}>
               Our diverse fleet of specialized haulers is maintained to the highest industry standards, ensuring reliable delivery for every load.
