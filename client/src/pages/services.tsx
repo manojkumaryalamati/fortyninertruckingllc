@@ -159,61 +159,6 @@ export default function Services() {
                </div>
              </motion.div>
 
-             {/* Service 3 */}
-             <motion.div 
-               initial={{ opacity: 0, y: 40 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               transition={{ duration: 0.8 }}
-               className="grid md:grid-cols-2 gap-16 items-center"
-             >
-               <div className="order-2 md:order-1 relative">
-                 <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl opacity-50" />
-                 <img 
-                   src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" 
-                   className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/50" 
-                   alt="Project Logistics" 
-                 />
-                 <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl border border-zinc-100 shadow-xl hidden lg:block">
-                   <div className="flex items-center gap-4">
-                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                       <MapPin size={24} />
-                     </div>
-                     <div>
-                       <p className="text-xs text-muted-foreground font-bold">Coverage</p>
-                       <p className="font-bold text-zinc-900">Statewide CA</p>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-               
-               <div className="order-1 md:order-2 space-y-8">
-                 <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20">
-                   <Briefcase size={32} />
-                 </div>
-                 <div>
-                   <h3 className="text-4xl font-black text-zinc-900 mb-4">Project Logistics</h3>
-                   <p className="text-lg text-zinc-600 leading-relaxed">
-                     For large-scale infrastructure and development projects, we offer comprehensive logistics planning. We coordinate fleet movements to maximize efficiency and minimize downtime.
-                   </p>
-                 </div>
-                 
-                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                   {["Route Planning", "Fleet Management", "On-Site Coordination", "Efficiency Optimization"].map(item => (
-                     <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-white border border-zinc-200 shadow-sm">
-                       <Check size={16} className="text-primary" /> 
-                       <span className="text-sm font-bold text-zinc-700">{item}</span>
-                     </div>
-                   ))}
-                 </div>
-                 
-                 <Link href="/contact">
-                   <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 h-12 font-bold text-white mt-4 group">
-                     Request Service <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
-                   </Button>
-                 </Link>
-               </div>
-             </motion.div>
           </div>
         </div>
       </section>
