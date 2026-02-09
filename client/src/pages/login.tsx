@@ -128,41 +128,6 @@ export default function Login() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password" className="font-semibold text-zinc-700">Password</Label>
-                
-                <Dialog open={isForgotPasswordOpen} onOpenChange={setIsForgotPasswordOpen}>
-                  <DialogTrigger asChild>
-                    <button type="button" className="text-xs font-semibold text-primary hover:text-primary/80 transition-colors">
-                      Forgot password?
-                    </button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Reset Password</DialogTitle>
-                      <DialogDescription>
-                        Enter your email address and we'll send you a link to reset your password.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <form onSubmit={handleForgotPassword} className="space-y-4 pt-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="reset-email">Email Address</Label>
-                        <Input 
-                          id="reset-email" 
-                          type="email" 
-                          placeholder="name@example.com" 
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                        />
-                      </div>
-                      <DialogFooter>
-                        <Button type="submit" disabled={isResetting} className="w-full bg-primary text-white">
-                          {isResetting ? <Loader2 className="animate-spin mr-2" /> : null}
-                          Send Reset Link
-                        </Button>
-                      </DialogFooter>
-                    </form>
-                  </DialogContent>
-                </Dialog>
               </div>
               <div className="relative">
                 <Input 
