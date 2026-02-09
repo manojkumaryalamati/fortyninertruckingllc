@@ -61,7 +61,7 @@ export function Navbar() {
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2">
-              <Clock size={14} className="text-primary" /> Mon - Fri: 7:00 AM - 5:00 PM
+              <Clock size={14} className="text-primary" /> 24/7
             </span>
             <Link href="/contact">
                <span className="text-primary hover:text-zinc-900 transition-colors cursor-pointer font-bold ml-2">Request A Quote &rarr;</span>
