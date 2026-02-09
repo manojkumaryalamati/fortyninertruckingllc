@@ -50,7 +50,7 @@ export function Navbar() {
     <>
       {/* Top Bar - Hidden on mobile, visible on desktop */}
       <div className={`hidden lg:flex fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} bg-zinc-100 text-zinc-600 border-b border-white/5`}>
-        <div className="w-full max-w-[1200px] mx-auto px-4 h-10 flex justify-between items-center text-xs font-medium tracking-wide">
+        <div className="w-full px-8 h-10 flex justify-between items-center text-xs font-medium tracking-wide">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
               <Phone size={14} className="text-primary" /> (925) 250-4605
@@ -71,7 +71,7 @@ export function Navbar() {
       </div>
 
       <nav className={`fixed left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'top-0' : 'top-0 lg:top-10'} ${navbarClasses}`}>
-        <div className="w-full max-w-[1200px] mx-auto px-4 flex items-center justify-between h-[72px]">
+        <div className="w-full px-8 flex items-center justify-between h-[72px]">
           
           {/* Logo Area */}
           <div className="flex-shrink-0 relative h-full flex items-center">
