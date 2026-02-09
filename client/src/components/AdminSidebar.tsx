@@ -7,6 +7,7 @@ import {
   Users, 
   Settings, 
   FileText,
+  Briefcase,
   BarChart3,
   LogOut,
   Menu,
@@ -60,6 +61,11 @@ export function AdminSidebar() {
         <Link href="/admin/documents">
           <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/documents") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
             <FileText size={18} /> Documents
+          </Button>
+        </Link>
+        <Link href="/admin/applications">
+          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/applications") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+            <Briefcase size={18} /> Applications
           </Button>
         </Link>
       </nav>
@@ -147,6 +153,11 @@ export function AdminMobileHeader() {
               <Link href="/admin/documents">
                 <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/documents") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
                   <FileText size={18} /> Documents
+                </Button>
+              </Link>
+              <Link href="/admin/applications">
+                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/applications") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
+                  <Briefcase size={18} /> Applications
                 </Button>
               </Link>
             </nav>
