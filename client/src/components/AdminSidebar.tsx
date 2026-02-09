@@ -33,7 +33,7 @@ export function AdminSidebar() {
 
   const NavContent = () => (
     <>
-      <div className="p-6 mb-2 flex justify-center">
+      <div className="p-4 mb-2 flex justify-center">
         <Link href="/admin">
           <div className="flex items-center gap-2 cursor-pointer w-full justify-center">
             <img 
