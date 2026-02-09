@@ -1,53 +1,51 @@
-import { addDoc, collection, serverTimestamp, doc, updateDoc } from "firebase/firestore";
-import { db } from "../lib/firebase";
-import { uploadDriverDocument } from "./upload";
-import { createDriverDocRecord } from "./documents";
+import { addDoc, collection, doc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../lib/firebase";
 
-export async function createDriverWithDl(params: {
-  name: string;
-  email: string;
-  phone: string;
-  license: string;
-  status: string;
-  joinDate?: string;
-  dlFile?: File;           // from upload input
-  docType?: "DL" | "MEDICAL";
-}) {
-  const { dlFile, docType = "DL", ...driverData } = params;
+async function uploadDriverDoc(driverId: string, docType: "DL" | "MEDICAL", file: File) {
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const storagePath = `driver_documents/${driverId}/${docType}/${Date.now()}_${safeName}`;
 
-  // 1) Create driver record first
+  const storageRef = ref(storage, storagePath);
+  await uploadBytes(storageRef, file);
+  const url = await getDownloadURL(storageRef);
+
+  await addDoc(collection(db, "documents"), {
+    ownerType: "driver",
+    ownerId: driverId,
+    documentType: docType === "DL" ? "DRIVING_LICENSE" : "MEDICAL_CARD",
+    fileName: file.name,
+    fileUrl: url,
+    storagePath,
+    createdAt: serverTimestamp(),
+    status: "Active",
+  });
+
+  return { url, storagePath };
+}
+
+export async function createDriverWithDocs(driverData: any, dlFile?: File, medicalFile?: File) {
+  // 1) Create driver first
   const driverRef = await addDoc(collection(db, "drivers"), {
     ...driverData,
-    truck: "Unassigned",
     createdAt: serverTimestamp(),
+    truck: "Unassigned",
+    pendingDocs: true,
   });
 
   const driverId = driverRef.id;
 
-  // 2) If file was selected, upload it + create document metadata
-  if (dlFile) {
-    const uploaded = await uploadDriverDocument({
-      driverId,
-      docType,
-      file: dlFile,
-    });
+  // 2) Upload docs
+  if (dlFile) await uploadDriverDoc(driverId, "DL", dlFile);
+  if (medicalFile) await uploadDriverDoc(driverId, "MEDICAL", medicalFile);
 
-    await createDriverDocRecord({
-      driverId,
-      docType,
-      fileName: uploaded.fileName,
-      fileUrl: uploaded.url,
-      storagePath: uploaded.path,
-      contentType: uploaded.contentType,
-      size: uploaded.size,
-    });
-
-    // 3) Optional: mark driver has DL
-    await updateDoc(doc(db, "drivers", driverId), {
-      dlUploaded: true,
-      dlUpdatedAt: serverTimestamp(),
-    });
-  }
+  // 3) Update driver flags
+  await updateDoc(doc(db, "drivers", driverId), {
+    pendingDocs: false,
+    dlUploaded: !!dlFile,
+    medicalUploaded: !!medicalFile,
+    docsUpdatedAt: serverTimestamp(),
+  });
 
   return driverId;
 }

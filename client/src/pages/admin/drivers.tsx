@@ -33,7 +33,7 @@ import { AdminSidebar, AdminMobileHeader } from "@/components/AdminSidebar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, onSnapshot, query, orderBy, deleteDoc, doc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
-import { createDriverWithDl } from "@/services/driverRegistration";
+import { createDriverWithDocs } from "@/services/driverRegistration";
 
 import { uploadFile } from "@/lib/storage-utils";
 
@@ -84,16 +84,18 @@ export default function DriversManagement() {
     
     try {
       if (isFirebaseConfigured()) {
-        await createDriverWithDl({
-          name: formData.get("name") as string,
-          status: formData.get("status") as string,
-          phone: formData.get("phone") as string,
-          email: formData.get("email") as string,
-          license: formData.get("license") as string,
-          joinDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
-          dlFile: selectedFile || undefined,
-          docType: "DL" // Assuming this form uploads DL primarily
-        });
+        await createDriverWithDocs(
+          {
+            name: formData.get("name") as string,
+            status: formData.get("status") as string,
+            phone: formData.get("phone") as string,
+            email: formData.get("email") as string,
+            license: formData.get("license") as string,
+            joinDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+          },
+          selectedFile || undefined // dlFile
+          // Add medicalFile if we have a second input for it
+        );
         toast({ title: "Driver Added", description: "New driver profile created successfully." });
       } else {
         throw new Error("Firebase not configured");
