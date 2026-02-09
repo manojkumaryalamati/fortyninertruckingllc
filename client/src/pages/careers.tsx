@@ -102,31 +102,35 @@ export default function Careers() {
           // and just store the application data. File upload would typically require 
           // more complex storage rules for unauthenticated users.
           
-          await addDoc(collection(db, "applications"), {
+          // Using driver_applications collection as requested
+          await addDoc(collection(db, "driver_applications"), {
             firstName: formData.firstName,
             lastName: formData.lastName,
             email: formData.email,
             phone: formData.phone,
-            yearsCommercialDriving: formData.experience, // Matches Firestore rule
-            license: formData.license, // Keeping license as key, or could be cdlNumber if requested
-            createdAt: serverTimestamp(),
+            yearsCommercialDriving: formData.experience,
+            cdlNumber: formData.license, // Renamed from license to cdlNumber
             status: "new",
-            hasResume: true,
-            resumeFileName: resumeFile.name
-            // In a real app, we'd upload the file here
+            createdAt: serverTimestamp(),
+            // Resume fields - currently placeholder as actual file upload requires auth/storage configuration
+            resumeUrl: null, 
+            resumePath: resumeFile ? `mock/path/${resumeFile.name}` : null,
+            // Keeping these for UI display in prototype if needed, but the schema above is the source of truth
+            resumeFileName: resumeFile?.name || null
           });
           
         } else {
-          await addDoc(collection(db, "applications"), {
+          await addDoc(collection(db, "driver_applications"), {
             firstName: formData.firstName,
             lastName: formData.lastName,
             email: formData.email,
             phone: formData.phone,
-            yearsCommercialDriving: formData.experience, // Matches Firestore rule
-            license: formData.license,
-            createdAt: serverTimestamp(),
+            yearsCommercialDriving: formData.experience,
+            cdlNumber: formData.license,
             status: "new",
-            hasResume: false
+            createdAt: serverTimestamp(),
+            resumeUrl: null,
+            resumePath: null
           });
         }
         
