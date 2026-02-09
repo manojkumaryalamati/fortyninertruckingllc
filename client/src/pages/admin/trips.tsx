@@ -480,7 +480,7 @@ export default function TripsManagement() {
         {/* Dispatch Board Layout */}
         <div className="grid lg:grid-cols-3 gap-6">
            {/* Active Trips Column */}
-           <div className="lg:col-span-2 space-y-6">
+           <div className="lg:col-span-3 space-y-6">
               <Card>
                 <div className="p-4 border-b border-border flex items-center justify-between">
                   <h3 className="font-bold">Active & Scheduled</h3>
