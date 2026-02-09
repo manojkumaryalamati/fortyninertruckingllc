@@ -322,9 +322,6 @@ export default function AdminDashboard() {
               <Bell size={18} />
               <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full" />
             </Button>
-            <Button className="h-8 text-xs font-semibold bg-foreground text-background hover:bg-foreground/90">
-              <Plus size={14} className="mr-2" /> New Load
-            </Button>
           </div>
         </header>
 
