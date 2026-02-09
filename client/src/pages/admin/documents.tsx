@@ -19,7 +19,8 @@ import {
   BarChart3,
   LogOut,
   Loader2,
-  Trash2
+  Trash2,
+  Edit
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,7 +32,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { AdminSidebar, AdminMobileHeader } from "@/components/AdminSidebar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 
 import { uploadFile } from "@/lib/storage-utils";
@@ -43,7 +44,11 @@ export default function DocumentsCenter() {
   const [documents, setDocuments] = useState<any[]>([]);
   const [filter, setFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [currentDoc, setCurrentDoc] = useState<any>(null);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -79,6 +84,17 @@ export default function DocumentsCenter() {
     }
   };
 
+  const calculateStatus = (expiryDateString: string) => {
+    const expiryDate = new Date(expiryDateString);
+    const today = new Date();
+    const threeMonthsFromNow = new Date();
+    threeMonthsFromNow.setMonth(today.getMonth() + 3);
+    
+    if (expiryDate < today) return "Expired";
+    if (expiryDate < threeMonthsFromNow) return "Expiring Soon";
+    return "Valid";
+  };
+
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedFile && isFirebaseConfigured()) {
@@ -90,14 +106,9 @@ export default function DocumentsCenter() {
     const formData = new FormData(e.target as HTMLFormElement);
     
     // Determine status based on expiration date
-    const expiryDate = new Date(formData.get("expiry") as string);
-    const today = new Date();
-    const threeMonthsFromNow = new Date();
-    threeMonthsFromNow.setMonth(today.getMonth() + 3);
-    
-    let status = "Valid";
-    if (expiryDate < today) status = "Expired";
-    else if (expiryDate < threeMonthsFromNow) status = "Expiring Soon";
+    const expiryDateString = formData.get("expiry") as string;
+    const expiryDate = new Date(expiryDateString);
+    const status = calculateStatus(expiryDateString);
 
     try {
       let fileUrl = "";
@@ -112,6 +123,7 @@ export default function DocumentsCenter() {
         type: formData.get("docType") as string,
         entity: formData.get("entity") as string,
         expiry: expiryDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        expiryRaw: expiryDateString, // Store raw for editing
         status: status,
         category: formData.get("category") as string,
         fileUrl: fileUrl,
@@ -129,6 +141,69 @@ export default function DocumentsCenter() {
     } catch (error) {
       console.error("Error adding document:", error);
       toast({ title: "Error", description: "Failed to upload document record.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleEditClick = (doc: any) => {
+    setCurrentDoc(doc);
+    // Convert friendly date back to input format yyyy-MM-dd if raw not available
+    let expiryValue = doc.expiryRaw;
+    if (!expiryValue && doc.expiry) {
+        // Attempt parse: "Jan 01, 2024"
+        const d = new Date(doc.expiry);
+        if (!isNaN(d.getTime())) {
+            expiryValue = d.toISOString().split('T')[0];
+        }
+    }
+    
+    setCurrentDoc({
+        ...doc,
+        expiryValue
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateDoc = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!currentDoc) return;
+    setIsSubmitting(true);
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    const expiryDateString = formData.get("expiry") as string;
+    const expiryDate = new Date(expiryDateString);
+    const status = calculateStatus(expiryDateString);
+
+    try {
+      let fileUrl = currentDoc.fileUrl;
+      if (selectedFile) {
+        const category = formData.get("category") as string;
+        fileUrl = await uploadFile(selectedFile, `documents/${category.toLowerCase()}`);
+      }
+
+      const updatedDoc = {
+        name: formData.get("fileName") as string,
+        type: formData.get("docType") as string,
+        entity: formData.get("entity") as string,
+        expiry: expiryDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        expiryRaw: expiryDateString,
+        status: status,
+        category: formData.get("category") as string,
+        fileUrl: fileUrl,
+        updatedAt: serverTimestamp()
+      };
+
+      if (isFirebaseConfigured()) {
+        await updateDoc(doc(db, "documents", currentDoc.id), updatedDoc);
+        toast({ title: "Document Updated", description: "Record updated successfully." });
+      }
+      setIsEditModalOpen(false);
+      setCurrentDoc(null);
+      setSelectedFile(null);
+    } catch (error) {
+      console.error("Error updating document:", error);
+      toast({ title: "Error", description: "Failed to update document.", variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
@@ -254,6 +329,88 @@ export default function DocumentsCenter() {
           </div>
 
           {/* Stats Overview */}
+          <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+             <DialogContent className="sm:max-w-[600px]">
+               <DialogHeader>
+                 <DialogTitle>Edit Document</DialogTitle>
+               </DialogHeader>
+               {currentDoc && (
+               <form onSubmit={handleUpdateDoc} className="space-y-6 py-4">
+                 <div className="grid grid-cols-2 gap-4">
+                   <div className="space-y-2">
+                     <Label htmlFor="edit-category">Category</Label>
+                     <Select name="category" defaultValue={currentDoc.category}>
+                       <SelectTrigger>
+                         <SelectValue placeholder="Select category" />
+                       </SelectTrigger>
+                       <SelectContent>
+                         <SelectItem value="Driver">Driver</SelectItem>
+                         <SelectItem value="Truck">Truck</SelectItem>
+                         <SelectItem value="Trip">Trip</SelectItem>
+                         <SelectItem value="Company">Company</SelectItem>
+                       </SelectContent>
+                     </Select>
+                   </div>
+                   <div className="space-y-2">
+                     <Label htmlFor="edit-docType">Document Type</Label>
+                     <Select name="docType" defaultValue={currentDoc.type}>
+                       <SelectTrigger>
+                         <SelectValue placeholder="Select type" />
+                       </SelectTrigger>
+                       <SelectContent>
+                         <SelectItem value="License">License / CDL</SelectItem>
+                         <SelectItem value="Medical">Medical Cert</SelectItem>
+                         <SelectItem value="Insurance">Insurance</SelectItem>
+                         <SelectItem value="Registration">Registration</SelectItem>
+                         <SelectItem value="Permit">Permit</SelectItem>
+                         <SelectItem value="BOL">Bill of Lading</SelectItem>
+                       </SelectContent>
+                     </Select>
+                   </div>
+                 </div>
+
+                 <div className="space-y-2">
+                   <Label htmlFor="edit-fileName">Document Name</Label>
+                   <Input id="edit-fileName" name="fileName" defaultValue={currentDoc.name} required />
+                 </div>
+
+                 <div className="grid grid-cols-2 gap-4">
+                   <div className="space-y-2">
+                     <Label htmlFor="edit-entity">Associated Entity</Label>
+                     <Input id="edit-entity" name="entity" defaultValue={currentDoc.entity} required />
+                   </div>
+                   <div className="space-y-2">
+                     <Label htmlFor="edit-expiry">Expiration Date</Label>
+                     <Input id="edit-expiry" name="expiry" type="date" defaultValue={currentDoc.expiryValue} required />
+                   </div>
+                 </div>
+
+                 <div className="space-y-2">
+                   <Label>Replace File (Optional)</Label>
+                   <div className="border-2 border-dashed border-border rounded-xl p-8 text-center hover:bg-secondary/50 transition-colors cursor-pointer relative">
+                     <input 
+                       type="file" 
+                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                       onChange={handleFileChange}
+                       accept=".pdf,.jpg,.jpeg,.png"
+                     />
+                     <Upload className="mx-auto h-10 w-10 text-muted-foreground mb-2" />
+                     <p className="text-sm font-medium">
+                       {selectedFile ? selectedFile.name : (currentDoc.fileUrl ? "Click to replace file" : "Upload File")}
+                     </p>
+                   </div>
+                 </div>
+
+                 <DialogFooter>
+                   <Button type="button" variant="outline" onClick={() => setIsEditModalOpen(false)}>Cancel</Button>
+                   <Button type="submit" disabled={isSubmitting}>
+                     {isSubmitting ? <Loader2 className="animate-spin" /> : "Save Changes"}
+                   </Button>
+                 </DialogFooter>
+               </form>
+               )}
+             </DialogContent>
+           </Dialog>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
              <Card className="bg-green-50 border-green-200">
                <CardContent className="p-4 flex items-center justify-between">
@@ -362,6 +519,9 @@ export default function DocumentsCenter() {
                        </td>
                        <td className="px-6 py-4 text-right">
                          <div className="flex items-center justify-end gap-2">
+                           <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary" onClick={() => handleEditClick(doc)}>
+                             <Edit size={16} />
+                           </Button>
                            <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => window.open(doc.fileUrl, '_blank')}>
                              <Download size={16} />
                            </Button>
