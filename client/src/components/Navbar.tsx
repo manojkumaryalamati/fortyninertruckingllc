@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo_new.png";
+import logo from "@/assets/logo_v6.png";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
