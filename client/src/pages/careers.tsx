@@ -61,9 +61,7 @@ export default function Careers() {
             yearsCommercialDriving: formData.experience,
             cdlNumber: formData.license,
             status: "new",
-            createdAt: serverTimestamp(),
-            resumeUrl: null,
-            resumePath: null
+            createdAt: serverTimestamp()
         });
         
         toast({
