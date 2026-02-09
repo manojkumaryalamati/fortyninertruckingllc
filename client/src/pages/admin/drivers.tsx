@@ -48,6 +48,10 @@ export default function DriversManagement() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  // View Profile Modal State
+  const [selectedDriver, setSelectedDriver] = useState<any>(null);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+
   // Fetch Drivers from Firestore
   useEffect(() => {
     if (!isFirebaseConfigured()) {
@@ -122,6 +126,11 @@ export default function DriversManagement() {
       console.error("Error deleting driver:", error);
       toast({ title: "Error", description: "Failed to delete driver.", variant: "destructive" });
     }
+  };
+
+  const handleViewProfile = (driver: any) => {
+    setSelectedDriver(driver);
+    setIsViewModalOpen(true);
   };
 
   return (
@@ -294,7 +303,7 @@ export default function DriversManagement() {
                 </div>
 
                 <div className="pt-4 flex gap-2">
-                   <Button variant="outline" size="sm" className="flex-1">View Profile</Button>
+                   <Button variant="outline" size="sm" className="flex-1" onClick={() => handleViewProfile(driver)}>View Profile</Button>
                    <Button variant="secondary" size="sm" className="flex-1">Documents</Button>
                 </div>
               </CardContent>
@@ -302,6 +311,98 @@ export default function DriversManagement() {
           ))}
         </div>
         )}
+             
+             {/* View Profile Modal */}
+             <Dialog open={isViewModalOpen} onOpenChange={setIsViewModalOpen}>
+               <DialogContent className="sm:max-w-[600px]">
+                 <DialogHeader>
+                   <DialogTitle>Driver Profile</DialogTitle>
+                 </DialogHeader>
+                 {selectedDriver && (
+                   <div className="space-y-6 py-4">
+                     <div className="flex items-center gap-4">
+                       <Avatar className="h-20 w-20 border-2 border-border">
+                         <AvatarFallback className="bg-primary/10 text-primary text-2xl font-bold">
+                           {selectedDriver.name?.charAt(0)}
+                         </AvatarFallback>
+                       </Avatar>
+                       <div>
+                         <h2 className="text-2xl font-bold">{selectedDriver.name}</h2>
+                         <div className="flex items-center gap-2 mt-1">
+                           <Badge variant="outline" className={`
+                             ${selectedDriver.status === "Active" ? "bg-green-50 text-green-700 border-green-200" : 
+                               selectedDriver.status === "On Leave" ? "bg-yellow-50 text-yellow-700 border-yellow-200" : 
+                               "bg-red-50 text-red-700 border-red-200"}
+                           `}>
+                             {selectedDriver.status}
+                           </Badge>
+                           <span className="text-sm text-muted-foreground font-mono">ID: {selectedDriver.id}</span>
+                         </div>
+                       </div>
+                     </div>
+
+                     <div className="grid grid-cols-2 gap-6">
+                       <div className="space-y-1">
+                         <Label className="text-muted-foreground">Email Address</Label>
+                         <div className="flex items-center gap-2 font-medium">
+                           <Mail size={16} /> {selectedDriver.email}
+                         </div>
+                       </div>
+                       <div className="space-y-1">
+                         <Label className="text-muted-foreground">Phone Number</Label>
+                         <div className="flex items-center gap-2 font-medium">
+                           <Phone size={16} /> {selectedDriver.phone}
+                         </div>
+                       </div>
+                       <div className="space-y-1">
+                         <Label className="text-muted-foreground">CDL Number</Label>
+                         <div className="flex items-center gap-2 font-medium">
+                           <FileText size={16} /> {selectedDriver.license}
+                         </div>
+                       </div>
+                       <div className="space-y-1">
+                         <Label className="text-muted-foreground">Assigned Truck</Label>
+                         <div className="flex items-center gap-2 font-medium">
+                           <Truck size={16} /> {selectedDriver.truck}
+                         </div>
+                       </div>
+                       <div className="space-y-1">
+                         <Label className="text-muted-foreground">Join Date</Label>
+                         <div className="font-medium">{selectedDriver.joinDate}</div>
+                       </div>
+                     </div>
+
+                     <div className="space-y-3 pt-4 border-t border-border">
+                       <Label className="text-lg font-bold">Documents</Label>
+                       <div className="grid grid-cols-2 gap-4">
+                         <div className="p-3 border rounded-lg bg-secondary/20 flex items-center justify-between">
+                            <span className="text-sm font-medium">Driver's License</span>
+                            {selectedDriver.dlUploaded ? (
+                              <Badge variant="secondary" className="bg-green-100 text-green-700 hover:bg-green-100">Uploaded</Badge>
+                            ) : (
+                              <Badge variant="outline" className="text-muted-foreground">Pending</Badge>
+                            )}
+                         </div>
+                         <div className="p-3 border rounded-lg bg-secondary/20 flex items-center justify-between">
+                            <span className="text-sm font-medium">Medical Card</span>
+                            {selectedDriver.medicalUploaded ? (
+                              <Badge variant="secondary" className="bg-green-100 text-green-700 hover:bg-green-100">Uploaded</Badge>
+                            ) : (
+                              <Badge variant="outline" className="text-muted-foreground">Pending</Badge>
+                            )}
+                         </div>
+                       </div>
+                     </div>
+
+                     <DialogFooter>
+                       <Button variant="outline" onClick={() => setIsViewModalOpen(false)}>Close</Button>
+                       <Button>Edit Profile</Button>
+                     </DialogFooter>
+                   </div>
+                 )}
+               </DialogContent>
+             </Dialog>
+
           </div>
         </main>
       </div>
