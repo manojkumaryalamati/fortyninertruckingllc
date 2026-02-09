@@ -323,7 +323,7 @@ export default function AdminApplications() {
                             {app.createdAt ? format(new Date(app.createdAt.seconds * 1000), 'MMM d, yyyy') : 'N/A'}
                           </td>
                           <td className="px-6 py-4 text-zinc-600">
-                            {app.experience}
+                            {app.yearsCommercialDriving || app.experience}
                           </td>
                           <td className="px-6 py-4">
                             <Badge variant="outline" className={`${getStatusColor(app.status || "new")} capitalize`}>
@@ -389,7 +389,7 @@ export default function AdminApplications() {
                                       <div className="grid gap-3 text-sm">
                                         <div>
                                           <Label className="text-xs text-zinc-500">Experience</Label>
-                                          <p className="font-medium">{app.experience}</p>
+                                          <p className="font-medium">{app.yearsCommercialDriving || app.experience}</p>
                                         </div>
                                         <div>
                                           <Label className="text-xs text-zinc-500">CDL Number</Label>
