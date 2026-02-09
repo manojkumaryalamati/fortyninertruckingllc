@@ -352,7 +352,6 @@ export default function DriversManagement() {
 
                 <div className="pt-4 flex gap-2">
                    <Button variant="outline" size="sm" className="flex-1" onClick={() => handleViewProfile(driver)}>View Profile</Button>
-                   <Button variant="secondary" size="sm" className="flex-1">Documents</Button>
                 </div>
               </CardContent>
             </Card>
