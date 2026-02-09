@@ -12,6 +12,7 @@ import TrucksManagement from "@/pages/admin/trucks";
 import DriversManagement from "@/pages/admin/drivers";
 import TripsManagement from "@/pages/admin/trips";
 import DocumentsCenter from "@/pages/admin/documents";
+import AdminApplications from "@/pages/admin/applications";
 import Certifications from "@/pages/certifications";
 import Services from "@/pages/services";
 import Fleet from "@/pages/fleet";
@@ -54,6 +55,9 @@ function Router() {
       </Route>
       <Route path="/admin/documents">
          {() => <ProtectedRoute component={DocumentsCenter} />}
+      </Route>
+      <Route path="/admin/applications">
+         {() => <ProtectedRoute component={AdminApplications} />}
       </Route>
 
       <Route path="/services" component={Services} />
