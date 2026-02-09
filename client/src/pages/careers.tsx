@@ -18,8 +18,6 @@ import { useToast } from "@/hooks/use-toast";
 export default function Careers() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
   
   const [formData, setFormData] = useState({
     firstName: "",
@@ -35,40 +33,6 @@ export default function Careers() {
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      // Basic validation: Check if file is PDF or Image and size < 5MB
-      const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
-      if (!validTypes.includes(file.type)) {
-        toast({
-          title: "Invalid File Type",
-          description: "Please upload a PDF, JPG, or PNG file.",
-          variant: "destructive"
-        });
-        return;
-      }
-      
-      if (file.size > 5 * 1024 * 1024) {
-        toast({
-          title: "File Too Large",
-          description: "File size must be less than 5MB.",
-          variant: "destructive"
-        });
-        return;
-      }
-      
-      setResumeFile(file);
-    }
-  };
-
-  const removeFile = () => {
-    setResumeFile(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -79,7 +43,7 @@ export default function Careers() {
       }
 
       if (!isFirebaseConfigured()) {
-        console.log("Mock submission:", formData, resumeFile ? `with file: ${resumeFile.name}` : "no file");
+        console.log("Mock submission:", formData);
         await new Promise(resolve => setTimeout(resolve, 1500));
         toast({
           title: "Application Sent (Mock)",
@@ -87,40 +51,9 @@ export default function Careers() {
         });
       } else {
         // Use the specialized service if we have a file, otherwise just add doc
-        if (resumeFile) {
-          // Note: createDriverWithDocs requires auth, but public applicants might not be logged in.
-          // For public forms, we typically either:
-          // 1. Just store metadata and file without auth (if rules allow)
-          // 2. Use a cloud function (best practice)
-          // 3. Or just save to 'applications' collection and upload file separately
-          
-          // Since the service enforces auth, let's adapt here for the public form:
-          // We'll upload to a public-write or specialized path if needed, 
-          // or just assume for this prototype we are using the 'applications' collection logic.
-          
-          // For now, let's stick to the simpler implementation for the public form
-          // and just store the application data. File upload would typically require 
-          // more complex storage rules for unauthenticated users.
-          
-          // Using driver_applications collection as requested
-          await addDoc(collection(db, "driver_applications"), {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            phone: formData.phone,
-            yearsCommercialDriving: formData.experience,
-            cdlNumber: formData.license, // Renamed from license to cdlNumber
-            status: "new",
-            createdAt: serverTimestamp(),
-            // Resume fields - currently placeholder as actual file upload requires auth/storage configuration
-            resumeUrl: null, 
-            resumePath: resumeFile ? `mock/path/${resumeFile.name}` : null,
-            // Keeping these for UI display in prototype if needed, but the schema above is the source of truth
-            resumeFileName: resumeFile?.name || null
-          });
-          
-        } else {
-          await addDoc(collection(db, "driver_applications"), {
+        // Resume upload section removed as requested
+        
+        await addDoc(collection(db, "driver_applications"), {
             firstName: formData.firstName,
             lastName: formData.lastName,
             email: formData.email,
@@ -131,8 +64,7 @@ export default function Careers() {
             createdAt: serverTimestamp(),
             resumeUrl: null,
             resumePath: null
-          });
-        }
+        });
         
         toast({
           title: "Application Sent",
@@ -148,9 +80,6 @@ export default function Careers() {
         experience: "Less than 1 year",
         license: ""
       });
-      setResumeFile(null);
-      if (fileInputRef.current) fileInputRef.current.value = "";
-      
     } catch (error: any) {
       console.error("Error submitting form:", error);
       toast({
@@ -241,44 +170,6 @@ export default function Careers() {
                 <div className="space-y-2">
                   <Label htmlFor="license" className="text-zinc-700">CDL Number</Label>
                   <Input id="license" value={formData.license} onChange={handleChange} placeholder="Enter License #" className="bg-zinc-50 border-zinc-200" />
-                </div>
-
-                <div 
-                  className={`border-2 border-dashed rounded-xl p-8 text-center space-y-2 transition-colors cursor-pointer ${resumeFile ? 'border-primary bg-primary/5' : 'border-zinc-200 hover:bg-zinc-50'}`}
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <input 
-                    type="file" 
-                    ref={fileInputRef}
-                    className="hidden" 
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={handleFileChange}
-                  />
-                  
-                  {resumeFile ? (
-                    <div className="flex flex-col items-center">
-                      <div className="bg-primary text-white p-3 rounded-full mb-2">
-                        <FileText size={24} />
-                      </div>
-                      <p className="text-sm font-bold text-primary break-all max-w-full px-4">{resumeFile.name}</p>
-                      <p className="text-xs text-zinc-500 mb-4">{(resumeFile.size / 1024 / 1024).toFixed(2)} MB</p>
-                      <Button 
-                        type="button" 
-                        variant="outline" 
-                        size="sm" 
-                        onClick={(e) => { e.stopPropagation(); removeFile(); }}
-                        className="h-8 text-red-500 hover:text-red-600 hover:bg-red-50 border-red-200"
-                      >
-                        <Trash2 size={14} className="mr-2" /> Remove
-                      </Button>
-                    </div>
-                  ) : (
-                    <>
-                      <Upload className="mx-auto text-zinc-400" />
-                      <p className="text-sm font-medium text-zinc-700">Upload Resume (Optional)</p>
-                      <p className="text-xs text-zinc-500">PDF, JPG, PNG up to 5MB</p>
-                    </>
-                  )}
                 </div>
 
                 <Button type="submit" disabled={isSubmitting} size="lg" className="w-full rounded-full h-12 text-base font-bold bg-primary text-white hover:bg-primary/90">
