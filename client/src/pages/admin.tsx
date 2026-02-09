@@ -337,24 +337,24 @@ export default function AdminDashboard() {
           <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
             {[
-              { label: "Active Drivers", value: stats.activeDrivers, change: "+2", trend: "up", icon: Users },
-              { label: "Trucks on Road", value: stats.trucksOnRoad, change: "-1", trend: "down", icon: Truck },
-              { label: "Today's Revenue", value: stats.revenue, change: "+15%", trend: "up", icon: DollarSign },
-              { label: "Safety Score", value: stats.safetyScore, change: "+1", trend: "up", icon: ShieldCheck },
+              { label: "Active Drivers", value: stats.activeDrivers, change: "+2", trend: "up", icon: Users, color: "text-blue-600 bg-blue-100" },
+              { label: "Trucks on Road", value: stats.trucksOnRoad, change: "-1", trend: "down", icon: Truck, color: "text-indigo-600 bg-indigo-100" },
+              { label: "Today's Revenue", value: stats.revenue, change: "+15%", trend: "up", icon: DollarSign, color: "text-green-600 bg-green-100" },
+              { label: "Safety Score", value: stats.safetyScore, change: "+1", trend: "up", icon: ShieldCheck, color: "text-orange-600 bg-orange-100" },
             ].map((stat, i) => (
-              <Card key={i} className="shadow-sm hover:shadow-md transition-shadow border-t-4 border-t-secondary">
+              <Card key={i} className="shadow-sm hover:shadow-md transition-shadow border-none ring-1 ring-black/5">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
-                    <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                    <div className={`p-2 rounded-lg ${stat.color}`}>
                       <stat.icon size={20} />
                     </div>
-                    <span className={`flex items-center text-xs font-semibold ${stat.trend === "up" ? "text-green-600 bg-green-100 dark:bg-green-900/30 dark:text-green-400" : "text-red-600 bg-red-100 dark:bg-red-900/30 dark:text-red-400"} px-2 py-0.5 rounded-full`}>
+                    <span className={`flex items-center text-xs font-bold ${stat.trend === "up" ? "text-green-600 bg-green-50" : "text-red-600 bg-red-50"} px-2.5 py-1 rounded-full border ${stat.trend === "up" ? "border-green-100" : "border-red-100"}`}>
                       {stat.change}
                     </span>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-1">{stat.label}</p>
-                    <div className="text-2xl font-bold tracking-tight">{stat.value}</div>
+                    <p className="text-sm font-semibold text-zinc-500 mb-1 uppercase tracking-wide text-xs">{stat.label}</p>
+                    <div className="text-3xl font-black tracking-tight text-zinc-900">{stat.value}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -365,19 +365,19 @@ export default function AdminDashboard() {
           <section>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-xl font-bold tracking-tight">Recent Shipments</h2>
-                <p className="text-sm text-muted-foreground">Manage and track active loads.</p>
+                <h2 className="text-xl font-bold tracking-tight text-zinc-900">Recent Shipments</h2>
+                <p className="text-sm text-zinc-500">Manage and track active loads.</p>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm"><Filter className="mr-2 h-4 w-4" /> Filter</Button>
-                <Button variant="outline" size="sm"><Download className="mr-2 h-4 w-4" /> Export</Button>
+                <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200"><Filter className="mr-2 h-4 w-4" /> Filter</Button>
+                <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200"><Download className="mr-2 h-4 w-4" /> Export</Button>
               </div>
             </div>
             
-            <Card className="shadow-sm overflow-hidden border-t-4 border-t-primary">
+            <Card className="shadow-sm overflow-hidden border-none ring-1 ring-black/5">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
-                  <thead className="bg-secondary/30 text-zinc-700 font-bold border-b border-border">
+                  <thead className="bg-zinc-50/50 text-zinc-500 font-semibold border-b border-zinc-100">
                     <tr>
                       <th className="px-6 py-4">Load ID</th>
                       <th className="px-6 py-4">Customer</th>
@@ -389,30 +389,31 @@ export default function AdminDashboard() {
                       <th className="px-6 py-4"></th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-border">
+                  <tbody className="divide-y divide-zinc-100 bg-white">
                     {recentShipments.map((load) => (
-                      <tr key={load.id} className="hover:bg-secondary/20 transition-colors group">
-                        <td className="px-6 py-4 font-medium">{load.id.substring(0, 8)}...</td>
-                        <td className="px-6 py-4">{load.customer}</td>
-                        <td className="px-6 py-4">{load.destination}</td>
+                      <tr key={load.id} className="hover:bg-zinc-50/80 transition-colors group">
+                        <td className="px-6 py-4 font-bold text-zinc-900">{load.id.substring(0, 8)}...</td>
+                        <td className="px-6 py-4 text-zinc-700">{load.customer}</td>
+                        <td className="px-6 py-4 text-zinc-600">{load.destination}</td>
                         <td className="px-6 py-4">
                           <Badge variant="outline" className={`
-                            ${load.status === "Delivered" ? "border-green-200 bg-green-50 text-green-700 dark:bg-green-900/20 dark:border-green-800 dark:text-green-400" : 
-                              load.status === "Delayed" ? "border-red-200 bg-red-50 text-red-700 dark:bg-red-900/20 dark:border-red-800 dark:text-red-400" : 
-                              load.status === "Pending" ? "border-yellow-200 bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-400" : 
-                              "border-blue-200 bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-400"}
+                            ${load.status === "Delivered" ? "border-green-200 bg-green-50 text-green-700" : 
+                              load.status === "Delayed" ? "border-red-200 bg-red-50 text-red-700" : 
+                              load.status === "Pending" ? "border-yellow-200 bg-yellow-50 text-yellow-700" : 
+                              "border-blue-200 bg-blue-50 text-blue-700"}
+                            font-semibold
                           `}>
                             {load.status}
                           </Badge>
                         </td>
-                        <td className="px-6 py-4 flex items-center gap-2">
-                           {load.driver !== "Unassigned" && <div className="h-6 w-6 rounded-full bg-secondary flex items-center justify-center text-xs font-bold">{load.driver ? load.driver.charAt(0) : "U"}</div>}
-                           {load.driver}
+                        <td className="px-6 py-4 flex items-center gap-3">
+                           {load.driver !== "Unassigned" && <div className="h-8 w-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-600">{load.driver ? load.driver.charAt(0) : "U"}</div>}
+                           <span className="font-medium text-zinc-700">{load.driver}</span>
                         </td>
-                        <td className="px-6 py-4 text-muted-foreground">{load.eta}</td>
-                        <td className="px-6 py-4 text-right font-medium">{load.value}</td>
+                        <td className="px-6 py-4 text-zinc-500 font-mono text-xs">{load.eta}</td>
+                        <td className="px-6 py-4 text-right font-bold text-zinc-900">{load.value}</td>
                         <td className="px-6 py-4 text-right">
-                          <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-zinc-900 transition-colors">
                             <MoreHorizontal size={16} />
                           </Button>
                         </td>
