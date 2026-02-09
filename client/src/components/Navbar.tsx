@@ -49,29 +49,29 @@ export function Navbar() {
   return (
     <>
       {/* Top Bar - Hidden on mobile, visible on desktop */}
-      <div className={`hidden lg:block fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} h-10 ${isHome ? 'bg-black text-white/80' : 'bg-zinc-100 text-zinc-600'} border-b border-white/5`}>
-        <div className="w-full max-w-[1800px] mx-auto px-8 h-full flex justify-between items-center text-xs font-medium tracking-wide">
-          <div className="flex items-center gap-6">
-            <span className={`flex items-center gap-2 hover:text-primary transition-colors cursor-pointer ${!isHome && !scrolled ? 'text-zinc-600' : ''}`}>
+      <div className={`hidden lg:flex fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} bg-zinc-100 text-zinc-600 border-b border-white/5`}>
+        <div className="w-full max-w-[1200px] mx-auto px-4 h-10 flex justify-between items-center text-xs font-medium tracking-wide">
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
               <Phone size={14} className="text-primary" /> (925) 250-4605
             </span>
-            <span className={`flex items-center gap-2 hover:text-primary transition-colors cursor-pointer ${!isHome && !scrolled ? 'text-zinc-600' : ''}`}>
+            <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
               <Mail size={14} className="text-primary" /> fortyninertrucking@gmail.com
             </span>
           </div>
-          <div className="flex items-center gap-6">
-            <span className={`flex items-center gap-2 ${!isHome && !scrolled ? 'text-zinc-600' : ''}`}>
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-2">
               <Clock size={14} className="text-primary" /> Mon - Fri: 7:00 AM - 5:00 PM
             </span>
             <Link href="/contact">
-               <span className="text-primary hover:text-white transition-colors cursor-pointer font-bold">Request A Quote &rarr;</span>
+               <span className="text-primary hover:text-zinc-900 transition-colors cursor-pointer font-bold ml-2">Request A Quote &rarr;</span>
             </Link>
           </div>
         </div>
       </div>
 
       <nav className={`fixed left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'top-0' : 'top-0 lg:top-10'} ${navbarClasses}`}>
-        <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 flex items-center justify-between h-20">
+        <div className="w-full max-w-[1200px] mx-auto px-4 flex items-center justify-between h-[72px]">
           
           {/* Logo Area */}
           <div className="flex-shrink-0 relative h-full flex items-center">
@@ -80,18 +80,19 @@ export function Navbar() {
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
-                    className={`transition-all duration-300 ${logoClasses} object-contain drop-shadow-md`}
+                    className={`transition-all duration-300 object-contain drop-shadow-md ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
+                    style={{ maxHeight: '44px', width: 'auto' }}
                   />
               </div>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((item) => (
               <Link key={item.name} href={item.href}>
                 <div className={`
-                  relative px-5 py-2 rounded-full cursor-pointer transition-all duration-300 group
+                  relative px-3 py-2 rounded-full cursor-pointer transition-all duration-300 group
                   ${linkClasses(item.href)}
                 `}>
                   <span className="text-sm tracking-wide uppercase font-semibold">{item.name}</span>
