@@ -19,11 +19,14 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 
+import { TruckLoader } from "@/components/TruckLoader";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isResetting, setIsResetting] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
   const { login } = useAuth();
   const { toast } = useToast();
@@ -37,10 +40,15 @@ export default function Login() {
       return;
     }
 
+    setIsLoggingIn(true);
+
     try {
+      // Show loader for 1 second
+      await new Promise(resolve => setTimeout(resolve, 1000));
       await login(email, password);
     } catch (err: any) {
       setError(err.message || "Failed to login");
+      setIsLoggingIn(false);
     }
   };
 
@@ -90,7 +98,12 @@ export default function Login() {
       <div className="w-full max-w-[1000px] grid md:grid-cols-2 gap-0 bg-white rounded-3xl shadow-2xl overflow-hidden border border-zinc-100">
         
         {/* Left Side - Login Form */}
-        <div className="p-8 md:p-12 flex flex-col justify-center">
+        <div className="p-8 md:p-12 flex flex-col justify-center relative">
+          {isLoggingIn ? (
+            <div className="absolute inset-0 z-10 bg-white/90 backdrop-blur-sm flex items-center justify-center rounded-3xl">
+              <TruckLoader text="Signing securely..." />
+            </div>
+          ) : null}
           <div className="mb-8">
             <h2 className="text-3xl font-black text-zinc-900 tracking-tight">Admin Portal</h2>
             <p className="text-zinc-500 mt-2">Secure access for fleet management.</p>
@@ -171,7 +184,7 @@ export default function Login() {
               </div>
             )}
 
-            <Button type="submit" className="w-full h-12 font-bold text-base bg-blue-500 text-white hover:bg-blue-600 rounded-xl shadow-lg shadow-blue-500/20">
+            <Button type="submit" className="w-full h-12 font-bold text-base bg-blue-500 text-white hover:bg-blue-600 rounded-xl shadow-lg shadow-blue-500/20" disabled={isLoggingIn}>
               Sign In <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </form>
