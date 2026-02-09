@@ -1,56 +1,115 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Truck } from "lucide-react";
+import { Truck, ArrowDown, Shield, Award, Gauge } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Fleet() {
   return (
     <div className="min-h-screen bg-white text-zinc-900 font-sans">
       <Navbar />
 
-      <section className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center">
-        {/* Background Image with Overlay */}
+      {/* Modern Fleet Hero */}
+      <section className="relative h-[90vh] w-full overflow-hidden bg-zinc-900">
+        {/* Background Image */}
         <div className="absolute inset-0 z-0">
            <img 
-             src="https://images.unsplash.com/photo-1605218427306-635ba2439af2?q=80&w=2940&auto=format&fit=crop" 
+             src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop" 
              alt="Fleet Hero" 
-             className="w-full h-full object-cover opacity-50"
+             className="w-full h-full object-cover opacity-40 scale-105"
            />
-           <div className="absolute inset-0 bg-black/60 z-10" />
+           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-transparent z-10" />
         </div>
 
-        {/* Sliding Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 overflow-hidden">
+        <div className="relative z-20 h-full w-full max-w-[1800px] mx-auto px-4 md:px-8 flex flex-col justify-center">
           <motion.div 
-            initial={{ x: "-100%", opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ 
-              duration: 1.2, 
-              ease: [0.22, 1, 0.36, 1], // Custom easing for smooth slide
-              delay: 0.2 
-            }}
-            className="flex flex-col items-center text-center space-y-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl space-y-8"
           >
-            <div className="h-24 w-24 rounded-3xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 shadow-2xl mb-8">
-              <Truck size={48} strokeWidth={1.5} />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm text-white/80 text-sm font-bold tracking-wider uppercase mb-4">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              Modern Fleet Technology
             </div>
-
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none mb-8">
-              Coming <br/>
-              <span className="text-primary text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">Soon</span>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[0.9]">
+              Power & <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">Precision</span>
             </h1>
             
-            <motion.div 
-              initial={{ width: 0 }}
-              animate={{ width: "100px" }}
-              transition={{ duration: 1, delay: 1 }}
-              className="h-1 bg-white/30 rounded-full my-8"
-            />
-
-            <p className="text-xl md:text-2xl text-white/70 max-w-2xl font-light tracking-wide mt-8">
-              We are currently updating our fleet gallery with our newest equipment. Check back shortly to view our full inventory of trucks and trailers.
+            <p className="text-xl md:text-2xl text-zinc-300 max-w-2xl font-light leading-relaxed">
+              Our diverse fleet of specialized haulers is maintained to the highest industry standards, ensuring reliable delivery for every load.
             </p>
+
+            <div className="flex flex-wrap gap-8 pt-8 border-t border-white/10 max-w-3xl">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-primary font-bold">
+                  <Shield size={20} />
+                  <span>Safety First</span>
+                </div>
+                <p className="text-sm text-zinc-400">Advanced safety systems</p>
+              </div>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-primary font-bold">
+                  <Gauge size={20} />
+                  <span>CARB Compliant</span>
+                </div>
+                <p className="text-sm text-zinc-400">Eco-friendly fleet</p>
+              </div>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-primary font-bold">
+                  <Award size={20} />
+                  <span>Well Maintained</span>
+                </div>
+                <p className="text-sm text-zinc-400">Rigorous service schedule</p>
+              </div>
+            </div>
           </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-10 left-8 md:left-12 z-20"
+        >
+          <div className="flex items-center gap-4 text-white/40">
+            <div className="h-[1px] w-12 bg-white/20"></div>
+            <span className="text-xs uppercase tracking-widest font-bold">Scroll to Explore</span>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Fleet Categories */}
+      <section className="py-24 bg-white">
+        <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
+           <div className="flex flex-col items-center justify-center text-center space-y-12">
+             <div className="space-y-4">
+                <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Our Inventory</h2>
+                <h3 className="text-4xl md:text-5xl font-black text-zinc-900">Ready for Any Job</h3>
+                <p className="text-zinc-500 max-w-2xl mx-auto text-lg">
+                  While our full gallery is being updated, rest assured we have the equipment you need.
+                </p>
+             </div>
+             
+             <div className="grid md:grid-cols-3 gap-8 w-full">
+               {[
+                 { name: "Super Dumps", desc: "Maximum payload efficiency for aggregate transport." },
+                 { name: "End Dumps", desc: "Versatile unloading for difficult job sites." },
+                 { name: "High Sides", desc: "High volume capacity for lighter materials." }
+               ].map((truck, i) => (
+                 <div key={i} className="group p-8 rounded-3xl bg-zinc-50 border border-zinc-100 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                   <div className="h-16 w-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-primary mb-6 mx-auto group-hover:scale-110 transition-transform">
+                     <Truck size={32} />
+                   </div>
+                   <h4 className="text-xl font-bold text-zinc-900 mb-2">{truck.name}</h4>
+                   <p className="text-zinc-500">{truck.desc}</p>
+                 </div>
+               ))}
+             </div>
+           </div>
         </div>
       </section>
 
