@@ -105,27 +105,6 @@ export default function Home() {
                 We don't just move materials; we build long-term partnerships with contractors, municipalities, and developers. Our commitment to safety and compliance ensures that every job is completed to the highest standards.
               </p>
             </div>
-            <div className="pt-8 grid grid-cols-3 gap-8 border-t border-zinc-200">
-              <div className="space-y-1">
-                <h4 className="text-4xl font-black text-primary">15+</h4>
-                <p className="text-sm font-bold tracking-wider text-zinc-500">Years Experience</p>
-              </div>
-              <div className="space-y-1">
-                <h4 className="text-4xl font-black text-primary">5k+</h4>
-                <p className="text-sm font-bold tracking-wider text-zinc-500">Loads Delivered</p>
-              </div>
-              <div className="space-y-1">
-                <h4 className="text-4xl font-black text-primary">100%</h4>
-                <p className="text-sm font-bold tracking-wider text-zinc-500">Safety Record</p>
-              </div>
-            </div>
-            <div className="pt-8">
-              <Link href="/about">
-                <Button className="rounded-full bg-primary hover:bg-primary/90 px-10 h-14 font-bold text-white shadow-lg">
-                  Read More
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
