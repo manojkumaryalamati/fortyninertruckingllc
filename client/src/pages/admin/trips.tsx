@@ -18,7 +18,8 @@ import {
   DollarSign, 
   Upload,
   Loader2,
-  Trash2
+  Trash2,
+  Edit
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,7 +32,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { AdminSidebar, AdminMobileHeader } from "@/components/AdminSidebar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 
 import { uploadFile } from "@/lib/storage-utils";
@@ -41,12 +42,18 @@ export default function TripsManagement() {
   const { user, logout } = useAuth();
   const { toast } = useToast();
   const [trips, setTrips] = useState<any[]>([]);
+  const [drivers, setDrivers] = useState<any[]>([]);
+  const [trucks, setTrucks] = useState<any[]>([]);
+  
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [currentTrip, setCurrentTrip] = useState<any>(null);
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  // Fetch Trips
+  // Fetch Trips, Drivers, Trucks
   useEffect(() => {
     if (!isFirebaseConfigured()) {
       toast({ title: "Configuration Missing", description: "Firebase is not configured.", variant: "destructive" });
@@ -54,14 +61,25 @@ export default function TripsManagement() {
       return;
     }
 
-    const q = query(collection(db, "trips"), orderBy("createdAt", "desc"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
+    const unsubscribeTrips = onSnapshot(query(collection(db, "trips"), orderBy("createdAt", "desc")), (snapshot) => {
       const tripsList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setTrips(tripsList);
       setIsLoading(false);
     });
 
-    return () => unsubscribe();
+    const unsubscribeDrivers = onSnapshot(query(collection(db, "drivers")), (snapshot) => {
+        setDrivers(snapshot.docs.map(d => ({ id: d.id, ...d.data() })));
+    });
+
+    const unsubscribeTrucks = onSnapshot(query(collection(db, "trucks")), (snapshot) => {
+        setTrucks(snapshot.docs.map(t => ({ id: t.id, ...t.data() })));
+    });
+
+    return () => {
+        unsubscribeTrips();
+        unsubscribeDrivers();
+        unsubscribeTrucks();
+    };
   }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,10 +103,13 @@ export default function TripsManagement() {
         date: formData.get("date") as string,
         customer: formData.get("customer") as string,
         route: `${formData.get("pickup")} → ${formData.get("dropoff")}`,
+        pickup: formData.get("pickup") as string,
+        dropoff: formData.get("dropoff") as string,
         driver: formData.get("driver") as string,
         truck: formData.get("truck") as string,
         status: "Scheduled",
         rate: `$${formData.get("rate")}`,
+        weight: formData.get("weight") as string,
         material: formData.get("material") as string,
         bolUrl: fileUrl,
         createdAt: serverTimestamp()
@@ -107,6 +128,73 @@ export default function TripsManagement() {
       toast({ title: "Error", description: "Failed to dispatch trip.", variant: "destructive" });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleEditClick = (trip: any) => {
+    setCurrentTrip(trip);
+    // Parse route back to pickup/dropoff if needed, or use stored fields
+    // Assuming we store pickup/dropoff separately now (added above), or parsing:
+    let pickup = trip.pickup;
+    let dropoff = trip.dropoff;
+    
+    if (!pickup && trip.route) {
+        const parts = trip.route.split("→");
+        if (parts.length === 2) {
+            pickup = parts[0].trim();
+            dropoff = parts[1].trim();
+        }
+    }
+
+    setCurrentTrip({
+        ...trip,
+        pickup,
+        dropoff,
+        rate: trip.rate?.replace('$', '')
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateTrip = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!currentTrip) return;
+    setIsSubmitting(true);
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    try {
+        let fileUrl = currentTrip.bolUrl;
+        if (selectedFile) {
+            fileUrl = await uploadFile(selectedFile, "trips/bol");
+        }
+
+        const updatedTrip = {
+            date: formData.get("date") as string,
+            customer: formData.get("customer") as string,
+            route: `${formData.get("pickup")} → ${formData.get("dropoff")}`,
+            pickup: formData.get("pickup") as string,
+            dropoff: formData.get("dropoff") as string,
+            driver: formData.get("driver") as string,
+            truck: formData.get("truck") as string,
+            status: formData.get("status") as string,
+            rate: `$${formData.get("rate")}`,
+            weight: formData.get("weight") as string,
+            material: formData.get("material") as string,
+            bolUrl: fileUrl,
+            updatedAt: serverTimestamp()
+        };
+
+        if (isFirebaseConfigured()) {
+            await updateDoc(doc(db, "trips", currentTrip.id), updatedTrip);
+            toast({ title: "Trip Updated", description: "Load details updated successfully." });
+        }
+        setIsEditModalOpen(false);
+        setCurrentTrip(null);
+        setSelectedFile(null);
+    } catch (error) {
+        console.error("Error updating trip:", error);
+        toast({ title: "Error", description: "Failed to update trip.", variant: "destructive" });
+    } finally {
+        setIsSubmitting(false);
     }
   };
 
@@ -202,10 +290,12 @@ export default function TripsManagement() {
                              <SelectValue placeholder="Select driver" />
                            </SelectTrigger>
                            <SelectContent>
-                             <SelectItem value="M. Rodriguez">M. Rodriguez</SelectItem>
-                             <SelectItem value="S. Jenkins">S. Jenkins</SelectItem>
-                             <SelectItem value="D. Chen">D. Chen</SelectItem>
                              <SelectItem value="Unassigned">Unassigned</SelectItem>
+                             {drivers.map(driver => (
+                               <SelectItem key={driver.id} value={driver.name}>
+                                 {driver.name}
+                               </SelectItem>
+                             ))}
                            </SelectContent>
                          </Select>
                        </div>
@@ -216,10 +306,12 @@ export default function TripsManagement() {
                              <SelectValue placeholder="Select truck" />
                            </SelectTrigger>
                            <SelectContent>
-                             <SelectItem value="TRK-409">TRK-409</SelectItem>
-                             <SelectItem value="TRK-410">TRK-410</SelectItem>
-                             <SelectItem value="TRK-205">TRK-205</SelectItem>
                              <SelectItem value="Unassigned">Unassigned</SelectItem>
+                             {trucks.map(truck => (
+                               <SelectItem key={truck.id} value={truck.truckNumber}>
+                                 {truck.truckNumber} ({truck.type})
+                               </SelectItem>
+                             ))}
                            </SelectContent>
                          </Select>
                        </div>
@@ -251,6 +343,135 @@ export default function TripsManagement() {
                  </form>
                </DialogContent>
              </Dialog>
+             {/* Edit Modal */}
+             <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+               <DialogContent className="sm:max-w-[700px]">
+                 <DialogHeader>
+                   <DialogTitle>Edit Trip Details</DialogTitle>
+                 </DialogHeader>
+                 {currentTrip && (
+                 <form onSubmit={handleUpdateTrip} className="space-y-6 py-4">
+                   <div className="space-y-4">
+                     <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Load Details</h3>
+                     <div className="grid grid-cols-2 gap-4">
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-customer">Customer Name</Label>
+                         <Input id="edit-customer" name="customer" defaultValue={currentTrip.customer} required />
+                       </div>
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-material">Material/Cargo</Label>
+                         <Input id="edit-material" name="material" defaultValue={currentTrip.material} required />
+                       </div>
+                     </div>
+                     <div className="grid grid-cols-3 gap-4">
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-rate">Rate ($)</Label>
+                         <Input id="edit-rate" name="rate" defaultValue={currentTrip.rate} type="number" required />
+                       </div>
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-weight">Weight (lbs)</Label>
+                         <Input id="edit-weight" name="weight" defaultValue={currentTrip.weight} />
+                       </div>
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-date">Pickup Date</Label>
+                         <Input id="edit-date" name="date" type="date" defaultValue={currentTrip.date} required />
+                       </div>
+                     </div>
+                   </div>
+
+                   <div className="space-y-4">
+                     <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Routing</h3>
+                     <div className="grid grid-cols-2 gap-4">
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-pickup">Pickup Location</Label>
+                         <Input id="edit-pickup" name="pickup" defaultValue={currentTrip.pickup} placeholder="City, State" required />
+                       </div>
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-dropoff">Dropoff Location</Label>
+                         <Input id="edit-dropoff" name="dropoff" defaultValue={currentTrip.dropoff} placeholder="City, State" required />
+                       </div>
+                     </div>
+                   </div>
+
+                   <div className="space-y-4">
+                     <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Assignment & Status</h3>
+                     <div className="grid grid-cols-3 gap-4">
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-driver">Assign Driver</Label>
+                         <Select name="driver" defaultValue={currentTrip.driver}>
+                           <SelectTrigger>
+                             <SelectValue placeholder="Select driver" />
+                           </SelectTrigger>
+                           <SelectContent>
+                             <SelectItem value="Unassigned">Unassigned</SelectItem>
+                             {drivers.map(driver => (
+                               <SelectItem key={driver.id} value={driver.name}>
+                                 {driver.name}
+                               </SelectItem>
+                             ))}
+                           </SelectContent>
+                         </Select>
+                       </div>
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-truck">Assign Truck</Label>
+                         <Select name="truck" defaultValue={currentTrip.truck}>
+                           <SelectTrigger>
+                             <SelectValue placeholder="Select truck" />
+                           </SelectTrigger>
+                           <SelectContent>
+                             <SelectItem value="Unassigned">Unassigned</SelectItem>
+                             {trucks.map(truck => (
+                               <SelectItem key={truck.id} value={truck.truckNumber}>
+                                 {truck.truckNumber} ({truck.type})
+                               </SelectItem>
+                             ))}
+                           </SelectContent>
+                         </Select>
+                       </div>
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-status">Status</Label>
+                         <Select name="status" defaultValue={currentTrip.status}>
+                           <SelectTrigger>
+                             <SelectValue placeholder="Status" />
+                           </SelectTrigger>
+                           <SelectContent>
+                             <SelectItem value="Scheduled">Scheduled</SelectItem>
+                             <SelectItem value="In Progress">In Progress</SelectItem>
+                             <SelectItem value="Completed">Completed</SelectItem>
+                             <SelectItem value="Cancelled">Cancelled</SelectItem>
+                           </SelectContent>
+                         </Select>
+                       </div>
+                     </div>
+                   </div>
+
+                   <div className="space-y-2">
+                     <Label>Update BOL (Optional)</Label>
+                     <div className="border-2 border-dashed border-border rounded-xl p-4 text-center hover:bg-secondary/50 transition-colors cursor-pointer relative">
+                       <input 
+                         type="file" 
+                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                         onChange={handleFileChange}
+                         accept=".pdf,.jpg,.jpeg,.png"
+                       />
+                       <Upload className="mx-auto h-6 w-6 text-muted-foreground mb-1" />
+                       <p className="text-sm font-medium">
+                         {selectedFile ? selectedFile.name : (currentTrip.bolUrl ? "Replace uploaded BOL" : "Upload Documents")}
+                       </p>
+                     </div>
+                   </div>
+
+                   <DialogFooter>
+                     <Button type="button" variant="outline" onClick={() => setIsEditModalOpen(false)}>Cancel</Button>
+                     <Button type="submit" disabled={isSubmitting}>
+                       {isSubmitting ? <Loader2 className="animate-spin" /> : "Save Changes"}
+                     </Button>
+                   </DialogFooter>
+                 </form>
+                 )}
+               </DialogContent>
+             </Dialog>
+
           </div>
         </div>
 
@@ -290,7 +511,9 @@ export default function TripsManagement() {
                            </div>
                         </div>
                         <div className="flex flex-col gap-2">
-                           <Button size="sm" variant="secondary">View Details</Button>
+                           <Button size="sm" variant="secondary" onClick={() => handleEditClick(trip)}>
+                              <Edit size={14} className="mr-1"/> Edit
+                           </Button>
                            <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10" onClick={() => handleDeleteTrip(trip.id)}><Trash2 size={14} className="mr-1"/> Delete</Button>
                         </div>
                      </div>
@@ -315,6 +538,7 @@ export default function TripsManagement() {
                         </div>
                         <div className="flex items-center gap-2">
                           <Badge variant="secondary" className="bg-green-100 text-green-700">Completed</Badge>
+                          <Button size="icon" variant="ghost" className="h-6 w-6 text-muted-foreground hover:text-foreground" onClick={() => handleEditClick(trip)}><Edit size={12} /></Button>
                           <Button size="icon" variant="ghost" className="h-6 w-6 text-destructive" onClick={() => handleDeleteTrip(trip.id)}><Trash2 size={12} /></Button>
                         </div>
                      </div>

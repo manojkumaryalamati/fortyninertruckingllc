@@ -135,8 +135,17 @@ export default function AdminDashboard() {
 
     // Subscribe to Trips
     const unsubscribeTrips = onSnapshot(collection(db, "trips"), (snapshot) => {
+       let totalRevenue = 0;
+       
        const trips = snapshot.docs.map(doc => {
          const data = doc.data();
+         
+         // Calculate Revenue
+         if (data.rate) {
+           const rateVal = parseFloat(data.rate.replace(/[^0-9.]/g, '') || "0");
+           totalRevenue += rateVal;
+         }
+
          return {
             id: doc.id,
             customer: data.customer,
@@ -152,8 +161,16 @@ export default function AdminDashboard() {
          setRecentShipments(trips.slice(0, 5));
          setStats(prev => ({ 
            ...prev, 
-           trucksOnRoad: trips.filter(t => t.status === "In Transit" || t.status === "In Progress").length 
+           trucksOnRoad: trips.filter(t => t.status === "In Transit" || t.status === "In Progress" || t.status === "Scheduled").length,
+           revenue: `$${totalRevenue.toLocaleString()}`
          }));
+       } else {
+          // If no trips, keep 0
+          setStats(prev => ({ 
+             ...prev, 
+             trucksOnRoad: 0,
+             revenue: "$0"
+           }));
        }
        setIsLoading(false);
     });
