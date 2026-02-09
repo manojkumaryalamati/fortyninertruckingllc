@@ -10,39 +10,43 @@ export default function Fleet() {
       <Navbar />
 
       {/* Modern Fleet Hero */}
-      <section className="relative h-[90vh] w-full overflow-hidden bg-zinc-900">
+      <section className="relative min-h-[70vh] w-full overflow-hidden bg-zinc-900 py-16">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
            <img 
              src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop" 
              alt="Fleet Hero" 
-             className="w-full h-full object-cover opacity-40 scale-105"
+             className="w-full h-full object-cover object-center opacity-40"
            />
-           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-transparent z-10" />
+           {/* Overlay */}
+           <div 
+             className="absolute inset-0 z-10" 
+             style={{ background: 'linear-gradient(90deg, rgba(0,0,0,0.70), rgba(0,0,0,0.20))' }}
+           />
         </div>
 
-        <div className="relative z-20 h-full w-full max-w-[1800px] mx-auto px-4 md:px-8 flex flex-col justify-center">
+        <div className="relative z-20 h-full w-full max-w-[1200px] mx-auto px-4 flex flex-col justify-center items-start">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl space-y-8"
+            className="w-full max-w-[800px] space-y-8"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm text-white/80 text-sm font-bold tracking-wider uppercase mb-4">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
               Modern Fleet Technology
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[0.9]">
+            <h1 className="font-black tracking-tighter text-white leading-[1.05]" style={{ fontSize: 'clamp(40px, 6vw, 92px)' }}>
               Power & <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">Precision</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-zinc-300 max-w-2xl font-light leading-relaxed">
+            <p className="text-zinc-300 font-light leading-relaxed" style={{ fontSize: 'clamp(16px, 2vw, 20px)', maxWidth: '560px' }}>
               Our diverse fleet of specialized haulers is maintained to the highest industry standards, ensuring reliable delivery for every load.
             </p>
 
-            <div className="flex flex-wrap gap-8 pt-8 border-t border-white/10 max-w-3xl">
+            <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-white/10 max-w-3xl">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-primary font-bold">
                   <Shield size={20} />
