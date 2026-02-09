@@ -493,11 +493,11 @@ export default function TripsManagement() {
                   <TruckLoader text="Loading trips..." />
                 ) : (
                 <div className="divide-y divide-border">
-                  {trips.filter(t => t.status !== "Completed").map(trip => (
+                  {trips.map(trip => (
                      <div key={trip.id} className="p-4 hover:bg-secondary/20 transition-colors flex flex-col md:flex-row gap-4 justify-between items-start md:items-center group">
                         <div className="space-y-2">
                            <div className="flex items-center gap-2">
-                              <span className="font-mono text-xs text-muted-foreground font-bold truncate w-20">#{trip.id}</span>
+                              <span className="font-mono text-xs text-muted-foreground font-bold truncate w-20">#{trip.id.substring(0, 8)}</span>
                               <Badge variant={trip.status === "In Progress" ? "default" : "outline"}>{trip.status}</Badge>
                               <span className="text-xs text-muted-foreground flex items-center gap-1"><Calendar size={12} /> {trip.date}</span>
                            </div>

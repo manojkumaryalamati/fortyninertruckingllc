@@ -28,32 +28,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { TruckLoader } from "@/components/TruckLoader";
 
-// Mock data for fallback
-const mockRegistrations = [
-  {
-    id: "reg_001",
-    companyName: "Bay Area Hauling",
-    contactPerson: "James Wilson",
-    email: "james@bayareahauling.com",
-    phone: "(510) 555-0123",
-    truckTypes: "End Dumps, Flatbeds",
-    fleetSize: "6-10",
-    status: "new",
-    createdAt: { seconds: 1675234567 }
-  },
-  {
-    id: "reg_002",
-    companyName: "Express Logistics",
-    contactPerson: "Sarah Miller",
-    email: "s.miller@expresslog.com",
-    phone: "(408) 555-9876",
-    truckTypes: "Super 10s",
-    fleetSize: "1-5",
-    status: "reviewed",
-    createdAt: { seconds: 1674234567 }
-  }
-];
-
 export default function AdminSubhaulers() {
   const { toast } = useToast();
   const [registrations, setRegistrations] = useState<any[]>([]);
@@ -67,7 +41,6 @@ export default function AdminSubhaulers() {
 
   useEffect(() => {
     if (!isFirebaseConfigured()) {
-      setRegistrations(mockRegistrations);
       setIsLoading(false);
       return;
     }
@@ -84,10 +57,9 @@ export default function AdminSubhaulers() {
       console.error("Error fetching registrations:", error);
       toast({
         title: "Error",
-        description: "Failed to load registrations. Showing mock data.",
+        description: "Failed to load registrations.",
         variant: "destructive"
       });
-      setRegistrations(mockRegistrations);
       setIsLoading(false);
     });
 
