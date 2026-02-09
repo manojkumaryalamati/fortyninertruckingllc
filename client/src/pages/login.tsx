@@ -184,7 +184,7 @@ export default function Login() {
               </div>
             )}
 
-            <Button type="submit" className="w-full h-12 font-bold text-base bg-zinc-900 text-white hover:bg-zinc-800 rounded-xl shadow-lg shadow-zinc-900/20" disabled={isLoggingIn}>
+            <Button type="submit" className="w-full h-12 font-bold text-base bg-zinc-200 text-zinc-900 hover:bg-zinc-300 rounded-xl shadow-lg shadow-zinc-200/50" disabled={isLoggingIn}>
               Sign In <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </form>
@@ -206,21 +206,21 @@ export default function Login() {
         </div>
 
         {/* Right Side - Visual */}
-        <div className="hidden md:block relative bg-zinc-900">
+        <div className="hidden md:block relative bg-zinc-100">
           <div className="absolute inset-0">
             <img 
               src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop"
               alt="Login Visual"
-              className="w-full h-full object-cover opacity-20 mix-blend-overlay"
+              className="w-full h-full object-cover opacity-5 mix-blend-multiply"
             />
           </div>
-          <div className="relative h-full flex flex-col justify-between p-12 text-white">
+          <div className="relative h-full flex flex-col justify-between p-12 text-zinc-900">
             <div className="space-y-2">
-              <div className="h-12 w-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/10 mb-6">
-                <CheckCircle2 className="h-6 w-6" />
+              <div className="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-zinc-200 mb-6">
+                <CheckCircle2 className="h-6 w-6 text-zinc-700" />
               </div>
-              <h3 className="text-2xl font-bold">Operational Excellence</h3>
-              <p className="text-zinc-400 leading-relaxed max-w-sm">
+              <h3 className="text-2xl font-bold text-zinc-900">Operational Excellence</h3>
+              <p className="text-zinc-500 leading-relaxed max-w-sm">
                 Manage your fleet, track shipments, and coordinate drivers all in one centralized platform.
               </p>
             </div>
@@ -228,7 +228,7 @@ export default function Login() {
             <div className="space-y-4">
               <div className="flex -space-x-4">
                 {[1,2,3,4].map(i => (
-                  <div key={i} className="h-10 w-10 rounded-full border-2 border-zinc-900 bg-zinc-700 flex items-center justify-center text-xs font-bold">
+                  <div key={i} className="h-10 w-10 rounded-full border-2 border-white bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-600">
                     {i}
                   </div>
                 ))}
