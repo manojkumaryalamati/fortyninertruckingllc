@@ -318,7 +318,7 @@ export default function AdminDashboard() {
               </DialogContent>
             </Dialog>
 
-            <Button variant="ghost" size="icon" className="relative">
+            <Button variant="ghost" size="icon" className="relative hidden">
               <Bell size={18} />
               <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full" />
             </Button>
