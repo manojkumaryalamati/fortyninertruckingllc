@@ -42,6 +42,7 @@ import { updatePassword, updateProfile } from "firebase/auth";
 import { auth, db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, onSnapshot, query, where, getCountFromServer, orderBy, limit } from "firebase/firestore";
 import { TruckLoader } from "@/components/TruckLoader";
+import { utils, writeFile } from "xlsx";
 
 export default function AdminDashboard() {
   const [location] = useLocation();
@@ -158,6 +159,41 @@ export default function AdminDashboard() {
 
     setFilteredShipments(result);
   }, [recentShipments, searchTerm, statusFilter]);
+
+  const handleExport = () => {
+    if (filteredShipments.length === 0) {
+      toast({
+        title: "No Data",
+        description: "There is no data to export.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Format data for export
+    const exportData = filteredShipments.map(item => ({
+      "Load ID": item.id,
+      "Customer": item.customer,
+      "Destination": item.destination,
+      "Status": item.status,
+      "Driver": item.driver || "Unassigned",
+      "ETA": item.eta,
+      "Value": item.value
+    }));
+
+    const ws = utils.json_to_sheet(exportData);
+    const wb = utils.book_new();
+    utils.book_append_sheet(wb, ws, "Shipments");
+    
+    // Generate filename with timestamp
+    const date = new Date().toISOString().split('T')[0];
+    writeFile(wb, `Shipments_${date}.xlsx`);
+    
+    toast({
+      title: "Export Started",
+      description: "Your download should begin shortly."
+    });
+  };
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -380,7 +416,9 @@ export default function AdminDashboard() {
                     <SelectItem value="Delayed">Delayed</SelectItem>
                   </SelectContent>
                 </Select>
-                <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200"><Download className="mr-2 h-4 w-4" /> Export</Button>
+                <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200" onClick={handleExport}>
+                  <Download className="mr-2 h-4 w-4" /> Export
+                </Button>
               </div>
             </div>
             
