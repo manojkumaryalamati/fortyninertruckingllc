@@ -167,7 +167,7 @@ export default function Contact() {
                      <div>
                        <h3 className="text-base font-bold mb-1 text-zinc-900">Hours of Operation</h3>
                        <p className="text-zinc-500 mb-1 text-sm">Office Hours</p>
-                       <p className="text-lg font-semibold text-zinc-700">Mon - Fri: 7:00 AM - 5:00 PM</p>
+                       <p className="text-lg font-semibold text-zinc-700">24/7</p>
                        <p className="text-zinc-500 mt-1 text-sm">Dispatch available 24/7</p>
                      </div>
                    </div>
