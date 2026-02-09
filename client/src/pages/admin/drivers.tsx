@@ -33,7 +33,7 @@ import { AdminSidebar, AdminMobileHeader } from "@/components/AdminSidebar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, onSnapshot, query, orderBy, deleteDoc, doc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
-import { createDriverWithDocs } from "@/services/driverRegistration";
+import { createDriverWithDocs, updateDriverWithDocs } from "@/services/driverRegistration";
 
 import { uploadFile } from "@/lib/storage-utils";
 
@@ -51,6 +51,9 @@ export default function DriversManagement() {
   // View Profile Modal State
   const [selectedDriver, setSelectedDriver] = useState<any>(null);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [medicalFile, setMedicalFile] = useState<File | null>(null);
 
   // Fetch Drivers from Firestore
   useEffect(() => {
@@ -75,9 +78,54 @@ export default function DriversManagement() {
     driver.id.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'dl' | 'medical') => {
     if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
+      if (type === 'dl') setSelectedFile(e.target.files[0]);
+      if (type === 'medical') setMedicalFile(e.target.files[0]);
+    }
+  };
+
+  const handleEditDriver = (driver: any) => {
+    setSelectedDriver(driver);
+    setIsViewModalOpen(false); // Close view modal if open
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateDriver = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedDriver) return;
+
+    setIsSubmitting(true);
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    try {
+      if (isFirebaseConfigured()) {
+        await updateDriverWithDocs(
+          selectedDriver.id,
+          {
+            name: formData.get("name") as string,
+            phone: formData.get("phone") as string,
+            email: formData.get("email") as string,
+            license: formData.get("license") as string,
+            status: formData.get("status") as string,
+            truck: formData.get("truck") as string,
+          },
+          selectedFile || undefined,
+          medicalFile || undefined
+        );
+        toast({ title: "Profile Updated", description: "Driver details saved successfully." });
+      } else {
+        throw new Error("Firebase not configured");
+      }
+      setIsEditModalOpen(false);
+      setSelectedFile(null);
+      setMedicalFile(null);
+      setSelectedDriver(null);
+    } catch (error) {
+      console.error("Error updating driver:", error);
+      toast({ title: "Error", description: "Failed to update driver.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -197,18 +245,18 @@ export default function DriversManagement() {
                      </div>
                    </div>
 
-                   <div className="space-y-2">
+                     <div className="space-y-2">
                      <Label>Upload Documents</Label>
                      <div className="border-2 border-dashed border-border rounded-xl p-6 text-center hover:bg-secondary/50 transition-colors cursor-pointer relative">
                        <input 
                          type="file" 
                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                         onChange={handleFileChange}
+                         onChange={(e) => handleFileChange(e, 'dl')}
                          accept=".pdf,.jpg,.jpeg,.png"
                        />
                        <Upload className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
                        <p className="text-sm font-medium">
-                         {selectedFile ? selectedFile.name : "Click to upload CDL or Medical Card"}
+                         {selectedFile ? selectedFile.name : "Click to upload CDL"}
                        </p>
                        <p className="text-xs text-muted-foreground">PDF, JPG up to 10MB</p>
                      </div>
@@ -396,9 +444,94 @@ export default function DriversManagement() {
 
                      <DialogFooter>
                        <Button variant="outline" onClick={() => setIsViewModalOpen(false)}>Close</Button>
-                       <Button>Edit Profile</Button>
+                       <Button onClick={() => handleEditDriver(selectedDriver)}>Edit Profile</Button>
                      </DialogFooter>
                    </div>
+                 )}
+               </DialogContent>
+             </Dialog>
+
+             {/* Edit Profile Modal */}
+             <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+               <DialogContent className="sm:max-w-[600px]">
+                 <DialogHeader>
+                   <DialogTitle>Edit Driver Profile</DialogTitle>
+                 </DialogHeader>
+                 {selectedDriver && (
+                   <form onSubmit={handleUpdateDriver} className="space-y-6 py-4">
+                     <div className="grid grid-cols-2 gap-4">
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-name">Full Name</Label>
+                         <Input id="edit-name" name="name" defaultValue={selectedDriver.name} required />
+                       </div>
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-phone">Phone Number</Label>
+                         <Input id="edit-phone" name="phone" defaultValue={selectedDriver.phone} required />
+                       </div>
+                     </div>
+                     
+                     <div className="space-y-2">
+                       <Label htmlFor="edit-email">Email Address</Label>
+                       <Input id="edit-email" name="email" type="email" defaultValue={selectedDriver.email} required />
+                     </div>
+
+                     <div className="grid grid-cols-2 gap-4">
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-license">CDL Number</Label>
+                         <Input id="edit-license" name="license" defaultValue={selectedDriver.license} required />
+                       </div>
+                       <div className="space-y-2">
+                         <Label htmlFor="edit-status">Status</Label>
+                         <Select name="status" defaultValue={selectedDriver.status}>
+                           <SelectTrigger>
+                             <SelectValue placeholder="Select status" />
+                           </SelectTrigger>
+                           <SelectContent>
+                             <SelectItem value="Active">Active</SelectItem>
+                             <SelectItem value="On Leave">On Leave</SelectItem>
+                             <SelectItem value="Suspended">Suspended</SelectItem>
+                           </SelectContent>
+                         </Select>
+                       </div>
+                     </div>
+                     
+                     <div className="space-y-2">
+                        <Label htmlFor="edit-truck">Assigned Truck</Label>
+                        <Select name="truck" defaultValue={selectedDriver.truck || "Unassigned"}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select truck" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Unassigned">Unassigned</SelectItem>
+                            <SelectItem value="TRK-409">TRK-409</SelectItem>
+                            <SelectItem value="TRK-410">TRK-410</SelectItem>
+                            <SelectItem value="TRK-205">TRK-205</SelectItem>
+                          </SelectContent>
+                        </Select>
+                     </div>
+
+                     <div className="space-y-4 pt-2 border-t border-border">
+                       <Label className="font-bold">Update Documents</Label>
+                       
+                       <div className="grid grid-cols-2 gap-4">
+                         <div className="space-y-2">
+                            <Label className="text-xs text-muted-foreground">Driver's License (Update)</Label>
+                            <Input type="file" onChange={(e) => handleFileChange(e, 'dl')} accept=".pdf,.jpg,.png" />
+                         </div>
+                         <div className="space-y-2">
+                            <Label className="text-xs text-muted-foreground">Medical Card (Update/Add)</Label>
+                            <Input type="file" onChange={(e) => handleFileChange(e, 'medical')} accept=".pdf,.jpg,.png" />
+                         </div>
+                       </div>
+                     </div>
+
+                     <DialogFooter>
+                       <Button type="button" variant="outline" onClick={() => setIsEditModalOpen(false)}>Cancel</Button>
+                       <Button type="submit" disabled={isSubmitting}>
+                         {isSubmitting ? <Loader2 className="animate-spin" /> : "Save Changes"}
+                       </Button>
+                     </DialogFooter>
+                   </form>
                  )}
                </DialogContent>
              </Dialog>
