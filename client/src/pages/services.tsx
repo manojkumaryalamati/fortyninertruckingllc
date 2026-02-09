@@ -62,17 +62,6 @@ export default function Services() {
                    className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/50" 
                    alt="Construction Hauling" 
                  />
-                 <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl border border-zinc-100 shadow-xl hidden lg:block">
-                   <div className="flex items-center gap-4">
-                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                       <ShieldCheck size={24} />
-                     </div>
-                     <div>
-                       <p className="text-xs text-muted-foreground font-bold">Compliance</p>
-                       <p className="font-bold text-zinc-900">100% Certified</p>
-                     </div>
-                   </div>
-                 </div>
                </div>
                
                <div className="order-1 md:order-2 space-y-8">
