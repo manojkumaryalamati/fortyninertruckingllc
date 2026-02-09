@@ -36,10 +36,6 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto space-y-8"
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-              <span className="text-primary">Reliable</span> Logistics <br />
-              <span className="text-white">Partner</span>
-            </h1>
             
             <p className="text-base md:text-xl text-white/80 font-medium max-w-2xl mx-auto leading-relaxed">
               California's premier partner for construction logistics and material transport.
