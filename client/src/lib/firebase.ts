@@ -20,5 +20,5 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 
 export const isFirebaseConfigured = () => {
-  return !!import.meta.env.VITE_FIREBASE_API_KEY;
+  return !!firebaseConfig.apiKey;
 };
