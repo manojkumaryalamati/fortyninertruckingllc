@@ -122,53 +122,53 @@ export default function Contact() {
              {/* Contact Info */}
              <div className="lg:col-span-5 space-y-16">
                <div>
-                 <h2 className="text-3xl font-bold tracking-tight mb-8 text-zinc-900">Get in Touch</h2>
-                 <div className="space-y-8">
-                   <div className="flex items-start gap-5 group">
-                     <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
-                       <Phone size={24} />
+                 <h2 className="text-2xl font-bold tracking-tight mb-8 text-zinc-900">Get in Touch</h2>
+                 <div className="space-y-6">
+                   <div className="flex items-start gap-4 group">
+                     <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+                       <Phone size={20} />
                      </div>
                      <div>
-                       <h3 className="text-lg font-bold mb-1 text-zinc-900">Phone Support</h3>
-                       <p className="text-zinc-500 mb-2">24/7 Dispatch Availability</p>
-                       <a href="tel:9252504605" className="text-xl font-semibold hover:text-primary transition-colors text-zinc-700">(925) 250-4605</a>
+                       <h3 className="text-base font-bold mb-1 text-zinc-900">Phone Support</h3>
+                       <p className="text-zinc-500 mb-1 text-sm">24/7 Dispatch Availability</p>
+                       <a href="tel:9252504605" className="text-lg font-semibold hover:text-primary transition-colors text-zinc-700">(925) 250-4605</a>
                      </div>
                    </div>
 
-                   <div className="flex items-start gap-5 group">
-                     <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
-                       <Mail size={24} />
+                   <div className="flex items-start gap-4 group">
+                     <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+                       <Mail size={20} />
                      </div>
                      <div>
-                       <h3 className="text-lg font-bold mb-1 text-zinc-900">Email</h3>
-                       <p className="text-zinc-500 mb-2">For quotes and bids</p>
-                       <a href="mailto:fortyninertrucking@gmail.com" className="text-xl font-semibold hover:text-primary transition-colors text-zinc-700">fortyninertrucking@gmail.com</a>
+                       <h3 className="text-base font-bold mb-1 text-zinc-900">Email</h3>
+                       <p className="text-zinc-500 mb-1 text-sm">For quotes and bids</p>
+                       <a href="mailto:fortyninertrucking@gmail.com" className="text-lg font-semibold hover:text-primary transition-colors text-zinc-700">fortyninertrucking@gmail.com</a>
                      </div>
                    </div>
 
-                   <div className="flex items-start gap-5 group">
-                     <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
-                       <MapPin size={24} />
+                   <div className="flex items-start gap-4 group">
+                     <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+                       <MapPin size={20} />
                      </div>
                      <div>
-                       <h3 className="text-lg font-bold mb-1 text-zinc-900">Headquarters</h3>
-                       <p className="text-zinc-500 mb-2">Main Terminal & Office</p>
-                       <address className="text-xl font-semibold not-italic text-zinc-700">
+                       <h3 className="text-base font-bold mb-1 text-zinc-900">Headquarters</h3>
+                       <p className="text-zinc-500 mb-1 text-sm">Main Terminal & Office</p>
+                       <address className="text-lg font-semibold not-italic text-zinc-700">
                          28 Glen Canyon Court<br/>
                          Pittsburg, CA 94565
                        </address>
                      </div>
                    </div>
 
-                   <div className="flex items-start gap-5 group">
-                     <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
-                       <Clock size={24} />
+                   <div className="flex items-start gap-4 group">
+                     <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+                       <Clock size={20} />
                      </div>
                      <div>
-                       <h3 className="text-lg font-bold mb-1 text-zinc-900">Hours of Operation</h3>
-                       <p className="text-zinc-500 mb-2">Office Hours</p>
-                       <p className="text-xl font-semibold text-zinc-700">Mon - Fri: 7:00 AM - 5:00 PM</p>
-                       <p className="text-zinc-500 mt-1">Dispatch available 24/7</p>
+                       <h3 className="text-base font-bold mb-1 text-zinc-900">Hours of Operation</h3>
+                       <p className="text-zinc-500 mb-1 text-sm">Office Hours</p>
+                       <p className="text-lg font-semibold text-zinc-700">Mon - Fri: 7:00 AM - 5:00 PM</p>
+                       <p className="text-zinc-500 mt-1 text-sm">Dispatch available 24/7</p>
                      </div>
                    </div>
                  </div>
