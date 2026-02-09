@@ -37,6 +37,8 @@ import { useToast } from "@/hooks/use-toast";
 
 import { uploadFile } from "@/lib/storage-utils";
 
+import { TruckLoader } from "@/components/TruckLoader";
+
 export default function TripsManagement() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
@@ -488,7 +490,7 @@ export default function TripsManagement() {
                   </div>
                 </div>
                 {isLoading ? (
-                  <div className="p-12 flex justify-center"><Loader2 className="animate-spin text-primary" /></div>
+                  <TruckLoader text="Loading trips..." />
                 ) : (
                 <div className="divide-y divide-border">
                   {trips.filter(t => t.status !== "Completed").map(trip => (

@@ -24,6 +24,8 @@ import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 import { Truck as TruckType } from "@/lib/types";
 
+import { TruckLoader } from "@/components/TruckLoader";
+
 export default function TrucksManagement() {
   const { toast } = useToast();
   const [trucks, setTrucks] = useState<TruckType[]>([]);
@@ -244,7 +246,13 @@ export default function TrucksManagement() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
-                    {filteredTrucks.length === 0 ? (
+                    {isLoading ? (
+                      <tr>
+                        <td colSpan={5} className="px-6 py-8">
+                          <TruckLoader text="Loading trucks..." size="sm" />
+                        </td>
+                      </tr>
+                    ) : filteredTrucks.length === 0 ? (
                       <tr>
                         <td colSpan={5} className="px-6 py-12 text-center text-muted-foreground">
                           <div className="flex flex-col items-center gap-2">

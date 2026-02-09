@@ -26,6 +26,8 @@ import { format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+import { TruckLoader } from "@/components/TruckLoader";
+
 // Mock data for fallback
 const mockRegistrations = [
   {
@@ -257,9 +259,8 @@ export default function AdminSubhaulers() {
                   <tbody className="divide-y divide-zinc-100 bg-white">
                     {isLoading ? (
                       <tr>
-                        <td colSpan={6} className="px-6 py-8 text-center text-zinc-500">
-                          <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
-                          Loading registrations...
+                        <td colSpan={6} className="px-6 py-8">
+                          <TruckLoader text="Loading registrations..." size="sm" />
                         </td>
                       </tr>
                     ) : filteredRegistrations.length === 0 ? (

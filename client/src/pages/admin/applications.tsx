@@ -28,6 +28,8 @@ import { format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+import { TruckLoader } from "@/components/TruckLoader";
+
 // Mock data for fallback
 const mockApplications = [
   {
@@ -284,9 +286,8 @@ export default function AdminApplications() {
                   <tbody className="divide-y divide-zinc-100 bg-white">
                     {isLoading ? (
                       <tr>
-                        <td colSpan={6} className="px-6 py-8 text-center text-zinc-500">
-                          <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
-                          Loading applications...
+                        <td colSpan={6} className="px-6 py-8">
+                          <TruckLoader text="Loading applications..." size="sm" />
                         </td>
                       </tr>
                     ) : filteredApplications.length === 0 ? (

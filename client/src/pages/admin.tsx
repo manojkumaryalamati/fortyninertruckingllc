@@ -97,6 +97,8 @@ const mockShipments = [
   { id: "FT-9285", customer: "Walmart DC", destination: "Phoenix, AZ", status: "Delayed", driver: "B. Davis", eta: "+2h Delay", value: "$2,100" },
 ];
 
+import { TruckLoader } from "@/components/TruckLoader";
+
 export default function AdminDashboard() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
@@ -349,6 +351,11 @@ export default function AdminDashboard() {
           </div>
         </header>
 
+        {isLoading ? (
+          <div className="h-[calc(100vh-4rem)] flex items-center justify-center">
+            <TruckLoader text="Loading dashboard..." />
+          </div>
+        ) : (
         <div className="p-6 space-y-8 max-w-[1600px] mx-auto">
           {/* Key Metrics */}
           <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -442,6 +449,7 @@ export default function AdminDashboard() {
             </Card>
           </section>
         </div>
+        )}
       </main>
       </div>
     </div>

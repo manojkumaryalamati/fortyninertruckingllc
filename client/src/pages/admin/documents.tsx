@@ -37,6 +37,8 @@ import { useToast } from "@/hooks/use-toast";
 
 import { uploadFile } from "@/lib/storage-utils";
 
+import { TruckLoader } from "@/components/TruckLoader";
+
 export default function DocumentsCenter() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
@@ -478,7 +480,7 @@ export default function DocumentsCenter() {
              </div>
              
              {isLoading ? (
-               <div className="p-12 flex justify-center"><Loader2 className="animate-spin text-primary" /></div>
+               <TruckLoader text="Loading documents..." />
              ) : (
              <div className="overflow-x-auto">
                <table className="w-full text-sm text-left">
