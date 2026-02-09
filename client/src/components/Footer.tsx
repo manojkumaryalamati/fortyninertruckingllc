@@ -11,7 +11,12 @@ export default function Footer() {
           <div className="space-y-6">
             <Link href="/">
               <div className="block cursor-pointer">
-                <img src={logo} alt="FortyNiner Trucking" className="h-10 w-auto brightness-0" />
+                <img 
+                  src={logo} 
+                  alt="FortyNiner Trucking" 
+                  className="brightness-0 object-contain drop-shadow-md" 
+                  style={{ maxHeight: '165px', width: 'auto' }}
+                />
               </div>
             </Link>
             <p className="text-zinc-600 leading-relaxed">
