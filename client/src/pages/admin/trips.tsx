@@ -480,7 +480,7 @@ export default function TripsManagement() {
         {/* Dispatch Board Layout */}
         <div className="grid lg:grid-cols-3 gap-6">
            {/* Active Trips Column */}
-           <div className="lg:col-span-3 space-y-6">
+           <div className="lg:col-span-2 space-y-6">
               <Card>
                 <div className="p-4 border-b border-border flex items-center justify-between">
                   <h3 className="font-bold">Active & Scheduled</h3>
@@ -546,6 +546,40 @@ export default function TripsManagement() {
                      </div>
                   ))}
                 </div>
+              </Card>
+           </div>
+           
+           {/* Unassigned Drivers */}
+           <div className="space-y-6">
+              <Card>
+                 <CardContent className="p-6">
+                    <h3 className="font-bold mb-4">Unassigned Drivers</h3>
+                    <div className="space-y-3">
+                       {drivers.filter(d => d.status === "Active").length > 0 ? (
+                         drivers.filter(d => d.status === "Active").map((driver) => (
+                          <div key={driver.id} className="flex items-center justify-between p-2 rounded-lg hover:bg-secondary">
+                             <div className="flex items-center gap-2">
+                                <div className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center text-xs font-bold text-muted-foreground border border-border">
+                                    {driver.name.charAt(0)}
+                                </div>
+                                <div>
+                                    <span className="text-sm font-medium block">{driver.name}</span>
+                                    <span className="text-xs text-muted-foreground block">{driver.licenseNumber || "No License"}</span>
+                                </div>
+                             </div>
+                             <Button size="sm" variant="ghost" onClick={() => {
+                                 // Pre-fill modal with this driver
+                                 setIsAddModalOpen(true);
+                             }}>Assign</Button>
+                          </div>
+                       ))
+                       ) : (
+                           <div className="text-center text-sm text-muted-foreground py-4">
+                               No active drivers available.
+                           </div>
+                       )}
+                    </div>
+                 </CardContent>
               </Card>
            </div>
         </div>
