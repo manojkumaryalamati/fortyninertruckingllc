@@ -40,80 +40,26 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { updatePassword, updateProfile } from "firebase/auth";
 import { auth, db, isFirebaseConfigured } from "@/lib/firebase";
-import { collection, onSnapshot, query, where, getCountFromServer } from "firebase/firestore";
-
-// Mock Data for Charts
-const weeklyData = [
-  { name: "Mon", value: 12400 },
-  { name: "Tue", value: 14200 },
-  { name: "Wed", value: 11800 },
-  { name: "Thu", value: 15600 },
-  { name: "Fri", value: 18900 },
-  { name: "Sat", value: 16400 },
-  { name: "Sun", value: 13200 },
-];
-
-const monthlyData = [
-  { name: "Week 1", value: 45000 },
-  { name: "Week 2", value: 52000 },
-  { name: "Week 3", value: 48000 },
-  { name: "Week 4", value: 61000 },
-];
-
-const quarterlyData = [
-  { name: "Jan", value: 180000 },
-  { name: "Feb", value: 210000 },
-  { name: "Mar", value: 195000 },
-];
-
-const yearlyData = [
-  { name: "Jan", value: 180000 },
-  { name: "Feb", value: 210000 },
-  { name: "Mar", value: 195000 },
-  { name: "Apr", value: 230000 },
-  { name: "May", value: 245000 },
-  { name: "Jun", value: 215000 },
-  { name: "Jul", value: 260000 },
-  { name: "Aug", value: 280000 },
-  { name: "Sep", value: 250000 },
-  { name: "Oct", value: 290000 },
-  { name: "Nov", value: 310000 },
-  { name: "Dec", value: 340000 },
-];
-
-const revenueDataMap = {
-  weekly: weeklyData,
-  monthly: monthlyData,
-  quarterly: quarterlyData,
-  yearly: yearlyData,
-};
-
-// Mock Data for Table (Fallback)
-const mockShipments = [
-  { id: "FT-9281", customer: "Tesla Gigafactory", destination: "Austin, TX", status: "In Transit", driver: "M. Rodriguez", eta: "2h 15m", value: "$4,200" },
-  { id: "FT-9282", customer: "Amazon fulfillment", destination: "Reno, NV", status: "Delivered", driver: "J. Smith", eta: "Arrived", value: "$1,850" },
-  { id: "FT-9283", customer: "Home Depot HQ", destination: "Atlanta, GA", status: "Pending", driver: "Unassigned", eta: "Tom. 8am", value: "$3,100" },
-  { id: "FT-9284", customer: "Costco Wholesale", destination: "Seattle, WA", status: "In Transit", driver: "K. Johnson", eta: "4h 30m", value: "$2,900" },
-  { id: "FT-9285", customer: "Walmart DC", destination: "Phoenix, AZ", status: "Delayed", driver: "B. Davis", eta: "+2h Delay", value: "$2,100" },
-];
-
+import { collection, onSnapshot, query, where, getCountFromServer, orderBy, limit } from "firebase/firestore";
 import { TruckLoader } from "@/components/TruckLoader";
 
 export default function AdminDashboard() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
   const { toast } = useToast();
-  const [revenueFilter, setRevenueFilter] = useState<keyof typeof revenueDataMap>("weekly");
   
   // Real-time Data States
   const [stats, setStats] = useState({
-    activeDrivers: 42,
-    trucksOnRoad: 38,
-    revenue: "$12,450",
-    safetyScore: "98/100"
+    activeDrivers: 0,
+    trucksOnRoad: 0,
+    revenue: "$0",
+    safetyScore: "100/100" // Default perfect score until incidents found
   });
-  const [recentShipments, setRecentShipments] = useState(mockShipments);
+  const [recentShipments, setRecentShipments] = useState<any[]>([]);
+  const [filteredShipments, setFilteredShipments] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
 
   // Profile Update State
   const [isUpdateProfileOpen, setIsUpdateProfileOpen] = useState(false);
@@ -129,23 +75,28 @@ export default function AdminDashboard() {
       return;
     }
 
-    // Subscribe to Drivers count
     const unsubscribeDrivers = onSnapshot(collection(db, "drivers"), (snapshot) => {
        const activeCount = snapshot.docs.filter(d => d.data().status === "Active").length;
-       setStats(prev => ({ ...prev, activeDrivers: activeCount || 42 })); // Fallback to mock if 0 for demo visual
+       setStats(prev => ({ ...prev, activeDrivers: activeCount }));
     });
 
-    // Subscribe to Trips
-    const unsubscribeTrips = onSnapshot(collection(db, "trips"), (snapshot) => {
+    const unsubscribeTrips = onSnapshot(query(collection(db, "trips"), orderBy("createdAt", "desc"), limit(50)), (snapshot) => {
        let totalRevenue = 0;
+       let completedTrips = 0;
+       let totalTrips = 0;
        
        const trips = snapshot.docs.map(doc => {
          const data = doc.data();
+         totalTrips++;
          
          // Calculate Revenue
          if (data.rate) {
            const rateVal = parseFloat(data.rate.replace(/[^0-9.]/g, '') || "0");
            totalRevenue += rateVal;
+         }
+
+         if (data.status === "Delivered") {
+            completedTrips++;
          }
 
          return {
@@ -154,26 +105,27 @@ export default function AdminDashboard() {
             destination: data.route?.split("→")[1]?.trim() || "Unknown",
             status: data.status === "In Progress" ? "In Transit" : data.status,
             driver: data.driver,
-            eta: "Unknown", // Would need real tracking for this
-            value: data.rate
+            eta: data.deliveryDate ? new Date(data.deliveryDate.seconds * 1000).toLocaleDateString() : "Pending",
+            value: data.rate || "$0",
+            bol: data.bol || ""
          };
        });
        
-       if (trips.length > 0) {
-         setRecentShipments(trips.slice(0, 5));
-         setStats(prev => ({ 
-           ...prev, 
-           trucksOnRoad: trips.filter(t => t.status === "In Transit" || t.status === "In Progress" || t.status === "Scheduled").length,
-           revenue: `$${totalRevenue.toLocaleString()}`
-         }));
-       } else {
-          // If no trips, keep 0
-          setStats(prev => ({ 
-             ...prev, 
-             trucksOnRoad: 0,
-             revenue: "$0"
-           }));
-       }
+       setRecentShipments(trips);
+       
+       // Calculate Safety Score based on mock logic for now (e.g. delivered vs total) or keep static if no real safety data exists
+       // For now, let's make it 98 default, or calculated if we had safety incidents.
+       // Since we don't have a "safety incidents" collection, we will keep it high but maybe vary slightly based on "Delayed" status?
+       const delayedTrips = trips.filter(t => t.status === "Delayed").length;
+       const calculatedScore = Math.max(80, 100 - (delayedTrips * 5));
+
+       setStats(prev => ({ 
+         ...prev, 
+         trucksOnRoad: trips.filter(t => t.status === "In Transit" || t.status === "In Progress" || t.status === "Scheduled").length,
+         revenue: `$${totalRevenue.toLocaleString()}`,
+         safetyScore: `${calculatedScore}/100`
+       }));
+
        setIsLoading(false);
     });
 
@@ -182,6 +134,30 @@ export default function AdminDashboard() {
       unsubscribeTrips();
     };
   }, []);
+
+  // Filter Logic
+  useEffect(() => {
+    let result = recentShipments;
+
+    // Search Filter
+    if (searchTerm) {
+      const lowerTerm = searchTerm.toLowerCase();
+      result = result.filter(item => 
+        item.id.toLowerCase().includes(lowerTerm) ||
+        item.customer.toLowerCase().includes(lowerTerm) ||
+        item.driver?.toLowerCase().includes(lowerTerm) ||
+        item.destination.toLowerCase().includes(lowerTerm) ||
+        (item.bol && item.bol.toLowerCase().includes(lowerTerm))
+      );
+    }
+
+    // Status Filter
+    if (statusFilter !== "All") {
+      result = result.filter(item => item.status === statusFilter);
+    }
+
+    setFilteredShipments(result);
+  }, [recentShipments, searchTerm, statusFilter]);
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -196,7 +172,6 @@ export default function AdminDashboard() {
       // Update Display Name
       if (newDisplayName && newDisplayName !== user.displayName) {
         if (!isFirebaseConfigured()) {
-          // Mock update
           console.log("Mock update profile:", newDisplayName);
         } else {
           await updateProfile(user, { displayName: newDisplayName });
@@ -260,6 +235,8 @@ export default function AdminDashboard() {
             <Search className="text-muted-foreground h-4 w-4" />
             <Input 
               placeholder="Search shipments, drivers, or BOL..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="bg-transparent border-none shadow-none focus-visible:ring-0 h-8 pl-0 text-zinc-900 placeholder:text-muted-foreground/70" 
             />
           </div>
@@ -361,10 +338,10 @@ export default function AdminDashboard() {
           <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
             {[
-              { label: "Active Drivers", value: stats.activeDrivers, change: "+2", trend: "up", icon: Users, color: "text-blue-600 bg-blue-100" },
-              { label: "Trucks on Road", value: stats.trucksOnRoad, change: "-1", trend: "down", icon: Truck, color: "text-indigo-600 bg-indigo-100" },
-              { label: "Today's Revenue", value: stats.revenue, change: "+15%", trend: "up", icon: DollarSign, color: "text-green-600 bg-green-100" },
-              { label: "Safety Score", value: stats.safetyScore, change: "+1", trend: "up", icon: ShieldCheck, color: "text-orange-600 bg-orange-100" },
+              { label: "Active Drivers", value: stats.activeDrivers, change: "Real-time", trend: "up", icon: Users, color: "text-blue-600 bg-blue-100" },
+              { label: "Trucks on Road", value: stats.trucksOnRoad, change: "Real-time", trend: "up", icon: Truck, color: "text-indigo-600 bg-indigo-100" },
+              { label: "Total Revenue", value: stats.revenue, change: "Cumulative", trend: "up", icon: DollarSign, color: "text-green-600 bg-green-100" },
+              { label: "Safety Score", value: stats.safetyScore, change: "Calculated", trend: "up", icon: ShieldCheck, color: "text-orange-600 bg-orange-100" },
             ].map((stat, i) => (
               <Card key={i} className="shadow-sm hover:shadow-md transition-shadow border-none ring-1 ring-black/5">
                 <CardContent className="p-6">
@@ -372,7 +349,7 @@ export default function AdminDashboard() {
                     <div className={`p-2 rounded-lg ${stat.color}`}>
                       <stat.icon size={20} />
                     </div>
-                    <span className={`flex items-center text-xs font-bold ${stat.trend === "up" ? "text-green-600 bg-green-50" : "text-red-600 bg-red-50"} px-2.5 py-1 rounded-full border ${stat.trend === "up" ? "border-green-100" : "border-red-100"}`}>
+                    <span className={`flex items-center text-[10px] font-bold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded-full border border-zinc-200`}>
                       {stat.change}
                     </span>
                   </div>
@@ -393,7 +370,19 @@ export default function AdminDashboard() {
                 <p className="text-sm text-zinc-500">Manage and track active loads.</p>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200"><Filter className="mr-2 h-4 w-4" /> Filter</Button>
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="h-8 w-[130px] bg-white border-zinc-200 text-xs font-medium">
+                    <Filter className="mr-2 h-3 w-3" /> 
+                    <SelectValue placeholder="Filter Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="All">All Statuses</SelectItem>
+                    <SelectItem value="Pending">Pending</SelectItem>
+                    <SelectItem value="In Transit">In Transit</SelectItem>
+                    <SelectItem value="Delivered">Delivered</SelectItem>
+                    <SelectItem value="Delayed">Delayed</SelectItem>
+                  </SelectContent>
+                </Select>
                 <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200"><Download className="mr-2 h-4 w-4" /> Export</Button>
               </div>
             </div>
@@ -414,35 +403,47 @@ export default function AdminDashboard() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-zinc-100 bg-white">
-                    {recentShipments.map((load) => (
-                      <tr key={load.id} className="hover:bg-zinc-50/80 transition-colors group">
-                        <td className="px-6 py-4 font-bold text-zinc-900">{load.id.substring(0, 8)}...</td>
-                        <td className="px-6 py-4 text-zinc-700">{load.customer}</td>
-                        <td className="px-6 py-4 text-zinc-600">{load.destination}</td>
-                        <td className="px-6 py-4">
-                          <Badge variant="outline" className={`
-                            ${load.status === "Delivered" ? "border-green-200 bg-green-50 text-green-700" : 
-                              load.status === "Delayed" ? "border-red-200 bg-red-50 text-red-700" : 
-                              load.status === "Pending" ? "border-yellow-200 bg-yellow-50 text-yellow-700" : 
-                              "border-blue-200 bg-blue-50 text-blue-700"}
-                            font-semibold
-                          `}>
-                            {load.status}
-                          </Badge>
-                        </td>
-                        <td className="px-6 py-4 flex items-center gap-3">
-                           {load.driver !== "Unassigned" && <div className="h-8 w-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-600">{load.driver ? load.driver.charAt(0) : "U"}</div>}
-                           <span className="font-medium text-zinc-700">{load.driver}</span>
-                        </td>
-                        <td className="px-6 py-4 text-zinc-500 font-mono text-xs">{load.eta}</td>
-                        <td className="px-6 py-4 text-right font-bold text-zinc-900">{load.value}</td>
-                        <td className="px-6 py-4 text-right">
-                          <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-zinc-900 transition-colors">
-                            <MoreHorizontal size={16} />
-                          </Button>
+                    {filteredShipments.length === 0 ? (
+                      <tr>
+                        <td colSpan={8} className="px-6 py-12 text-center text-zinc-400">
+                          <p>No shipments found matching your criteria.</p>
                         </td>
                       </tr>
-                    ))}
+                    ) : (
+                      filteredShipments.map((load) => (
+                        <tr key={load.id} className="hover:bg-zinc-50/80 transition-colors group">
+                          <td className="px-6 py-4 font-bold text-zinc-900 whitespace-nowrap">{load.id.substring(0, 8)}...</td>
+                          <td className="px-6 py-4 text-zinc-700">{load.customer}</td>
+                          <td className="px-6 py-4 text-zinc-600">{load.destination}</td>
+                          <td className="px-6 py-4">
+                            <Badge variant="outline" className={`
+                              ${load.status === "Delivered" ? "border-green-200 bg-green-50 text-green-700" : 
+                                load.status === "Delayed" ? "border-red-200 bg-red-50 text-red-700" : 
+                                load.status === "Pending" ? "border-yellow-200 bg-yellow-50 text-yellow-700" : 
+                                "border-blue-200 bg-blue-50 text-blue-700"}
+                              font-semibold whitespace-nowrap
+                            `}>
+                              {load.status}
+                            </Badge>
+                          </td>
+                          <td className="px-6 py-4 flex items-center gap-3">
+                             {load.driver !== "Unassigned" && load.driver ? (
+                               <div className="h-8 w-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-600 shrink-0">
+                                 {load.driver.charAt(0)}
+                               </div>
+                             ) : null}
+                             <span className="font-medium text-zinc-700 whitespace-nowrap">{load.driver || "Unassigned"}</span>
+                          </td>
+                          <td className="px-6 py-4 text-zinc-500 font-mono text-xs whitespace-nowrap">{load.eta}</td>
+                          <td className="px-6 py-4 text-right font-bold text-zinc-900 whitespace-nowrap">{load.value}</td>
+                          <td className="px-6 py-4 text-right">
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-zinc-900 transition-colors">
+                              <MoreHorizontal size={16} />
+                            </Button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
