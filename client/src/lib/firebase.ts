@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  // Using the explicit bucket name as requested to resolve CORS/path issues
-  storageBucket: "fortyninertruckingllc.firebasestorage.app", 
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyBPf09YcCVNU7hIza3i1Ylw-gDrGfQsafE",
+  authDomain: "fortyninertruckingllc.firebaseapp.com",
+  projectId: "fortyninertruckingllc",
+  storageBucket: "fortyninertruckingllc.firebasestorage.app",
+  messagingSenderId: "131233292817",
+  appId: "1:131233292817:web:9ae8616d76a1a0580b07b0",
+  measurementId: "G-LLP5KP62RD"
 };
 
 const app = initializeApp(firebaseConfig);
