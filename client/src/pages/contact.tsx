@@ -97,7 +97,7 @@ export default function Contact() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-32 md:pt-64 md:pb-48 overflow-hidden bg-zinc-50 border-b border-zinc-100">
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-zinc-50 border-b border-zinc-100">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 relative z-10">
           <div className="max-w-4xl space-y-8">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 mb-8">
