@@ -55,16 +55,8 @@ export default function Services() {
                transition={{ duration: 0.8 }}
                className="grid md:grid-cols-2 gap-16 items-center"
              >
-               <div className="order-2 md:order-1 relative">
-                 <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl opacity-50" />
-                 <img 
-                   src="https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop" 
-                   className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/50" 
-                   alt="Construction Hauling" 
-                 />
-               </div>
                
-               <div className="order-1 md:order-2 space-y-8">
+               <div className="order-1 md:order-2 space-y-8 col-span-2 md:col-span-2">
                  <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20">
                    <HardHat size={32} />
                  </div>
