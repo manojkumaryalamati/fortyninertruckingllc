@@ -19,10 +19,10 @@ export default function Subhaulers() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     companyName: "",
-    contactName: "",
+    contactPerson: "",
     email: "",
     phone: "",
-    truckType: "",
+    truckTypes: "",
     fleetSize: ""
   });
 
@@ -36,7 +36,7 @@ export default function Subhaulers() {
     setIsSubmitting(true);
 
     try {
-      if (!formData.companyName || !formData.contactName || !formData.email || !formData.phone) {
+      if (!formData.companyName || !formData.contactPerson || !formData.email || !formData.phone) {
         throw new Error("Please fill in all required fields");
       }
 
@@ -48,7 +48,7 @@ export default function Subhaulers() {
           description: "Firebase is not configured. Check console for data.",
         });
       } else {
-        await addDoc(collection(db, "subhaulers"), {
+        await addDoc(collection(db, "subhauler_registrations"), {
           ...formData,
           createdAt: serverTimestamp(),
           status: "new"
@@ -62,10 +62,10 @@ export default function Subhaulers() {
 
       setFormData({
         companyName: "",
-        contactName: "",
+        contactPerson: "",
         email: "",
         phone: "",
-        truckType: "",
+        truckTypes: "",
         fleetSize: ""
       });
     } catch (error: any) {
@@ -122,8 +122,8 @@ export default function Subhaulers() {
                     <Input id="companyName" value={formData.companyName} onChange={handleChange} placeholder="Your Trucking Co." className="bg-zinc-50 border-zinc-200" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="contactName" className="text-zinc-700">Contact Person</Label>
-                    <Input id="contactName" value={formData.contactName} onChange={handleChange} placeholder="Full Name" className="bg-zinc-50 border-zinc-200" />
+                    <Label htmlFor="contactPerson" className="text-zinc-700">Contact Person</Label>
+                    <Input id="contactPerson" value={formData.contactPerson} onChange={handleChange} placeholder="Full Name" className="bg-zinc-50 border-zinc-200" />
                   </div>
                 </div>
                 
@@ -138,8 +138,8 @@ export default function Subhaulers() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="truckType" className="text-zinc-700">Truck Types Available</Label>
-                  <Input id="truckType" value={formData.truckType} onChange={handleChange} placeholder="e.g. Super Dumps, Transfers" className="bg-zinc-50 border-zinc-200" />
+                  <Label htmlFor="truckTypes" className="text-zinc-700">Truck Types Available</Label>
+                  <Input id="truckTypes" value={formData.truckTypes} onChange={handleChange} placeholder="e.g. Super Dumps, Transfers" className="bg-zinc-50 border-zinc-200" />
                 </div>
                 
                 <div className="space-y-2">

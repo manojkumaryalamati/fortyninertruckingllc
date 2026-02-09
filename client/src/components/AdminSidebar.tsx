@@ -68,6 +68,11 @@ export function AdminSidebar() {
             <Briefcase size={18} /> Applications
           </Button>
         </Link>
+        <Link href="/admin/subhaulers">
+          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/subhaulers") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+            <Truck size={18} /> Subhaulers
+          </Button>
+        </Link>
       </nav>
 
       <div className="p-4 border-t border-zinc-100 bg-white">
@@ -158,6 +163,11 @@ export function AdminMobileHeader() {
               <Link href="/admin/applications">
                 <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/applications") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
                   <Briefcase size={18} /> Applications
+                </Button>
+              </Link>
+              <Link href="/admin/subhaulers">
+                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/subhaulers") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
+                  <Truck size={18} /> Subhaulers
                 </Button>
               </Link>
             </nav>
