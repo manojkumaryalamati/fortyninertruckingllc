@@ -88,12 +88,19 @@ export default function AdminApplications() {
       return;
     }
 
-    const q = query(collection(db, "applications"), orderBy("createdAt", "desc"));
+    // Updated to query driver_applications collection
+    const q = query(collection(db, "driver_applications"), orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const apps = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+      const apps = snapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          ...data,
+          // Map fields for backward compatibility/UI display if needed
+          license: data.cdlNumber || data.license,
+          hasResume: !!(data.resumePath || data.resumeUrl || data.resumeFileName)
+        };
+      });
       setApplications(apps);
       setIsLoading(false);
     }, (error) => {
@@ -114,7 +121,7 @@ export default function AdminApplications() {
     setIsProcessing(true);
     try {
       if (isFirebaseConfigured()) {
-        await updateDoc(doc(db, "applications", appId), {
+        await updateDoc(doc(db, "driver_applications", appId), {
           status: newStatus,
           updatedAt: serverTimestamp()
         });
@@ -153,7 +160,7 @@ export default function AdminApplications() {
     setIsProcessing(true);
     try {
       if (isFirebaseConfigured()) {
-        await deleteDoc(doc(db, "applications", appId));
+        await deleteDoc(doc(db, "driver_applications", appId));
       } else {
         setApplications(prev => prev.filter(app => app.id !== appId));
         await new Promise(resolve => setTimeout(resolve, 500));
