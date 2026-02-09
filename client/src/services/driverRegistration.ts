@@ -11,17 +11,7 @@ async function uploadDriverDoc(driverId: string, docType: "DL" | "MEDICAL" | "AG
   }
 
   // Rules sanity check logging
-  console.log("--- Rules Sanity Check ---");
-  console.log("Uploading as UID:", auth.currentUser.uid);
-  console.log("Target Path:", `driver_documents/${driverId}/${docType}/...`);
-  try {
-    const token = await auth.currentUser.getIdTokenResult();
-    console.log("Admin Claim:", token.claims.admin);
-    console.log("Full Token Claims:", token.claims);
-  } catch (e) {
-    console.warn("Could not fetch token claims for debug logging");
-  }
-  console.log("--------------------------");
+  // (logging removed)
 
   const safeName = sanitize(file.name);
   // Path: driver_documents/{driverId}/{docType}/{timestamp}_{originalName}
@@ -36,8 +26,6 @@ async function uploadDriverDoc(driverId: string, docType: "DL" | "MEDICAL" | "AG
     uploadTask.on('state_changed',
       (snapshot) => {
         // You could track progress here if needed
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done`);
       },
       (error) => {
         console.error("Upload failed:", error);
