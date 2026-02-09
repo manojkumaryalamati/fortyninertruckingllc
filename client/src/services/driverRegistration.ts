@@ -127,3 +127,50 @@ export async function createDriverWithDocs(driverData: any, dlFile?: File, medic
     throw error;
   }
 }
+
+export async function updateDriverWithDocs(driverId: string, updates: any, dlFile?: File, medicalFile?: File) {
+  if (!auth.currentUser) {
+    throw new Error("Authentication required to update driver.");
+  }
+
+  console.log("Updating driver record:", driverId);
+  const newDocs = [];
+
+  try {
+    // 1) Upload new docs if present
+    if (dlFile) {
+      console.log("Uploading New DL...");
+      const dlResult = await uploadDriverDoc(driverId, "DL", dlFile);
+      newDocs.push(dlResult.metadata);
+    }
+
+    if (medicalFile) {
+      console.log("Uploading New Medical Card...");
+      const medResult = await uploadDriverDoc(driverId, "MEDICAL", medicalFile);
+      newDocs.push(medResult.metadata);
+    }
+
+    // 2) Prepare update object
+    const updateData: any = {
+      ...updates,
+      lastUpdatedAt: serverTimestamp(),
+      lastUpdatedBy: auth.currentUser.uid,
+    };
+
+    if (newDocs.length > 0) {
+      updateData.documents = arrayUnion(...newDocs);
+      if (dlFile) updateData.dlUploaded = true;
+      if (medicalFile) updateData.medicalUploaded = true;
+      updateData.docsUpdatedAt = serverTimestamp();
+    }
+
+    // 3) Update Firestore
+    await updateDoc(doc(db, "drivers", driverId), updateData);
+    console.log("Driver update complete.");
+    return driverId;
+
+  } catch (error) {
+    console.error("Error during driver update:", error);
+    throw error;
+  }
+}
