@@ -81,7 +81,7 @@ export function Navbar() {
                     src={logo} 
                     alt="FortyNiner Trucking" 
                     className={`transition-all duration-300 object-contain drop-shadow-md ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
-                    style={{ maxHeight: '100px', width: 'auto' }}
+                    style={{ maxHeight: '165px', width: 'auto' }}
                   />
               </div>
             </Link>
