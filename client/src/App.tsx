@@ -13,6 +13,7 @@ import DriversManagement from "@/pages/admin/drivers";
 import TripsManagement from "@/pages/admin/trips";
 import DocumentsCenter from "@/pages/admin/documents";
 import AdminApplications from "@/pages/admin/applications";
+import AdminSubhaulers from "@/pages/admin/subhaulers";
 import Certifications from "@/pages/certifications";
 import Services from "@/pages/services";
 import Fleet from "@/pages/fleet";
@@ -58,6 +59,9 @@ function Router() {
       </Route>
       <Route path="/admin/applications">
          {() => <ProtectedRoute component={AdminApplications} />}
+      </Route>
+      <Route path="/admin/subhaulers">
+         {() => <ProtectedRoute component={AdminSubhaulers} />}
       </Route>
 
       <Route path="/services" component={Services} />
