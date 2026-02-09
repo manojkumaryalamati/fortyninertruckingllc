@@ -24,6 +24,12 @@ export function AdminSidebar() {
 
   const isActive = (path: string) => location === path;
 
+  const handleLogout = async () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      await logout();
+    }
+  };
+
   const NavContent = () => (
     <>
       <div className="p-6 mb-2">
@@ -79,7 +85,7 @@ export function AdminSidebar() {
         <Button 
           variant="ghost" 
           className="w-full justify-start gap-3 text-zinc-500 hover:text-red-600 hover:bg-red-50 mb-4 font-medium transition-colors"
-          onClick={logout}
+          onClick={handleLogout}
         >
           <LogOut size={18} /> Logout
         </Button>
@@ -110,6 +116,12 @@ export function AdminMobileHeader() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
   const isActive = (path: string) => location === path;
+
+  const handleLogout = async () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      await logout();
+    }
+  };
 
   return (
     <div className="md:hidden flex items-center justify-between p-4 border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-sm">
@@ -176,7 +188,7 @@ export function AdminMobileHeader() {
               <Button 
                 variant="ghost" 
                 className="w-full justify-start gap-3 text-zinc-500 hover:text-red-600 hover:bg-red-50 mb-4 font-medium"
-                onClick={logout}
+                onClick={handleLogout}
               >
                 <LogOut size={18} /> Logout
               </Button>
