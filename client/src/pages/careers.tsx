@@ -139,38 +139,11 @@ export default function Careers() {
       
     } catch (error: any) {
       console.error("Error submitting form:", error);
-      
-      // Fallback for permissions issue in prototype
-      if (error.code === 'permission-denied' || error.message.includes('Missing or insufficient permissions')) {
-        console.log("Permission denied - switching to mock success for prototype.");
-        console.log("Submission Data:", formData);
-        if (resumeFile) console.log("File:", resumeFile.name);
-        
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        toast({
-          title: "Application Sent (Mock Mode)",
-          description: "Backend permissions restrict public writes, but your form logic works correctly.",
-        });
-        
-        // Clear form
-        setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            experience: "Less than 1 year",
-            license: ""
-          });
-          setResumeFile(null);
-          if (fileInputRef.current) fileInputRef.current.value = "";
-          
-      } else {
-        toast({
-            title: "Error",
-            description: error.message || "Failed to submit application. Please try again.",
-            variant: "destructive"
-        });
-      }
+      toast({
+        title: "Error",
+        description: error.message || "Failed to submit application. Please try again.",
+        variant: "destructive"
+      });
     } finally {
       setIsSubmitting(false);
     }
