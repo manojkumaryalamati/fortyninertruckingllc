@@ -103,7 +103,12 @@ export default function Careers() {
           // more complex storage rules for unauthenticated users.
           
           await addDoc(collection(db, "applications"), {
-            ...formData,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            yearsCommercialDriving: formData.experience, // Matches Firestore rule
+            license: formData.license, // Keeping license as key, or could be cdlNumber if requested
             createdAt: serverTimestamp(),
             status: "new",
             hasResume: true,
@@ -113,7 +118,12 @@ export default function Careers() {
           
         } else {
           await addDoc(collection(db, "applications"), {
-            ...formData,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            yearsCommercialDriving: formData.experience, // Matches Firestore rule
+            license: formData.license,
             createdAt: serverTimestamp(),
             status: "new",
             hasResume: false
