@@ -24,7 +24,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isResetting, setIsResetting] = useState(false);
-  const [isForgotUsernameOpen, setIsForgotUsernameOpen] = useState(false);
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
   const { login } = useAuth();
   const { toast } = useToast();
@@ -177,39 +176,7 @@ export default function Login() {
             </Button>
           </form>
 
-          <div className="mt-8 flex items-center justify-between text-sm">
-            <Dialog open={isForgotUsernameOpen} onOpenChange={setIsForgotUsernameOpen}>
-              <DialogTrigger asChild>
-                <button type="button" className="text-zinc-500 hover:text-zinc-800 flex items-center gap-1 transition-colors">
-                  <HelpCircle size={14} /> Forgot username?
-                </button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Forgot Username?</DialogTitle>
-                  <DialogDescription>
-                    Your username is typically your company email address.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4 pt-2 text-sm text-zinc-600">
-                  <p>
-                    If you are an administrator or dispatcher, please use your <span className="font-semibold text-zinc-900">@fortyninertrucking.com</span> email address.
-                  </p>
-                  <p>
-                    If you cannot remember which email was used for your account, please contact the IT department or your system administrator directly.
-                  </p>
-                  <div className="bg-zinc-50 p-4 rounded-lg border border-zinc-100 mt-4">
-                    <p className="font-semibold text-zinc-900 mb-1">System Administrator</p>
-                    <p className="text-zinc-500">support@fortyninertrucking.com</p>
-                    <p className="text-zinc-500">(925) 250-4605</p>
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button variant="outline" onClick={() => setIsForgotUsernameOpen(false)}>Close</Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-
+          <div className="mt-8 flex items-center justify-end text-sm">
             <Link href="/">
               <a className="text-zinc-500 hover:text-primary transition-colors font-medium">
                 Back to Website
