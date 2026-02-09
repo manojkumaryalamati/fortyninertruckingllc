@@ -35,68 +35,68 @@ export function AdminSidebar() {
       <div className="p-6 mb-2">
         <Link href="/admin">
           <div className="flex items-center gap-2 cursor-pointer">
-            <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">49</div>
-            <span className="text-xl font-black tracking-tight text-zinc-900">Trucking<span className="text-blue-600">.</span></span>
+            <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">49</div>
+            <span className="text-xl font-black tracking-tight text-white">Trucking<span className="text-primary">.</span></span>
           </div>
         </Link>
       </div>
       
       <nav className="flex-1 px-3 space-y-1">
-        <p className="px-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3 mt-2">Menu</p>
+        <p className="px-4 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-3 mt-2">Menu</p>
         
         <Link href="/admin">
-          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`}>
             <LayoutDashboard size={18} /> Overview
           </Button>
         </Link>
         <Link href="/admin/trucks">
-          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/trucks") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/trucks") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`}>
             <Truck size={18} /> Trucks
           </Button>
         </Link>
         <Link href="/admin/trips">
-          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/trips") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/trips") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`}>
             <Package size={18} /> Trips & Loads
           </Button>
         </Link>
         <Link href="/admin/drivers">
-          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/drivers") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/drivers") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`}>
             <Users size={18} /> Drivers
           </Button>
         </Link>
         <Link href="/admin/documents">
-          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/documents") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/documents") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`}>
             <FileText size={18} /> Documents
           </Button>
         </Link>
         <Link href="/admin/applications">
-          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/applications") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/applications") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`}>
             <Briefcase size={18} /> Applications
           </Button>
         </Link>
         <Link href="/admin/subhaulers">
-          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/subhaulers") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`}>
+          <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium transition-all duration-200 ${isActive("/admin/subhaulers") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`}>
             <Truck size={18} /> Subhaulers
           </Button>
         </Link>
       </nav>
 
-      <div className="p-4 border-t border-zinc-100 bg-white">
+      <div className="p-4 border-t border-zinc-800 bg-zinc-900/50">
         <Button 
           variant="ghost" 
-          className="w-full justify-start gap-3 text-zinc-500 hover:text-red-600 hover:bg-red-50 mb-4 font-medium transition-colors"
+          className="w-full justify-start gap-3 text-zinc-400 hover:text-red-400 hover:bg-red-500/10 mb-4 font-medium transition-colors"
           onClick={handleLogout}
         >
           <LogOut size={18} /> Logout
         </Button>
         
-        <div className="flex items-center gap-3 px-2 pt-2 border-t border-zinc-100">
-          <Avatar className="h-9 w-9 border border-zinc-200 shadow-sm">
+        <div className="flex items-center gap-3 px-2 pt-2 border-t border-zinc-800">
+          <Avatar className="h-9 w-9 border border-zinc-700 shadow-sm">
             <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback className="bg-zinc-100 text-zinc-500">AD</AvatarFallback>
+            <AvatarFallback className="bg-zinc-800 text-zinc-400">AD</AvatarFallback>
           </Avatar>
           <div className="flex flex-col text-sm overflow-hidden">
-            <span className="font-bold text-zinc-900 truncate">{user?.displayName || "Admin User"}</span>
+            <span className="font-bold text-white truncate">{user?.displayName || "Admin User"}</span>
             <span className="text-zinc-500 text-xs truncate" title={user?.email || ""}>{user?.email || "admin@49trucking.com"}</span>
           </div>
         </div>
@@ -105,7 +105,7 @@ export function AdminSidebar() {
   );
 
   return (
-    <aside className="w-72 bg-white border-r border-zinc-200 hidden md:flex flex-col sticky top-0 h-screen shadow-sm z-30">
+    <aside className="w-72 bg-zinc-900 border-r border-zinc-800 hidden md:flex flex-col sticky top-0 h-screen shadow-xl z-30">
       <NavContent />
     </aside>
   );
@@ -136,70 +136,70 @@ export function AdminMobileHeader() {
             <Menu size={24} />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="p-0 w-72 bg-white border-r border-zinc-200">
+        <SheetContent side="left" className="p-0 w-72 bg-zinc-900 border-r border-zinc-800 text-white">
           <div className="flex flex-col h-full">
             <div className="p-6 mb-2">
               <div className="flex items-center gap-2">
-                <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">49</div>
-                <span className="text-xl font-black tracking-tight text-zinc-900">Trucking<span className="text-blue-600">.</span></span>
+                <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">49</div>
+                <span className="text-xl font-black tracking-tight text-white">Trucking<span className="text-primary">.</span></span>
               </div>
             </div>
             
             <nav className="flex-1 px-3 space-y-1">
-              <p className="px-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3 mt-2">Menu</p>
+              <p className="px-4 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-3 mt-2">Menu</p>
               <Link href="/admin">
-                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
+                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`} onClick={() => setOpen(false)}>
                   <LayoutDashboard size={18} /> Overview
                 </Button>
               </Link>
               <Link href="/admin/trucks">
-                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/trucks") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
+                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/trucks") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`} onClick={() => setOpen(false)}>
                   <Truck size={18} /> Trucks
                 </Button>
               </Link>
               <Link href="/admin/trips">
-                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/trips") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
+                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/trips") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`} onClick={() => setOpen(false)}>
                   <Package size={18} /> Trips & Loads
                 </Button>
               </Link>
               <Link href="/admin/drivers">
-                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/drivers") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
+                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/drivers") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`} onClick={() => setOpen(false)}>
                   <Users size={18} /> Drivers
                 </Button>
               </Link>
               <Link href="/admin/documents">
-                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/documents") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
+                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/documents") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`} onClick={() => setOpen(false)}>
                   <FileText size={18} /> Documents
                 </Button>
               </Link>
               <Link href="/admin/applications">
-                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/applications") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
+                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/applications") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`} onClick={() => setOpen(false)}>
                   <Briefcase size={18} /> Applications
                 </Button>
               </Link>
               <Link href="/admin/subhaulers">
-                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/subhaulers") ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-100" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"}`} onClick={() => setOpen(false)}>
+                <Button variant="ghost" className={`w-full justify-start gap-3 mb-1 font-medium ${isActive("/admin/subhaulers") ? "bg-primary text-white shadow-sm ring-1 ring-primary/50" : "text-zinc-400 hover:text-white hover:bg-white/10"}`} onClick={() => setOpen(false)}>
                   <Truck size={18} /> Subhaulers
                 </Button>
               </Link>
             </nav>
 
-            <div className="p-4 border-t border-zinc-100 bg-white">
+            <div className="p-4 border-t border-zinc-800 bg-zinc-900/50">
               <Button 
                 variant="ghost" 
-                className="w-full justify-start gap-3 text-zinc-500 hover:text-red-600 hover:bg-red-50 mb-4 font-medium"
+                className="w-full justify-start gap-3 text-zinc-400 hover:text-red-400 hover:bg-red-500/10 mb-4 font-medium"
                 onClick={handleLogout}
               >
                 <LogOut size={18} /> Logout
               </Button>
               
-              <div className="flex items-center gap-3 px-2 pt-2 border-t border-zinc-100">
-                <Avatar className="h-8 w-8 border border-zinc-200">
+              <div className="flex items-center gap-3 px-2 pt-2 border-t border-zinc-800">
+                <Avatar className="h-8 w-8 border border-zinc-700">
                   <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback className="bg-zinc-100 text-zinc-500">AD</AvatarFallback>
+                  <AvatarFallback className="bg-zinc-800 text-zinc-400">AD</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col text-sm overflow-hidden">
-                  <span className="font-semibold text-zinc-900 truncate">{user?.displayName || "Admin User"}</span>
+                  <span className="font-semibold text-white truncate">{user?.displayName || "Admin User"}</span>
                   <span className="text-zinc-500 text-xs truncate" title={user?.email || ""}>{user?.email || "admin@49trucking.com"}</span>
                 </div>
               </div>
