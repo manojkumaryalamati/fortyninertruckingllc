@@ -548,42 +548,9 @@ export default function TripsManagement() {
                 </div>
               </Card>
            </div>
-
-           {/* Quick Actions & Calendar Placeholder */}
-           <div className="space-y-6">
-              <Card className="bg-primary text-primary-foreground border-none">
-                 <CardContent className="p-6 space-y-4">
-                    <h3 className="font-bold text-xl">Quick Dispatch</h3>
-                    <p className="text-primary-foreground/80 text-sm">Create a new load assignment instantly.</p>
-                    <div className="space-y-3">
-                       <Input placeholder="Customer Name" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-                       <Input placeholder="Pickup Location" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-                       <Input placeholder="Dropoff Location" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-                       <Button variant="secondary" className="w-full font-bold">Create Assignment</Button>
-                    </div>
-                 </CardContent>
-              </Card>
-
-              <Card>
-                 <CardContent className="p-6">
-                    <h3 className="font-bold mb-4">Unassigned Drivers</h3>
-                    <div className="space-y-3">
-                       {["David Chen", "Emily Davis"].map((driver, i) => (
-                          <div key={i} className="flex items-center justify-between p-2 rounded-lg hover:bg-secondary">
-                             <div className="flex items-center gap-2">
-                                <div className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center text-xs font-bold">{driver.charAt(0)}</div>
-                                <span className="text-sm font-medium">{driver}</span>
-                             </div>
-                             <Button size="sm" variant="ghost">Assign</Button>
-                          </div>
-                       ))}
-                    </div>
-                 </CardContent>
-              </Card>
-           </div>
         </div>
-      </div>
-      </main>
+          </div>
+        </main>
       </div>
     </div>
   );
