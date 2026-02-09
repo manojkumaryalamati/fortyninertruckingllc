@@ -35,8 +35,7 @@ export function AdminSidebar() {
       <div className="p-6 mb-2">
         <Link href="/admin">
           <div className="flex items-center gap-2 cursor-pointer">
-            <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">49</div>
-            <span className="text-xl font-black tracking-tight text-white">Trucking<span className="text-primary">.</span></span>
+            <img src="/logo_new.png" alt="49 Trucking" className="h-8 w-auto object-contain" />
           </div>
         </Link>
       </div>
@@ -126,8 +125,7 @@ export function AdminMobileHeader() {
   return (
     <div className="md:hidden flex items-center justify-between p-4 border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-2">
-         <div className="h-8 w-8 bg-zinc-900 rounded-lg flex items-center justify-center text-white font-bold">49</div>
-        <span className="text-lg font-black text-zinc-900 tracking-tight">Trucking.</span>
+        <img src="/logo_new.png" alt="49 Trucking" className="h-8 w-auto object-contain" />
       </div>
       
       <Sheet open={open} onOpenChange={setOpen}>
@@ -140,8 +138,7 @@ export function AdminMobileHeader() {
           <div className="flex flex-col h-full">
             <div className="p-6 mb-2">
               <div className="flex items-center gap-2">
-                <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">49</div>
-                <span className="text-xl font-black tracking-tight text-white">Trucking<span className="text-primary">.</span></span>
+                <img src="/logo_new.png" alt="49 Trucking" className="h-8 w-auto object-contain" />
               </div>
             </div>
             
