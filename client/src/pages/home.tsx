@@ -36,12 +36,12 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto space-y-8"
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9]">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
               Heavy <span className="text-primary">Hauling</span> <br />
               Done <span className="text-white">Right</span>
             </h1>
             
-            <p className="text-lg md:text-2xl text-white/80 font-medium max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base md:text-xl text-white/80 font-medium max-w-2xl mx-auto leading-relaxed">
               California's premier partner for construction logistics and material transport.
             </p>
             
