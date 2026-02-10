@@ -74,13 +74,13 @@ export function Navbar() {
         <div className="w-full px-4 lg:px-8 flex items-center justify-between h-[72px]">
           
           {/* Logo Area */}
-          <div className="flex-shrink-0 relative h-full flex items-center">
+          <div className="flex-shrink-0 relative h-full flex items-center max-w-[75%]">
             <Link href="/">
               <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center">
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
-                    className={`transition-all duration-300 object-contain drop-shadow-md h-14 w-auto ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
+                    className={`transition-all duration-300 object-contain drop-shadow-md h-10 md:h-14 w-auto ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
                   />
               </div>
             </Link>
@@ -112,7 +112,7 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             
              <button 
-               className={`lg:hidden p-2 rounded-md transition-colors relative z-50 ${buttonClasses}`}
+               className={`lg:hidden p-2 rounded-md transition-colors relative z-[60] cursor-pointer ${buttonClasses}`}
                onClick={() => setIsMobileMenuOpen(true)}
              >
                <Menu size={32} />
