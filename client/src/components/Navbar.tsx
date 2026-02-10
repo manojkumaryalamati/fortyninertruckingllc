@@ -29,8 +29,8 @@ export function Navbar() {
   const isHome = location === "/";
   // Always solid background when scrolled, transparent only at very top of home
   const navbarClasses = scrolled 
-    ? "bg-white/90 backdrop-blur-md shadow-sm py-0 lg:py-2 border-b border-zinc-200" 
-    : (isHome ? "bg-transparent py-0 lg:py-4 border-b border-white/10" : "bg-white py-0 lg:py-4 border-b border-zinc-200");
+    ? "bg-white/90 backdrop-blur-md shadow-sm py-2 border-b border-zinc-200" 
+    : (isHome ? "bg-transparent py-4 border-b border-white/10" : "bg-white py-4 border-b border-zinc-200");
 
   const logoClasses = scrolled 
     ? "w-24 brightness-0" 
@@ -130,11 +130,11 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed inset-0 z-[100] bg-white text-zinc-900 p-0 lg:hidden flex flex-col"
+            className="fixed inset-0 z-[60] bg-white text-zinc-900 p-0 lg:hidden flex flex-col"
           >
             <div className="flex justify-between items-center p-6 border-b border-zinc-100">
-              <div className="h-auto w-[160px] relative flex items-center">
-                 <img src={logo} alt="FortyNiner Trucking" className="w-full h-auto max-h-[80px] object-contain brightness-0" />
+              <div className="h-12 w-auto relative flex items-center">
+                 <img src={logo} alt="FortyNiner Trucking" className="h-full w-auto object-contain brightness-0" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -144,14 +144,14 @@ export function Navbar() {
               </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-start gap-1">
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-center gap-2">
               {navLinks.map((item, idx) => (
                 <Link key={item.name} href={item.href}>
                   <motion.div 
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className={`text-base font-bold uppercase tracking-widest py-3 border-b border-zinc-50/50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-zinc-600'}`}
+                    className={`text-lg font-bold uppercase tracking-widest py-4 border-b border-zinc-50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-zinc-600'}`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
