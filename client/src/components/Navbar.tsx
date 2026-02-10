@@ -1,10 +1,9 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, Phone, Mail, Clock } from "lucide-react";
+import { Menu, X, Phone, Mail, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo_v6.png";
-import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -75,19 +74,20 @@ export function Navbar() {
         <div className="w-full px-4 lg:px-8 flex items-center justify-between h-[72px]">
           
           {/* Logo Area */}
-          <div className="flex-shrink-0 relative h-full flex items-center max-w-[200px] lg:max-w-[75%]">
+          <div className="flex-shrink-0 relative h-full flex items-center">
             <Link href="/">
               <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center">
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
-                    className={`transition-all duration-300 object-contain drop-shadow-md w-[120px] lg:w-[160px] h-auto ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
+                    className={`transition-all duration-300 object-contain drop-shadow-md ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
+                    style={{ maxHeight: '165px', width: 'auto' }}
                   />
               </div>
             </Link>
           </div>
 
-          {/* Desktop Navigation - Hidden on mobile, visible on desktop */}
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((item) => (
               <Link key={item.name} href={item.href}>
@@ -112,63 +112,75 @@ export function Navbar() {
           {/* Right Actions */}
           <div className="flex items-center gap-4">
             
-            {/* Menu Trigger - Visible on all screens */}
-            <button 
-              className={`p-2 rounded-md transition-colors relative z-[60] cursor-pointer ${buttonClasses}`}
-              aria-label="Open menu"
-              onClick={() => setIsMobileMenuOpen(true)}
-            >
-              <Menu size={32} />
-            </button>
-
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetContent side="right" className="w-full sm:w-full p-0 border-l-0">
-                 <div className="sr-only">
-                    <SheetTitle>Menu</SheetTitle>
-                    <SheetDescription>Navigation links</SheetDescription>
-                 </div>
-                 
-                 <div className="flex flex-col h-full bg-white text-zinc-900">
-                    <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-start gap-1 pt-16">
-                      {navLinks.map((item, idx) => (
-                        <Link key={item.name} href={item.href}>
-                          <motion.div 
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.1 }}
-                            className={`text-base font-bold uppercase tracking-widest py-3 border-b border-zinc-50/50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-zinc-600'}`}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            {item.name}
-                            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">→</span>
-                          </motion.div>
-                        </Link>
-                      ))}
-                      <Link href="/contact">
-                          <motion.div 
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="mt-8"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                           <Button className="w-full h-14 text-sm font-bold bg-primary text-white uppercase tracking-widest rounded-none">
-                             Get a Quote
-                           </Button>
-                          </motion.div>
-                      </Link>
-                    </div>
-                    
-                    <div className="p-8 bg-zinc-50 text-center space-y-4">
-                       <p className="text-zinc-400 text-sm">Need immediate assistance?</p>
-                       <a href="tel:9252504605" className="text-2xl font-black text-zinc-900 block">(925) 250-4605</a>
-                    </div>
-                 </div>
-              </SheetContent>
-            </Sheet>
+             <button 
+               className={`lg:hidden p-2 rounded-md transition-colors ${buttonClasses}`}
+               onClick={() => setIsMobileMenuOpen(true)}
+             >
+               <Menu size={32} />
+             </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay - Unchanged mostly, just styling tweaks */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+            className="fixed inset-0 z-[100] bg-white text-zinc-900 p-0 lg:hidden flex flex-col"
+          >
+            <div className="flex justify-between items-center p-6 border-b border-zinc-100">
+              <div className="h-auto w-[160px] relative flex items-center">
+                 <img src={logo} alt="FortyNiner Trucking" className="w-full h-auto max-h-[80px] object-contain brightness-0" />
+              </div>
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-colors text-zinc-900"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-start gap-1">
+              {navLinks.map((item, idx) => (
+                <Link key={item.name} href={item.href}>
+                  <motion.div 
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                    className={`text-base font-bold uppercase tracking-widest py-3 border-b border-zinc-50/50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-zinc-600'}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">→</span>
+                  </motion.div>
+                </Link>
+              ))}
+              <Link href="/contact">
+                  <motion.div 
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="mt-8"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                   <Button className="w-full h-14 text-sm font-bold bg-primary text-white uppercase tracking-widest rounded-none">
+                     Get a Quote
+                   </Button>
+                  </motion.div>
+              </Link>
+            </div>
+            
+            <div className="p-8 bg-zinc-50 text-center space-y-4">
+               <p className="text-zinc-400 text-sm">Need immediate assistance?</p>
+               <a href="tel:9252504605" className="text-2xl font-black text-zinc-900 block">(925) 250-4605</a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
