@@ -29,8 +29,8 @@ export function Navbar() {
   const isHome = location === "/";
   // Always solid background when scrolled, transparent only at very top of home
   const navbarClasses = scrolled 
-    ? "bg-white/90 backdrop-blur-md shadow-sm py-[2px] lg:py-2 border-b border-zinc-200" 
-    : (isHome ? "bg-transparent py-[2px] lg:py-4 border-b border-white/10" : "bg-white py-[2px] lg:py-4 border-b border-zinc-200");
+    ? "bg-white/90 backdrop-blur-md shadow-sm py-0 lg:py-2 border-b border-zinc-200" 
+    : (isHome ? "bg-transparent py-0 lg:py-4 border-b border-white/10" : "bg-white py-0 lg:py-4 border-b border-zinc-200");
 
   const logoClasses = scrolled 
     ? "w-24 brightness-0" 
@@ -71,7 +71,7 @@ export function Navbar() {
       </div>
 
       <nav className={`fixed left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'top-0' : 'top-0 lg:top-10'} ${navbarClasses}`}>
-        <div className="w-full px-4 lg:px-8 flex items-center justify-between h-[72px]">
+        <div className="w-full px-8 flex items-center justify-between h-[72px]">
           
           {/* Logo Area */}
           <div className="flex-shrink-0 relative h-full flex items-center">
