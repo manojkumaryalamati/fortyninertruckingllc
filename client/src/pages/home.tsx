@@ -88,16 +88,16 @@ export default function Home() {
       </section>
 
       {/* Who We Are - Split Layout */}
-      <section className="py-24 bg-zinc-50">
+      <section className="py-16 md:py-24 bg-zinc-50">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
               <h2 className="text-sm font-bold tracking-widest text-primary">About Us</h2>
-              <h3 className="text-4xl md:text-5xl font-black tracking-tight text-zinc-900">
+              <h3 className="text-3xl md:text-5xl font-black tracking-tight text-zinc-900">
                 The <span className="text-primary">Standard</span> in Hauling
               </h3>
             </div>
-            <div className="space-y-4 text-lg text-zinc-600 leading-relaxed">
+            <div className="space-y-4 text-base md:text-lg text-zinc-600 leading-relaxed">
               <p>
                 FortyNinerTrucking LLC is a premier logistics provider specializing in construction material transport and heavy hauling. With years of industry experience, we have built a reputation for reliability, safety, and operational precision.
               </p>
@@ -110,21 +110,21 @@ export default function Home() {
       </section>
 
       {/* Featured Services (Modern Interactive Grid) */}
-      <section className="py-24 bg-white overflow-hidden relative">
+      <section className="py-16 md:py-24 bg-white overflow-hidden relative">
         {/* Abstract Background Elements */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -mr-32 -mt-32 opacity-20" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -ml-32 -mb-32 opacity-20" />
 
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
             <div className="space-y-4 max-w-2xl">
               <h2 className="text-sm font-bold tracking-[0.2em] text-primary">Capabilities</h2>
-              <h3 className="text-4xl md:text-5xl font-black tracking-tighter leading-[0.9] text-zinc-900">
+              <h3 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.9] text-zinc-900">
                 Engineered for <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">Heavy Loads</span>
               </h3>
             </div>
             <Link href="/services">
-               <Button variant="outline" className="rounded-full border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 h-12 px-6 tracking-wider font-bold group">
+               <Button variant="outline" className="rounded-full border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 h-12 px-6 tracking-wider font-bold group w-full md:w-auto">
                  View All Services <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                </Button>
             </Link>

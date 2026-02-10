@@ -366,9 +366,9 @@ export default function AdminDashboard() {
             <TruckLoader text="Loading dashboard..." />
           </div>
         ) : (
-        <div className="p-6 space-y-8 max-w-[1600px] mx-auto">
+        <div className="p-4 md:p-6 space-y-8 max-w-[1600px] mx-auto">
           {/* Key Metrics */}
-          <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
             {[
               { label: "Active Drivers", value: stats.activeDrivers, change: "Real-time", trend: "up", icon: Users, color: "text-blue-600 bg-blue-100" },
@@ -388,7 +388,7 @@ export default function AdminDashboard() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-zinc-500 mb-1 uppercase tracking-wide text-xs">{stat.label}</p>
-                    <div className="text-3xl font-black tracking-tight text-zinc-900">{stat.value}</div>
+                    <div className="text-2xl lg:text-3xl font-black tracking-tight text-zinc-900">{stat.value}</div>
                   </div>
                 </CardContent>
               </Card>

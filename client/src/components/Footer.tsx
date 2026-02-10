@@ -14,8 +14,7 @@ export default function Footer() {
                 <img 
                   src={logo} 
                   alt="FortyNiner Trucking" 
-                  className="brightness-0 object-contain drop-shadow-md" 
-                  style={{ maxHeight: '165px', width: 'auto' }}
+                  className="h-16 w-auto brightness-0 object-contain drop-shadow-md" 
                 />
               </div>
             </Link>
