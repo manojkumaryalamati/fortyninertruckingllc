@@ -113,15 +113,15 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             
             {/* Mobile Menu Trigger */}
+            <button 
+              className={`lg:hidden p-2 rounded-md transition-colors relative z-[60] cursor-pointer ${buttonClasses}`}
+              aria-label="Open menu"
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <Menu size={32} />
+            </button>
+
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <button 
-                  className={`lg:hidden p-2 rounded-md transition-colors relative z-[60] cursor-pointer ${buttonClasses}`}
-                  aria-label="Open menu"
-                >
-                  <Menu size={32} />
-                </button>
-              </SheetTrigger>
               <SheetContent side="right" className="w-full sm:w-full p-0 border-l-0">
                  <div className="sr-only">
                     <SheetTitle>Mobile Menu</SheetTitle>
