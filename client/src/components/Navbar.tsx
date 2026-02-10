@@ -133,8 +133,8 @@ export function Navbar() {
             className="fixed inset-0 z-[60] bg-white text-zinc-900 p-0 lg:hidden flex flex-col"
           >
             <div className="flex justify-between items-center p-6 border-b border-zinc-100">
-              <div className="h-12 w-auto relative flex items-center">
-                 <img src={logo} alt="FortyNiner Trucking" className="h-full w-auto object-contain brightness-0" />
+              <div className="h-auto w-[160px] relative flex items-center">
+                 <img src={logo} alt="FortyNiner Trucking" className="w-full h-auto object-contain brightness-0" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
