@@ -80,8 +80,7 @@ export function Navbar() {
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
-                    className={`transition-all duration-300 object-contain drop-shadow-md ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
-                    style={{ maxHeight: '165px', width: 'auto' }}
+                    className={`transition-all duration-300 object-contain drop-shadow-md h-14 w-auto ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
                   />
               </div>
             </Link>
@@ -113,7 +112,7 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             
              <button 
-               className={`lg:hidden p-2 rounded-md transition-colors ${buttonClasses}`}
+               className={`lg:hidden p-2 rounded-md transition-colors relative z-50 ${buttonClasses}`}
                onClick={() => setIsMobileMenuOpen(true)}
              >
                <Menu size={32} />
