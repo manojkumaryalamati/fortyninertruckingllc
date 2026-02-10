@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
@@ -56,6 +56,9 @@ export default function DriversManagement() {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [medicalFile, setMedicalFile] = useState<File | null>(null);
+
+  // Delete Confirmation State
+  const [driverToDelete, setDriverToDelete] = useState<string | null>(null);
 
   // Fetch Drivers from Firestore
   useEffect(() => {
@@ -164,17 +167,23 @@ export default function DriversManagement() {
     }
   };
 
-  const handleDeleteDriver = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this driver?")) return;
+  const handleDeleteDriver = (id: string) => {
+    setDriverToDelete(id);
+  };
+
+  const confirmDeleteDriver = async () => {
+    if (!driverToDelete) return;
     
     try {
       if (isFirebaseConfigured()) {
-        await deleteDoc(doc(db, "drivers", id));
+        await deleteDoc(doc(db, "drivers", driverToDelete));
         toast({ title: "Driver Deleted", description: "Driver profile removed." });
       }
     } catch (error) {
       console.error("Error deleting driver:", error);
       toast({ title: "Error", description: "Failed to delete driver.", variant: "destructive" });
+    } finally {
+      setDriverToDelete(null);
     }
   };
 
@@ -532,6 +541,22 @@ export default function DriversManagement() {
                      </DialogFooter>
                    </form>
                  )}
+               </DialogContent>
+             </Dialog>
+
+             {/* Delete Confirmation Dialog */}
+             <Dialog open={!!driverToDelete} onOpenChange={(open) => !open && setDriverToDelete(null)}>
+               <DialogContent>
+                 <DialogHeader>
+                   <DialogTitle>Delete Driver</DialogTitle>
+                   <DialogDescription>
+                     Are you sure you want to delete this driver? This action cannot be undone.
+                   </DialogDescription>
+                 </DialogHeader>
+                 <DialogFooter>
+                   <Button variant="outline" onClick={() => setDriverToDelete(null)}>Cancel</Button>
+                   <Button variant="destructive" onClick={confirmDeleteDriver}>Delete</Button>
+                 </DialogFooter>
                </DialogContent>
              </Dialog>
 

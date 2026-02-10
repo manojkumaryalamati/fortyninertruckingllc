@@ -37,6 +37,9 @@ export default function TrucksManagement() {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [currentTruck, setCurrentTruck] = useState<TruckType | null>(null);
   
+  // Delete Confirmation State
+  const [truckToDelete, setTruckToDelete] = useState<string | null>(null);
+
   // Form States
   const [formData, setFormData] = useState<Partial<TruckType>>({
     truckNo: "",
@@ -104,18 +107,24 @@ export default function TrucksManagement() {
     }
   };
 
-  const handleDeleteTruck = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this truck?")) return;
+  const handleDeleteTruck = (id: string) => {
+    setTruckToDelete(id);
+  };
+
+  const confirmDeleteTruck = async () => {
+    if (!truckToDelete) return;
     
     try {
       if (!isFirebaseConfigured()) {
         throw new Error("Firebase not configured");
       } else {
-        await deleteDoc(doc(db, "trucks", id));
+        await deleteDoc(doc(db, "trucks", truckToDelete));
       }
       toast({ title: "Success", description: "Truck deleted successfully" });
     } catch (error: any) {
       toast({ title: "Error", description: error.message, variant: "destructive" });
+    } finally {
+      setTruckToDelete(null);
     }
   };
 
@@ -354,6 +363,23 @@ export default function TrucksManagement() {
               </form>
             </DialogContent>
           </Dialog>
+
+          {/* Delete Confirmation Dialog */}
+          <Dialog open={!!truckToDelete} onOpenChange={(open) => !open && setTruckToDelete(null)}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Delete Truck</DialogTitle>
+                <DialogDescription>
+                  Are you sure you want to delete this truck? This action cannot be undone.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setTruckToDelete(null)}>Cancel</Button>
+                <Button variant="destructive" onClick={confirmDeleteTruck}>Delete</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
 
         </main>
       </div>
