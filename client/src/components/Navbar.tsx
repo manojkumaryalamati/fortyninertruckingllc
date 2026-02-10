@@ -129,20 +129,6 @@ export function Navbar() {
                  </div>
                  
                  <div className="flex flex-col h-full bg-white text-zinc-900">
-                    <div className="flex justify-between items-center p-6 border-b border-zinc-100">
-                      <div className="h-auto w-[160px] relative flex items-center">
-                         <img src={logo} alt="FortyNiner Trucking" className="w-full h-auto max-h-[80px] object-contain brightness-0" />
-                      </div>
-                      {/* Close button is automatically added by SheetContent, but we can add a custom one if we want specific styling or just rely on the default. The default is small and in the corner. Let's hide the default and use ours if we want or just use ours to close. SheetContent has a close button. We can just let it be. But the original design had a specific layout. I'll hide the default close button via CSS in globals or just accept it. Wait, I can't easily hide the default one without looking at SheetPrimitive. Let's just use our custom header layout and let the default close button overlay or remove it.
-                      Actually, SheetContent renders a SheetPrimitive.Close. I can't remove it easily via props. I'll just rely on the built-in close button for better accessibility and simplicity, or try to match the design.
-                      
-                      The built-in Close button is: absolute right-4 top-4.
-                      My design has a header with logo left and close right.
-                      I'll render my own close button that calls setIsMobileMenuOpen(false) and maybe hide the default one with CSS or just let them coexist (bad).
-                      I'll just use the standard Sheet behavior which is robust.
-                      */}
-                    </div>
-                    
                     <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-start gap-1">
                       {navLinks.map((item, idx) => (
                         <Link key={item.name} href={item.href}>
