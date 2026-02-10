@@ -130,11 +130,11 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-white text-zinc-900 p-0 lg:hidden flex flex-col"
+            className="fixed inset-0 z-[100] bg-white text-zinc-900 p-0 lg:hidden flex flex-col"
           >
             <div className="flex justify-between items-center p-6 border-b border-zinc-100">
               <div className="h-auto w-[160px] relative flex items-center">
-                 <img src={logo} alt="FortyNiner Trucking" className="w-full h-auto object-contain brightness-0" />
+                 <img src={logo} alt="FortyNiner Trucking" className="w-full h-auto max-h-[80px] object-contain brightness-0" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -144,7 +144,7 @@ export function Navbar() {
               </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-center gap-2">
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-start gap-2">
               {navLinks.map((item, idx) => (
                 <Link key={item.name} href={item.href}>
                   <motion.div 
