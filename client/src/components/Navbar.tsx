@@ -144,14 +144,14 @@ export function Navbar() {
               </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-start gap-2">
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-start gap-1">
               {navLinks.map((item, idx) => (
                 <Link key={item.name} href={item.href}>
                   <motion.div 
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className={`text-lg font-bold uppercase tracking-widest py-4 border-b border-zinc-50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-zinc-600'}`}
+                    className={`text-base font-bold uppercase tracking-widest py-3 border-b border-zinc-50/50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-zinc-600'}`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
