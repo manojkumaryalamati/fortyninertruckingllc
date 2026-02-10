@@ -63,6 +63,9 @@ export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
 
+  // Delete Confirmation State
+  const [tripToDelete, setTripToDelete] = useState<string | null>(null);
+
   // Profile Update State
   const [isUpdateProfileOpen, setIsUpdateProfileOpen] = useState(false);
   const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "");
@@ -260,21 +263,23 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleDeleteTrip = async (id: string) => {
-    if (!window.confirm("Are you sure you want to delete this trip? This action cannot be undone.")) {
-      return;
-    }
+  const handleDeleteTrip = (id: string) => {
+    setTripToDelete(id);
+  };
 
+  const confirmDeleteTrip = async () => {
+    if (!tripToDelete) return;
+    
     try {
       if (isFirebaseConfigured()) {
-        await deleteDoc(doc(db, "trips", id));
+        await deleteDoc(doc(db, "trips", tripToDelete));
         toast({
           title: "Trip Deleted",
           description: "The trip record has been permanently removed.",
         });
       } else {
         // Mock deletion
-        setRecentShipments(prev => prev.filter(t => t.id !== id));
+        setRecentShipments(prev => prev.filter(t => t.id !== tripToDelete));
         toast({
           title: "Trip Deleted (Mock)",
           description: "The trip record has been removed from the view.",
@@ -287,6 +292,8 @@ export default function AdminDashboard() {
         description: error.message || "Failed to delete trip",
         variant: "destructive"
       });
+    } finally {
+      setTripToDelete(null);
     }
   };
 
@@ -391,6 +398,22 @@ export default function AdminDashboard() {
             </Button>
           </div>
         </header>
+
+        {/* Delete Confirmation Dialog */}
+        <Dialog open={!!tripToDelete} onOpenChange={(open) => !open && setTripToDelete(null)}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Delete Trip</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to delete this trip? This action cannot be undone.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setTripToDelete(null)}>Cancel</Button>
+              <Button variant="destructive" onClick={confirmDeleteTrip}>Delete</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         {isLoading ? (
           <div className="h-[calc(100vh-4rem)] flex items-center justify-center">
