@@ -304,16 +304,7 @@ export default function AdminDashboard() {
         <AdminMobileHeader />
         <main className="flex-1 overflow-auto">
         {/* Header */}
-        <header className="h-16 border-b border-border bg-background/50 backdrop-blur-sm sticky top-0 z-10 flex items-center justify-between px-6">
-          <div className="flex items-center gap-4 w-1/3">
-            <Search className="text-muted-foreground h-4 w-4" />
-            <Input 
-              placeholder="Search shipments, drivers, or BOL..." 
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-transparent border-none shadow-none focus-visible:ring-0 h-8 pl-0 text-zinc-900 placeholder:text-muted-foreground/70" 
-            />
-          </div>
+        <header className="h-16 border-b border-border bg-background/50 backdrop-blur-sm sticky top-0 z-10 flex items-center justify-end px-6">
           <div className="flex items-center gap-4">
             <Dialog open={isUpdateProfileOpen} onOpenChange={setIsUpdateProfileOpen}>
               <DialogTrigger asChild>
