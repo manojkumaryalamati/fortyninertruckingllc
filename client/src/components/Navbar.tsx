@@ -71,24 +71,21 @@ export function Navbar() {
       </div>
 
       <nav className={`fixed left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'top-0' : 'top-0 lg:top-10'} ${navbarClasses}`}>
-        <div className="w-full px-8 flex items-center justify-between h-[72px] relative">
+        <div className="w-full px-8 flex items-center justify-between h-[72px]">
           
-          {/* Logo Area - Absolute to overlap */}
-          <div className="absolute top-0 left-8 z-50 flex items-start">
+          {/* Logo Area */}
+          <div className="flex-shrink-0 relative h-full flex items-center">
             <Link href="/">
-              <div className="cursor-pointer hover:opacity-90 transition-opacity relative group pt-2">
+              <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center">
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
                     className={`transition-all duration-300 object-contain drop-shadow-md ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
-                    style={{ height: '120px', width: 'auto' }}
+                    style={{ maxHeight: '165px', width: 'auto' }}
                   />
               </div>
             </Link>
           </div>
-
-          {/* Spacer to maintain layout balance */}
-          <div className="w-28 h-full flex-shrink-0"></div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6">
