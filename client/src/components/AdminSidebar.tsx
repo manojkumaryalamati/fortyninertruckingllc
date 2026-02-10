@@ -17,18 +17,19 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from "react";
 
 export function AdminSidebar() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
 
   const isActive = (path: string) => location === path;
 
   const handleLogout = async () => {
-    if (window.confirm("Are you sure you want to log out?")) {
-      await logout();
-    }
+    setIsLogoutDialogOpen(false);
+    await logout();
   };
 
   const NavContent = () => (
@@ -86,13 +87,28 @@ export function AdminSidebar() {
       </nav>
 
       <div className="p-4 border-t border-zinc-800 bg-zinc-900/50">
-        <Button 
-          variant="ghost" 
-          className="w-full justify-start gap-3 text-zinc-400 hover:text-red-400 hover:bg-red-500/10 mb-4 font-medium transition-colors"
-          onClick={handleLogout}
-        >
-          <LogOut size={18} /> Logout
-        </Button>
+        <Dialog open={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen}>
+          <DialogTrigger asChild>
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start gap-3 text-zinc-400 hover:text-red-400 hover:bg-red-500/10 mb-4 font-medium transition-colors"
+            >
+              <LogOut size={18} /> Logout
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Confirm Logout</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to log out of the admin panel?
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsLogoutDialogOpen(false)}>Cancel</Button>
+              <Button variant="destructive" onClick={handleLogout}>Logout</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
         
         <div className="flex items-center gap-3 px-2 pt-2 border-t border-zinc-800">
           <Avatar className="h-9 w-9 border border-zinc-700 shadow-sm">
@@ -119,12 +135,12 @@ export function AdminMobileHeader() {
   const [open, setOpen] = useState(false);
   const [location] = useLocation();
   const { user, logout } = useAuth();
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const isActive = (path: string) => location === path;
 
   const handleLogout = async () => {
-    if (window.confirm("Are you sure you want to log out?")) {
-      await logout();
-    }
+    setIsLogoutDialogOpen(false);
+    await logout();
   };
 
   return (
@@ -187,13 +203,28 @@ export function AdminMobileHeader() {
             </nav>
 
             <div className="p-4 border-t border-zinc-800 bg-zinc-900/50">
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start gap-3 text-zinc-400 hover:text-red-400 hover:bg-red-500/10 mb-4 font-medium"
-                onClick={handleLogout}
-              >
-                <LogOut size={18} /> Logout
-              </Button>
+              <Dialog open={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start gap-3 text-zinc-400 hover:text-red-400 hover:bg-red-500/10 mb-4 font-medium"
+                  >
+                    <LogOut size={18} /> Logout
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Confirm Logout</DialogTitle>
+                    <DialogDescription>
+                      Are you sure you want to log out of the admin panel?
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <Button variant="outline" onClick={() => setIsLogoutDialogOpen(false)}>Cancel</Button>
+                    <Button variant="destructive" onClick={handleLogout}>Logout</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
               
               <div className="flex items-center gap-3 px-2 pt-2 border-t border-zinc-800">
                 <Avatar className="h-8 w-8 border border-zinc-700">
