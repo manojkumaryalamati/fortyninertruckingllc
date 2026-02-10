@@ -124,13 +124,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!isFirebaseConfigured()) {
         setUser(null);
         setIsAdmin(false);
-        setLocation("/login");
+        setLocation("/");
         return;
       }
       
       await signOut(auth);
       setIsAdmin(false);
-      setLocation("/login");
+      setLocation("/");
     } catch (err: any) {
       console.error("Logout error:", err);
       setError(err.message || "Failed to logout");
