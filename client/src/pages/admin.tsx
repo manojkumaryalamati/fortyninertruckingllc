@@ -25,7 +25,8 @@ import {
   UserCog,
   Key,
   Mail,
-  Loader2
+  Loader2,
+  Trash2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,7 +41,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { updatePassword, updateProfile } from "firebase/auth";
 import { auth, db, isFirebaseConfigured } from "@/lib/firebase";
-import { collection, onSnapshot, query, where, getCountFromServer, orderBy, limit } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getCountFromServer, orderBy, limit, deleteDoc, doc } from "firebase/firestore";
 import { TruckLoader } from "@/components/TruckLoader";
 import { utils, writeFile } from "xlsx";
 
@@ -259,6 +260,36 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleDeleteTrip = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this trip? This action cannot be undone.")) {
+      return;
+    }
+
+    try {
+      if (isFirebaseConfigured()) {
+        await deleteDoc(doc(db, "trips", id));
+        toast({
+          title: "Trip Deleted",
+          description: "The trip record has been permanently removed.",
+        });
+      } else {
+        // Mock deletion
+        setRecentShipments(prev => prev.filter(t => t.id !== id));
+        toast({
+          title: "Trip Deleted (Mock)",
+          description: "The trip record has been removed from the view.",
+        });
+      }
+    } catch (error: any) {
+      console.error("Error deleting trip:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to delete trip",
+        variant: "destructive"
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex">
       <AdminSidebar />
@@ -472,8 +503,13 @@ export default function AdminDashboard() {
                           <td className="px-6 py-4 text-zinc-500 font-mono text-xs whitespace-nowrap">{load.eta}</td>
                           <td className="px-6 py-4 text-right font-bold text-zinc-900 whitespace-nowrap">{load.value}</td>
                           <td className="px-6 py-4 text-right">
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-zinc-900 transition-colors">
-                              <MoreHorizontal size={16} />
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-zinc-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                              onClick={() => handleDeleteTrip(load.id)}
+                            >
+                              <Trash2 size={16} />
                             </Button>
                           </td>
                         </tr>
