@@ -33,13 +33,13 @@ export function AdminSidebar() {
 
   const NavContent = () => (
     <>
-      <div className="flex justify-start w-full py-6 px-6">
+      <div className="flex justify-start w-full py-2 px-2">
         <Link href="/admin">
           <div className="flex items-center justify-start w-full cursor-pointer">
             <img 
               src={logo} 
               alt="49 Trucking" 
-              className="h-16 lg:h-20 w-auto object-contain brightness-0 invert" 
+              className="h-[120px] w-auto object-contain brightness-0 invert" 
             />
           </div>
         </Link>
