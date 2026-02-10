@@ -71,7 +71,7 @@ export function Navbar() {
       </div>
 
       <nav className={`fixed left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'top-0' : 'top-0 lg:top-10'} ${navbarClasses}`}>
-        <div className="w-full px-8 flex items-center justify-between h-[72px]">
+        <div className="w-full px-4 lg:px-8 flex items-center justify-between h-[72px]">
           
           {/* Logo Area */}
           <div className="flex-shrink-0 relative h-full flex items-center">
