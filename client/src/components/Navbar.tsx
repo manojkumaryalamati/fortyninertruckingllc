@@ -122,7 +122,7 @@ export function Navbar() {
                   <Menu size={32} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-full p-0 border-l-0 z-[100]">
+              <SheetContent side="right" className="w-full sm:w-full p-0 border-l-0">
                  <div className="sr-only">
                     <SheetTitle>Mobile Menu</SheetTitle>
                     <SheetDescription>Navigation links for mobile devices</SheetDescription>
