@@ -39,7 +39,7 @@ export function AdminSidebar() {
             <img 
               src={logo} 
               alt="49 Trucking" 
-              className="h-12 w-auto object-contain brightness-0 invert" 
+              className="h-16 lg:h-20 w-auto object-contain brightness-0 invert" 
             />
           </div>
         </Link>
