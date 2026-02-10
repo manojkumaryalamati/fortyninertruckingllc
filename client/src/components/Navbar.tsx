@@ -29,8 +29,8 @@ export function Navbar() {
   const isHome = location === "/";
   // Always solid background when scrolled, transparent only at very top of home
   const navbarClasses = scrolled 
-    ? "bg-white/90 backdrop-blur-md shadow-sm py-0 lg:py-2 border-b border-zinc-200" 
-    : (isHome ? "bg-transparent py-0 lg:py-4 border-b border-white/10" : "bg-white py-0 lg:py-4 border-b border-zinc-200");
+    ? "bg-white/90 backdrop-blur-md shadow-sm py-[2px] lg:py-2 border-b border-zinc-200" 
+    : (isHome ? "bg-transparent py-[2px] lg:py-4 border-b border-white/10" : "bg-white py-[2px] lg:py-4 border-b border-zinc-200");
 
   const logoClasses = scrolled 
     ? "w-24 brightness-0" 
