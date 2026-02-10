@@ -47,7 +47,11 @@ export default function Login() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       await login(email, password);
     } catch (err: any) {
-      setError(err.message || "Failed to login");
+      let errorMessage = err.message || "Failed to login";
+      if (errorMessage.includes("auth/invalid-credential")) {
+        errorMessage = "Please enter a valid Email/Password";
+      }
+      setError(errorMessage);
       setIsLoggingIn(false);
     }
   };
