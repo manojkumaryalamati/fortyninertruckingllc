@@ -28,14 +28,14 @@ export function TruckLoader({ className = "", text = "Loading...", size = "lg" }
         <div className="absolute bottom-[1px] animate-drive-across will-change-transform z-20">
             <div className="relative">
                 <Truck 
-                    className="text-primary transform -scale-x-100" 
+                    className="text-primary" 
                     size={32 * scale} 
                     strokeWidth={1.5} 
                 />
-                {/* Wind/Speed lines */}
-                <div className="absolute top-1 -right-3 flex flex-col gap-[2px] opacity-0 animate-wind">
+                {/* Wind/Speed lines - Trailing behind (left side) */}
+                <div className="absolute top-1 -left-3 flex flex-col gap-[2px] opacity-0 animate-wind items-end">
                     <div className="w-3 h-[1px] bg-muted-foreground/40 rounded-full"></div>
-                    <div className="w-2 h-[1px] bg-muted-foreground/40 rounded-full ml-1"></div>
+                    <div className="w-2 h-[1px] bg-muted-foreground/40 rounded-full mr-1"></div>
                 </div>
             </div>
         </div>
