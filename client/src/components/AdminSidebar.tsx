@@ -33,19 +33,19 @@ export function AdminSidebar() {
 
   const NavContent = () => (
     <>
-      <div className="flex justify-center w-full py-4">
+      <div className="flex justify-start w-full py-6 px-6">
         <Link href="/admin">
-          <div className="flex items-center justify-center w-full cursor-pointer">
+          <div className="flex items-center justify-start w-full cursor-pointer">
             <img 
               src={logo} 
               alt="49 Trucking" 
-              className="h-auto w-auto max-h-[160px] max-w-full object-contain brightness-0 invert" 
+              className="h-12 w-auto object-contain brightness-0 invert" 
             />
           </div>
         </Link>
       </div>
       
-      <nav className="flex-1 px-3 space-y-1">
+      <nav className="flex-1 px-3 space-y-1 overflow-y-auto custom-scrollbar">
         <p className="px-4 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-3 mt-2">Menu</p>
         
         <Link href="/admin">
