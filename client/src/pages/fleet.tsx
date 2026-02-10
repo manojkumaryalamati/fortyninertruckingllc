@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Truck, ArrowDown, Shield, Award, Gauge } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import heroDumpTruck from "@/assets/hero-dump-truck.jpg";
 
 export default function Fleet() {
   return (
@@ -14,7 +15,7 @@ export default function Fleet() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
            <img 
-             src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop" 
+             src={heroDumpTruck} 
              alt="Fleet Hero" 
              className="w-full h-full object-cover object-center opacity-40"
            />
