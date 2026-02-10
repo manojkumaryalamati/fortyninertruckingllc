@@ -80,7 +80,7 @@ export function Navbar() {
                    <img 
                     src={logo} 
                     alt="FortyNiner Trucking" 
-                    className={`transition-all duration-300 object-contain drop-shadow-md h-10 md:h-14 w-auto ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
+                    className={`transition-all duration-300 object-contain drop-shadow-md w-[160px] h-auto ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
                   />
               </div>
             </Link>
