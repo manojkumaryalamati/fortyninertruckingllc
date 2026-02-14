@@ -1,0 +1,146 @@
+Act as a Fortune-500 brand strategist, senior UX copywriter, and logistics industry expert.
+
+Your task is to write ORIGINAL, high-quality website content for a modern trucking and hauling company named:
+
+“FortyNinerTrucking LLC”
+
+IMPORTANT CONSTRAINTS
+- Understand the business model of Channa Trucking (construction hauling, dump trucks, subhauling, drivers, permits, safety-first operations)
+- DO NOT copy sentences, phrases, or structure from Channa Trucking
+- Content must be 100% original, premium, and professional
+- Tone: confident, reliable, safety-driven, modern, no fluff
+- Audience: construction companies, contractors, city/state projects, infrastructure firms
+- Geography: United States
+- SEO-friendly but human (no keyword stuffing)
+
+BUSINESS POSITIONING
+FortyNinerTrucking LLC is:
+- A full-service trucking & hauling company
+- Specializes in construction and material hauling
+- Operates a professional, well-maintained fleet
+- Safety-first, compliance-driven, and on-time focused
+- Works with contractors, developers, municipalities, and subhaulers
+- Employs experienced CDL drivers and partners with owner-operators
+
+WRITE CONTENT FOR THE FOLLOWING SECTIONS
+
+========================
+1) HOME PAGE – HERO
+========================
+- Headline (powerful, short, confident)
+- Sub-headline (what we do + who we serve)
+- 1–2 CTA texts (example: Request a Quote, Talk to Dispatch)
+
+========================
+2) ABOUT US
+========================
+Write 2–3 short paragraphs covering:
+- Who FortyNinerTrucking LLC is
+- Years of experience (write generically, do not invent exact numbers)
+- Commitment to safety, reliability, and professionalism
+- Focus on long-term partnerships, not one-off jobs
+
+========================
+3) CORE VALUES (3–4 ITEMS)
+========================
+Write value blocks similar in concept to:
+- Safety
+- Reliability
+- Expertise
+- Accountability
+
+Each value should have:
+- Title
+- 1–2 sentence description (original wording)
+
+========================
+4) SERVICES
+========================
+Write content for these service categories (you may rename creatively):
+- Construction Material Hauling
+- Dump Truck Services
+- Transfer & End Dump Operations
+- Project-Based Hauling Solutions
+- Subhauler & Owner-Operator Support
+
+For each service:
+- Short headline
+- 2–3 sentence description
+- Emphasize efficiency, compliance, and job-site coordination
+
+========================
+5) OUR FLEET
+========================
+Write a professional fleet overview paragraph explaining:
+- Diverse, well-maintained trucks
+- Regular inspections and compliance
+- Ready for small and large-scale projects
+
+Then list fleet types (descriptive, not copied):
+- 10-Wheel Dump Trucks
+- Super Dumps
+- End Dumps
+- Transfer Trucks
+
+========================
+6) SAFETY & COMPLIANCE
+========================
+Write a section that:
+- Emphasizes safety culture
+- Mentions compliance with DOT and industry regulations (no fake numbers)
+- Highlights trained drivers, inspections, and documentation
+
+========================
+7) CERTIFICATIONS & PERMITS
+========================
+Write general content stating:
+- Proper licensing and certifications
+- Ability to work on public and private projects
+- Commitment to regulatory standards
+
+DO NOT list fake certificate IDs.
+
+========================
+8) CAREERS – DRIVERS
+========================
+Write content encouraging CDL drivers to apply:
+- Professional work environment
+- Well-maintained equipment
+- Respect for drivers
+- Safety-focused culture
+
+Include a short “Why Drive With Us?” bullet list.
+
+========================
+9) SUBHAULERS / OWNER-OPERATORS
+========================
+Write content inviting subhaulers to partner:
+- Fair dispatch
+- Clear communication
+- Long-term opportunities
+- Compliance-focused partnerships
+
+========================
+10) CONTACT / CALL TO ACTION
+========================
+Write a closing CTA section:
+- Encourage contractors and partners to reach out
+- Emphasize fast response and reliable dispatch
+- Professional but welcoming tone
+
+========================
+STYLE RULES
+========================
+- Use modern, clean business language
+- Avoid buzzwords unless meaningful
+- No emojis
+- No slang
+- No exaggerated claims
+- Sound like a real, established trucking company
+- Content should feel “enterprise-ready”
+
+OUTPUT FORMAT
+- Use clear headings
+- Keep paragraphs readable
+- Use bullet points where appropriate
+- Make content ready to paste directly into a website

@@ -1,0 +1,186 @@
+import { Link, useLocation } from "wouter";
+import { Button } from "@/components/ui/button";
+import { Menu, X, Phone, Mail, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assets/logo_v6.png";
+
+export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "Our Trucks", href: "/fleet" },
+    { name: "Certifications", href: "/certifications" },
+    { name: "Careers", href: "/careers" },
+    { name: "Subhaulers", href: "/subhaulers" },
+    { name: "Admin", href: "/login" },
+  ];
+
+  const isHome = location === "/";
+  // Always solid background when scrolled, transparent only at very top of home
+  const navbarClasses = scrolled 
+    ? "bg-white/90 backdrop-blur-md shadow-sm py-2 border-b border-zinc-200" 
+    : (isHome ? "bg-transparent py-4 border-b border-white/10" : "bg-white py-4 border-b border-zinc-200");
+
+  const logoClasses = scrolled 
+    ? "w-24 brightness-0" 
+    : (isHome ? "w-28 brightness-0 invert" : "w-28 brightness-0");
+
+  const linkClasses = (href: string) => {
+    if (scrolled) return location === href ? "text-primary font-bold bg-primary/10" : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100";
+    if (isHome) return location === href ? "text-white font-bold bg-white/10" : "text-white/80 hover:text-white hover:bg-white/5";
+    return location === href ? "text-primary font-bold bg-primary/10" : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100";
+  };
+
+  const buttonClasses = scrolled 
+    ? "text-zinc-900 hover:bg-zinc-100" 
+    : (isHome ? "text-white hover:bg-white/10" : "text-zinc-900 hover:bg-zinc-100");
+
+  return (
+    <>
+      {/* Top Bar - Hidden on mobile, visible on desktop */}
+      <div className={`hidden lg:flex fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} bg-zinc-100 text-zinc-600 border-b border-white/5`}>
+        <div className="w-full px-8 h-10 flex justify-between items-center text-xs font-medium tracking-wide">
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
+              <Phone size={14} className="text-primary" /> (925) 250-4605
+            </span>
+            <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
+              <Mail size={14} className="text-primary" /> fortyninertrucking@gmail.com
+            </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-2">
+              <Clock size={14} className="text-primary" /> 24/7
+            </span>
+            <Link href="/contact">
+               <span className="text-primary hover:text-zinc-900 transition-colors cursor-pointer font-bold ml-2">Request A Quote &rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <nav className={`fixed left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'top-0' : 'top-0 lg:top-10'} ${navbarClasses}`}>
+        <div className="w-full flex items-center justify-between h-[72px]">
+          
+          {/* Logo Area */}
+          <div className="flex-shrink-0 relative h-full flex items-center">
+            <Link href="/">
+              <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center">
+                   <img 
+                    src={logo} 
+                    alt="FortyNiner Trucking" 
+                    className={`transition-all duration-300 object-contain drop-shadow-md ${scrolled ? 'brightness-0' : (isHome ? 'brightness-0 invert' : 'brightness-0')}`}
+                    style={{ maxHeight: '165px', width: 'auto' }}
+                  />
+              </div>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-6">
+            {navLinks.map((item) => (
+              <Link key={item.name} href={item.href}>
+                <div className={`
+                  relative px-3 py-2 rounded-full cursor-pointer transition-all duration-300 group
+                  ${linkClasses(item.href)}
+                `}>
+                  <span className="text-sm tracking-wide  font-semibold">{item.name}</span>
+                  {location === item.href && (
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full border border-primary/50"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-4">
+            
+             <button 
+               className={`lg:hidden p-2 rounded-md transition-colors ${buttonClasses}`}
+               onClick={() => setIsMobileMenuOpen(true)}
+             >
+               <Menu size={32} />
+             </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay - Unchanged mostly, just styling tweaks */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+            className="fixed inset-0 z-[60] bg-white text-zinc-900 p-0 lg:hidden flex flex-col"
+          >
+            <div className="flex justify-between items-center p-6 border-b border-zinc-100 navbar-css">
+              <div className="h-45 w-auto relative flex items-center">
+                 <img src={logo} alt="FortyNiner Trucking" className="h-full w-auto object-contain brightness-0" />
+              </div>
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-colors text-zinc-900"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-center gap-2 mobile-menu-css">
+              {navLinks.map((item, idx) => (
+                <Link key={item.name} href={item.href}>
+                  <motion.div 
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                    className={`text-lg font-bold uppercase tracking-widest py-4 border-b border-zinc-50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-zinc-600'}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">→</span>
+                  </motion.div>
+                </Link>
+              ))}
+              <Link href="/contact">
+                  <motion.div 
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="mt-8"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                   <Button className="w-full h-14 text-sm font-bold bg-primary text-white  tracking-widest rounded-none">
+                     Get a Quote
+                   </Button>
+                  </motion.div>
+              </Link>
+            </div>
+            
+            <div className="p-8 bg-zinc-50 text-center space-y-4">
+               <p className="text-zinc-400 text-sm">Need immediate assistance?</p>
+               <a href="tel:9252504605" className="text-2xl font-black text-zinc-900 block">(925) 250-4605</a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
