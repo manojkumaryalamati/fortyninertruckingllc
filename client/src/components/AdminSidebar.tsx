@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
-import logo from "@/assets/logo_v10.png";
+import logo from "@/assets/logo_v11.png";
 import { 
   LayoutDashboard, 
   Truck, 
