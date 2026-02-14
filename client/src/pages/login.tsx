@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { TruckLoader } from "@/components/TruckLoader";
+import logo from "@/assets/logo_v7.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -109,6 +110,7 @@ export default function Login() {
             </div>
           ) : null}
           <div className="mb-8">
+            <img src={logo} alt="49 Trucking" className="h-24 w-auto object-contain mb-6 mx-auto md:mx-0" />
             <h2 className="text-3xl font-black text-zinc-900 tracking-tight">Admin Portal</h2>
             <p className="text-zinc-500 mt-2">Secure access for fleet management.</p>
           </div>
