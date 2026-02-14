@@ -162,9 +162,9 @@ export default function Login() {
 
           <div className="mt-8 flex items-center justify-end text-sm">
             <Link href="/">
-              <a className="text-zinc-500 hover:text-primary transition-colors font-medium">
+              <span className="text-zinc-500 hover:text-primary transition-colors font-medium cursor-pointer">
                 Back to Website
-              </a>
+              </span>
             </Link>
           </div>
           
