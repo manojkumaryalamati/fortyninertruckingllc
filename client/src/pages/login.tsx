@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { TruckLoader } from "@/components/TruckLoader";
-import logo from "@/assets/logo_v7.png";
+import logo from "@/assets/logo_v8.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
