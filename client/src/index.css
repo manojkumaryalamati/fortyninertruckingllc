@@ -44,6 +44,7 @@
 }
 .cursor-pointer{
   width: auto;
+  font-size: 1rem;
 }
 
 .navbar-css{
@@ -51,7 +52,7 @@
 }
 
 .mobile-menu-css{
-  margin-top:-6rem;
+  margin-top:-1rem;
 }
 
 .fleet-css{
