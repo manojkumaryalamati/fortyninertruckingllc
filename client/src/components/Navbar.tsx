@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo_transparent.png";
+import { Logo } from "@/components/Logo";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -77,12 +77,7 @@ export function Navbar() {
           <div className="flex-shrink-0 relative h-full flex items-center">
             <Link href="/">
               <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center py-2">
-                   <img 
-                    src={logo} 
-                    alt="FortyNiner Trucking" 
-                    className={`transition-all duration-300 object-contain drop-shadow-md ${scrolled ? 'h-10 md:h-14' : 'h-12 md:h-16'}`}
-                    style={{ width: 'auto' }}
-                  />
+                  <Logo dark={isHome && !scrolled} iconSize={scrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'} />
               </div>
             </Link>
           </div>
@@ -134,7 +129,7 @@ export function Navbar() {
           >
             <div className="flex justify-between items-center p-6 border-b border-zinc-100">
               <div className="h-12 w-auto relative flex items-center">
-                 <img src={logo} alt="FortyNiner Trucking" className="h-10 w-auto object-contain drop-shadow-sm" />
+                 <Logo iconSize="h-8" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}

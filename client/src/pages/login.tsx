@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { TruckLoader } from "@/components/TruckLoader";
-import logo from "@/assets/logo_transparent.png";
+import { Logo } from "@/components/Logo";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -109,8 +109,8 @@ export default function Login() {
               <TruckLoader text="Signing securely..." />
             </div>
           ) : null}
-          <div className="mb-8">
-            <img src={logo} alt="49 Trucking" className="h-20 md:h-24 w-auto object-contain mb-6 mx-auto md:mx-0 drop-shadow-xl" />
+          <div className="mb-8 flex flex-col items-center md:items-start">
+            <Logo iconSize="h-20 md:h-24" className="mb-8 scale-110 origin-center md:origin-left" />
             <h2 className="text-3xl font-black text-zinc-900 tracking-tight">Admin Portal</h2>
             <p className="text-zinc-500 mt-2">Secure access for fleet management.</p>
           </div>
