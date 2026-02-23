@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
-import logo from "@/assets/logo_v12.png";
+import logo from "@/assets/F655E6D5-E3E4-4181-9818-41D901AF90BE_1771865347055.jpeg";
 import { 
   LayoutDashboard, 
   Truck, 
@@ -34,13 +34,13 @@ export function AdminSidebar() {
 
   const NavContent = () => (
     <>
-      <div className="flex justify-start w-full py-2 px-2">
+      <div className="flex justify-start w-full py-4 px-4">
         <Link href="/admin">
           <div className="flex items-center justify-start w-full cursor-pointer">
             <img 
               src={logo} 
               alt="49 Trucking" 
-              className="h-[120px] w-auto object-contain brightness-0 invert" 
+              className="h-20 w-auto object-contain rounded-xl shadow-lg border border-white/10" 
             />
           </div>
         </Link>
@@ -146,7 +146,7 @@ export function AdminMobileHeader() {
   return (
     <div className="md:hidden flex items-center justify-between p-4 border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-2">
-        <img src={logo} alt="49 Trucking" className="h-10 w-auto object-contain brightness-0" />
+        <img src={logo} alt="49 Trucking" className="h-10 w-auto object-contain rounded-lg shadow-sm" />
       </div>
       
       <Sheet open={open} onOpenChange={setOpen}>
@@ -159,7 +159,7 @@ export function AdminMobileHeader() {
           <div className="flex flex-col h-full">
             <div className="p-6 mb-2">
               <div className="flex items-center gap-2">
-                <img src={logo} alt="49 Trucking" className="h-16 w-auto object-contain brightness-0 invert" />
+                <img src={logo} alt="49 Trucking" className="h-16 w-auto object-contain rounded-xl shadow-lg border border-white/10" />
               </div>
             </div>
             
