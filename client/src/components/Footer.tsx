@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/F655E6D5-E3E4-4181-9818-41D901AF90BE_1771865347055.jpeg";
+import logo from "@assets/F655E6D5-E3E4-4181-9818-41D901AF90BE_1771865347055.jpeg";
 
 export default function Footer() {
   return (
