@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Logo } from "@/components/Logo";
+import logo from "@/assets/F655E6D5-E3E4-4181-9818-41D901AF90BE_1771865347055.jpeg";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -77,7 +77,12 @@ export function Navbar() {
           <div className="flex-shrink-0 relative h-full flex items-center">
             <Link href="/">
               <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center py-2">
-                  <Logo dark={isHome && !scrolled} iconSize={scrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'} />
+                   <img 
+                    src={logo} 
+                    alt="FortyNiner Trucking" 
+                    className={`transition-all duration-300 object-contain drop-shadow-xl rounded-xl border-2 border-white/10 ${scrolled ? 'h-10 md:h-14' : 'h-12 md:h-16'}`}
+                    style={{ width: 'auto' }}
+                  />
               </div>
             </Link>
           </div>
@@ -129,7 +134,7 @@ export function Navbar() {
           >
             <div className="flex justify-between items-center p-6 border-b border-zinc-100">
               <div className="h-12 w-auto relative flex items-center">
-                 <Logo iconSize="h-8" />
+                 <img src={logo} alt="FortyNiner Trucking" className="h-10 w-auto object-contain rounded-lg shadow-sm" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
