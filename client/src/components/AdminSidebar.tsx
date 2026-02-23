@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
-import logo from "@assets/F655E6D5-E3E4-4181-9818-41D901AF90BE_1771865347055.jpeg";
+import logo from "@/assets/logo_transparent.png";
 import { 
   LayoutDashboard, 
   Truck, 
@@ -40,7 +40,7 @@ export function AdminSidebar() {
             <img 
               src={logo} 
               alt="49 Trucking" 
-              className="h-20 w-auto object-contain rounded-xl shadow-lg border border-white/10" 
+              className="h-20 w-auto object-contain drop-shadow-lg" 
             />
           </div>
         </Link>
@@ -146,7 +146,7 @@ export function AdminMobileHeader() {
   return (
     <div className="md:hidden flex items-center justify-between p-4 border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-2">
-        <img src={logo} alt="49 Trucking" className="h-10 w-auto object-contain rounded-lg shadow-sm" />
+        <img src={logo} alt="49 Trucking" className="h-10 w-auto object-contain drop-shadow-sm" />
       </div>
       
       <Sheet open={open} onOpenChange={setOpen}>
@@ -159,7 +159,7 @@ export function AdminMobileHeader() {
           <div className="flex flex-col h-full">
             <div className="p-6 mb-2">
               <div className="flex items-center gap-2">
-                <img src={logo} alt="49 Trucking" className="h-16 w-auto object-contain rounded-xl shadow-lg border border-white/10" />
+                <img src={logo} alt="49 Trucking" className="h-16 w-auto object-contain drop-shadow-md" />
               </div>
             </div>
             
