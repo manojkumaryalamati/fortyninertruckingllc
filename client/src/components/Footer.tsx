@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@assets/F655E6D5-E3E4-4181-9818-41D901AF90BE_1771865347055.jpeg";
+import logo from "@/assets/logo_transparent.png";
 
 export default function Footer() {
   return (
@@ -14,7 +14,7 @@ export default function Footer() {
                 <img 
                   src={logo} 
                   alt="FortyNiner Trucking" 
-                  className="h-16 md:h-24 w-auto object-contain drop-shadow-xl rounded-2xl border border-zinc-200/50" 
+                  className="h-16 md:h-24 w-auto object-contain drop-shadow-md" 
                 />
               </div>
             </Link>
