@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
-import logo from "@/assets/logo_transparent.png";
+import { Logo } from "@/components/Logo";
 import { 
   LayoutDashboard, 
   Truck, 
@@ -34,14 +34,10 @@ export function AdminSidebar() {
 
   const NavContent = () => (
     <>
-      <div className="flex justify-start w-full py-4 px-4">
+      <div className="flex justify-start w-full py-6 px-4">
         <Link href="/admin">
           <div className="flex items-center justify-start w-full cursor-pointer">
-            <img 
-              src={logo} 
-              alt="49 Trucking" 
-              className="h-20 w-auto object-contain drop-shadow-lg" 
-            />
+            <Logo dark={true} stacked={true} iconSize="h-16" className="items-center text-center w-full" />
           </div>
         </Link>
       </div>
@@ -146,7 +142,7 @@ export function AdminMobileHeader() {
   return (
     <div className="md:hidden flex items-center justify-between p-4 border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-2">
-        <img src={logo} alt="49 Trucking" className="h-10 w-auto object-contain drop-shadow-sm" />
+        <Logo iconSize="h-8" />
       </div>
       
       <Sheet open={open} onOpenChange={setOpen}>
@@ -159,7 +155,7 @@ export function AdminMobileHeader() {
           <div className="flex flex-col h-full">
             <div className="p-6 mb-2">
               <div className="flex items-center gap-2">
-                <img src={logo} alt="49 Trucking" className="h-16 w-auto object-contain drop-shadow-md" />
+                <Logo dark={true} stacked={true} iconSize="h-12" className="items-center text-center w-full" />
               </div>
             </div>
             
