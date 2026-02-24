@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
-import logo from "@/assets/F655E6D5-E3E4-4181-9818-41D901AF90BE_1771865347055.jpeg";
+import { Logo } from "@/components/Logo";
 import { 
   LayoutDashboard, 
   Truck, 
@@ -34,14 +34,10 @@ export function AdminSidebar() {
 
   const NavContent = () => (
     <>
-      <div className="flex justify-start w-full py-4 px-4">
+      <div className="flex justify-start w-full py-6 px-4">
         <Link href="/admin">
-          <div className="flex items-center justify-start w-full cursor-pointer">
-            <img 
-              src={logo} 
-              alt="49 Trucking" 
-              className="h-20 w-auto object-contain rounded-xl shadow-lg border border-white/10" 
-            />
+          <div className="flex items-center justify-start w-full cursor-pointer bg-white/5 p-4 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
+            <Logo variant="light" className="scale-75 origin-left" />
           </div>
         </Link>
       </div>
@@ -146,7 +142,7 @@ export function AdminMobileHeader() {
   return (
     <div className="md:hidden flex items-center justify-between p-4 border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-2">
-        <img src={logo} alt="49 Trucking" className="h-10 w-auto object-contain rounded-lg shadow-sm" />
+        <Logo variant="dark" className="scale-50 origin-left -ml-4" />
       </div>
       
       <Sheet open={open} onOpenChange={setOpen}>
@@ -157,9 +153,9 @@ export function AdminMobileHeader() {
         </SheetTrigger>
         <SheetContent side="left" className="p-0 w-72 bg-zinc-900 border-r border-zinc-800 text-white">
           <div className="flex flex-col h-full">
-            <div className="p-6 mb-2">
-              <div className="flex items-center gap-2">
-                <img src={logo} alt="49 Trucking" className="h-16 w-auto object-contain rounded-xl shadow-lg border border-white/10" />
+            <div className="p-6 mb-2 mt-4">
+              <div className="flex items-center gap-2 bg-white/5 p-4 rounded-xl border border-white/10">
+                <Logo variant="light" className="scale-75 origin-left" />
               </div>
             </div>
             
