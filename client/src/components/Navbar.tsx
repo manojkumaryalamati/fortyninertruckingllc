@@ -76,7 +76,7 @@ export function Navbar() {
           {/* Logo Area */}
           <div className="flex-shrink-0 relative h-full flex items-center">
             <Link href="/">
-              <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center py-2">
+              <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center">
                 <Logo 
                   variant={scrolled || !isHome ? "dark" : "light"} 
                   className={`transition-all duration-300 ${scrolled ? 'scale-75 origin-left' : 'scale-90 md:scale-100 origin-left'}`}
