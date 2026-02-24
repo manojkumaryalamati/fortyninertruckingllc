@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/F655E6D5-E3E4-4181-9818-41D901AF90BE_1771865347055.jpeg";
+import { Logo } from "@/components/Logo";
 
 export default function Footer() {
   return (
@@ -10,12 +10,8 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           <div className="space-y-6">
             <Link href="/">
-              <div className="block cursor-pointer">
-                <img 
-                  src={logo} 
-                  alt="FortyNiner Trucking" 
-                  className="h-16 md:h-24 w-auto object-contain drop-shadow-xl rounded-2xl border border-zinc-200/50" 
-                />
+              <div className="block cursor-pointer bg-white p-4 rounded-2xl border border-zinc-200 shadow-sm inline-block">
+                <Logo variant="dark" />
               </div>
             </Link>
             <p className="text-zinc-600 leading-relaxed">
