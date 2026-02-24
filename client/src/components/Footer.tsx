@@ -10,8 +10,8 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           <div className="space-y-6">
             <Link href="/">
-              <div className="block cursor-pointer bg-white p-4 rounded-2xl border border-zinc-200 shadow-sm inline-block">
-                <Logo variant="dark" />
+              <div className="block cursor-pointer inline-block">
+                <Logo variant="dark" className="scale-75 origin-left" />
               </div>
             </Link>
             <p className="text-zinc-600 leading-relaxed">
