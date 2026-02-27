@@ -87,18 +87,20 @@ export default function Fleet() {
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
            <div className="flex flex-col items-center justify-center text-center space-y-12">
              <div className="space-y-4">
-                <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Our Inventory</h2>
-                <h3 className="text-4xl md:text-5xl font-black text-zinc-900">Ready for Any Job</h3>
+                <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Truck Types Available</h2>
+                <h3 className="text-4xl md:text-5xl font-black text-zinc-900">Our Fleet</h3>
                 <p className="text-zinc-500 max-w-2xl mx-auto text-lg">
                   While our full gallery is being updated, rest assured we have the equipment you need.
                 </p>
              </div>
              
-             <div className="grid md:grid-cols-3 gap-8 w-full">
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
                {[
-                 { name: "Super Dumps", desc: "Maximum payload efficiency for aggregate transport." },
-                 { name: "End Dumps", desc: "Versatile unloading for difficult job sites." },
-                 { name: "High Sides", desc: "High volume capacity for lighter materials." }
+                 { name: "Super Dumps", desc: "Heavy hauling with high payload capacity" },
+                 { name: "Super Tags", desc: "Versatile hauling with tag axle stability" },
+                 { name: "Super 10's", desc: "Maneuverable option for tight job sites" },
+                 { name: "Ten Wheelers", desc: "Reliable for construction and aggregates" },
+                 { name: "End Dumps", desc: "Efficient unloading for bulk materials" }
                ].map((truck, i) => (
                  <div key={i} className="group p-8 rounded-3xl bg-zinc-50 border border-zinc-100 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
                    <div className="h-16 w-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-primary mb-6 mx-auto group-hover:scale-110 transition-transform">
