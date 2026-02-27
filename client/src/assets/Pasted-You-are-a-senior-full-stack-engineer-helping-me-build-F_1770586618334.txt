@@ -1,0 +1,46 @@
+You are a senior full-stack engineer helping me build FortyNinerTruckingLLC website in Replit using Firebase.
+
+Current status (already done):
+- Firebase project: fortyninertruckingllc
+- Firestore is enabled
+- Public contact form writes to Firestore collection: `contact_submissions`
+- Cloud Function `emailOnContactSubmission` is deployed and working
+- Admin user exists in Firebase Auth with UID: ZvwAdbeeuKgBdn68irKxay8ektI3
+- Firestore has admin doc: `users/ZvwAdbeeuKgBdn68irKxay8ektI3` with role="admin"
+- Firebase Auth Email/Password is enabled
+
+Goal:
+Implement Firebase Authentication + Admin Authorization in the Replit app:
+1) Create an Admin Login page (email/password) using Firebase Auth.
+2) After login, verify admin access by reading Firestore doc `users/{uid}` and checking `role === "admin"`.
+3) If user is not admin, show "Access denied" and sign them out.
+4) Create an Admin Dashboard layout (sidebar + pages) with placeholders for CRUD modules:
+   - Trucks
+   - Drivers
+   - Trips
+   - Documents
+5) Add route protection so only authenticated admins can access /admin routes.
+6) Add a top navigation bar with logout.
+7) Implement Firestore rules (copy/paste) to enforce:
+   - `contact_submissions`: public create, admin read/update/delete
+   - `trucks`, `drivers`, `trips`, `documents`: admin read/write only
+   - everything else denied by default
+8) Create Firestore collections and TypeScript interfaces for:
+   - Truck (truckNo, vin, plate, status, createdAt)
+   - Driver (name, phone, licenseNo, status, createdAt)
+   - Trip (truckId, driverId, pickup, drop, date, status, createdAt)
+   - Document metadata (type, ownerType, ownerId, fileName, fileUrl, createdAt)
+9) Implement minimal CRUD for Trucks (Create/List/Edit/Delete) as a working example using Firestore.
+10) Use env variables for Firebase config (do not hardcode secrets). Provide exact Replit steps to add Secrets.
+
+Constraints:
+- Use Firebase modular SDK v9+.
+- Keep code clean and production-ready.
+- Do not loosen Firestore security rules.
+- Prefer React/Vite or plain JS if already present; adapt to the existing Replit project structure automatically.
+- Provide: (a) shell commands, (b) exact file paths, (c) copy-paste ready code.
+
+Output expected:
+- A step-by-step implementation plan
+- Commands to run in Replit Shell
+- Full code for: firebase.ts, authService.ts, adminRouteGuard, login page, admin layout, trucks CRUD page, and updated Firestore rules text.
