@@ -22,9 +22,12 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(timer);
   }, []);
+
+  const nextImage = () => setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+  const prevImage = () => setCurrentImageIndex((prevIndex) => (prevIndex - 1 + carouselImages.length) % carouselImages.length);
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
@@ -47,6 +50,22 @@ export default function Home() {
             />
           </AnimatePresence>
           <div className="absolute inset-0 bg-black/60 z-10" />
+          
+          {/* Navigation Controls */}
+          <div className="absolute inset-0 z-20 flex items-center justify-between px-4 md:px-12 pointer-events-none">
+            <button 
+              onClick={prevImage}
+              className="pointer-events-auto h-12 w-12 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm transition-all border border-white/20"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              onClick={nextImage}
+              className="pointer-events-auto h-12 w-12 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm transition-all border border-white/20"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
 
         {/* Hero Content */}
