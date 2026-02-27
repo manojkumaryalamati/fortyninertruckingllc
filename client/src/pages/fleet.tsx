@@ -124,10 +124,6 @@ export default function Fleet() {
                  <h4 className="text-2xl font-black text-zinc-900 mb-3 tracking-tight">{truck.name}</h4>
                  <p className="text-primary font-medium text-sm mb-4">{truck.desc}</p>
                  <p className="text-zinc-500 leading-relaxed text-sm flex-grow">{truck.detail}</p>
-                 
-                 <div className="pt-6 mt-6 border-t border-zinc-100 flex items-center text-sm font-bold text-zinc-900 group-hover:text-primary transition-colors">
-                   Request availability <ArrowDown size={16} className="ml-2 -rotate-90" />
-                 </div>
                </div>
              ))}
            </div>
