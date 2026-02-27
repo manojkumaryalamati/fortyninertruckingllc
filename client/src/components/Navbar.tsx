@@ -114,7 +114,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay - Unchanged mostly, just styling tweaks */}
+      {/* Mobile Menu Overlay - Redesigned */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
@@ -124,51 +124,56 @@ export function Navbar() {
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
             className="fixed inset-0 z-[60] bg-white text-[var(--text)] p-0 lg:hidden flex flex-col"
           >
-            <div className="flex justify-between items-center p-6 border-b border-[var(--border)]">
-              <div className="h-12 w-auto relative flex items-center">
+            <div className="flex justify-between items-center p-4 border-b border-[var(--border)]">
+              <div className="h-10 w-auto relative flex items-center">
                  <Logo variant="dark" className="scale-75 origin-left" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-full bg-[var(--border)] hover:bg-[var(--border)] transition-colors text-[var(--text)]"
+                className="p-2 rounded-full bg-[var(--surface-2)] hover:bg-[var(--border)] transition-colors text-[var(--text)]"
               >
                 <X size={24} />
               </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-6 flex flex-col justify-center gap-2">
-              {navLinks.map((item, idx) => (
-                <Link key={item.name} href={item.href}>
+            <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-4">
+              <div className="space-y-1">
+                {navLinks.map((item, idx) => (
+                  <Link key={item.name} href={item.href}>
+                    <motion.div 
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.05 }}
+                      className={`text-lg font-bold tracking-wide py-3 px-4 rounded-xl cursor-pointer flex items-center justify-between group ${location === item.href ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : 'text-[var(--text-muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]'}`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                      <span className={`transition-opacity ${location === item.href ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} text-[var(--primary)]`}>→</span>
+                    </motion.div>
+                  </Link>
+                ))}
+              </div>
+              
+              <Link href="/contact" className="mt-4">
                   <motion.div 
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className={`text-lg font-bold uppercase tracking-widest py-4 border-b border-zinc-50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-[var(--primary)]' : 'text-[var(--text-muted)]'}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    {item.name}
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[var(--primary)]">→</span>
-                  </motion.div>
-                </Link>
-              ))}
-              <Link href="/contact">
-                  <motion.div 
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="mt-8"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                   <Button className="w-full h-14 text-sm font-bold bg-[var(--primary)] text-white uppercase tracking-widest rounded-none">
+                   <Button className="w-full h-12 text-base font-bold bg-[var(--primary)] text-white tracking-wide rounded-xl shadow-md">
                      Get a Quote
                    </Button>
                   </motion.div>
               </Link>
             </div>
             
-            <div className="p-8 bg-[var(--surface-2)] text-center space-y-4">
-               <p className="text-[var(--text-muted)] text-sm">Need immediate assistance?</p>
-               <a href="tel:9252504605" className="text-2xl font-black text-[var(--text)] block">(925) 250-4605</a>
+            <div className="p-6 bg-[var(--surface-2)] border-t border-[var(--border)] text-center">
+               <p className="text-[var(--text-muted)] text-sm mb-2 font-medium">Need immediate assistance?</p>
+               <a href="tel:9252504605" className="text-xl font-black text-[var(--primary)] flex items-center justify-center gap-2">
+                 <Phone size={18} />
+                 (925) 250-4605
+               </a>
             </div>
           </motion.div>
         )}
