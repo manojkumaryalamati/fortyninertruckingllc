@@ -80,21 +80,27 @@ export default function Home() {
             <p className="text-base md:text-xl text-white/80 font-medium max-w-2xl mx-auto leading-relaxed">
               California's premier partner for construction logistics and material transport.
             </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
-              <Link href="/contact">
-                <Button className="h-12 px-8 text-base font-bold tracking-wide bg-[var(--primary)] hover:bg-white hover:text-[var(--primary)] text-white rounded-full min-w-[180px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                  Get A Quote
-                </Button>
-              </Link>
-              <Link href="/services">
-                <Button variant="outline" className="h-12 px-8 text-base font-bold tracking-wide border-2 border-white/80 text-white hover:bg-white hover:text-[var(--text)] bg-black/20 backdrop-blur-sm rounded-full min-w-[180px] transition-all duration-300 transform hover:-translate-y-1">
-                  Our Services
-                </Button>
-              </Link>
-            </div>
           </motion.div>
         </div>
+
+        {/* Bottom Actions */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="absolute bottom-32 left-0 right-0 z-20 flex flex-col sm:flex-row items-center justify-center gap-6 px-4"
+        >
+          <Link href="/contact">
+            <Button className="h-12 px-8 text-base font-bold tracking-wide bg-[var(--primary)] hover:bg-white hover:text-[var(--primary)] text-white rounded-full min-w-[180px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              Get A Quote
+            </Button>
+          </Link>
+          <Link href="/services">
+            <Button variant="outline" className="h-12 px-8 text-base font-bold tracking-wide border-2 border-white/80 text-white hover:bg-white hover:text-[var(--text)] bg-black/20 backdrop-blur-sm rounded-full min-w-[180px] transition-all duration-300 transform hover:-translate-y-1">
+              Our Services
+            </Button>
+          </Link>
+        </motion.div>
 
         {/* Simple Scroll Indicator */}
         <motion.div 
