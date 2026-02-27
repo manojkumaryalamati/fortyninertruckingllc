@@ -39,7 +39,7 @@ function ScrollToTop() {
 
 function Router() {
   return (
-    <Suspense fallback={<div className="min-h-screen w-full flex items-center justify-center bg-zinc-50"><TruckLoader text="Loading..." /></div>}>
+    <Suspense fallback={<div className="min-h-screen w-full flex items-center justify-center bg-[var(--surface-2)]"><TruckLoader text="Loading..." /></div>}>
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />

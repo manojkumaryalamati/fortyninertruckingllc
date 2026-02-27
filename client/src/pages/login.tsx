@@ -99,8 +99,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4 py-12">
-      <div className="w-full max-w-[1000px] grid md:grid-cols-2 gap-0 bg-white rounded-3xl shadow-2xl overflow-hidden border border-zinc-100">
+    <div className="min-h-screen flex items-center justify-center bg-[var(--surface-2)] px-4 py-12">
+      <div className="w-full max-w-[1000px] grid md:grid-cols-2 gap-0 bg-white rounded-3xl shadow-2xl overflow-hidden border border-[var(--border)]">
         
         {/* Left Side - Login Form */}
         <div className="p-8 md:p-12 flex flex-col justify-center relative">
@@ -113,13 +113,13 @@ export default function Login() {
             <div className="mb-6 flex justify-center md:justify-start">
               <Logo variant="dark" />
             </div>
-            <h2 className="text-3xl font-black text-zinc-900 tracking-tight">Admin Portal</h2>
-            <p className="text-zinc-500 mt-2">Secure access for fleet management.</p>
+            <h2 className="text-3xl font-black text-[var(--text)] tracking-tight">Admin Portal</h2>
+            <p className="text-[var(--text-muted)] mt-2">Secure access for fleet management.</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email" className="font-semibold text-zinc-700">Email Address</Label>
+              <Label htmlFor="email" className="font-semibold text-[var(--text-muted)]">Email Address</Label>
               <div className="relative">
                 <Input 
                   id="email" 
@@ -127,15 +127,15 @@ export default function Login() {
                   placeholder="admin@49trucking.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 h-12 bg-zinc-50 border-zinc-200 focus:bg-white text-zinc-900 placeholder:text-zinc-400 transition-all"
+                  className="pl-10 h-12 bg-[var(--surface-2)] border-[var(--border)] focus:bg-white text-[var(--text)] placeholder:text-[var(--text-muted)] transition-all"
                 />
-                <Mail className="absolute left-3 top-3.5 h-5 w-5 text-zinc-400" />
+                <Mail className="absolute left-3 top-3.5 h-5 w-5 text-[var(--text-muted)]" />
               </div>
             </div>
 
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password" className="font-semibold text-zinc-700">Password</Label>
+                <Label htmlFor="password" className="font-semibold text-[var(--text-muted)]">Password</Label>
               </div>
               <div className="relative">
                 <Input 
@@ -144,9 +144,9 @@ export default function Login() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 h-12 bg-zinc-50 border-zinc-200 focus:bg-white text-zinc-900 placeholder:text-zinc-400 transition-all"
+                  className="pl-10 h-12 bg-[var(--surface-2)] border-[var(--border)] focus:bg-white text-[var(--text)] placeholder:text-[var(--text-muted)] transition-all"
                 />
-                <Lock className="absolute left-3 top-3.5 h-5 w-5 text-zinc-400" />
+                <Lock className="absolute left-3 top-3.5 h-5 w-5 text-[var(--text-muted)]" />
               </div>
             </div>
 
@@ -157,14 +157,14 @@ export default function Login() {
               </div>
             )}
 
-            <Button type="submit" className="w-full h-12 font-bold text-base bg-zinc-200 text-zinc-900 hover:bg-zinc-300 rounded-xl shadow-lg shadow-zinc-200/50" disabled={isLoggingIn}>
+            <Button type="submit" className="w-full h-12 font-bold text-base bg-[var(--border)] text-[var(--text)] hover:bg-[var(--surface-2)] rounded-xl shadow-lg shadow-[var(--shadow)]/50" disabled={isLoggingIn}>
               Sign In <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </form>
 
           <div className="mt-8 flex items-center justify-end text-sm">
             <Link href="/">
-              <span className="text-zinc-500 hover:text-primary transition-colors font-medium cursor-pointer">
+              <span className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors font-medium cursor-pointer">
                 Back to Website
               </span>
             </Link>
@@ -179,7 +179,7 @@ export default function Login() {
         </div>
 
         {/* Right Side - Visual */}
-        <div className="hidden md:block relative bg-zinc-100">
+        <div className="hidden md:block relative bg-[var(--border)]">
           <div className="absolute inset-0">
             <img 
               src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop"
@@ -187,13 +187,13 @@ export default function Login() {
               className="w-full h-full object-cover opacity-5 mix-blend-multiply"
             />
           </div>
-          <div className="relative h-full flex flex-col justify-between p-12 text-zinc-900">
+          <div className="relative h-full flex flex-col justify-between p-12 text-[var(--text)]">
             <div className="space-y-2">
-              <div className="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-zinc-200 mb-6">
-                <CheckCircle2 className="h-6 w-6 text-zinc-700" />
+              <div className="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-[var(--border)] mb-6">
+                <CheckCircle2 className="h-6 w-6 text-[var(--text-muted)]" />
               </div>
-              <h3 className="text-2xl font-bold text-zinc-900">Operational Excellence</h3>
-              <p className="text-zinc-500 leading-relaxed max-w-sm">
+              <h3 className="text-2xl font-bold text-[var(--text)]">Operational Excellence</h3>
+              <p className="text-[var(--text-muted)] leading-relaxed max-w-sm">
                 Manage your fleet, track shipments, and coordinate drivers all in one centralized platform.
               </p>
             </div>
@@ -201,12 +201,12 @@ export default function Login() {
             <div className="space-y-4">
               <div className="flex -space-x-4">
                 {[1,2,3,4].map(i => (
-                  <div key={i} className="h-10 w-10 rounded-full border-2 border-white bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-600">
+                  <div key={i} className="h-10 w-10 rounded-full border-2 border-white bg-[var(--border)] flex items-center justify-center text-xs font-bold text-[var(--text-muted)]">
                     {i}
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-zinc-500">Trusted by 50+ Enterprise Partners</p>
+              <p className="text-sm text-[var(--text-muted)]">Trusted by 50+ Enterprise Partners</p>
             </div>
           </div>
         </div>

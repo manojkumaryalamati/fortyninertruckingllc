@@ -313,7 +313,7 @@ export default function DriversManagement() {
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-10 w-10 border border-border">
-                    <AvatarFallback className="bg-primary/10 text-primary font-bold">{driver.name?.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="bg-[var(--primary)]/10 text-[var(--primary)] font-bold">{driver.name?.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <div>
                     <CardTitle className="text-base font-bold">{driver.name}</CardTitle>
@@ -378,7 +378,7 @@ export default function DriversManagement() {
                    <div className="space-y-6 py-4">
                      <div className="flex items-center gap-4">
                        <Avatar className="h-20 w-20 border-2 border-border">
-                         <AvatarFallback className="bg-primary/10 text-primary text-2xl font-bold">
+                         <AvatarFallback className="bg-[var(--primary)]/10 text-[var(--primary)] text-2xl font-bold">
                            {selectedDriver.name?.charAt(0)}
                          </AvatarFallback>
                        </Avatar>

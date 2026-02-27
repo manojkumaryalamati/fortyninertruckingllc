@@ -159,7 +159,7 @@ export default function TrucksManagement() {
             </div>
             <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
               <DialogTrigger asChild>
-                <Button className="font-bold bg-primary text-primary-foreground hover:bg-primary/90">
+                <Button className="font-bold bg-[var(--primary)] text-[var(--primary)]-foreground hover:bg-[var(--primary)]/90">
                   <Plus className="mr-2 h-4 w-4" /> Add Truck
                 </Button>
               </DialogTrigger>
@@ -227,12 +227,12 @@ export default function TrucksManagement() {
 
           <Card className="border-border shadow-sm border-t-4 border-t-primary">
             <CardContent className="p-0">
-              <div className="p-4 border-b border-border flex items-center gap-4 bg-zinc-50/50">
+              <div className="p-4 border-b border-border flex items-center gap-4 bg-[var(--surface-2)]/50">
                 <div className="relative flex-1 max-w-sm">
                   <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input 
                     placeholder="Search by truck #, VIN, or plate..." 
-                    className="pl-9 bg-white border-zinc-200"
+                    className="pl-9 bg-white border-[var(--border)]"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
@@ -245,7 +245,7 @@ export default function TrucksManagement() {
 
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
-                  <thead className="bg-secondary/30 text-zinc-700 font-bold border-b border-border">
+                  <thead className="bg-secondary/30 text-[var(--text-muted)] font-bold border-b border-border">
                     <tr>
                       <th className="px-6 py-4">Truck No.</th>
                       <th className="px-6 py-4">VIN</th>
@@ -288,7 +288,7 @@ export default function TrucksManagement() {
                           <td className="px-6 py-4 text-right">
                             <div className="flex justify-end gap-2">
                               <Button variant="ghost" size="icon" onClick={() => openEditModal(truck)}>
-                                <Edit size={16} className="text-muted-foreground hover:text-primary" />
+                                <Edit size={16} className="text-muted-foreground hover:text-[var(--primary)]" />
                               </Button>
                               <Button variant="ghost" size="icon" onClick={() => truck.id && handleDeleteTruck(truck.id)}>
                                 <Trash2 size={16} className="text-muted-foreground hover:text-destructive" />

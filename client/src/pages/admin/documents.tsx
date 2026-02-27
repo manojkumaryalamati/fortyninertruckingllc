@@ -441,13 +441,13 @@ export default function DocumentsCenter() {
                  <div className="h-8 w-8 rounded-full bg-red-200 flex items-center justify-center text-red-700"><AlertTriangle size={16} /></div>
                </CardContent>
              </Card>
-             <Card className="bg-primary/5 border-primary/20">
+             <Card className="bg-[var(--primary)]/5 border-[var(--primary)]/20">
                <CardContent className="p-4 flex items-center justify-between">
                  <div>
-                   <p className="text-xs font-bold uppercase text-primary mb-1">Total Docs</p>
+                   <p className="text-xs font-bold uppercase text-[var(--primary)] mb-1">Total Docs</p>
                    <p className="text-2xl font-bold">{documents.length}</p>
                  </div>
-                 <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary"><FileText size={16} /></div>
+                 <div className="h-8 w-8 rounded-full bg-[var(--primary)]/20 flex items-center justify-center text-[var(--primary)]"><FileText size={16} /></div>
                </CardContent>
              </Card>
           </div>
@@ -499,7 +499,7 @@ export default function DocumentsCenter() {
                    {filteredDocs.map(doc => (
                      <tr key={doc.id} className="hover:bg-secondary/20 transition-colors group">
                        <td className="px-6 py-4 font-bold flex items-center gap-2">
-                         <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                         <div className="h-8 w-8 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)]">
                            <FileText size={14} />
                          </div>
                          {doc.name}
@@ -521,7 +521,7 @@ export default function DocumentsCenter() {
                        </td>
                        <td className="px-6 py-4 text-right">
                          <div className="flex items-center justify-end gap-2">
-                           <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary" onClick={() => handleEditClick(doc)}>
+                           <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity hover:text-[var(--primary)]" onClick={() => handleEditClick(doc)}>
                              <Edit size={16} />
                            </Button>
                            <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => window.open(doc.fileUrl, '_blank')}>

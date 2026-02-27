@@ -29,42 +29,42 @@ export function Navbar() {
   const isHome = location === "/";
   // Always solid background when scrolled, transparent only at very top of home
   const navbarClasses = scrolled 
-    ? "bg-white/90 backdrop-blur-md shadow-sm py-2 border-b border-zinc-200" 
-    : (isHome ? "bg-transparent py-4 border-b border-white/10" : "bg-white py-4 border-b border-zinc-200");
+    ? "bg-white/90 backdrop-blur-md shadow-sm py-2 border-b border-[var(--border)]" 
+    : (isHome ? "bg-transparent py-4 border-b border-white/10" : "bg-white py-4 border-b border-[var(--border)]");
 
   const logoClasses = scrolled 
     ? "w-24 brightness-0" 
     : (isHome ? "w-28 brightness-0 invert" : "w-28 brightness-0");
 
   const linkClasses = (href: string) => {
-    if (scrolled) return location === href ? "text-primary font-bold bg-primary/10" : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100";
+    if (scrolled) return location === href ? "text-[var(--primary)] font-bold bg-[var(--primary)]/10" : "text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--border)]";
     if (isHome) return location === href ? "text-white font-bold bg-white/10" : "text-white/80 hover:text-white hover:bg-white/5";
-    return location === href ? "text-primary font-bold bg-primary/10" : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100";
+    return location === href ? "text-[var(--primary)] font-bold bg-[var(--primary)]/10" : "text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--border)]";
   };
 
   const buttonClasses = scrolled 
-    ? "text-zinc-900 hover:bg-zinc-100" 
-    : (isHome ? "text-white hover:bg-white/10" : "text-zinc-900 hover:bg-zinc-100");
+    ? "text-[var(--text)] hover:bg-[var(--border)]" 
+    : (isHome ? "text-white hover:bg-white/10" : "text-[var(--text)] hover:bg-[var(--border)]");
 
   return (
     <>
       {/* Top Bar - Hidden on mobile, visible on desktop */}
-      <div className={`hidden lg:flex fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} bg-zinc-100 text-zinc-600 border-b border-white/5`}>
+      <div className={`hidden lg:flex fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} bg-[var(--border)] text-[var(--text-muted)] border-b border-white/5`}>
         <div className="w-full px-8 h-10 flex justify-between items-center text-xs font-medium tracking-wide">
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
-              <Phone size={14} className="text-primary" /> (925) 250-4605
+            <span className="flex items-center gap-2 hover:text-[var(--primary)] transition-colors cursor-pointer">
+              <Phone size={14} className="text-[var(--primary)]" /> (925) 250-4605
             </span>
-            <span className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
-              <Mail size={14} className="text-primary" /> fortyninertrucking@gmail.com
+            <span className="flex items-center gap-2 hover:text-[var(--primary)] transition-colors cursor-pointer">
+              <Mail size={14} className="text-[var(--primary)]" /> fortyninertrucking@gmail.com
             </span>
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2">
-              <Clock size={14} className="text-primary" /> 24/7
+              <Clock size={14} className="text-[var(--primary)]" /> 24/7
             </span>
             <Link href="/contact">
-               <span className="text-primary hover:text-zinc-900 transition-colors cursor-pointer font-bold ml-2">Request A Quote &rarr;</span>
+               <span className="text-[var(--primary)] hover:text-[var(--text)] transition-colors cursor-pointer font-bold ml-2">Request A Quote &rarr;</span>
             </Link>
           </div>
         </div>
@@ -97,7 +97,7 @@ export function Navbar() {
                   {location === item.href && (
                     <motion.div
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full border border-primary/50"
+                      className="absolute inset-0 rounded-full border border-[var(--primary)]/50"
                       initial={false}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
@@ -128,15 +128,15 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-white text-zinc-900 p-0 lg:hidden flex flex-col"
+            className="fixed inset-0 z-[60] bg-white text-[var(--text)] p-0 lg:hidden flex flex-col"
           >
-            <div className="flex justify-between items-center p-6 border-b border-zinc-100">
+            <div className="flex justify-between items-center p-6 border-b border-[var(--border)]">
               <div className="h-12 w-auto relative flex items-center">
                  <Logo variant="dark" className="scale-75 origin-left" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-colors text-zinc-900"
+                className="p-2 rounded-full bg-[var(--border)] hover:bg-[var(--border)] transition-colors text-[var(--text)]"
               >
                 <X size={24} />
               </button>
@@ -149,11 +149,11 @@ export function Navbar() {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className={`text-lg font-bold uppercase tracking-widest py-4 border-b border-zinc-50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-primary' : 'text-zinc-600'}`}
+                    className={`text-lg font-bold uppercase tracking-widest py-4 border-b border-zinc-50 cursor-pointer flex items-center justify-between group ${location === item.href ? 'text-[var(--primary)]' : 'text-[var(--text-muted)]'}`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">→</span>
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[var(--primary)]">→</span>
                   </motion.div>
                 </Link>
               ))}
@@ -165,16 +165,16 @@ export function Navbar() {
                     className="mt-8"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                   <Button className="w-full h-14 text-sm font-bold bg-primary text-white uppercase tracking-widest rounded-none">
+                   <Button className="w-full h-14 text-sm font-bold bg-[var(--primary)] text-white uppercase tracking-widest rounded-none">
                      Get a Quote
                    </Button>
                   </motion.div>
               </Link>
             </div>
             
-            <div className="p-8 bg-zinc-50 text-center space-y-4">
-               <p className="text-zinc-400 text-sm">Need immediate assistance?</p>
-               <a href="tel:9252504605" className="text-2xl font-black text-zinc-900 block">(925) 250-4605</a>
+            <div className="p-8 bg-[var(--surface-2)] text-center space-y-4">
+               <p className="text-[var(--text-muted)] text-sm">Need immediate assistance?</p>
+               <a href="tel:9252504605" className="text-2xl font-black text-[var(--text)] block">(925) 250-4605</a>
             </div>
           </motion.div>
         )}

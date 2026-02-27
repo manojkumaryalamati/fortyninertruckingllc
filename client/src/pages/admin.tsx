@@ -427,13 +427,13 @@ export default function AdminDashboard() {
                     <div className={`p-2 rounded-lg ${stat.color}`}>
                       <stat.icon size={20} />
                     </div>
-                    <span className={`flex items-center text-[10px] font-bold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded-full border border-zinc-200`}>
+                    <span className={`flex items-center text-[10px] font-bold text-[var(--text-muted)] bg-[var(--border)] px-2 py-0.5 rounded-full border border-[var(--border)]`}>
                       {stat.change}
                     </span>
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-zinc-500 mb-1 uppercase tracking-wide text-xs">{stat.label}</p>
-                    <div className="text-2xl lg:text-3xl font-black tracking-tight text-zinc-900">{stat.value}</div>
+                    <p className="text-sm font-semibold text-[var(--text-muted)] mb-1 uppercase tracking-wide text-xs">{stat.label}</p>
+                    <div className="text-2xl lg:text-3xl font-black tracking-tight text-[var(--text)]">{stat.value}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -444,12 +444,12 @@ export default function AdminDashboard() {
           <section>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-xl font-bold tracking-tight text-zinc-900">Recent Shipments</h2>
-                <p className="text-sm text-zinc-500">Manage and track active loads.</p>
+                <h2 className="text-xl font-bold tracking-tight text-[var(--text)]">Recent Shipments</h2>
+                <p className="text-sm text-[var(--text-muted)]">Manage and track active loads.</p>
               </div>
               <div className="flex gap-2">
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="h-8 w-[130px] bg-white border-zinc-200 text-xs font-medium">
+                  <SelectTrigger className="h-8 w-[130px] bg-white border-[var(--border)] text-xs font-medium">
                     <Filter className="mr-2 h-3 w-3" /> 
                     <SelectValue placeholder="Filter Status" />
                   </SelectTrigger>
@@ -461,7 +461,7 @@ export default function AdminDashboard() {
                     <SelectItem value="Delayed">Delayed</SelectItem>
                   </SelectContent>
                 </Select>
-                <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200" onClick={handleExport}>
+                <Button variant="outline" size="sm" className="bg-white hover:bg-[var(--surface-2)] border-[var(--border)]" onClick={handleExport}>
                   <Download className="mr-2 h-4 w-4" /> Export
                 </Button>
               </div>
@@ -470,7 +470,7 @@ export default function AdminDashboard() {
             <Card className="shadow-sm overflow-hidden border-none ring-1 ring-black/5">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
-                  <thead className="bg-zinc-50/50 text-zinc-500 font-semibold border-b border-zinc-100">
+                  <thead className="bg-[var(--surface-2)]/50 text-[var(--text-muted)] font-semibold border-b border-[var(--border)]">
                     <tr>
                       <th className="px-6 py-4">Load ID</th>
                       <th className="px-6 py-4">Customer</th>
@@ -482,19 +482,19 @@ export default function AdminDashboard() {
                       <th className="px-6 py-4"></th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-100 bg-white">
+                  <tbody className="divide-y divide-[var(--border)] bg-white">
                     {filteredShipments.length === 0 ? (
                       <tr>
-                        <td colSpan={8} className="px-6 py-12 text-center text-zinc-400">
+                        <td colSpan={8} className="px-6 py-12 text-center text-[var(--text-muted)]">
                           <p>No shipments found matching your criteria.</p>
                         </td>
                       </tr>
                     ) : (
                       filteredShipments.map((load) => (
-                        <tr key={load.id} className="hover:bg-zinc-50/80 transition-colors group">
-                          <td className="px-6 py-4 font-bold text-zinc-900 whitespace-nowrap">{load.id.substring(0, 8)}...</td>
-                          <td className="px-6 py-4 text-zinc-700">{load.customer}</td>
-                          <td className="px-6 py-4 text-zinc-600">{load.destination}</td>
+                        <tr key={load.id} className="hover:bg-[var(--surface-2)]/80 transition-colors group">
+                          <td className="px-6 py-4 font-bold text-[var(--text)] whitespace-nowrap">{load.id.substring(0, 8)}...</td>
+                          <td className="px-6 py-4 text-[var(--text-muted)]">{load.customer}</td>
+                          <td className="px-6 py-4 text-[var(--text-muted)]">{load.destination}</td>
                           <td className="px-6 py-4">
                             <Badge variant="outline" className={`
                               ${load.status === "Delivered" ? "border-green-200 bg-green-50 text-green-700" : 
@@ -508,19 +508,19 @@ export default function AdminDashboard() {
                           </td>
                           <td className="px-6 py-4 flex items-center gap-3">
                              {load.driver !== "Unassigned" && load.driver ? (
-                               <div className="h-8 w-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-600 shrink-0">
+                               <div className="h-8 w-8 rounded-full bg-[var(--border)] border border-[var(--border)] flex items-center justify-center text-xs font-bold text-[var(--text-muted)] shrink-0">
                                  {load.driver.charAt(0)}
                                </div>
                              ) : null}
-                             <span className="font-medium text-zinc-700 whitespace-nowrap">{load.driver || "Unassigned"}</span>
+                             <span className="font-medium text-[var(--text-muted)] whitespace-nowrap">{load.driver || "Unassigned"}</span>
                           </td>
-                          <td className="px-6 py-4 text-zinc-500 font-mono text-xs whitespace-nowrap">{load.eta}</td>
-                          <td className="px-6 py-4 text-right font-bold text-zinc-900 whitespace-nowrap">{load.value}</td>
+                          <td className="px-6 py-4 text-[var(--text-muted)] font-mono text-xs whitespace-nowrap">{load.eta}</td>
+                          <td className="px-6 py-4 text-right font-bold text-[var(--text)] whitespace-nowrap">{load.value}</td>
                           <td className="px-6 py-4 text-right">
                             <Button 
                               variant="ghost" 
                               size="icon" 
-                              className="h-8 w-8 text-zinc-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                              className="h-8 w-8 text-[var(--text-muted)] hover:text-red-600 hover:bg-red-50 transition-colors"
                               onClick={() => handleDeleteTrip(load.id)}
                             >
                               <Trash2 size={16} />

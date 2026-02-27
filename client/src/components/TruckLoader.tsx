@@ -28,7 +28,7 @@ export function TruckLoader({ className = "", text = "Loading...", size = "lg" }
         <div className="absolute bottom-[1px] animate-drive-across will-change-transform z-20">
             <div className="relative">
                 <Truck 
-                    className="text-primary" 
+                    className="text-[var(--primary)]" 
                     size={32 * scale} 
                     strokeWidth={1.5} 
                 />

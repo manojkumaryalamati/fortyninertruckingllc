@@ -185,7 +185,7 @@ export default function AdminSubhaulers() {
       case "reviewed": return "bg-yellow-100 text-yellow-700 border-yellow-200";
       case "approved": return "bg-green-100 text-green-700 border-green-200";
       case "rejected": return "bg-red-100 text-red-700 border-red-200";
-      default: return "bg-zinc-100 text-zinc-700 border-zinc-200";
+      default: return "bg-[var(--border)] text-[var(--text-muted)] border-[var(--border)]";
     }
   };
 
@@ -200,27 +200,27 @@ export default function AdminSubhaulers() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-2xl font-black tracking-tight text-zinc-900 flex items-center gap-3">
-                  <Truck className="h-6 w-6 text-primary" />
+                <h1 className="text-2xl font-black tracking-tight text-[var(--text)] flex items-center gap-3">
+                  <Truck className="h-6 w-6 text-[var(--primary)]" />
                   Subhauler Registrations
                 </h1>
-                <p className="text-sm text-zinc-500 mt-1">Manage partner carrier applications and fleet details.</p>
+                <p className="text-sm text-[var(--text-muted)] mt-1">Manage partner carrier applications and fleet details.</p>
               </div>
               <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" className="bg-white hover:bg-zinc-50 border-zinc-200" onClick={handleExport}>
+                <Button variant="outline" size="sm" className="bg-white hover:bg-[var(--surface-2)] border-[var(--border)]" onClick={handleExport}>
                   <Download className="mr-2 h-4 w-4" /> Export CSV
                 </Button>
               </div>
             </div>
 
             {/* Filters */}
-            <Card className="shadow-sm border-zinc-200">
+            <Card className="shadow-sm border-[var(--border)]">
               <CardContent className="p-4 flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-[var(--text-muted)]" />
                   <Input 
                     placeholder="Search by company, contact person or email..." 
-                    className="pl-9 bg-zinc-50 border-zinc-200"
+                    className="pl-9 bg-[var(--surface-2)] border-[var(--border)]"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
@@ -252,10 +252,10 @@ export default function AdminSubhaulers() {
             </Card>
 
             {/* Registrations Table */}
-            <Card className="shadow-sm border-zinc-200 overflow-hidden">
+            <Card className="shadow-sm border-[var(--border)] overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
-                  <thead className="bg-zinc-50/50 text-zinc-500 font-semibold border-b border-zinc-100">
+                  <thead className="bg-[var(--surface-2)]/50 text-[var(--text-muted)] font-semibold border-b border-[var(--border)]">
                     <tr>
                       <th className="px-6 py-4">Company</th>
                       <th className="px-6 py-4">Contact Person</th>
@@ -265,7 +265,7 @@ export default function AdminSubhaulers() {
                       <th className="px-6 py-4 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-100 bg-white">
+                  <tbody className="divide-y divide-[var(--border)] bg-white">
                     {isLoading ? (
                       <tr>
                         <td colSpan={6} className="px-6 py-8">
@@ -274,34 +274,34 @@ export default function AdminSubhaulers() {
                       </tr>
                     ) : filteredRegistrations.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="px-6 py-8 text-center text-zinc-500">
+                        <td colSpan={6} className="px-6 py-8 text-center text-[var(--text-muted)]">
                           No registrations found matching your criteria.
                         </td>
                       </tr>
                     ) : (
                       filteredRegistrations.map((reg) => (
-                        <tr key={reg.id} className="hover:bg-zinc-50/80 transition-colors group">
+                        <tr key={reg.id} className="hover:bg-[var(--surface-2)]/80 transition-colors group">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
-                              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                              <div className="h-10 w-10 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)]">
                                 <Building2 size={20} />
                               </div>
                               <div>
-                                <div className="font-bold text-zinc-900">{reg.companyName}</div>
-                                <div className="text-xs text-zinc-500">Applied: {reg.createdAt ? format(new Date(reg.createdAt.seconds * 1000), 'MMM d') : 'N/A'}</div>
+                                <div className="font-bold text-[var(--text)]">{reg.companyName}</div>
+                                <div className="text-xs text-[var(--text-muted)]">Applied: {reg.createdAt ? format(new Date(reg.createdAt.seconds * 1000), 'MMM d') : 'N/A'}</div>
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4">
-                            <div className="font-medium text-zinc-900">{reg.contactPerson}</div>
+                            <div className="font-medium text-[var(--text)]">{reg.contactPerson}</div>
                           </td>
                           <td className="px-6 py-4">
                             <div className="space-y-1">
-                              <div className="flex items-center gap-2 text-zinc-600">
+                              <div className="flex items-center gap-2 text-[var(--text-muted)]">
                                 <Mail size={12} />
                                 {reg.email}
                               </div>
-                              <div className="flex items-center gap-2 text-zinc-600">
+                              <div className="flex items-center gap-2 text-[var(--text-muted)]">
                                 <Phone size={12} />
                                 {reg.phone}
                               </div>
@@ -309,10 +309,10 @@ export default function AdminSubhaulers() {
                           </td>
                           <td className="px-6 py-4">
                             <div className="space-y-1">
-                              <div className="text-xs font-semibold text-zinc-700 bg-zinc-100 inline-block px-2 py-0.5 rounded">
+                              <div className="text-xs font-semibold text-[var(--text-muted)] bg-[var(--border)] inline-block px-2 py-0.5 rounded">
                                 Size: {reg.fleetSize}
                               </div>
-                              <div className="text-xs text-zinc-500 truncate max-w-[150px]" title={reg.truckTypes}>
+                              <div className="text-xs text-[var(--text-muted)] truncate max-w-[150px]" title={reg.truckTypes}>
                                 {reg.truckTypes}
                               </div>
                             </div>
@@ -329,14 +329,14 @@ export default function AdminSubhaulers() {
                               else setSelectedReg(null);
                             }}>
                               <DialogTrigger asChild>
-                                <Button variant="ghost" size="sm" className="h-8 text-zinc-500 hover:text-primary hover:bg-primary/5">
+                                <Button variant="ghost" size="sm" className="h-8 text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/5">
                                   <Eye size={16} className="mr-2" /> View
                                 </Button>
                               </DialogTrigger>
                               <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden flex flex-col p-0">
                                 <DialogHeader className="p-6 pb-2">
                                   <DialogTitle className="text-2xl flex items-center gap-3">
-                                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                                    <div className="h-10 w-10 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)]">
                                       <Building2 size={20} />
                                     </div>
                                     {reg.companyName}
@@ -349,43 +349,43 @@ export default function AdminSubhaulers() {
                                 <ScrollArea className="flex-1 p-6 pt-2">
                                   <div className="grid md:grid-cols-2 gap-6">
                                     <div className="space-y-4">
-                                      <h3 className="font-semibold text-zinc-900 flex items-center gap-2 border-b pb-2">
+                                      <h3 className="font-semibold text-[var(--text)] flex items-center gap-2 border-b pb-2">
                                         <User size={16} /> Contact Information
                                       </h3>
                                       <div className="grid gap-3 text-sm">
                                         <div>
-                                          <Label className="text-xs text-zinc-500">Contact Person</Label>
+                                          <Label className="text-xs text-[var(--text-muted)]">Contact Person</Label>
                                           <p className="font-medium">{reg.contactPerson}</p>
                                         </div>
                                         <div>
-                                          <Label className="text-xs text-zinc-500">Email Address</Label>
+                                          <Label className="text-xs text-[var(--text-muted)]">Email Address</Label>
                                           <p className="font-medium flex items-center gap-2">
-                                            <Mail size={12} className="text-zinc-400" /> 
-                                            <a href={`mailto:${reg.email}`} className="text-primary hover:underline">{reg.email}</a>
+                                            <Mail size={12} className="text-[var(--text-muted)]" /> 
+                                            <a href={`mailto:${reg.email}`} className="text-[var(--primary)] hover:underline">{reg.email}</a>
                                           </p>
                                         </div>
                                         <div>
-                                          <Label className="text-xs text-zinc-500">Phone Number</Label>
+                                          <Label className="text-xs text-[var(--text-muted)]">Phone Number</Label>
                                           <p className="font-medium flex items-center gap-2">
-                                            <Phone size={12} className="text-zinc-400" />
-                                            <a href={`tel:${reg.phone}`} className="text-primary hover:underline">{reg.phone}</a>
+                                            <Phone size={12} className="text-[var(--text-muted)]" />
+                                            <a href={`tel:${reg.phone}`} className="text-[var(--primary)] hover:underline">{reg.phone}</a>
                                           </p>
                                         </div>
                                       </div>
                                     </div>
                                     
                                     <div className="space-y-4">
-                                      <h3 className="font-semibold text-zinc-900 flex items-center gap-2 border-b pb-2">
+                                      <h3 className="font-semibold text-[var(--text)] flex items-center gap-2 border-b pb-2">
                                         <Truck size={16} /> Fleet Details
                                       </h3>
                                       <div className="grid gap-3 text-sm">
                                         <div>
-                                          <Label className="text-xs text-zinc-500">Fleet Size</Label>
+                                          <Label className="text-xs text-[var(--text-muted)]">Fleet Size</Label>
                                           <p className="font-medium">{reg.fleetSize} Trucks</p>
                                         </div>
                                         <div>
-                                          <Label className="text-xs text-zinc-500">Truck Types</Label>
-                                          <p className="font-medium p-2 bg-zinc-50 rounded border border-zinc-100 text-zinc-700">
+                                          <Label className="text-xs text-[var(--text-muted)]">Truck Types</Label>
+                                          <p className="font-medium p-2 bg-[var(--surface-2)] rounded border border-[var(--border)] text-[var(--text-muted)]">
                                             {reg.truckTypes}
                                           </p>
                                         </div>
@@ -394,7 +394,7 @@ export default function AdminSubhaulers() {
                                   </div>
 
                                   <div className="mt-8 space-y-4">
-                                    <h3 className="font-semibold text-zinc-900 flex items-center gap-2 border-b pb-2">
+                                    <h3 className="font-semibold text-[var(--text)] flex items-center gap-2 border-b pb-2">
                                       <CheckCircle size={16} /> Registration Status
                                     </h3>
                                     <div className="flex flex-wrap gap-2">
@@ -415,7 +415,7 @@ export default function AdminSubhaulers() {
                                         </Button>
                                       ))}
                                     </div>
-                                    <div className="pt-4 border-t flex justify-between items-center text-xs text-zinc-500">
+                                    <div className="pt-4 border-t flex justify-between items-center text-xs text-[var(--text-muted)]">
                                       <span>Registered on {reg.createdAt ? format(new Date(reg.createdAt.seconds * 1000), 'PPP p') : 'Unknown'}</span>
                                       <Button 
                                         variant="ghost" 

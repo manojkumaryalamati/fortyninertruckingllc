@@ -503,7 +503,7 @@ export default function TripsManagement() {
                            </div>
                            <h4 className="font-bold text-lg">{trip.customer}</h4>
                            <div className="flex items-center gap-2 text-sm">
-                              <MapPin size={14} className="text-primary" />
+                              <MapPin size={14} className="text-[var(--primary)]" />
                               <span>{trip.route}</span>
                            </div>
                            <div className="flex items-center gap-4 text-xs text-muted-foreground">
