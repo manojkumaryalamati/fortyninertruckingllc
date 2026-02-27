@@ -1,0 +1,40 @@
+Access to XMLHttpRequest at 'https://firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png' from origin 'https://74c87e2d-ebef-452a-bdc8-60aabaeb0e62-00-2n6d0cjxd1zab.kirk.replit.dev' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.Understand this error
+firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png:1  Failed to load resource: net::ERR_FAILEDUnderstand this error
+drivers:1 Access to XMLHttpRequest at 'https://firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png' from origin 'https://74c87e2d-ebef-452a-bdc8-60aabaeb0e62-00-2n6d0cjxd1zab.kirk.replit.dev' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.Understand this error
+firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png:1  Failed to load resource: net::ERR_FAILEDUnderstand this error
+drivers:1 Access to XMLHttpRequest at 'https://firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png' from origin 'https://74c87e2d-ebef-452a-bdc8-60aabaeb0e62-00-2n6d0cjxd1zab.kirk.replit.dev' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.Understand this error
+firebase_storage.js?v=4269c5c2:1498  POST https://firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png net::ERR_FAILED
+send @ firebase_storage.js?v=4269c5c2:1498
+doTheRequest @ firebase_storage.js?v=4269c5c2:456
+(anonymous) @ firebase_storage.js?v=4269c5c2:279Understand this error
+drivers:1 Access to XMLHttpRequest at 'https://firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png' from origin 'https://74c87e2d-ebef-452a-bdc8-60aabaeb0e62-00-2n6d0cjxd1zab.kirk.replit.dev' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.Understand this error
+firebase_storage.js?v=4269c5c2:1498  POST https://firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png net::ERR_FAILED
+send @ firebase_storage.js?v=4269c5c2:1498
+doTheRequest @ firebase_storage.js?v=4269c5c2:456
+(anonymous) @ firebase_storage.js?v=4269c5c2:279
+setTimeout
+callWithDelay @ firebase_storage.js?v=4269c5c2:277
+responseHandler @ firebase_storage.js?v=4269c5c2:313
+(anonymous) @ firebase_storage.js?v=4269c5c2:465
+Promise.then
+doTheRequest @ firebase_storage.js?v=4269c5c2:456
+(anonymous) @ firebase_storage.js?v=4269c5c2:279Understand this error
+drivers:1 Access to XMLHttpRequest at 'https://firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png' from origin 'https://74c87e2d-ebef-452a-bdc8-60aabaeb0e62-00-2n6d0cjxd1zab.kirk.replit.dev' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.Understand this error
+firebase_storage.js?v=4269c5c2:1498  POST https://firebasestorage.googleapis.com/v0/b/fortyninertruckingllc.appspot.com/o?name=driver_documents%2F6mKrBD3TQJRKLm2lexMZ%2FDL%2F1770590505698_test1__1_.png net::ERR_FAILED
+send @ firebase_storage.js?v=4269c5c2:1498
+doTheRequest @ firebase_storage.js?v=4269c5c2:456
+(anonymous) @ firebase_storage.js?v=4269c5c2:279
+setTimeout
+callWithDelay @ firebase_storage.js?v=4269c5c2:277
+responseHandler @ firebase_storage.js?v=4269c5c2:313
+(anonymous) @ firebase_storage.js?v=4269c5c2:465
+Promise.then
+doTheRequest @ firebase_storage.js?v=4269c5c2:456
+(anonymous) @ firebase_storage.js?v=4269c5c2:279
+setTimeout
+callWithDelay @ firebase_storage.js?v=4269c5c2:277
+responseHandler @ firebase_storage.js?v=4269c5c2:313
+(anonymous) @ firebase_storage.js?v=4269c5c2:465
+Promise.then
+doTheRequest @ firebase_storage.js?v=4269c5c2:456
+(anonymous) @ firebase_storage.js?v=4269c5c2:279Understand this error

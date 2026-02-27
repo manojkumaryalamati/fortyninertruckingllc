@@ -9,23 +9,44 @@ import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
-import heroImage from "@/assets/hero-truck-main.jpg";
+import heroImage1 from "@/assets/a2a02ae8-e30d-4a34-ad88-64598b4c945f_1772219729261.jpeg";
+import heroImage2 from "@/assets/867d8163-e94d-4056-b575-856aa6f68ace_1772219729261.jpeg";
+import heroImage3 from "@/assets/2901750e-cf47-4cc3-af40-fe476f6840bc_1772219729261.jpeg";
+import heroImage4 from "@/assets/d04ae16f-4942-46fc-bb1d-ac0c5740543c_1772219729261.jpeg";
+
+const carouselImages = [heroImage1, heroImage2, heroImage3, heroImage4];
 
 export default function Home() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
       <Navbar />
 
       {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-           <img 
-             src={heroImage}
-             alt="FortyNiner Trucking Fleet" 
-             className="w-full h-full object-cover object-center"
-           />
-           <div className="absolute inset-0 bg-black/60 z-10" />
+        {/* Background Image Carousel */}
+        <div className="absolute inset-0 z-0 bg-zinc-900">
+          <AnimatePresence mode="popLayout">
+            <motion.img
+              key={currentImageIndex}
+              src={carouselImages[currentImageIndex]}
+              alt="FortyNiner Trucking Fleet"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-black/60 z-10" />
         </div>
 
         {/* Hero Content */}
