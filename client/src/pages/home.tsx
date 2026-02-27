@@ -81,14 +81,14 @@ export default function Home() {
               California's premier partner for construction logistics and material transport.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
               <Link href="/contact">
-                <Button className="h-14 px-8 text-lg font-bold uppercase tracking-widest bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white rounded-none min-w-[200px]">
+                <Button className="h-12 px-8 text-base font-bold tracking-wide bg-[var(--primary)] hover:bg-white hover:text-[var(--primary)] text-white rounded-full min-w-[180px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                   Get A Quote
                 </Button>
               </Link>
               <Link href="/services">
-                <Button variant="outline" className="h-14 px-8 text-lg font-bold uppercase tracking-widest border-2 border-white text-white hover:bg-white hover:text-black bg-transparent rounded-none min-w-[200px]">
+                <Button variant="outline" className="h-12 px-8 text-base font-bold tracking-wide border-2 border-white/80 text-white hover:bg-white hover:text-[var(--text)] bg-black/20 backdrop-blur-sm rounded-full min-w-[180px] transition-all duration-300 transform hover:-translate-y-1">
                   Our Services
                 </Button>
               </Link>
