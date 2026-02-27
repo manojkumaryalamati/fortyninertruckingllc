@@ -36,7 +36,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px]">
         {/* Background Image Carousel */}
-        <div className="absolute inset-0 z-0 bg-black">
+        <div className="absolute inset-0 z-0 bg-white">
           <AnimatePresence mode="popLayout">
             <motion.img
               key={currentImageIndex}
@@ -49,7 +49,8 @@ export default function Home() {
               className="absolute inset-0 w-full h-full object-contain object-center"
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-black/40 z-10" />
+          {/* Very light gradient overlay just at the bottom to ensure buttons are readable without a solid dark box */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent z-10" />
           
           {/* Navigation Controls */}
           <div className="absolute inset-0 z-20 flex items-center justify-between px-4 md:px-12 pointer-events-none">
@@ -91,12 +92,12 @@ export default function Home() {
           className="absolute bottom-32 left-0 right-0 z-20 flex flex-col sm:flex-row items-center justify-center gap-6 px-4"
         >
           <Link href="/contact">
-            <Button className="h-12 px-8 text-base font-bold tracking-wide bg-[var(--primary)] hover:bg-white hover:text-[var(--primary)] text-white rounded-full min-w-[180px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <Button className="h-12 px-8 text-base font-bold tracking-wide bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white rounded-full min-w-[180px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               Get A Quote
             </Button>
           </Link>
           <Link href="/services">
-            <Button variant="outline" className="h-12 px-8 text-base font-bold tracking-wide border-2 border-white/80 text-white hover:bg-white hover:text-[var(--text)] bg-black/20 backdrop-blur-sm rounded-full min-w-[180px] transition-all duration-300 transform hover:-translate-y-1">
+            <Button variant="outline" className="h-12 px-8 text-base font-bold tracking-wide border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white bg-white/90 backdrop-blur-sm rounded-full min-w-[180px] transition-all duration-300 transform hover:-translate-y-1">
               Our Services
             </Button>
           </Link>
@@ -107,10 +108,10 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white/40"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-[var(--primary)]/40"
         >
-          <div className="w-[1px] h-16 bg-white/20 overflow-hidden">
-            <div className="w-full h-1/2 bg-white animate-movedown"></div>
+          <div className="w-[1px] h-16 bg-[var(--primary)]/20 overflow-hidden">
+            <div className="w-full h-1/2 bg-[var(--primary)] animate-movedown"></div>
           </div>
         </motion.div>
       </section>
