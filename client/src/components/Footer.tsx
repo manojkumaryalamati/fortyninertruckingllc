@@ -1,83 +1,116 @@
 import { Link } from "wouter";
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--border)] text-[var(--text)] py-16 border-t border-[var(--border)]">
-      <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
-          <div className="space-y-6">
+    <footer className="bg-white text-[var(--text)] border-t border-[var(--border)] relative overflow-hidden">
+      {/* Abstract Background Element */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--primary)]/5 rounded-full blur-[100px] -mr-32 -mt-32 opacity-50 pointer-events-none" />
+
+      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 pt-20 pb-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-4 space-y-6">
             <Link href="/">
-              <div className="block cursor-pointer inline-block">
+              <div className="block cursor-pointer inline-block mb-2">
                 <Logo variant="dark" className="scale-75 origin-left" />
               </div>
             </Link>
-            <p className="text-[var(--text-muted)] leading-relaxed">
-              Premier construction hauling and logistics solutions. Building strong partnerships through reliability, safety, and operational excellence.
+            <p className="text-[var(--text-muted)] leading-relaxed text-sm max-w-sm">
+              California's premier partner for construction logistics and material transport. Building strong partnerships through reliability, safety, and operational excellence.
             </p>
-            <div className="flex gap-4">
-              <Button variant="ghost" size="icon" className="text-[var(--text-muted)] hover:bg-[var(--primary)] hover:text-white rounded-full h-10 w-10">
-                <Facebook size={20} />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-[var(--text-muted)] hover:bg-[var(--primary)] hover:text-white rounded-full h-10 w-10">
-                <Twitter size={20} />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-[var(--text-muted)] hover:bg-[var(--primary)] hover:text-white rounded-full h-10 w-10">
-                <Instagram size={20} />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-[var(--text-muted)] hover:bg-[var(--primary)] hover:text-white rounded-full h-10 w-10">
-                <Linkedin size={20} />
-              </Button>
+            <div className="flex gap-3 pt-2">
+              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+                <a key={i} href="#" className="h-10 w-10 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all duration-300">
+                  <Icon size={18} />
+                </a>
+              ))}
             </div>
           </div>
 
-          <div>
-            <h3 className="font-bold text-lg mb-6 text-[var(--primary)]">Quick Links</h3>
+          {/* Quick Links */}
+          <div className="lg:col-span-2 lg:col-start-6">
+            <h3 className="font-bold text-sm uppercase tracking-widest text-[var(--text)] mb-6">Company</h3>
             <ul className="space-y-4">
               {[
-                { name: "Services", href: "/services" },
                 { name: "Our Fleet", href: "/fleet" },
+                { name: "Services", href: "/services" },
                 { name: "Careers", href: "/careers" },
                 { name: "Subhaulers", href: "/subhaulers" },
-                { name: "Contact Us", href: "/contact" },
-                { name: "Admin Portal", href: "/admin" }
               ].map(link => (
                 <li key={link.name}>
                   <Link href={link.href}>
-                    <span className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors cursor-pointer">{link.name}</span>
+                    <span className="text-[var(--text-muted)] hover:text-[var(--primary)] text-sm font-medium transition-colors cursor-pointer inline-flex items-center group">
+                      <ArrowRight size={14} className="mr-2 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all text-[var(--primary)]" />
+                      {link.name}
+                    </span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-bold text-lg mb-6 text-[var(--primary)]">Contact Info</h3>
+          {/* Support */}
+          <div className="lg:col-span-2">
+            <h3 className="font-bold text-sm uppercase tracking-widest text-[var(--text)] mb-6">Support</h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-[var(--text-muted)]">
-                <MapPin size={20} className="text-[var(--primary)] shrink-0 mt-1" />
-                <span>28 Glen Canyon Court<br />Pittsburg, CA 94565</span>
+              {[
+                { name: "Contact Us", href: "/contact" },
+                { name: "Admin Portal", href: "/admin" },
+                { name: "Privacy Policy", href: "#" },
+                { name: "Terms of Service", href: "#" },
+              ].map(link => (
+                <li key={link.name}>
+                  <Link href={link.href}>
+                    <span className="text-[var(--text-muted)] hover:text-[var(--primary)] text-sm font-medium transition-colors cursor-pointer inline-flex items-center group">
+                      <ArrowRight size={14} className="mr-2 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all text-[var(--primary)]" />
+                      {link.name}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="lg:col-span-3">
+            <h3 className="font-bold text-sm uppercase tracking-widest text-[var(--text)] mb-6">Get in Touch</h3>
+            <ul className="space-y-5">
+              <li className="flex items-start gap-4">
+                <div className="mt-1 h-8 w-8 rounded-full bg-[var(--primary-soft)] flex items-center justify-center shrink-0">
+                  <MapPin size={16} className="text-[var(--primary)]" />
+                </div>
+                <div className="text-sm text-[var(--text-muted)] leading-relaxed">
+                  <span className="font-semibold text-[var(--text)] block mb-1">Headquarters</span>
+                  28 Glen Canyon Court<br />Pittsburg, CA 94565
+                </div>
               </li>
-              <li className="flex items-center gap-3 text-[var(--text-muted)]">
-                <Phone size={20} className="text-[var(--primary)] shrink-0" />
-                <span>(925) 250-4605</span>
-              </li>
-              <li className="flex items-center gap-3 text-[var(--text-muted)]">
-                <Mail size={20} className="text-[var(--primary)] shrink-0" />
-                <span>fortyninertrucking@gmail.com</span>
+              <li className="flex items-start gap-4">
+                <div className="mt-1 h-8 w-8 rounded-full bg-[var(--primary-soft)] flex items-center justify-center shrink-0">
+                  <Phone size={16} className="text-[var(--primary)]" />
+                </div>
+                <div className="text-sm text-[var(--text-muted)]">
+                  <span className="font-semibold text-[var(--text)] block mb-1">Call Us 24/7</span>
+                  (925) 250-4605
+                </div>
               </li>
             </ul>
           </div>
+
         </div>
 
-        <div className="pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[var(--text-muted)]">
-          <p>&copy; {new Date().getFullYear()} FortyNinerTrucking LLC. All rights reserved.</p>
-          <div className="flex gap-8">
-            <span className="hover:text-[var(--primary)] cursor-pointer transition-colors">Privacy Policy</span>
-            <span className="hover:text-[var(--primary)] cursor-pointer transition-colors">Terms of Service</span>
-            <span className="hover:text-[var(--primary)] cursor-pointer transition-colors">Sitemap</span>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-[var(--text-muted)] font-medium">
+            &copy; {new Date().getFullYear()} FortyNinerTrucking LLC. All rights reserved.
+          </p>
+          <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
+            <span>Designed with</span>
+            <span className="text-[var(--primary)] animate-pulse">♥</span>
+            <span>for logistics</span>
           </div>
         </div>
       </div>
