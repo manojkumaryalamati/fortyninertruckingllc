@@ -7,7 +7,7 @@ import { Navbar } from "@/components/Navbar";
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans">
+    <div className="min-h-screen bg-[var(--surface-2)] text-[var(--text)] font-sans">
       <Navbar />
 
       {/* Hero Section */}
@@ -25,10 +25,10 @@ export default function About() {
           <div className="max-w-3xl space-y-10">
             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.9]">
               Driving <br />
-              <span className="text-primary">Excellence</span> <br />
+              <span className="text-[var(--primary)]">Excellence</span> <br />
               in Hauling
             </h1>
-            <div className="h-1 w-24 bg-primary my-8" />
+            <div className="h-1 w-24 bg-[var(--primary)] my-8" />
             <p className="text-xl text-white/90 leading-relaxed max-w-xl font-medium mt-8">
               FortyNinerTrucking LLC is your strategic partner in logistics, delivering safety and reliability since inception.
             </p>
@@ -41,11 +41,11 @@ export default function About() {
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <h2 className="text-sm font-bold tracking-widest text-primary">Our Mission</h2>
-              <h3 className="text-4xl font-black tracking-tight text-zinc-900">
-                Commitment to <span className="text-primary">Safety</span> & Service
+              <h2 className="text-sm font-bold tracking-widest text-[var(--primary)]">Our Mission</h2>
+              <h3 className="text-4xl font-black tracking-tight text-[var(--text)]">
+                Commitment to <span className="text-[var(--primary)]">Safety</span> & Service
               </h3>
-              <div className="space-y-4 text-lg text-zinc-600 leading-relaxed">
+              <div className="space-y-4 text-lg text-[var(--text-muted)] leading-relaxed">
                 <p>
                   FortyNinerTrucking LLC is a full-service trucking and hauling company dedicated to supporting the construction and infrastructure industries. We specialize in moving materials efficiently, safely, and on schedule.
                 </p>
@@ -62,24 +62,24 @@ export default function About() {
                   { icon: Target, title: "Reliability", desc: "Consistent performance every load" }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4">
-                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <div className="h-12 w-12 rounded-full bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0">
                       <item.icon size={24} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-zinc-900">{item.title}</h4>
-                      <p className="text-sm text-zinc-500">{item.desc}</p>
+                      <h4 className="font-bold text-[var(--text)]">{item.title}</h4>
+                      <p className="text-sm text-[var(--text-muted)]">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="relative h-[600px] bg-zinc-100 rounded-lg overflow-hidden">
+            <div className="relative h-[600px] bg-[var(--border)] rounded-lg overflow-hidden">
                <img 
                  src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop" 
                  className="absolute inset-0 w-full h-full object-cover"
                />
-               <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
+               <div className="absolute inset-0 bg-[var(--primary)]/10 mix-blend-multiply" />
                <div className="absolute bottom-0 left-0 p-8 bg-black/60 backdrop-blur-sm text-white w-full">
                  <p className="text-3xl font-black">10M+ Miles</p>
                  <p className="text-sm font-bold opacity-80 uppercase">Safely Traveled across California</p>
@@ -91,7 +91,7 @@ export default function About() {
 
 
       {/* CTA */}
-      <section className="py-24 bg-primary text-white text-center">
+      <section className="py-24 bg-[var(--primary)] text-white text-center">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 max-w-4xl space-y-8">
           <h2 className="text-4xl md:text-5xl font-black">Ready to Partner With Us?</h2>
           <p className="text-xl font-medium opacity-90">
@@ -99,7 +99,7 @@ export default function About() {
           </p>
           <div className="flex justify-center gap-4 pt-4">
              <Link href="/contact">
-               <Button size="lg" className="rounded-full bg-white text-primary hover:bg-gray-100 font-bold px-10 h-14">
+               <Button size="lg" className="rounded-full bg-white text-[var(--primary)] hover:bg-gray-100 font-bold px-10 h-14">
                  Get in Touch
                </Button>
              </Link>

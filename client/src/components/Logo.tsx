@@ -12,7 +12,7 @@ export function Logo({ className, variant = "dark", ...props }: LogoProps) {
     <div 
       className={cn(
         "flex flex-col items-center justify-center select-none",
-        isLight ? "text-white" : "text-zinc-900",
+        isLight ? "text-white" : "text-[var(--text)]",
         className
       )}
       {...props}
@@ -30,7 +30,7 @@ export function Logo({ className, variant = "dark", ...props }: LogoProps) {
         <span 
           className={cn(
             "font-rockwell uppercase text-2xl md:text-3xl lg:text-4xl whitespace-nowrap",
-            isLight ? "text-white drop-shadow-md" : "text-zinc-900"
+            isLight ? "text-white drop-shadow-md" : "text-[var(--text)]"
           )}
           style={{ 
             textShadow: isLight ? '2px 2px 4px rgba(0,0,0,0.5)' : '1px 1px 0px rgba(0,0,0,0.1)'
@@ -41,7 +41,7 @@ export function Logo({ className, variant = "dark", ...props }: LogoProps) {
         <span 
           className={cn(
             "font-brush text-xl md:text-2xl lg:text-3xl -mt-1 md:-mt-2 whitespace-nowrap",
-            isLight ? "text-primary drop-shadow-md" : "text-primary"
+            isLight ? "text-[var(--primary)] drop-shadow-md" : "text-[var(--primary)]"
           )}
           style={{ 
             textShadow: isLight ? '1px 1px 3px rgba(0,0,0,0.5)' : 'none',

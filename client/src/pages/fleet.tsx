@@ -7,11 +7,11 @@ import { Link } from "wouter";
 
 export default function Fleet() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-sans">
+    <div className="min-h-screen bg-white text-[var(--text)] font-sans">
       <Navbar />
 
       {/* Modern Fleet Hero */}
-      <section className="relative min-h-[85vh] w-full overflow-hidden bg-zinc-900 py-16">
+      <section className="relative min-h-[85vh] w-full overflow-hidden bg-[var(--text)] py-16">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
            <img 
@@ -34,40 +34,40 @@ export default function Fleet() {
             className="w-full max-w-[800px] space-y-8"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm text-white/80 text-sm font-bold tracking-wider uppercase mb-4">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse"></span>
               Power. Precision. Performance.
             </div>
             
             <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] tracking-tight">
               The Heavy-Duty <br/>
-              <span className="text-primary">Powerhouse</span>
+              <span className="text-[var(--primary)]">Powerhouse</span>
             </h1>
             
-            <p className="text-zinc-300 font-light leading-relaxed text-lg md:text-xl max-w-[600px]">
+            <p className="text-[var(--text-muted)] font-light leading-relaxed text-lg md:text-xl max-w-[600px]">
               When the job demands serious muscle, Forty Niner Trucking delivers. Our state-of-the-art, meticulously maintained fleet is engineered to handle California’s toughest construction and logistics challenges with uncompromising reliability.
             </p>
 
             <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-white/10 max-w-3xl">
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-primary font-bold">
+                <div className="flex items-center gap-2 text-[var(--primary)] font-bold">
                   <Shield size={20} />
                   <span>Safety First</span>
                 </div>
-                <p className="text-sm text-zinc-400">Advanced safety systems</p>
+                <p className="text-sm text-[var(--text-muted)]">Advanced safety systems</p>
               </div>
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-primary font-bold">
+                <div className="flex items-center gap-2 text-[var(--primary)] font-bold">
                   <Gauge size={20} />
                   <span>CARB Compliant</span>
                 </div>
-                <p className="text-sm text-zinc-400">Eco-friendly & green fleet</p>
+                <p className="text-sm text-[var(--text-muted)]">Eco-friendly & green fleet</p>
               </div>
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-primary font-bold">
+                <div className="flex items-center gap-2 text-[var(--primary)] font-bold">
                   <Award size={20} />
                   <span>Well Maintained</span>
                 </div>
-                <p className="text-sm text-zinc-400">Rigorous service schedule</p>
+                <p className="text-sm text-[var(--text-muted)]">Rigorous service schedule</p>
               </div>
             </div>
           </motion.div>
@@ -88,17 +88,17 @@ export default function Fleet() {
       </section>
 
       {/* Fleet Categories */}
-      <section className="py-24 bg-zinc-50 relative overflow-hidden">
+      <section className="py-24 bg-[var(--surface-2)] relative overflow-hidden">
         {/* Abstract shapes */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -mr-40 -mt-40 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-zinc-200/50 rounded-full blur-[120px] -ml-40 -mb-40 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--primary)]/5 rounded-full blur-[120px] -mr-40 -mt-40 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[var(--border)]/50 rounded-full blur-[120px] -ml-40 -mb-40 pointer-events-none" />
 
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
            <div className="flex flex-col items-center justify-center text-center space-y-6 mb-16">
              <div className="space-y-4">
-                <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Truck Types Available</h2>
-                <h3 className="text-4xl md:text-5xl font-black text-zinc-900 tracking-tight">Our Specialized Fleet</h3>
-                <p className="text-zinc-600 max-w-2xl mx-auto text-lg leading-relaxed mt-4">
+                <h2 className="text-[var(--primary)] font-bold tracking-widest uppercase text-sm">Truck Types Available</h2>
+                <h3 className="text-4xl md:text-5xl font-black text-[var(--text)] tracking-tight">Our Specialized Fleet</h3>
+                <p className="text-[var(--text-muted)] max-w-2xl mx-auto text-lg leading-relaxed mt-4">
                   From tight urban job sites to massive infrastructure projects, our diverse inventory of heavy-duty trucks ensures you have the exact equipment needed to maximize payload efficiency and minimize downtime.
                 </p>
              </div>
@@ -112,18 +112,18 @@ export default function Fleet() {
                { name: "Ten Wheelers", desc: "Reliable for construction and aggregates.", detail: "The industry workhorse. Rugged, dependable, and ready to tackle steep grades and rough construction terrain.", highlight: "Rugged Dependability" },
                { name: "End Dumps", desc: "Efficient unloading for bulk materials.", detail: "Ideal for stockpiling large volumes of aggregate, demo debris, or fill dirt with rapid, controlled dumping mechanisms.", highlight: "Rapid Unloading" }
              ].map((truck, i) => (
-               <div key={i} className="group p-8 rounded-3xl bg-white border border-zinc-200 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 flex flex-col h-full">
+               <div key={i} className="group p-8 rounded-3xl bg-white border border-[var(--border)] hover:border-[var(--primary)] transition-all duration-300 hover:shadow-xl hover:shadow-[var(--primary)]/5 flex flex-col h-full">
                  <div className="flex justify-between items-start mb-6">
-                   <div className="h-14 w-14 bg-zinc-50 rounded-2xl border border-zinc-100 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                   <div className="h-14 w-14 bg-[var(--surface-2)] rounded-2xl border border-[var(--border)] flex items-center justify-center text-[var(--primary)] group-hover:scale-110 group-hover:bg-[var(--primary)] group-hover:text-white transition-all duration-300">
                      <Truck size={28} />
                    </div>
-                   <span className="text-[10px] font-bold uppercase tracking-wider bg-zinc-100 text-zinc-600 py-1.5 px-3 rounded-full group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                   <span className="text-[10px] font-bold uppercase tracking-wider bg-[var(--border)] text-[var(--text-muted)] py-1.5 px-3 rounded-full group-hover:bg-[var(--primary)]/10 group-hover:text-[var(--primary)] transition-colors">
                      {truck.highlight}
                    </span>
                  </div>
-                 <h4 className="text-2xl font-black text-zinc-900 mb-3 tracking-tight">{truck.name}</h4>
-                 <p className="text-primary font-medium text-sm mb-4">{truck.desc}</p>
-                 <p className="text-zinc-500 leading-relaxed text-sm flex-grow">{truck.detail}</p>
+                 <h4 className="text-2xl font-black text-[var(--text)] mb-3 tracking-tight">{truck.name}</h4>
+                 <p className="text-[var(--primary)] font-medium text-sm mb-4">{truck.desc}</p>
+                 <p className="text-[var(--text-muted)] leading-relaxed text-sm flex-grow">{truck.detail}</p>
                </div>
              ))}
            </div>
@@ -131,17 +131,17 @@ export default function Fleet() {
       </section>
 
       {/* Fleet Maintenance & Reliability Section */}
-      <section className="py-24 bg-white border-t border-zinc-100">
+      <section className="py-24 bg-white border-t border-[var(--border)]">
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Uncompromising Standards</h2>
-                <h3 className="text-3xl md:text-5xl font-black text-zinc-900 tracking-tight leading-[1.1]">
+                <h2 className="text-[var(--primary)] font-bold tracking-widest uppercase text-sm">Uncompromising Standards</h2>
+                <h3 className="text-3xl md:text-5xl font-black text-[var(--text)] tracking-tight leading-[1.1]">
                   Maintained for <br/> Absolute Reliability
                 </h3>
               </div>
-              <p className="text-zinc-600 text-lg leading-relaxed">
+              <p className="text-[var(--text-muted)] text-lg leading-relaxed">
                 A delayed truck means a delayed project. That's why Forty Niner Trucking invests heavily in proactive, preventative maintenance. Our in-house service team ensures every vehicle that leaves our yard is operating at peak performance.
               </p>
               
@@ -152,12 +152,12 @@ export default function Fleet() {
                   { title: "GPS Tracking", desc: "Real-time dispatch routing and load tracking technology." },
                 ].map((item, i) => (
                   <li key={i} className="flex gap-4">
-                    <div className="mt-1 h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <CheckCircle2 size={14} className="text-primary" />
+                    <div className="mt-1 h-6 w-6 rounded-full bg-[var(--primary)]/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 size={14} className="text-[var(--primary)]" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-zinc-900">{item.title}</h4>
-                      <p className="text-zinc-500 text-sm mt-1">{item.desc}</p>
+                      <h4 className="font-bold text-[var(--text)]">{item.title}</h4>
+                      <p className="text-[var(--text-muted)] text-sm mt-1">{item.desc}</p>
                     </div>
                   </li>
                 ))}
@@ -165,20 +165,20 @@ export default function Fleet() {
             </div>
 
             <div className="relative">
-              <div className="absolute -inset-4 bg-zinc-100 rounded-3xl transform rotate-3 scale-105 -z-10 transition-transform hover:rotate-6 duration-500"></div>
+              <div className="absolute -inset-4 bg-[var(--border)] rounded-3xl transform rotate-3 scale-105 -z-10 transition-transform hover:rotate-6 duration-500"></div>
               <img 
                 src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop" 
                 alt="Fleet Maintenance" 
                 className="w-full h-auto aspect-square object-cover rounded-3xl shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-500"
               />
-              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl border border-zinc-100 hidden md:block">
+              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl border border-[var(--border)] hidden md:block">
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 bg-zinc-900 text-white rounded-full flex items-center justify-center">
+                  <div className="h-12 w-12 bg-[var(--text)] text-white rounded-full flex items-center justify-center">
                     <Wrench size={24} />
                   </div>
                   <div>
-                    <p className="text-sm text-zinc-500 font-medium">Uptime Rate</p>
-                    <p className="text-2xl font-black text-zinc-900">99.8%</p>
+                    <p className="text-sm text-[var(--text-muted)] font-medium">Uptime Rate</p>
+                    <p className="text-2xl font-black text-[var(--text)]">99.8%</p>
                   </div>
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default function Fleet() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-primary text-white text-center px-4">
+      <section className="py-24 bg-[var(--primary)] text-white text-center px-4">
         <div className="max-w-3xl mx-auto space-y-8">
           <h2 className="text-4xl md:text-5xl font-black tracking-tight">Need specific equipment for your next project?</h2>
           <p className="text-xl text-white/80 font-medium max-w-2xl mx-auto">
@@ -196,7 +196,7 @@ export default function Fleet() {
           </p>
           <div className="pt-4">
             <Link href="/contact">
-              <Button className="h-14 px-10 text-lg font-bold uppercase tracking-widest bg-zinc-900 hover:bg-zinc-800 text-white rounded-none border-none shadow-xl shadow-zinc-900/20">
+              <Button className="h-14 px-10 text-lg font-bold uppercase tracking-widest bg-[var(--text)] hover:bg-[var(--surface-2)] text-white rounded-none border-none shadow-xl shadow-[var(--shadow)]/20">
                 Request Fleet Availability
               </Button>
             </Link>

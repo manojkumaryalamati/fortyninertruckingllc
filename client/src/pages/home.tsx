@@ -30,13 +30,13 @@ export default function Home() {
   const prevImage = () => setCurrentImageIndex((prevIndex) => (prevIndex - 1 + carouselImages.length) % carouselImages.length);
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-[var(--primary)]/20">
       <Navbar />
 
       {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden">
         {/* Background Image Carousel */}
-        <div className="absolute inset-0 z-0 bg-zinc-900">
+        <div className="absolute inset-0 z-0 bg-[var(--text)]">
           <AnimatePresence mode="popLayout">
             <motion.img
               key={currentImageIndex}
@@ -83,7 +83,7 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link href="/contact">
-                <Button className="h-14 px-8 text-lg font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white rounded-none min-w-[200px]">
+                <Button className="h-14 px-8 text-lg font-bold uppercase tracking-widest bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white rounded-none min-w-[200px]">
                   Get A Quote
                 </Button>
               </Link>
@@ -110,16 +110,16 @@ export default function Home() {
       </section>
 
       {/* Value Prop Strip */}
-      <section className="bg-white py-16 border-b border-zinc-100">
+      <section className="bg-white py-16 border-b border-[var(--border)]">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
              <div className="md:w-1/2">
-                <h3 className="text-3xl font-black text-zinc-900 leading-tight">
-                  Safety, Reliability, and <span className="text-primary">Expertise</span> in every load.
+                <h3 className="text-3xl font-black text-[var(--text)] leading-tight">
+                  Safety, Reliability, and <span className="text-[var(--primary)]">Expertise</span> in every load.
                 </h3>
              </div>
              <div className="md:w-1/2 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                <p className="text-zinc-600 leading-relaxed">
+                <p className="text-[var(--text-muted)] leading-relaxed">
                   We are committed to operational excellence. Our fleet and team adhere to the strictest safety protocols to ensure your project stays on track and compliant.
                 </p>
              </div>
@@ -128,16 +128,16 @@ export default function Home() {
       </section>
 
       {/* Who We Are - Split Layout */}
-      <section className="py-16 md:py-24 bg-zinc-50">
+      <section className="py-16 md:py-24 bg-[var(--surface-2)]">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
-              <h2 className="text-sm font-bold tracking-widest text-primary">About Us</h2>
-              <h3 className="text-3xl md:text-5xl font-black tracking-tight text-zinc-900">
-                The <span className="text-primary">Standard</span> in Hauling
+              <h2 className="text-sm font-bold tracking-widest text-[var(--primary)]">About Us</h2>
+              <h3 className="text-3xl md:text-5xl font-black tracking-tight text-[var(--text)]">
+                The <span className="text-[var(--primary)]">Standard</span> in Hauling
               </h3>
             </div>
-            <div className="space-y-4 text-base md:text-lg text-zinc-600 leading-relaxed">
+            <div className="space-y-4 text-base md:text-lg text-[var(--text-muted)] leading-relaxed">
               <p>
                 FortyNinerTrucking LLC is a premier logistics provider specializing in construction material transport and heavy hauling. With years of industry experience, we have built a reputation for reliability, safety, and operational precision.
               </p>
@@ -152,19 +152,19 @@ export default function Home() {
       {/* Featured Services (Modern Interactive Grid) */}
       <section className="py-16 md:py-24 bg-white overflow-hidden relative">
         {/* Abstract Background Elements */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -mr-32 -mt-32 opacity-20" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -ml-32 -mb-32 opacity-20" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--primary)]/5 rounded-full blur-[100px] -mr-32 -mt-32 opacity-20" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--primary)]/5 rounded-full blur-[100px] -ml-32 -mb-32 opacity-20" />
 
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
             <div className="space-y-4 max-w-2xl">
-              <h2 className="text-sm font-bold tracking-[0.2em] text-primary">Capabilities</h2>
-              <h3 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.9] text-zinc-900">
-                Engineered for <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">Heavy Loads</span>
+              <h2 className="text-sm font-bold tracking-[0.2em] text-[var(--primary)]">Capabilities</h2>
+              <h3 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.9] text-[var(--text)]">
+                Engineered for <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--primary)]/60">Heavy Loads</span>
               </h3>
             </div>
             <Link href="/services">
-               <Button variant="outline" className="rounded-full border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 h-12 px-6 tracking-wider font-bold group w-full md:w-auto">
+               <Button variant="outline" className="rounded-full border-[var(--border)] text-[var(--text-muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)] h-12 px-6 tracking-wider font-bold group w-full md:w-auto">
                  View All Services <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                </Button>
             </Link>
@@ -194,22 +194,22 @@ export default function Home() {
                  icon: Scale
                }
              ].map((service, i) => (
-               <div key={i} className="group relative h-[300px] rounded-3xl overflow-hidden cursor-pointer border border-zinc-100 hover:border-primary/50 transition-all duration-500 bg-zinc-50">
+               <div key={i} className="group relative h-[300px] rounded-3xl overflow-hidden cursor-pointer border border-[var(--border)] hover:border-[var(--primary)]/50 transition-all duration-500 bg-[var(--surface-2)]">
                  {/* Content */}
                  <div className="absolute inset-0 p-8 flex flex-col justify-center items-center text-center">
                    <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-                     <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 mx-auto group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                     <div className="w-16 h-16 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] mb-6 mx-auto group-hover:bg-[var(--primary)] group-hover:text-white transition-all duration-500">
                         <service.icon size={32} />
                      </div>
                      
-                     <h4 className="text-2xl font-black text-zinc-900 mb-2 leading-none">{service.title}</h4>
-                     <p className="text-primary font-bold tracking-wider text-xs mb-4 opacity-80">{service.subtitle}</p>
+                     <h4 className="text-2xl font-black text-[var(--text)] mb-2 leading-none">{service.title}</h4>
+                     <p className="text-[var(--primary)] font-bold tracking-wider text-xs mb-4 opacity-80">{service.subtitle}</p>
                      
-                     <p className="text-zinc-600 leading-relaxed max-w-sm mx-auto mb-4">
+                     <p className="text-[var(--text-muted)] leading-relaxed max-w-sm mx-auto mb-4">
                        {service.desc}
                      </p>
                      
-                     <div className="inline-flex items-center gap-2 text-zinc-900 font-bold tracking-widest text-xs border-b border-primary/0 group-hover:border-primary transition-all pb-1">
+                     <div className="inline-flex items-center gap-2 text-[var(--text)] font-bold tracking-widest text-xs border-b border-[var(--primary)]/0 group-hover:border-[var(--primary)] transition-all pb-1">
                        Details <ArrowRight size={14} />
                      </div>
                    </div>
@@ -221,52 +221,52 @@ export default function Home() {
       </section>
 
       {/* Easy Process Section */}
-      <section className="py-24 bg-zinc-50 border-t border-zinc-100">
+      <section className="py-24 bg-[var(--surface-2)] border-t border-[var(--border)]">
          <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
            <div className="max-w-4xl mx-auto text-center mb-16">
-             <h2 className="text-4xl font-black tracking-tight mb-4 text-zinc-900">
-               Core <span className="text-primary">Values</span>
+             <h2 className="text-4xl font-black tracking-tight mb-4 text-[var(--text)]">
+               Core <span className="text-[var(--primary)]">Values</span>
              </h2>
-             <p className="text-xl text-zinc-500">The principles that drive every mile we travel.</p>
+             <p className="text-xl text-[var(--text-muted)]">The principles that drive every mile we travel.</p>
            </div>
            
            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-               <div className="bg-white p-8 rounded-3xl border border-zinc-100 hover:border-primary/50 transition-colors group shadow-sm">
-                 <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+               <div className="bg-white p-8 rounded-3xl border border-[var(--border)] hover:border-[var(--primary)]/50 transition-colors group shadow-sm">
+                 <div className="h-14 w-14 bg-[var(--primary)]/10 rounded-2xl flex items-center justify-center text-[var(--primary)] mb-6 group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
                    <Shield size={28} />
                  </div>
-                 <h3 className="text-xl font-bold mb-3 text-zinc-900">Safety</h3>
-                 <p className="text-zinc-500 leading-relaxed">The foundation of everything we do. We protect our drivers, our partners, and the motoring public.</p>
+                 <h3 className="text-xl font-bold mb-3 text-[var(--text)]">Safety</h3>
+                 <p className="text-[var(--text-muted)] leading-relaxed">The foundation of everything we do. We protect our drivers, our partners, and the motoring public.</p>
                </div>
 
-               <div className="bg-white p-8 rounded-3xl border border-zinc-100 hover:border-primary/50 transition-colors group shadow-sm">
-                 <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+               <div className="bg-white p-8 rounded-3xl border border-[var(--border)] hover:border-[var(--primary)]/50 transition-colors group shadow-sm">
+                 <div className="h-14 w-14 bg-[var(--primary)]/10 rounded-2xl flex items-center justify-center text-[var(--primary)] mb-6 group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
                    <Clock size={28} />
                  </div>
-                 <h3 className="text-xl font-bold mb-3 text-zinc-900">Reliability</h3>
-                 <p className="text-zinc-500 leading-relaxed">When we say we will be there, we are there. We deliver on our promises, every single time.</p>
+                 <h3 className="text-xl font-bold mb-3 text-[var(--text)]">Reliability</h3>
+                 <p className="text-[var(--text-muted)] leading-relaxed">When we say we will be there, we are there. We deliver on our promises, every single time.</p>
                </div>
 
-               <div className="bg-white p-8 rounded-3xl border border-zinc-100 hover:border-primary/50 transition-colors group shadow-sm">
-                 <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+               <div className="bg-white p-8 rounded-3xl border border-[var(--border)] hover:border-[var(--primary)]/50 transition-colors group shadow-sm">
+                 <div className="h-14 w-14 bg-[var(--primary)]/10 rounded-2xl flex items-center justify-center text-[var(--primary)] mb-6 group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
                    <Star size={28} />
                  </div>
-                 <h3 className="text-xl font-bold mb-3 text-zinc-900">Expertise</h3>
-                 <p className="text-zinc-500 leading-relaxed">Our team brings deep industry knowledge to solve complex logistical challenges.</p>
+                 <h3 className="text-xl font-bold mb-3 text-[var(--text)]">Expertise</h3>
+                 <p className="text-[var(--text-muted)] leading-relaxed">Our team brings deep industry knowledge to solve complex logistical challenges.</p>
                </div>
 
-               <div className="bg-white p-8 rounded-3xl border border-zinc-100 hover:border-primary/50 transition-colors group shadow-sm">
-                 <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+               <div className="bg-white p-8 rounded-3xl border border-[var(--border)] hover:border-[var(--primary)]/50 transition-colors group shadow-sm">
+                 <div className="h-14 w-14 bg-[var(--primary)]/10 rounded-2xl flex items-center justify-center text-[var(--primary)] mb-6 group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
                    <Check size={28} />
                  </div>
-                 <h3 className="text-xl font-bold mb-3 text-zinc-900">Accountability</h3>
-                 <p className="text-zinc-500 leading-relaxed">We take ownership of our work and maintain transparent communication at all levels.</p>
+                 <h3 className="text-xl font-bold mb-3 text-[var(--text)]">Accountability</h3>
+                 <p className="text-[var(--text-muted)] leading-relaxed">We take ownership of our work and maintain transparent communication at all levels.</p>
                </div>
            </div>
            
            <div className="text-center mt-12">
              <Link href="/contact">
-              <Button className="rounded-full bg-primary hover:bg-primary/90 px-10 h-14 font-bold text-white shadow-xl shadow-primary/20">
+              <Button className="rounded-full bg-[var(--primary)] hover:bg-[var(--primary)]/90 px-10 h-14 font-bold text-white shadow-xl shadow-[var(--primary)]/20">
                 Partner With Us
               </Button>
              </Link>
