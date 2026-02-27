@@ -27,24 +27,18 @@ export function Navbar() {
   ];
 
   const isHome = location === "/";
-  // Always solid background when scrolled, transparent only at very top of home
+  // Always solid background when scrolled, solid white at top of home
   const navbarClasses = scrolled 
     ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-[var(--border)]" 
-    : (isHome ? "bg-transparent border-b border-white/10" : "bg-white border-b border-[var(--border)]");
+    : "bg-white border-b border-[var(--border)]";
 
-  const logoClasses = scrolled 
-    ? "w-24 brightness-0" 
-    : (isHome ? "w-28 brightness-0 invert" : "w-28 brightness-0");
+  const logoClasses = "w-28 brightness-0";
 
   const linkClasses = (href: string) => {
-    if (scrolled) return location === href ? "text-[var(--primary)] font-bold bg-[var(--primary)]/10" : "text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--border)]";
-    if (isHome) return location === href ? "text-white font-bold bg-white/10" : "text-white/80 hover:text-white hover:bg-white/5";
     return location === href ? "text-[var(--primary)] font-bold bg-[var(--primary)]/10" : "text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--border)]";
   };
 
-  const buttonClasses = scrolled 
-    ? "text-[var(--text)] hover:bg-[var(--border)]" 
-    : (isHome ? "text-white hover:bg-white/10" : "text-[var(--text)] hover:bg-[var(--border)]");
+  const buttonClasses = "text-[var(--text)] hover:bg-[var(--border)]";
 
   return (
     <>
@@ -78,7 +72,7 @@ export function Navbar() {
             <Link href="/">
               <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center">
                 <Logo 
-                  variant={scrolled || !isHome ? "dark" : "light"} 
+                  variant="dark" 
                   className={`transition-all duration-300 ${scrolled ? 'scale-75 origin-left' : 'scale-90 md:scale-100 origin-left'}`}
                 />
               </div>

@@ -34,22 +34,22 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-screen w-full overflow-hidden">
+      <section className="relative h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px]">
         {/* Background Image Carousel */}
-        <div className="absolute inset-0 z-0 bg-[var(--text)]">
+        <div className="absolute inset-0 z-0 bg-black">
           <AnimatePresence mode="popLayout">
             <motion.img
               key={currentImageIndex}
               src={carouselImages[currentImageIndex]}
               alt="FortyNiner Trucking Fleet"
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-contain object-center"
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-black/60 z-10" />
+          <div className="absolute inset-0 bg-black/40 z-10" />
           
           {/* Navigation Controls */}
           <div className="absolute inset-0 z-20 flex items-center justify-between px-4 md:px-12 pointer-events-none">
