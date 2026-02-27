@@ -34,7 +34,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px]">
+      <section className="relative min-h-[500px] h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px] lg:h-[calc(100vh-112px)] lg:mt-[112px]">
         {/* Background Image Carousel */}
         <div className="absolute inset-0 z-0 bg-white">
           <AnimatePresence mode="popLayout">
@@ -84,20 +84,20 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Bottom Actions - Aligned Right */}
+        {/* Bottom Actions - Responsive Alignment */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="absolute bottom-12 right-12 z-20 flex flex-col sm:flex-row items-center gap-4"
+          className="absolute bottom-16 left-4 right-4 sm:left-auto sm:right-12 z-20 flex flex-col sm:flex-row items-center gap-4"
         >
-          <Link href="/services">
-            <Button variant="outline" className="h-12 px-8 text-base font-bold tracking-wide border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white bg-white/90 backdrop-blur-sm rounded-full min-w-[160px] shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+          <Link href="/services" className="w-full sm:w-auto">
+            <Button variant="outline" className="w-full sm:w-auto h-12 px-8 text-base font-bold tracking-wide border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white bg-white/90 backdrop-blur-sm rounded-full min-w-[160px] shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               Our Services
             </Button>
           </Link>
-          <Link href="/contact">
-            <Button className="h-12 px-8 text-base font-bold tracking-wide bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white rounded-full min-w-[160px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <Link href="/contact" className="w-full sm:w-auto">
+            <Button className="w-full sm:w-auto h-12 px-8 text-base font-bold tracking-wide bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white rounded-full min-w-[160px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               Get A Quote
             </Button>
           </Link>

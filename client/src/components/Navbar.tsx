@@ -29,7 +29,7 @@ export function Navbar() {
   const isHome = location === "/";
   // Always solid background when scrolled, solid white at top of home
   const navbarClasses = scrolled 
-    ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-[var(--border)]" 
+    ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-[var(--border)]" 
     : "bg-white border-b border-[var(--border)]";
 
   const logoClasses = "w-28 brightness-0";
@@ -43,7 +43,7 @@ export function Navbar() {
   return (
     <>
       {/* Top Bar - Hidden on mobile, visible on desktop */}
-      <div className={`hidden lg:flex fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} bg-[var(--border)] text-[var(--text-muted)] border-b border-white/5`}>
+      <div className={`hidden lg:flex fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'} bg-[var(--surface-2)] text-[var(--text-muted)] border-b border-[var(--border)]`}>
         <div className="w-full px-8 h-10 flex justify-between items-center text-xs font-medium tracking-wide">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2 hover:text-[var(--primary)] transition-colors cursor-pointer">
