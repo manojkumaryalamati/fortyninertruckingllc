@@ -7,11 +7,12 @@ interface LogoProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export function Logo({ className, variant = "dark", ...props }: LogoProps) {
-  // We no longer invert the logo as it's a JPEG with its own colors and background
+  const isLight = variant === "light";
+
   return (
     <div 
       className={cn(
-        "flex items-center justify-center select-none rounded-xl overflow-hidden",
+        "flex items-center justify-center select-none overflow-hidden",
         className
       )}
       {...props}
@@ -19,7 +20,10 @@ export function Logo({ className, variant = "dark", ...props }: LogoProps) {
       <img 
         src={logoImg} 
         alt="Forty Niner Trucking LLC" 
-        className="h-auto max-h-16 w-auto object-contain transition-all duration-300"
+        className={cn(
+          "h-auto max-h-16 w-auto object-contain transition-all duration-300",
+          !isLight && "mix-blend-multiply"
+        )}
       />
     </div>
   );
