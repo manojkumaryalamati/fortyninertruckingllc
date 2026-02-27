@@ -9,7 +9,7 @@ export default function Footer() {
       {/* Abstract Background Element */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--primary)]/5 rounded-full blur-[100px] -mr-32 -mt-32 opacity-50 pointer-events-none" />
 
-      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 pt-20 pb-8 relative z-10">
+      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           
           {/* Brand Column */}
@@ -103,7 +103,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-[var(--text-muted)] font-medium">
             &copy; {new Date().getFullYear()} FortyNinerTrucking LLC. All rights reserved.
           </p>
