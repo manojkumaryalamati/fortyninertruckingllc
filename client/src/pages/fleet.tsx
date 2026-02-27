@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Truck, ArrowDown, Shield, Award, Gauge } from "lucide-react";
+import { Truck, ArrowDown, Shield, Award, Gauge, Wrench, Clock, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 export default function Fleet() {
   return (
@@ -34,12 +35,16 @@ export default function Fleet() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm text-white/80 text-sm font-bold tracking-wider uppercase mb-4">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              Modern Fleet Technology
+              Power. Precision. Performance.
             </div>
             
+            <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] tracking-tight">
+              The Heavy-Duty <br/>
+              <span className="text-primary">Powerhouse</span>
+            </h1>
             
-            <p className="text-zinc-300 font-light leading-relaxed" style={{ fontSize: 'clamp(16px, 2vw, 20px)', maxWidth: '560px' }}>
-              Our diverse fleet of specialized haulers is maintained to the highest industry standards, ensuring reliable delivery for every load.
+            <p className="text-zinc-300 font-light leading-relaxed text-lg md:text-xl max-w-[600px]">
+              When the job demands serious muscle, Forty Niner Trucking delivers. Our state-of-the-art, meticulously maintained fleet is engineered to handle California’s toughest construction and logistics challenges with uncompromising reliability.
             </p>
 
             <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-white/10 max-w-3xl">
@@ -55,7 +60,7 @@ export default function Fleet() {
                   <Gauge size={20} />
                   <span>CARB Compliant</span>
                 </div>
-                <p className="text-sm text-zinc-400">Eco-friendly fleet</p>
+                <p className="text-sm text-zinc-400">Eco-friendly & green fleet</p>
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-primary font-bold">
@@ -83,35 +88,123 @@ export default function Fleet() {
       </section>
 
       {/* Fleet Categories */}
-      <section className="py-24 bg-white">
-        <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
-           <div className="flex flex-col items-center justify-center text-center space-y-12">
+      <section className="py-24 bg-zinc-50 relative overflow-hidden">
+        {/* Abstract shapes */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -mr-40 -mt-40 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-zinc-200/50 rounded-full blur-[120px] -ml-40 -mb-40 pointer-events-none" />
+
+        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
+           <div className="flex flex-col items-center justify-center text-center space-y-6 mb-16">
              <div className="space-y-4">
                 <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Truck Types Available</h2>
-                <h3 className="text-4xl md:text-5xl font-black text-zinc-900">Our Fleet</h3>
-                <p className="text-zinc-500 max-w-2xl mx-auto text-lg">
-                  While our full gallery is being updated, rest assured we have the equipment you need.
+                <h3 className="text-4xl md:text-5xl font-black text-zinc-900 tracking-tight">Our Specialized Fleet</h3>
+                <p className="text-zinc-600 max-w-2xl mx-auto text-lg leading-relaxed mt-4">
+                  From tight urban job sites to massive infrastructure projects, our diverse inventory of heavy-duty trucks ensures you have the exact equipment needed to maximize payload efficiency and minimize downtime.
                 </p>
              </div>
-             
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-               {[
-                 { name: "Super Dumps", desc: "Heavy hauling with high payload capacity" },
-                 { name: "Super Tags", desc: "Versatile hauling with tag axle stability" },
-                 { name: "Super 10's", desc: "Maneuverable option for tight job sites" },
-                 { name: "Ten Wheelers", desc: "Reliable for construction and aggregates" },
-                 { name: "End Dumps", desc: "Efficient unloading for bulk materials" }
-               ].map((truck, i) => (
-                 <div key={i} className="group p-8 rounded-3xl bg-zinc-50 border border-zinc-100 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
-                   <div className="h-16 w-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-primary mb-6 mx-auto group-hover:scale-110 transition-transform">
-                     <Truck size={32} />
-                   </div>
-                   <h4 className="text-xl font-bold text-zinc-900 mb-2">{truck.name}</h4>
-                   <p className="text-zinc-500">{truck.desc}</p>
-                 </div>
-               ))}
-             </div>
            </div>
+           
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+             {[
+               { name: "Super Dumps", desc: "Heavy hauling with high payload capacity.", detail: "Engineered for maximum weight compliance, allowing you to move more tons per trip and slash transportation costs.", highlight: "Maximum Payload" },
+               { name: "Super Tags", desc: "Versatile hauling with tag axle stability.", detail: "The perfect balance of capacity and agility. The drop-down tag axle provides exceptional weight distribution on highways.", highlight: "Superior Stability" },
+               { name: "Super 10's", desc: "Maneuverable option for tight job sites.", detail: "When space is limited, the Super 10 shines. Outstanding turning radius without sacrificing significant hauling volume.", highlight: "Highly Maneuverable" },
+               { name: "Ten Wheelers", desc: "Reliable for construction and aggregates.", detail: "The industry workhorse. Rugged, dependable, and ready to tackle steep grades and rough construction terrain.", highlight: "Rugged Dependability" },
+               { name: "End Dumps", desc: "Efficient unloading for bulk materials.", detail: "Ideal for stockpiling large volumes of aggregate, demo debris, or fill dirt with rapid, controlled dumping mechanisms.", highlight: "Rapid Unloading" }
+             ].map((truck, i) => (
+               <div key={i} className="group p-8 rounded-3xl bg-white border border-zinc-200 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 flex flex-col h-full">
+                 <div className="flex justify-between items-start mb-6">
+                   <div className="h-14 w-14 bg-zinc-50 rounded-2xl border border-zinc-100 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                     <Truck size={28} />
+                   </div>
+                   <span className="text-[10px] font-bold uppercase tracking-wider bg-zinc-100 text-zinc-600 py-1.5 px-3 rounded-full group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                     {truck.highlight}
+                   </span>
+                 </div>
+                 <h4 className="text-2xl font-black text-zinc-900 mb-3 tracking-tight">{truck.name}</h4>
+                 <p className="text-primary font-medium text-sm mb-4">{truck.desc}</p>
+                 <p className="text-zinc-500 leading-relaxed text-sm flex-grow">{truck.detail}</p>
+                 
+                 <div className="pt-6 mt-6 border-t border-zinc-100 flex items-center text-sm font-bold text-zinc-900 group-hover:text-primary transition-colors">
+                   Request availability <ArrowDown size={16} className="ml-2 -rotate-90" />
+                 </div>
+               </div>
+             ))}
+           </div>
+        </div>
+      </section>
+
+      {/* Fleet Maintenance & Reliability Section */}
+      <section className="py-24 bg-white border-t border-zinc-100">
+        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Uncompromising Standards</h2>
+                <h3 className="text-3xl md:text-5xl font-black text-zinc-900 tracking-tight leading-[1.1]">
+                  Maintained for <br/> Absolute Reliability
+                </h3>
+              </div>
+              <p className="text-zinc-600 text-lg leading-relaxed">
+                A delayed truck means a delayed project. That's why Forty Niner Trucking invests heavily in proactive, preventative maintenance. Our in-house service team ensures every vehicle that leaves our yard is operating at peak performance.
+              </p>
+              
+              <ul className="space-y-5">
+                {[
+                  { title: "Daily Inspections", desc: "Comprehensive pre-trip and post-trip DOT inspections." },
+                  { title: "CARB Compliance", desc: "Fully upgraded fleet meeting all California emissions standards." },
+                  { title: "GPS Tracking", desc: "Real-time dispatch routing and load tracking technology." },
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-4">
+                    <div className="mt-1 h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 size={14} className="text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-zinc-900">{item.title}</h4>
+                      <p className="text-zinc-500 text-sm mt-1">{item.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -inset-4 bg-zinc-100 rounded-3xl transform rotate-3 scale-105 -z-10 transition-transform hover:rotate-6 duration-500"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop" 
+                alt="Fleet Maintenance" 
+                className="w-full h-auto aspect-square object-cover rounded-3xl shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-500"
+              />
+              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl border border-zinc-100 hidden md:block">
+                <div className="flex items-center gap-4">
+                  <div className="h-12 w-12 bg-zinc-900 text-white rounded-full flex items-center justify-center">
+                    <Wrench size={24} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-zinc-500 font-medium">Uptime Rate</p>
+                    <p className="text-2xl font-black text-zinc-900">99.8%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-primary text-white text-center px-4">
+        <div className="max-w-3xl mx-auto space-y-8">
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight">Need specific equipment for your next project?</h2>
+          <p className="text-xl text-white/80 font-medium max-w-2xl mx-auto">
+            Our dispatch team is ready to match the right trucks to your material requirements and job site constraints.
+          </p>
+          <div className="pt-4">
+            <Link href="/contact">
+              <Button className="h-14 px-10 text-lg font-bold uppercase tracking-widest bg-zinc-900 hover:bg-zinc-800 text-white rounded-none border-none shadow-xl shadow-zinc-900/20">
+                Request Fleet Availability
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
