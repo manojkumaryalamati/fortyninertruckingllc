@@ -77,8 +77,10 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto space-y-8"
           >
-            
-            <p className="text-base md:text-xl text-white/80 font-medium max-w-2xl mx-auto leading-relaxed">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight text-shadow-sm">
+              The <span className="text-[var(--primary)]">Standard</span> in Hauling
+            </h1>
+            <p className="text-base md:text-xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
               California's premier partner for construction logistics and material transport.
             </p>
           </motion.div>
