@@ -192,7 +192,7 @@ export default function Fleet() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-[var(--primary)] text-white text-center px-4">
+      <section className="py-24 bg-[var(--primary)] text-white text-center px-4 md:px-8">
         <div className="max-w-3xl mx-auto space-y-8">
           <h2 className="text-4xl md:text-5xl font-black tracking-tight">Need specific equipment for your next project?</h2>
           <p className="text-xl text-white/80 font-medium max-w-2xl mx-auto">
