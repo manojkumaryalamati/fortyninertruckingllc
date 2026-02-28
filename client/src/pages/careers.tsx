@@ -177,7 +177,9 @@ export default function Careers() {
           </Card>
         </div>
       </div>
-      <Footer />
+      <div className="mt-20">
+        <Footer />
+      </div>
     </div>
   );
 }
