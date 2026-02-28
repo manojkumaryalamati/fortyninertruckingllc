@@ -5,24 +5,28 @@ import { Truck, ArrowDown, Shield, Award, Gauge, Wrench, Clock, CheckCircle2 } f
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
+// Import actual hero images
+import heroImage1 from "@/assets/a2a02ae8-e30d-4a34-ad88-64598b4c945f_1772219729261.jpeg";
+import heroImage2 from "@/assets/867d8163-e94d-4056-b575-856aa6f68ace_1772219729261.jpeg";
+
 export default function Fleet() {
   return (
     <div className="min-h-screen bg-white text-[var(--text)] font-sans">
       <Navbar />
 
       {/* Modern Fleet Hero */}
-      <section className="relative min-h-[85vh] w-full overflow-hidden bg-[var(--text)] py-16">
+      <section className="relative min-h-[85vh] w-full overflow-hidden bg-[var(--text)] py-16 mt-[72px] lg:mt-[112px]">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
            <img 
-             src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2940&auto=format&fit=crop" 
+             src={heroImage1} 
              alt="Fleet Hero" 
-             className="w-full h-full object-cover object-center opacity-40"
+             className="w-full h-full object-cover object-[center_35%] opacity-40"
            />
            {/* Overlay */}
            <div 
              className="absolute inset-0 z-10" 
-             style={{ background: 'linear-gradient(90deg, rgba(0,0,0,0.70), rgba(0,0,0,0.20))' }}
+             style={{ background: 'linear-gradient(90deg, rgba(0,0,0,0.85), rgba(0,0,0,0.30))' }}
            />
         </div>
 
@@ -167,7 +171,7 @@ export default function Fleet() {
             <div className="relative">
               <div className="absolute -inset-4 bg-[var(--border)] rounded-3xl transform rotate-3 scale-105 -z-10 transition-transform hover:rotate-6 duration-500"></div>
               <img 
-                src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop" 
+                src={heroImage2} 
                 alt="Fleet Maintenance" 
                 className="w-full h-auto aspect-square object-cover rounded-3xl shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-500"
               />
