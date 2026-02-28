@@ -154,7 +154,9 @@ export default function Subhaulers() {
           </Card>
         </div>
       </div>
-      <Footer />
+      <div className="mt-20">
+        <Footer />
+      </div>
     </div>
   );
 }
