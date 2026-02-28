@@ -55,7 +55,7 @@ export default function Certifications() {
           <h2 className="text-3xl font-bold mb-10 text-center text-[var(--text)]">Operating Permits & Licenses</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
              {[
-               { title: "Motor Carrier Permit", id: "CA-99281", icon: TruckIcon }
+               { title: "Motor Carrier Permit", id: "CA-561086", icon: TruckIcon }
              ].map((permit, i) => (
                <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-[var(--border)] hover:border-[var(--primary)]/50 transition-colors bg-white shadow-sm">
                  <div className="h-10 w-10 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0">
