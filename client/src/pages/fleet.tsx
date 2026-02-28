@@ -42,7 +42,7 @@ export default function Fleet() {
               Power. Precision. Performance.
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight">
               The Heavy-Duty <br/>
               <span className="text-[var(--primary)]">Powerhouse</span>
             </h1>
