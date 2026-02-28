@@ -55,12 +55,7 @@ export default function Certifications() {
           <h2 className="text-3xl font-bold mb-10 text-center text-[var(--text)]">Operating Permits & Licenses</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
              {[
-               { title: "Motor Carrier Permit", id: "CA-99281", icon: TruckIcon },
-               { title: "DOT Number", id: "USDOT 392819", icon: FileText },
-               { title: "EPA ID", id: "CAL00029182", icon: LeafIcon },
-               { title: "DIR Registration", id: "PW-LR-100088291", icon: HardHatIcon },
-               { title: "HazMat Certification", id: "HM-29182", icon: FlaskConicalIcon },
-               { title: "SmartWay Partner", id: "Verified", icon: RecycleIcon }
+               { title: "Motor Carrier Permit", id: "CA-99281", icon: TruckIcon }
              ].map((permit, i) => (
                <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-[var(--border)] hover:border-[var(--primary)]/50 transition-colors bg-white shadow-sm">
                  <div className="h-10 w-10 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0">
