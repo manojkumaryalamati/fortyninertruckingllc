@@ -90,7 +90,7 @@ export default function Careers() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--surface-2)] text-[var(--text)] font-sans pt-40 md:pt-56 pb-32">
+    <div className="min-h-screen bg-[var(--surface-2)] text-[var(--text)] font-sans pt-40 md:pt-40 pb-1 mt-10">
       <Navbar />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">

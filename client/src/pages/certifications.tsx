@@ -6,7 +6,7 @@ import { Navbar } from "@/components/Navbar";
 
 export default function Certifications() {
   return (
-    <div className="min-h-screen bg-[var(--surface-2)] text-[var(--text)] font-sans pt-40 md:pt-56 pb-32">
+    <div className="min-h-screen bg-[var(--surface-2)] text-[var(--text)] font-sans pt-40 md:pt-40 pb-10">
       <Navbar />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
@@ -51,7 +51,7 @@ export default function Certifications() {
         </div>
 
         {/* Permits & Licenses List */}
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto mb-10">
           <h2 className="text-3xl font-bold mb-10 text-center text-[var(--text)]">Operating Permits & Licenses</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
              {[
