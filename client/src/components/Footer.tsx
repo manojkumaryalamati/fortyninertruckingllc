@@ -5,7 +5,7 @@ import { Logo } from "@/components/Logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-[var(--text)] border-t border-[var(--border)] relative overflow-hidden">
+    <footer className="bg-white text-[var(--text)] border-t border-[var(--border)] relative overflow-hidden pt-4">
       {/* Abstract Background Element */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--primary)]/5 rounded-full blur-[100px] -mr-32 -mt-32 opacity-50 pointer-events-none" />
 
