@@ -30,38 +30,45 @@ export default function Fleet() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full max-w-4xl mx-auto space-y-8"
+            className="w-full max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/20 backdrop-blur-sm text-white text-sm font-bold tracking-wider uppercase mb-4 shadow-lg">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/20 backdrop-blur-sm text-white text-sm font-bold tracking-wider uppercase shadow-lg">
               <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse"></span>
               Power. Precision. Performance.
             </div>
-
-            <div className="flex flex-wrap justify-center items-center gap-8 pt-8 max-w-3xl mx-auto">
-              <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
-                  <Shield size={24} />
-                  <span className="text-white">Safety First</span>
-                </div>
-                <p className="text-base text-white/90 font-medium">Advanced safety systems</p>
-              </div>
-              <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
-                  <Gauge size={24} />
-                  <span className="text-white">CARB Compliant</span>
-                </div>
-                <p className="text-base text-white/90 font-medium">Eco-friendly & green fleet</p>
-              </div>
-              <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
-                  <Award size={24} />
-                  <span className="text-white">Well Maintained</span>
-                </div>
-                <p className="text-base text-white/90 font-medium">Rigorous service schedule</p>
-              </div>
-            </div>
           </motion.div>
         </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="absolute bottom-24 left-0 right-0 z-20 px-4 w-full"
+        >
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 max-w-4xl mx-auto">
+            <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10 w-full sm:w-auto">
+              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                <Shield size={24} />
+                <span className="text-white">Safety First</span>
+              </div>
+              <p className="text-base text-white/90 font-medium text-center">Advanced safety systems</p>
+            </div>
+            <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10 w-full sm:w-auto">
+              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                <Gauge size={24} />
+                <span className="text-white">CARB Compliant</span>
+              </div>
+              <p className="text-base text-white/90 font-medium text-center">Eco-friendly & green fleet</p>
+            </div>
+            <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10 w-full sm:w-auto">
+              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                <Award size={24} />
+                <span className="text-white">Well Maintained</span>
+              </div>
+              <p className="text-base text-white/90 font-medium text-center">Rigorous service schedule</p>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div 
