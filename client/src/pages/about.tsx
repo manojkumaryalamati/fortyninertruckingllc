@@ -23,7 +23,7 @@ export default function About() {
 
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
           <div className="max-w-3xl space-y-10">
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.9]">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-white leading-[0.9]">
               Driving <br />
               <span className="text-[var(--primary)]">Excellence</span> <br />
               in Hauling

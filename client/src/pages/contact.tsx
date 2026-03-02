@@ -100,7 +100,7 @@ export default function Contact() {
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-[var(--surface-2)] border-b border-[var(--border)]">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 relative z-10">
           <div className="max-w-4xl space-y-8">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-[var(--text)] mb-8">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--text)] mb-8">
               Let's Start a <br />
               <span className="text-[var(--primary)]">Conversation.</span>
             </h1>

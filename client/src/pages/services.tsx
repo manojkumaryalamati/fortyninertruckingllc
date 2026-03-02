@@ -29,7 +29,7 @@ export default function Services() {
              className="space-y-8"
            >
              <h2 className="text-[var(--primary)] font-bold tracking-widest text-sm mb-6">Our Expertise</h2>
-             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-none mb-8">
+             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-white leading-none mb-8">
               Specialized <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-orange-400">Hauling Solutions</span>
              </h1>
