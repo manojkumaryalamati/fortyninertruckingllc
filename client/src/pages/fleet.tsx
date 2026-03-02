@@ -30,9 +30,9 @@ export default function Fleet() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="w-full max-w-[800px] space-y-8"
+            className="w-full max-w-[800px] space-y-8 bg-white/85 backdrop-blur-md p-8 md:p-12 rounded-[2rem] border border-white/50 shadow-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm text-white/80 text-sm font-bold tracking-wider uppercase mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 border border-black/10 text-[var(--text)] text-sm font-bold tracking-wider uppercase mb-4">
               <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse"></span>
               Power. Precision. Performance.
             </div>
@@ -41,7 +41,7 @@ export default function Fleet() {
               When the job demands serious muscle, Forty Niner Trucking delivers. Our state-of-the-art, meticulously maintained fleet is engineered to handle California’s toughest construction and logistics challenges with uncompromising reliability.
             </p>
 
-            <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-white/10 max-w-3xl">
+            <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-black/10 max-w-3xl">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-[var(--primary)] font-bold">
                   <Shield size={20} />
