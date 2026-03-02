@@ -115,7 +115,7 @@ export default function Login() {
             <div className="mb-6 flex justify-center md:justify-start">
               <Logo variant="dark" />
             </div>
-            <h2 className="text-3xl font-black text-[var(--text)] tracking-tight">Admin Portal</h2>
+            <h2 className="text-2xl font-black text-[var(--text)] tracking-tight">Admin Portal</h2>
             <p className="text-[var(--text-muted)] mt-2">Secure access for fleet management.</p>
           </div>
 

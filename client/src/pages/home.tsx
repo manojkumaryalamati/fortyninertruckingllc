@@ -34,7 +34,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-[500px] h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px] lg:h-[calc(100vh-112px)] lg:mt-[112px]">
+      <section className="relative min-h-[400px] h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px] lg:h-[calc(100vh-112px)] lg:mt-[112px]">
         {/* Background Image Carousel */}
         <div className="absolute inset-0 z-0 bg-white">
           <AnimatePresence mode="popLayout">
@@ -77,7 +77,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto space-y-8"
           >
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.1] tracking-tight text-shadow-sm">
+            <h1 className="text-2xl md:text-3xl lg:text-2xl font-black text-white leading-[1.1] tracking-tight text-shadow-sm">
               The <span className="text-[var(--primary)]">Standard</span> in Hauling
             </h1>
             <p className="text-base md:text-xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
@@ -119,11 +119,11 @@ export default function Home() {
       </section>
 
       {/* Value Prop Strip */}
-      <section className="bg-white py-16 border-b border-[var(--border)]">
+      <section className="bg-white py-12 border-b border-[var(--border)]">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
              <div className="md:w-1/2">
-                <h3 className="text-3xl font-black text-[var(--text)] leading-tight">
+                <h3 className="text-2xl font-black text-[var(--text)] leading-tight">
                   Safety, Reliability, and <span className="text-[var(--primary)]">Expertise</span> in every load.
                 </h3>
              </div>
@@ -137,12 +137,12 @@ export default function Home() {
       </section>
 
       {/* Who We Are - Split Layout */}
-      <section className="py-16 md:py-24 bg-[var(--surface-2)]">
+      <section className="py-12 md:py-12 bg-[var(--surface-2)]">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="space-y-4">
               <h2 className="text-sm font-bold tracking-widest text-[var(--primary)]">About Us</h2>
-              <h3 className="text-3xl md:text-5xl font-black tracking-tight text-[var(--text)]">
+              <h3 className="text-2xl md:text-2xl font-black tracking-tight text-[var(--text)]">
                 The <span className="text-[var(--primary)]">Standard</span> in Hauling
               </h3>
             </div>
@@ -159,7 +159,7 @@ export default function Home() {
       </section>
 
       {/* Featured Services (Modern Interactive Grid) */}
-      <section className="py-16 md:py-24 bg-white overflow-hidden relative">
+      <section className="py-12 md:py-12 bg-white overflow-hidden relative">
         {/* Abstract Background Elements */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--primary)]/5 rounded-full blur-[100px] -mr-32 -mt-32 opacity-20" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--primary)]/5 rounded-full blur-[100px] -ml-32 -mb-32 opacity-20" />
@@ -168,7 +168,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
             <div className="space-y-4 max-w-2xl">
               <h2 className="text-sm font-bold tracking-[0.2em] text-[var(--primary)]">Capabilities</h2>
-              <h3 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.9] text-[var(--text)]">
+              <h3 className="text-2xl md:text-2xl font-black tracking-tighter leading-[0.9] text-[var(--text)]">
                 Engineered for <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--primary)]/60">Heavy Loads</span>
               </h3>
             </div>
@@ -230,10 +230,10 @@ export default function Home() {
       </section>
 
       {/* Easy Process Section */}
-      <section className="py-24 bg-[var(--surface-2)] border-t border-[var(--border)]">
+      <section className="py-12 bg-[var(--surface-2)] border-t border-[var(--border)]">
          <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
            <div className="max-w-4xl mx-auto text-center mb-16">
-             <h2 className="text-4xl font-black tracking-tight mb-4 text-[var(--text)]">
+             <h2 className="text-2xl font-black tracking-tight mb-4 text-[var(--text)]">
                Core <span className="text-[var(--primary)]">Values</span>
              </h2>
              <p className="text-xl text-[var(--text-muted)]">The principles that drive every mile we travel.</p>

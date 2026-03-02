@@ -433,7 +433,7 @@ export default function AdminDashboard() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-[var(--text-muted)] mb-1 uppercase tracking-wide text-xs">{stat.label}</p>
-                    <div className="text-2xl lg:text-3xl font-black tracking-tight text-[var(--text)]">{stat.value}</div>
+                    <div className="text-2xl lg:text-2xl font-black tracking-tight text-[var(--text)]">{stat.value}</div>
                   </div>
                 </CardContent>
               </Card>
