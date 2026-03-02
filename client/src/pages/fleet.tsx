@@ -36,10 +36,6 @@ export default function Fleet() {
               <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse"></span>
               Power. Precision. Performance.
             </div>
-            
-            <p className="text-xl md:text-2xl lg:text-3xl text-white font-bold max-w-3xl mx-auto leading-relaxed drop-shadow-xl" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
-              When the job demands serious muscle, Forty Niner Trucking delivers. Our state-of-the-art, meticulously maintained fleet is engineered to handle California’s toughest construction and logistics challenges with uncompromising reliability.
-            </p>
 
             <div className="flex flex-wrap justify-center items-center gap-8 pt-8 max-w-3xl mx-auto">
               <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
