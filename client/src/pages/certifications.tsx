@@ -11,7 +11,7 @@ export default function Certifications() {
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
         <div className="max-w-4xl mx-auto text-center mb-32 space-y-8">
-          <h1 className="text-5xl font-bold tracking-tight mb-8 text-[var(--text)]">Compliance & Certifications</h1>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-8 text-[var(--text)]">Compliance & Certifications</h1>
           <p className="text-xl text-[var(--text-muted)] leading-relaxed mt-6">
             FortyNinerTrucking LLC is committed to the highest standards of safety, compliance, and professional excellence. We maintain all necessary permits and certifications to operate efficiently and legally across all our service areas.
           </p>
