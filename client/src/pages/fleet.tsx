@@ -23,11 +23,6 @@ export default function Fleet() {
              alt="Fleet Hero" 
              className="w-full h-full object-cover object-[center_35%] opacity-40"
            />
-           {/* Overlay */}
-           <div 
-             className="absolute inset-0 z-10" 
-             style={{ background: 'linear-gradient(90deg, rgba(0,0,0,0.85), rgba(0,0,0,0.30))' }}
-           />
         </div>
 
         <div className="relative z-20 h-full w-full max-w-[1200px] mx-auto px-4 flex flex-col justify-center items-start">
