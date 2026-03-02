@@ -14,7 +14,7 @@ export default function Services() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden flex items-center justify-center mt-[72px] lg:mt-[112px]">
+      <section className="relative h-[70vh] min-h-[400px] w-full overflow-hidden flex items-center justify-center mt-[72px] lg:mt-[112px]">
         <div className="absolute inset-0 z-0">
            <img 
              src={heroImage3} 
@@ -32,7 +32,7 @@ export default function Services() {
              className="space-y-8"
            >
              <h2 className="text-[var(--primary)] font-bold tracking-widest text-sm mb-6">Our Expertise</h2>
-             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-white leading-none mb-8">
+             <h1 className="text-2xl md:text-3xl lg:text-2xl font-black tracking-tighter text-white leading-none mb-8">
               Specialized <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-orange-400">Hauling Solutions</span>
              </h1>
@@ -44,7 +44,7 @@ export default function Services() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-24 bg-[var(--surface-2)] relative overflow-hidden">
+      <section className="py-12 bg-[var(--surface-2)] relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent" />
         
@@ -64,7 +64,7 @@ export default function Services() {
                    <HardHat size={32} />
                  </div>
                  <div>
-                   <h3 className="text-4xl font-black text-[var(--text)] mb-4">Construction Material Hauling</h3>
+                   <h3 className="text-2xl font-black text-[var(--text)] mb-4">Construction Material Hauling</h3>
                    <p className="text-lg text-[var(--text-muted)] leading-relaxed">
                      We provide reliable transport solutions for all types of construction materials. From aggregates and sand to asphalt and gravel, our fleet ensures a consistent supply chain for your job site.
                    </p>
@@ -100,7 +100,7 @@ export default function Services() {
                    <Truck size={32} />
                  </div>
                  <div>
-                   <h3 className="text-4xl font-black text-[var(--text)] mb-4">Dump Truck Services</h3>
+                   <h3 className="text-2xl font-black text-[var(--text)] mb-4">Dump Truck Services</h3>
                    <p className="text-lg text-[var(--text-muted)] leading-relaxed">
                      Our fleet of high-capacity dump trucks is equipped to handle heavy loads with ease. We support excavation, grading, and paving projects with precision dumping and rapid turnaround times.
                    </p>
@@ -148,9 +148,9 @@ export default function Services() {
       </section>
       
       {/* CTA Section */}
-      <section className="bg-white border-t border-[var(--border)] py-24 text-center">
+      <section className="bg-white border-t border-[var(--border)] py-12 text-center">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 max-w-3xl space-y-8">
-          <h2 className="text-4xl font-black text-[var(--text)]">Have a specialized hauling need?</h2>
+          <h2 className="text-2xl font-black text-[var(--text)]">Have a specialized hauling need?</h2>
           <p className="text-[var(--text-muted)] text-xl font-medium">We adapt to your project requirements. Let's discuss your logistics plan.</p>
           <div className="flex justify-center gap-4 pt-4">
             <Link href="/contact">

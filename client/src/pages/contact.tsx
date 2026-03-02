@@ -100,7 +100,7 @@ export default function Contact() {
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-[var(--surface-2)] border-b border-[var(--border)]">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 relative z-10">
           <div className="max-w-4xl space-y-8">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--text)] mb-8">
+            <h1 className="text-2xl md:text-3xl lg:text-2xl font-bold tracking-tight text-[var(--text)] mb-8">
               Let's Start a <br />
               <span className="text-[var(--primary)]">Conversation.</span>
             </h1>
@@ -116,7 +116,7 @@ export default function Contact() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--primary)]/5 rounded-full blur-3xl" />
       </section>
 
-      <section className="py-24 bg-white relative">
+      <section className="py-12 bg-white relative">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-24">
              {/* Contact Info */}
@@ -197,7 +197,7 @@ export default function Contact() {
                  <h3 className="text-2xl font-bold mb-8 relative z-10 text-[var(--text)]">Send us a Message</h3>
                  
                  {isSuccess ? (
-                   <div className="relative z-10 flex flex-col items-center justify-center py-20 text-center space-y-6">
+                   <div className="relative z-10 flex flex-col items-center justify-center py-16 text-center space-y-6">
                      <div className="h-20 w-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
                        <CheckCircle2 className="w-10 h-10" />
                      </div>

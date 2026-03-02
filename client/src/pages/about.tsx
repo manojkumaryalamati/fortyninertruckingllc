@@ -14,7 +14,7 @@ export default function About() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden mt-0">
+      <section className="relative h-[70vh] min-h-[400px] w-full overflow-hidden mt-0">
         <div className="absolute inset-0 z-0">
            <img 
              src={heroImage1} 
@@ -26,7 +26,7 @@ export default function About() {
 
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
           <div className="max-w-3xl space-y-10">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-white leading-[0.9]">
+            <h1 className="text-2xl md:text-3xl lg:text-2xl font-black tracking-tighter text-white leading-[0.9]">
               Driving <br />
               <span className="text-[var(--primary)]">Excellence</span> <br />
               in Hauling
@@ -40,12 +40,12 @@ export default function About() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <h2 className="text-sm font-bold tracking-widest text-[var(--primary)]">Our Mission</h2>
-              <h3 className="text-4xl font-black tracking-tight text-[var(--text)]">
+              <h3 className="text-2xl font-black tracking-tight text-[var(--text)]">
                 Commitment to <span className="text-[var(--primary)]">Safety</span> & Service
               </h3>
               <div className="space-y-4 text-lg text-[var(--text-muted)] leading-relaxed">
@@ -84,7 +84,7 @@ export default function About() {
                />
                <div className="absolute inset-0 bg-[var(--primary)]/10 mix-blend-multiply" />
                <div className="absolute bottom-0 left-0 p-8 bg-black/60 backdrop-blur-sm text-white w-full">
-                 <p className="text-3xl font-black">10M+ Miles</p>
+                 <p className="text-2xl font-black">10M+ Miles</p>
                  <p className="text-sm font-bold opacity-80 uppercase">Safely Traveled across California</p>
                </div>
             </div>
@@ -94,9 +94,9 @@ export default function About() {
 
 
       {/* CTA */}
-      <section className="py-24 bg-[var(--primary)] text-white text-center">
+      <section className="py-12 bg-[var(--primary)] text-white text-center">
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 max-w-4xl space-y-8">
-          <h2 className="text-4xl md:text-5xl font-black">Ready to Partner With Us?</h2>
+          <h2 className="text-3xl md:text-2xl font-black">Ready to Partner With Us?</h2>
           <p className="text-xl font-medium opacity-90">
             Join the hundreds of contractors who trust FortyNinerTrucking for their logistical needs.
           </p>

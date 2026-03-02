@@ -15,7 +15,7 @@ export default function Fleet() {
       <Navbar />
 
       {/* Modern Fleet Hero */}
-      <section className="relative min-h-[85vh] w-full overflow-hidden py-16 mt-[72px] lg:mt-[112px]">
+      <section className="relative min-h-[85vh] w-full overflow-hidden py-12 mt-[72px] lg:mt-[112px]">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
            <img 
@@ -85,7 +85,7 @@ export default function Fleet() {
       </section>
 
       {/* Fleet Categories */}
-      <section className="py-24 bg-[var(--surface-2)] relative overflow-hidden">
+      <section className="py-12 bg-[var(--surface-2)] relative overflow-hidden">
         {/* Abstract shapes */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--primary)]/5 rounded-full blur-[120px] -mr-40 -mt-40 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[var(--border)]/50 rounded-full blur-[120px] -ml-40 -mb-40 pointer-events-none" />
@@ -94,7 +94,7 @@ export default function Fleet() {
            <div className="flex flex-col items-center justify-center text-center space-y-6 mb-16">
              <div className="space-y-4">
                 <h2 className="text-[var(--primary)] font-bold tracking-widest uppercase text-sm">Truck Types Available</h2>
-                <h3 className="text-4xl md:text-5xl font-black text-[var(--text)] tracking-tight">Our Specialized Fleet</h3>
+                <h3 className="text-3xl md:text-2xl font-black text-[var(--text)] tracking-tight">Our Specialized Fleet</h3>
                 <p className="text-[var(--text-muted)] max-w-2xl mx-auto text-lg leading-relaxed mt-4">
                   From tight urban job sites to massive infrastructure projects, our diverse inventory of heavy-duty trucks ensures you have the exact equipment needed to maximize payload efficiency and minimize downtime.
                 </p>
@@ -128,13 +128,13 @@ export default function Fleet() {
       </section>
 
       {/* Fleet Maintenance & Reliability Section */}
-      <section className="py-24 bg-white border-t border-[var(--border)]">
+      <section className="py-12 bg-white border-t border-[var(--border)]">
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
                 <h2 className="text-[var(--primary)] font-bold tracking-widest uppercase text-sm">Uncompromising Standards</h2>
-                <h3 className="text-3xl md:text-5xl font-black text-[var(--text)] tracking-tight leading-[1.1]">
+                <h3 className="text-2xl md:text-2xl font-black text-[var(--text)] tracking-tight leading-[1.1]">
                   Maintained for <br/> Absolute Reliability
                 </h3>
               </div>
@@ -185,9 +185,9 @@ export default function Fleet() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-[var(--primary)] text-white text-center px-4 md:px-8">
+      <section className="py-12 bg-[var(--primary)] text-white text-center px-4 md:px-8">
         <div className="max-w-3xl mx-auto space-y-8">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight">Need specific equipment for your next project?</h2>
+          <h2 className="text-3xl md:text-2xl font-black tracking-tight">Need specific equipment for your next project?</h2>
           <p className="text-xl text-white/80 font-medium max-w-2xl mx-auto">
             Our dispatch team is ready to match the right trucks to your material requirements and job site constraints.
           </p>
