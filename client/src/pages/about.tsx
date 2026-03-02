@@ -5,6 +5,9 @@ import { Link } from "wouter";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
+import heroImage1 from "@/assets/a2a02ae8-e30d-4a34-ad88-64598b4c945f_1772219729261.jpeg";
+import heroImage2 from "@/assets/867d8163-e94d-4056-b575-856aa6f68ace_1772219729261.jpeg";
+
 export default function About() {
   return (
     <div className="min-h-screen bg-[var(--surface-2)] text-[var(--text)] font-sans">
@@ -14,9 +17,9 @@ export default function About() {
       <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden mt-0">
         <div className="absolute inset-0 z-0">
            <img 
-             src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" 
+             src={heroImage1} 
              alt="About Us Hero" 
-             className="w-full h-full object-cover"
+             className="w-full h-full object-cover object-[center_25%]"
            />
            <div className="absolute inset-0 bg-black/50 z-10" />
         </div>
@@ -76,7 +79,7 @@ export default function About() {
             
             <div className="relative h-[600px] bg-[var(--border)] rounded-lg overflow-hidden">
                <img 
-                 src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop" 
+                 src={heroImage2} 
                  className="absolute inset-0 w-full h-full object-cover"
                />
                <div className="absolute inset-0 bg-[var(--primary)]/10 mix-blend-multiply" />
