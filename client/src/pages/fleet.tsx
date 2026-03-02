@@ -42,12 +42,7 @@ export default function Fleet() {
               Power. Precision. Performance.
             </div>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.1] tracking-tight">
-              The Heavy-Duty <br/>
-              <span className="text-[var(--primary)]">Powerhouse</span>
-            </h1>
-            
-            <p className="text-[var(--text-muted)] font-light leading-relaxed text-lg md:text-xl max-w-[600px]">
+            <p className="text-[var(--text-muted)] font-light leading-relaxed text-lg md:text-xl max-w-[600px] pt-4">
               When the job demands serious muscle, Forty Niner Trucking delivers. Our state-of-the-art, meticulously maintained fleet is engineered to handle California’s toughest construction and logistics challenges with uncompromising reliability.
             </p>
 
