@@ -17,7 +17,7 @@ export default function Footer() {
       {/* Abstract Background Element */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--primary)]/5 rounded-full blur-[100px] -mr-32 -mt-32 opacity-50 pointer-events-none" />
 
-      <div className="w-full  mx-auto px-4 md:px-1 relative z-10 footer-css">
+      <div className="w-full mx-auto relative z-10 footer-css" style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-6">
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-6">
