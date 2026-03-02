@@ -22,6 +22,8 @@ import {
 import { TruckLoader } from "@/components/TruckLoader";
 import { Logo } from "@/components/Logo";
 
+import heroImage1 from "@/assets/a2a02ae8-e30d-4a34-ad88-64598b4c945f_1772219729261.jpeg";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -182,9 +184,9 @@ export default function Login() {
         <div className="hidden md:block relative bg-[var(--border)]">
           <div className="absolute inset-0">
             <img 
-              src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=3270&auto=format&fit=crop"
+              src={heroImage1}
               alt="Login Visual"
-              className="w-full h-full object-cover opacity-5 mix-blend-multiply"
+              className="w-full h-full object-cover opacity-20 mix-blend-multiply"
             />
           </div>
           <div className="relative h-full flex flex-col justify-between p-12 text-[var(--text)]">

@@ -185,21 +185,21 @@ export default function Home() {
                  title: "Construction Hauling", 
                  subtitle: "Aggregates & Materials",
                  desc: "Reliable transport of sand, gravel, rock, and asphalt for projects of any scale.",
-                 image: "https://images.unsplash.com/photo-1617135002770-65c7f9392943?q=80&w=2940&auto=format&fit=crop",
+                 image: heroImage2,
                  icon: Truck
                },
                { 
                  title: "Heavy Equipment", 
                  subtitle: "Specialized Transport",
                  desc: "Low-bed and flatbed services for moving excavators, dozers, and heavy machinery.",
-                 image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop",
+                 image: heroImage3,
                  icon: HardHat
                },
                { 
                  title: "Site Services", 
                  subtitle: "Clearing & Grading",
                  desc: "Comprehensive site preparation support including debris removal and grading.",
-                 image: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop",
+                 image: heroImage4,
                  icon: Scale
                }
              ].map((service, i) => (

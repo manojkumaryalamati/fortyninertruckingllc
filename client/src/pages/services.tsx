@@ -5,18 +5,21 @@ import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { motion } from "framer-motion";
 
+import heroImage3 from "@/assets/2901750e-cf47-4cc3-af40-fe476f6840bc_1772219729261.jpeg";
+import heroImage4 from "@/assets/d04ae16f-4942-46fc-bb1d-ac0c5740543c_1772219729261.jpeg";
+
 export default function Services() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden flex items-center justify-center">
+      <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden flex items-center justify-center mt-[72px] lg:mt-[112px]">
         <div className="absolute inset-0 z-0">
            <img 
-             src="https://images.unsplash.com/photo-1590496793907-71876d7dd545?q=80&w=2800&auto=format&fit=crop" 
+             src={heroImage3} 
              alt="Services Hero" 
-             className="w-full h-full object-cover opacity-60"
+             className="w-full h-full object-cover object-[center_25%] opacity-60"
            />
            <div className="absolute inset-0 bg-black/60 z-10" />
         </div>
@@ -122,7 +125,7 @@ export default function Services() {
                <div className="relative">
                  <div className="absolute -inset-4 bg-[var(--primary)]/10 rounded-3xl blur-2xl opacity-50" />
                  <img 
-                   src="https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2940&auto=format&fit=crop" 
+                   src={heroImage4} 
                    className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/50" 
                    alt="Dump Truck" 
                  />
