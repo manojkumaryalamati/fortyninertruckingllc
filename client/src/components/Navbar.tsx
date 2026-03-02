@@ -87,7 +87,7 @@ export function Navbar() {
                   relative px-3 py-2 rounded-full cursor-pointer transition-all duration-300 group
                   ${linkClasses(item.href)}
                 `}>
-                  <span className="text-sm tracking-wide uppercase font-semibold">{item.name}</span>
+                  <span className="text-sm tracking-wide font-semibold">{item.name}</span>
                   {location === item.href && (
                     <motion.div
                       layoutId="nav-pill"
