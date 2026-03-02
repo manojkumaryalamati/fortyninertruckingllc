@@ -25,43 +25,43 @@ export default function Fleet() {
            />
         </div>
 
-        <div className="relative z-20 h-full w-full max-w-[1200px] mx-auto px-4 flex flex-col justify-center items-start">
+        <div className="relative z-20 h-full w-full max-w-[1200px] mx-auto px-4 flex flex-col justify-center items-center text-center">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="w-full max-w-[800px] space-y-8 bg-white/85 backdrop-blur-md p-8 md:p-12 rounded-[2rem] border border-white/50 shadow-2xl"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-full max-w-4xl mx-auto space-y-8"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 border border-black/10 text-[var(--text)] text-sm font-bold tracking-wider uppercase mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/20 backdrop-blur-sm text-white text-sm font-bold tracking-wider uppercase mb-4 shadow-lg">
               <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse"></span>
               Power. Precision. Performance.
             </div>
             
-            <p className="text-[var(--text-muted)] font-light leading-relaxed text-lg md:text-xl max-w-[600px] pt-4">
+            <p className="text-xl md:text-2xl lg:text-3xl text-white font-bold max-w-3xl mx-auto leading-relaxed drop-shadow-xl" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
               When the job demands serious muscle, Forty Niner Trucking delivers. Our state-of-the-art, meticulously maintained fleet is engineered to handle California’s toughest construction and logistics challenges with uncompromising reliability.
             </p>
 
-            <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-black/10 max-w-3xl">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[var(--primary)] font-bold">
-                  <Shield size={20} />
-                  <span>Safety First</span>
+            <div className="flex flex-wrap justify-center items-center gap-8 pt-8 max-w-3xl mx-auto">
+              <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
+                <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                  <Shield size={24} />
+                  <span className="text-white">Safety First</span>
                 </div>
-                <p className="text-sm text-[var(--text-muted)]">Advanced safety systems</p>
+                <p className="text-base text-white/90 font-medium">Advanced safety systems</p>
               </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[var(--primary)] font-bold">
-                  <Gauge size={20} />
-                  <span>CARB Compliant</span>
+              <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
+                <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                  <Gauge size={24} />
+                  <span className="text-white">CARB Compliant</span>
                 </div>
-                <p className="text-sm text-[var(--text-muted)]">Eco-friendly & green fleet</p>
+                <p className="text-base text-white/90 font-medium">Eco-friendly & green fleet</p>
               </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[var(--primary)] font-bold">
-                  <Award size={20} />
-                  <span>Well Maintained</span>
+              <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
+                <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                  <Award size={24} />
+                  <span className="text-white">Well Maintained</span>
                 </div>
-                <p className="text-sm text-[var(--text-muted)]">Rigorous service schedule</p>
+                <p className="text-base text-white/90 font-medium">Rigorous service schedule</p>
               </div>
             </div>
           </motion.div>
