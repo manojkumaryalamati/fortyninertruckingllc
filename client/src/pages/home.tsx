@@ -52,21 +52,6 @@ export default function Home() {
           {/* Very light gradient overlay just at the bottom to ensure buttons are readable without a solid dark box */}
           <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent z-10" />
           
-          {/* Navigation Controls */}
-          <div className="absolute inset-0 z-20 flex items-center justify-between px-4 md:px-12 pointer-events-none">
-            <button 
-              onClick={prevImage}
-              className="pointer-events-auto h-12 w-12 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm transition-all border border-white/20"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button 
-              onClick={nextImage}
-              className="pointer-events-auto h-12 w-12 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm transition-all border border-white/20"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
         </div>
 
         {/* Hero Content */}
