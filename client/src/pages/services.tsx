@@ -19,9 +19,8 @@ export default function Services() {
            <img 
              src={heroImage3} 
              alt="Services Hero" 
-             className="w-full h-full object-cover object-[20%_center] md:object-[center_25%] opacity-60"
+             className="w-full h-full object-cover object-[20%_center] md:object-[center_25%]"
            />
-           <div className="absolute inset-0 bg-black/60 z-10" />
         </div>
         
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 text-center space-y-10">
@@ -29,14 +28,14 @@ export default function Services() {
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.6 }}
-             className="space-y-8"
+             className="space-y-8 bg-black/40 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none p-6 md:p-0 rounded-2xl md:rounded-none inline-block max-w-4xl"
            >
-             <h2 className="text-[var(--primary)] font-bold tracking-widest text-sm mb-6">Our Expertise</h2>
-             <h1 className="text-2xl md:text-3xl lg:text-2xl font-black tracking-tighter text-white leading-none mb-8">
+             <h2 className="text-[var(--primary)] font-bold tracking-widest text-sm mb-6" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>Our Expertise</h2>
+             <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter text-white leading-none mb-8" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
               Specialized <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-orange-400">Hauling Solutions</span>
+              <span className="text-[var(--primary)]">Hauling Solutions</span>
              </h1>
-             <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed mt-8">
+             <p className="text-xl text-white font-medium max-w-2xl mx-auto leading-relaxed mt-8" style={{ textShadow: '0 2px 6px rgba(0,0,0,0.8)' }}>
                Comprehensive logistics and transport services tailored for the modern construction industry.
              </p>
            </motion.div>
