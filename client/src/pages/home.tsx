@@ -46,7 +46,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover object-[70%_center] md:object-[center_25%]"
+              className="absolute inset-0 w-full h-full object-cover object-[20%_center] md:object-[center_25%]"
             />
           </AnimatePresence>
           {/* Very light gradient overlay just at the bottom to ensure buttons are readable without a solid dark box */}

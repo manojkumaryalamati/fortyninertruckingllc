@@ -21,7 +21,7 @@ export default function Fleet() {
            <img 
              src={heroImage1} 
              alt="Fleet Hero" 
-             className="w-full h-full object-cover object-[70%_center] md:object-[center_35%]"
+             className="w-full h-full object-cover object-[20%_center] md:object-[center_35%]"
            />
         </div>
 
