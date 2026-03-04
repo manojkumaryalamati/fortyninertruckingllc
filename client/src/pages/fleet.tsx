@@ -30,12 +30,16 @@ export default function Fleet() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full max-w-4xl mx-auto"
+            className="w-full max-w-4xl mx-auto space-y-6"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/20 backdrop-blur-sm text-white text-sm font-bold tracking-wider uppercase shadow-lg">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 text-white text-xs md:text-sm font-bold tracking-wider uppercase">
               <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse"></span>
               Power. Precision. Performance.
             </div>
+            
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-[1.1] tracking-tight">
+              Our Specialized <span className="text-[var(--primary)]">Fleet</span>
+            </h1>
           </motion.div>
         </div>
 
@@ -43,29 +47,20 @@ export default function Fleet() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="absolute bottom-24 left-0 right-0 z-20 px-4 w-full"
+          className="absolute bottom-8 left-0 right-0 z-20 px-4 w-full"
         >
-          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 max-w-4xl mx-auto">
-            <div className="space-y-2  p-4 rounded-xl border border-white/10 w-full sm:w-auto">
-              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg">
-                <Shield size={24} />
-                <span className="text-white">Safety First</span>
-              </div>
-              <p className="text-base text-white/90 font-medium text-center">Advanced safety systems</p>
+          <div className="flex flex-row justify-center items-center gap-6 md:gap-12 max-w-4xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center gap-2">
+              <Shield size={20} className="text-[var(--primary)]" />
+              <span className="text-white font-bold text-xs md:text-sm text-center">Safety First</span>
             </div>
-            <div className="space-y-2  p-4 rounded-xl border border-white/10 w-full sm:w-auto">
-              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg">
-                <Gauge size={24} />
-                <span className="text-white">CARB Compliant</span>
-              </div>
-              <p className="text-base text-white/90 font-medium text-center">Eco-friendly & green fleet</p>
+            <div className="flex flex-col md:flex-row items-center gap-2">
+              <Gauge size={20} className="text-[var(--primary)]" />
+              <span className="text-white font-bold text-xs md:text-sm text-center">CARB Compliant</span>
             </div>
-            <div className="space-y-2  p-4 rounded-xl border border-white/10 w-full sm:w-auto">
-              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg">
-                <Award size={24} />
-                <span className="text-white">Well Maintained</span>
-              </div>
-              <p className="text-base text-white/90 font-medium text-center">Rigorous service schedule</p>
+            <div className="flex flex-col md:flex-row items-center gap-2">
+              <Award size={20} className="text-[var(--primary)]" />
+              <span className="text-white font-bold text-xs md:text-sm text-center">Well Maintained</span>
             </div>
           </div>
         </motion.div>
