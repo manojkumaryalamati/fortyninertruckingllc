@@ -15,7 +15,7 @@ export default function Fleet() {
       <Navbar />
 
       {/* Modern Fleet Hero */}
-      <section className="relative min-h-[65vh] md:min-h-[85vh] w-full overflow-hidden py-12 mt-[72px] lg:mt-[112px]">
+      <section className="relative min-h-[40vh] md:min-h-[85vh] w-full overflow-hidden py-12 mt-[72px] lg:mt-[112px]">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
            <img 
