@@ -126,7 +126,7 @@ export default function Services() {
                  <div className="absolute -inset-4 bg-[var(--primary)]/10 rounded-3xl blur-2xl opacity-50" />
                  <img 
                    src={heroImage4} 
-                   className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl border border-white/50" 
+                   className="relative rounded-3xl w-full h-[500px] object-cover object-[25%_center] md:object-center shadow-2xl border border-white/50" 
                    alt="Dump Truck" 
                  />
                  <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl border border-[var(--border)] shadow-xl hidden lg:block">
