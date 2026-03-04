@@ -34,7 +34,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-[450px] h-[65vh] md:h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px] lg:h-[calc(100vh-112px)] lg:mt-[112px]">
+      <section className="relative min-h-[350px] h-[45vh] md:min-h-[500px] md:h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px] lg:h-[calc(100vh-112px)] lg:mt-[112px]">
         {/* Background Image Carousel */}
         <div className="absolute inset-0 z-0 bg-white">
           <AnimatePresence mode="popLayout">
