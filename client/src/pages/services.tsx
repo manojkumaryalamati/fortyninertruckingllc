@@ -19,7 +19,7 @@ export default function Services() {
            <img 
              src={heroImage3} 
              alt="Services Hero" 
-             className="w-full h-full object-cover object-[70%_center] md:object-[center_25%] opacity-60"
+             className="w-full h-full object-cover object-[20%_center] md:object-[center_25%] opacity-60"
            />
            <div className="absolute inset-0 bg-black/60 z-10" />
         </div>

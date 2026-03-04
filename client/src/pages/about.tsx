@@ -19,7 +19,7 @@ export default function About() {
            <img 
              src={heroImage1} 
              alt="About Us Hero" 
-             className="w-full h-full object-cover object-[70%_center] md:object-[center_25%]"
+             className="w-full h-full object-cover object-[20%_center] md:object-[center_25%]"
            />
            <div className="absolute inset-0 bg-black/50 z-10" />
         </div>
