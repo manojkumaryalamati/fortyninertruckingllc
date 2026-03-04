@@ -159,15 +159,15 @@ export default function Fleet() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-[var(--primary)] text-white text-center px-4 md:px-8">
+      <section className="py-16 md:py-24 bg-[var(--surface-2)] text-[var(--text)] text-center px-4 md:px-8">
         <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
           <h2 className="text-2xl md:text-3xl font-black tracking-tight leading-tight">Need specific equipment for your next project?</h2>
-          <p className="text-base md:text-xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-xl text-[var(--text-muted)] font-medium max-w-2xl mx-auto leading-relaxed">
             Our dispatch team is ready to match the right trucks to your material requirements and job site constraints.
           </p>
           <div className="pt-6 md:pt-8">
             <Link href="/contact">
-              <Button className="h-12 md:h-14 px-8 md:px-10 text-sm md:text-lg font-bold uppercase tracking-widest bg-[var(--text)] hover:bg-[var(--surface-2)] text-white rounded-none border-none">
+              <Button className="h-12 md:h-14 px-8 md:px-10 text-sm md:text-lg font-bold uppercase tracking-widest bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white rounded-none border-none">
                 Request Fleet Availability
               </Button>
             </Link>
