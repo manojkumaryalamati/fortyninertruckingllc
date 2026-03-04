@@ -79,12 +79,12 @@ export default function Home() {
           className="absolute bottom-16 left-4 right-4 sm:left-auto sm:right-12 z-20 flex flex-col sm:flex-row items-center gap-4"
         >
           <Link href="/services" className="w-full sm:w-auto">
-            <Button variant="outline" className="w-full sm:w-auto h-12 px-8 text-base font-bold tracking-wide border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white bg-white/90 backdrop-blur-sm rounded-full min-w-[160px] shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <Button variant="outline" className="w-full sm:w-auto h-10 px-6 text-sm md:h-12 md:px-8 md:text-base font-bold tracking-wide border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white bg-white/90 backdrop-blur-sm rounded-full min-w-[140px] md:min-w-[160px] shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               Our Services
             </Button>
           </Link>
           <Link href="/contact" className="w-full sm:w-auto">
-            <Button className="w-full sm:w-auto h-12 px-8 text-base font-bold tracking-wide bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white rounded-full min-w-[160px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <Button className="w-full sm:w-auto h-10 px-6 text-sm md:h-12 md:px-8 md:text-base font-bold tracking-wide bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white rounded-full min-w-[140px] md:min-w-[160px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               Get A Quote
             </Button>
           </Link>
