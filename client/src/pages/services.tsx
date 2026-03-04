@@ -14,12 +14,12 @@ export default function Services() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[400px] w-full overflow-hidden flex items-center justify-center mt-[72px] lg:mt-[112px]">
+      <section className="relative h-[55vh] md:h-[70vh] min-h-[400px] w-full overflow-hidden flex items-center justify-center mt-[72px] lg:mt-[112px]">
         <div className="absolute inset-0 z-0">
            <img 
              src={heroImage3} 
              alt="Services Hero" 
-             className="w-full h-full object-cover object-[center_25%] opacity-60"
+             className="w-full h-full object-cover object-[70%_center] md:object-[center_25%] opacity-60"
            />
            <div className="absolute inset-0 bg-black/60 z-10" />
         </div>

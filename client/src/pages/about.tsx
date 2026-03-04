@@ -14,12 +14,12 @@ export default function About() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[400px] w-full overflow-hidden mt-0">
+      <section className="relative h-[55vh] md:h-[70vh] min-h-[400px] w-full overflow-hidden mt-0">
         <div className="absolute inset-0 z-0">
            <img 
              src={heroImage1} 
              alt="About Us Hero" 
-             className="w-full h-full object-cover object-[center_25%]"
+             className="w-full h-full object-cover object-[70%_center] md:object-[center_25%]"
            />
            <div className="absolute inset-0 bg-black/50 z-10" />
         </div>

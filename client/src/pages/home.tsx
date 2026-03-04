@@ -34,7 +34,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-[400px] h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px] lg:h-[calc(100vh-112px)] lg:mt-[112px]">
+      <section className="relative min-h-[450px] h-[65vh] md:h-[calc(100vh-72px)] w-full overflow-hidden mt-[72px] lg:h-[calc(100vh-112px)] lg:mt-[112px]">
         {/* Background Image Carousel */}
         <div className="absolute inset-0 z-0 bg-white">
           <AnimatePresence mode="popLayout">
@@ -46,7 +46,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover object-[center_25%]"
+              className="absolute inset-0 w-full h-full object-cover object-[70%_center] md:object-[center_25%]"
             />
           </AnimatePresence>
           {/* Very light gradient overlay just at the bottom to ensure buttons are readable without a solid dark box */}
@@ -77,7 +77,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto space-y-8"
           >
-            <h1 className="text-2xl md:text-3xl lg:text-2xl font-black text-white leading-[1.1] tracking-tight text-shadow-sm">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-[1.1] tracking-tight text-shadow-sm">
               The <span className="text-[var(--primary)]">Standard</span> in Hauling
             </h1>
             <p className="text-base md:text-xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
