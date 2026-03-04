@@ -21,18 +21,18 @@ export default function About() {
              alt="About Us Hero" 
              className="w-full h-full object-cover object-[20%_center] md:object-[center_25%]"
            />
-           <div className="absolute inset-0 bg-black/50 z-10" />
+           
         </div>
 
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
           <div className="max-w-3xl space-y-10">
-            <h1 className="text-2xl md:text-3xl lg:text-2xl font-black tracking-tighter text-white leading-[0.9]">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter text-white leading-[0.9]">
               Driving <br />
               <span className="text-[var(--primary)]">Excellence</span> <br />
               in Hauling
             </h1>
             <div className="h-1 w-24 bg-[var(--primary)] my-8" />
-            <p className="text-xl text-white/90 leading-relaxed max-w-xl font-medium mt-8">
+            <p className="text-xl text-white font-medium leading-relaxed max-w-xl mt-8">
               FortyNinerTrucking LLC is your strategic partner in logistics, delivering safety and reliability since inception.
             </p>
           </div>

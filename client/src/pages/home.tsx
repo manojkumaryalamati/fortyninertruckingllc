@@ -50,7 +50,7 @@ export default function Home() {
             />
           </AnimatePresence>
           {/* Very light gradient overlay just at the bottom to ensure buttons are readable without a solid dark box */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent z-10" />
+          
           
         </div>
 
@@ -62,10 +62,10 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto space-y-8"
           >
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-[1.1] tracking-tight text-shadow-sm">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-[1.1] tracking-tight">
               The <span className="text-[var(--primary)]">Standard</span> in Hauling
             </h1>
-            <p className="text-base md:text-xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+            <p className="text-base md:text-xl text-white font-medium max-w-2xl mx-auto leading-relaxed">
               California's premier partner for construction logistics and material transport.
             </p>
           </motion.div>

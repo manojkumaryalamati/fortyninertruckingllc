@@ -46,22 +46,22 @@ export default function Fleet() {
           className="absolute bottom-24 left-0 right-0 z-20 px-4 w-full"
         >
           <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 max-w-4xl mx-auto">
-            <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10 w-full sm:w-auto">
-              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+            <div className="space-y-2  p-4 rounded-xl border border-white/10 w-full sm:w-auto">
+              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg">
                 <Shield size={24} />
                 <span className="text-white">Safety First</span>
               </div>
               <p className="text-base text-white/90 font-medium text-center">Advanced safety systems</p>
             </div>
-            <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10 w-full sm:w-auto">
-              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+            <div className="space-y-2  p-4 rounded-xl border border-white/10 w-full sm:w-auto">
+              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg">
                 <Gauge size={24} />
                 <span className="text-white">CARB Compliant</span>
               </div>
               <p className="text-base text-white/90 font-medium text-center">Eco-friendly & green fleet</p>
             </div>
-            <div className="space-y-2 bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10 w-full sm:w-auto">
-              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+            <div className="space-y-2  p-4 rounded-xl border border-white/10 w-full sm:w-auto">
+              <div className="flex items-center justify-center gap-2 text-[var(--primary)] font-bold text-lg">
                 <Award size={24} />
                 <span className="text-white">Well Maintained</span>
               </div>
