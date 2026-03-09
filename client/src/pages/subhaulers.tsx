@@ -109,6 +109,25 @@ export default function Subhaulers() {
                  </Card>
                ))}
             </div>
+
+            <div className="pt-8">
+              <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="h-12 w-12 rounded-full bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0">
+                    <ShieldCheck size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[var(--text)]">Subhauler Agreement</h3>
+                    <p className="text-sm text-[var(--text-muted)]">Download our complete terms and conditions.</p>
+                  </div>
+                </div>
+                <Button asChild variant="outline" className="shrink-0 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white rounded-full">
+                  <a href="/src/assets/fortyNinerTruckingSubhauler.pdf" target="_blank" rel="noopener noreferrer">
+                    View Document
+                  </a>
+                </Button>
+              </div>
+            </div>
           </div>
 
           <Card className="border-none shadow-xl bg-white border border-[var(--border)]">
