@@ -88,7 +88,7 @@ export function Navbar() {
                 </Link>
               </div>
 
-              <div className="hidden xl:flex items-center justify-center flex-1 px-2">
+              <div className="hidden lg:flex items-center justify-center flex-1 px-2">
                 <div className="flex items-center gap-1 rounded-full border border-[var(--border)] bg-[var(--surface-2)]/80 p-1.5">
                   {navLinks.map((item) => (
                     <Link key={item.name} href={item.href}>
@@ -111,7 +111,7 @@ export function Navbar() {
                 </div>
               </div>
 
-              <div className="hidden lg:flex items-center gap-2 xl:gap-3">
+              <div className="hidden xl:flex items-center gap-2 xl:gap-3">
                 <Link href="/login">
                   <Button
                     data-testid="button-admin-portal-nav"
