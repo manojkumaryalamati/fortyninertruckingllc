@@ -1,0 +1,63 @@
+You are a senior frontend engineer. Fix alignment and spacing issues across my trucking website UI (desktop + mobile).
+
+Problem seen in UI:
+- Top contact bar + main navbar spacing looks off (too much vertical space / uneven padding).
+- Logo + menu items are not vertically aligned.
+- Hero section text (“Power & Precision”) is oversized / misaligned and overlaps badly on smaller screens.
+- Content has extra left/right gaps and sometimes horizontal overflow.
+- Need clean consistent spacing (8/16/24/32px rhythm), centered container, and responsive typography.
+
+Your tasks:
+1) Inspect the layout files and identify where header/hero is defined.
+   - Find components/sections for TopBar, Navbar/Header, Hero.
+   - Find CSS/SCSS/Tailwind files controlling spacing.
+
+2) Fix global layout issues:
+   - Ensure `html, body { margin:0; padding:0; }`
+   - Add `* { box-sizing: border-box; }`
+   - Remove any `width: 100vw` causing horizontal scroll; replace with `width: 100%`.
+   - Ensure container max-width + centered:
+     - `.container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }`
+
+3) Header + TopBar alignment:
+   - Use flexbox for vertical centering:
+     - TopBar: `display:flex; align-items:center; justify-content:space-between; gap:12px; padding: 8px 16px;`
+     - Navbar: `display:flex; align-items:center; justify-content:space-between; height:72px;`
+   - Make menu spacing consistent:
+     - `nav ul { display:flex; gap:24px; align-items:center; }`
+   - Fix logo sizing so it doesn’t push layout:
+     - `img { max-height: 44px; width:auto; }`
+   - Make header sticky (optional) without jumping:
+     - `position: sticky; top: 0; z-index: 50; background: #fff;`
+
+4) Hero section fixes (most important):
+   - Ensure hero background image covers and centers:
+     - `background-size: cover; background-position: center;`
+   - Add overlay gradient for readability:
+     - `::before { content:""; position:absolute; inset:0; background: linear-gradient(90deg, rgba(0,0,0,.70), rgba(0,0,0,.20)); }`
+   - Put hero text inside a max-width container and align left:
+     - `display:flex; align-items:center;`
+   - Make title responsive using clamp (avoid huge overflow):
+     - `h1 { font-size: clamp(40px, 6vw, 92px); line-height: 1.05; }`
+     - `h1 .accent { color: #d11b2d; }`
+   - Fix paragraph width:
+     - `p { max-width: 560px; font-size: clamp(16px, 2vw, 20px); }`
+   - Ensure hero min-height and padding:
+     - `min-height: 70vh; padding: 64px 0; position: relative; overflow: hidden;`
+
+5) Feature icons row inside hero:
+   - Align items and spacing:
+     - `display:flex; gap:24px; flex-wrap:wrap; align-items:center;`
+   - On mobile stack them:
+     - `@media (max-width: 768px) { flex-direction: column; align-items:flex-start; }`
+
+6) Mobile & tablet responsiveness:
+   - Add breakpoints for header menu collapsing:
+     - At <= 1024px reduce nav gaps and font sizes.
+     - At <= 768px convert navbar to hamburger or stacked menu.
+   - Ensure no horizontal scrolling on any breakpoint.
+
+Output requirements:
+- Show the exact files you changed + code diffs/snippets.
+- Explain briefly what caused the spacing/alignment issues and how your fix resolves them.
+- Do not ask me questions; scan the repo and implement improvements directly.
