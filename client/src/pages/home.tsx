@@ -194,28 +194,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-white">
-        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
-          <div className="rounded-[2rem] bg-[var(--text)] text-white p-8 md:p-12 grid lg:grid-cols-[1fr_auto] gap-8 items-center">
-            <div className="space-y-4 max-w-2xl">
-              <h2 className="text-3xl md:text-4xl font-black tracking-tight">Need trucks for a project, want to drive, or looking to partner as a subhauler?</h2>
-              <p className="text-white/75 text-lg leading-relaxed">We tightened the public experience around the actions that matter most so prospects can move directly into the right workflow.</p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/contact">
-                <Button data-testid="button-home-cta-contact" className="rounded-full bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90">Talk to Dispatch</Button>
-              </Link>
-              <Link href="/careers">
-                <Button data-testid="button-home-cta-careers" variant="outline" className="rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10">Driver Careers</Button>
-              </Link>
-              <Link href="/subhaulers">
-                <Button data-testid="button-home-cta-subhaulers" variant="outline" className="rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10">Subhauler Network</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
