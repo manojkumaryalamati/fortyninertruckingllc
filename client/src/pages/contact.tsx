@@ -3,13 +3,43 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Mail, MapPin, Phone, Loader2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
-// import { sendEmail } from "@/lib/email"; // Removed client-side email sending
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
+
+const contactCards = [
+  {
+    title: "Phone support",
+    subtitle: "24/7 Dispatch Availability",
+    value: "(925) 250-4605",
+    href: "tel:9252504605",
+    icon: Phone,
+  },
+  {
+    title: "Email",
+    subtitle: "Quotes, bids, and logistics coordination",
+    value: "fortyninertrucking@gmail.com",
+    href: "mailto:fortyninertrucking@gmail.com",
+    icon: Mail,
+  },
+  {
+    title: "Headquarters",
+    subtitle: "Main terminal and office",
+    value: "28 Glen Canyon Court, Pittsburg, CA 94565",
+    href: "https://maps.google.com/?q=28+Glen+Canyon+Court+Pittsburg+CA+94565",
+    icon: MapPin,
+  },
+  {
+    title: "Hours",
+    subtitle: "Dispatch support",
+    value: "24/7",
+    href: "",
+    icon: Clock,
+  },
+];
 
 export default function Contact() {
   const { toast } = useToast();
@@ -21,12 +51,12 @@ export default function Contact() {
     email: "",
     phone: "",
     subject: "Requesting a Quote",
-    message: ""
+    message: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id]: value }));
+    setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,58 +64,49 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Basic validation for required fields
       if (!formData.email || !formData.message || !formData.firstName || !formData.lastName) {
         throw new Error("Please fill in all required fields");
       }
 
       if (!isFirebaseConfigured()) {
-        console.warn("Firebase is not configured. Submission blocked.");
         toast({
           title: "Configuration Error",
           description: "Firebase environment variables are missing. Please check your setup.",
-          variant: "destructive"
+          variant: "destructive",
         });
         return;
       }
 
-      // Submission to contact_submissions collection
-      // Firestore will create the collection automatically on first write
       await addDoc(collection(db, "contact_submissions"), {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
         phone: formData.phone,
-        interestedIn: formData.subject, // Map subject field to interestedIn as requested
+        interestedIn: formData.subject,
         message: formData.message,
         status: "new",
         createdAt: serverTimestamp(),
       });
-      
-      // Note: Email notification will be handled by Firebase Functions (backend trigger)
-      // listening to the 'contact_submissions' collection.
-      
+
       toast({
         title: "Message Sent",
         description: "We've received your message and will get back to you soon.",
       });
 
-      // Clear form and show success state
       setFormData({
         firstName: "",
         lastName: "",
         email: "",
         phone: "",
         subject: "Requesting a Quote",
-        message: ""
+        message: "",
       });
       setIsSuccess(true);
     } catch (error: any) {
-      console.error("Submission error:", error);
       toast({
         title: "Submission Failed",
         description: error.message || "Failed to send message. Please try again.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -96,215 +117,138 @@ export default function Contact() {
     <div className="min-h-screen bg-white text-[var(--text)] font-sans">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-[var(--surface-2)] border-b border-[var(--border)]">
-        <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8 relative z-10">
-          <div className="max-w-4xl space-y-8">
-            <h1 className="text-2xl md:text-3xl lg:text-2xl font-bold tracking-tight text-[var(--text)] mb-8">
-              Let's Start a <br />
-              <span className="text-[var(--primary)]">Conversation.</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-[var(--text-muted)] max-w-2xl leading-relaxed mt-6">
-              Whether you need a quote for a major project or want to join our fleet, 
-              our team is ready to help you move forward.
-            </p>
-          </div>
-        </div>
-        
-        {/* Background Elements */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[var(--primary)]/5 to-transparent hidden lg:block" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--primary)]/5 rounded-full blur-3xl" />
-      </section>
+      <section className="pt-28 md:pt-36 pb-16 md:pb-20 bg-[var(--surface-2)] border-b border-[var(--border)]">
+        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
+          <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-start">
+            <div className="space-y-8 max-w-2xl">
+              <div className="space-y-4">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Contact</p>
+                <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-contact-title">
+                  Reach the team quickly, with a clearer path into quotes and dispatch.
+                </h1>
+                <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed" data-testid="text-contact-description">
+                  We tightened the contact experience for production so customers can immediately see how to call, email, visit, or submit a quote request without the oversized empty spacing from before.
+                </p>
+              </div>
 
-      <section className="py-12 bg-white relative">
-        <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-24">
-             {/* Contact Info */}
-             <div className="lg:col-span-5 space-y-16">
-               <div>
-                 <h2 className="text-2xl font-bold tracking-tight mb-8 text-[var(--text)]">Get in Touch</h2>
-                 <div className="space-y-6">
-                   <div className="flex items-start gap-4 group">
-                     <div className="h-10 w-10 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0 transition-colors group-hover:bg-[var(--primary)] group-hover:text-white">
-                       <Phone size={20} />
-                     </div>
-                     <div>
-                       <h3 className="text-base font-bold mb-1 text-[var(--text)]">Phone Support</h3>
-                       <p className="text-[var(--text-muted)] mb-1 text-sm">24/7 Dispatch Availability</p>
-                       <a href="tel:9252504605" className="text-lg font-semibold hover:text-[var(--primary)] transition-colors text-[var(--text-muted)]">(925) 250-4605</a>
-                     </div>
-                   </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {contactCards.map((card) => (
+                  <div key={card.title} className="rounded-[1.5rem] border border-[var(--border)] bg-white p-5 shadow-sm space-y-3">
+                    <div className="h-12 w-12 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] flex items-center justify-center">
+                      <card.icon size={24} />
+                    </div>
+                    <div className="space-y-1">
+                      <h2 className="text-lg font-black text-[var(--text)]">{card.title}</h2>
+                      <p className="text-sm text-[var(--text-muted)]">{card.subtitle}</p>
+                    </div>
+                    {card.href ? (
+                      <a
+                        href={card.href}
+                        target={card.href.startsWith("https") ? "_blank" : undefined}
+                        rel={card.href.startsWith("https") ? "noopener noreferrer" : undefined}
+                        className="text-sm font-semibold text-[var(--text)] hover:text-[var(--primary)] break-words"
+                        data-testid={`link-contact-${card.title.toLowerCase().replace(/\s+/g, "-")}`}
+                      >
+                        {card.value}
+                      </a>
+                    ) : (
+                      <p className="text-sm font-semibold text-[var(--text)]" data-testid="text-contact-hours">{card.value}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
 
-                   <div className="flex items-start gap-4 group">
-                     <div className="h-10 w-10 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0 transition-colors group-hover:bg-[var(--primary)] group-hover:text-white">
-                       <Mail size={20} />
-                     </div>
-                     <div>
-                       <h3 className="text-base font-bold mb-1 text-[var(--text)]">Email</h3>
-                       <p className="text-[var(--text-muted)] mb-1 text-sm">For quotes and bids</p>
-                       <a href="mailto:fortyninertrucking@gmail.com" className="text-lg font-semibold hover:text-[var(--primary)] transition-colors text-[var(--text-muted)]">fortyninertrucking@gmail.com</a>
-                     </div>
-                   </div>
+              <div className="rounded-[1.75rem] overflow-hidden border border-[var(--border)] h-[280px] relative bg-[var(--border)] shadow-sm">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.418648834645!2d-121.8988654242686!3d38.0175829719246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808560b4576394e1%3A0xc3f833777f985440!2s28%20Glen%20Canyon%20Ct%2C%20Pittsburg%2C%20CA%2094565!5e0!3m2!1sen!2sus!4v1707360000000!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="grayscale hover:grayscale-0 transition-all duration-500"
+                ></iframe>
+              </div>
+            </div>
 
-                   <div className="flex items-start gap-4 group">
-                     <div className="h-10 w-10 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0 transition-colors group-hover:bg-[var(--primary)] group-hover:text-white">
-                       <MapPin size={20} />
-                     </div>
-                     <div>
-                       <h3 className="text-base font-bold mb-1 text-[var(--text)]">Headquarters</h3>
-                       <p className="text-[var(--text-muted)] mb-1 text-sm">Main Terminal & Office</p>
-                       <address className="text-lg font-semibold not-italic text-[var(--text-muted)]">
-                         28 Glen Canyon Court<br/>
-                         Pittsburg, CA 94565
-                       </address>
-                     </div>
-                   </div>
+            <div className="bg-white rounded-[2rem] p-8 md:p-10 shadow-xl shadow-black/5 border border-[var(--border)] relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary)]/5 rounded-bl-full -mr-10 -mt-10" />
+              <div className="space-y-3 mb-8 relative z-10">
+                <h2 className="text-3xl font-black tracking-tight text-[var(--text)]">Send us a Message</h2>
+                <p className="text-[var(--text-muted)] leading-relaxed">
+                  Use the form for quotes, partnership questions, driver opportunities, or general project coordination.
+                </p>
+              </div>
 
-                   <div className="flex items-start gap-4 group">
-                     <div className="h-10 w-10 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0 transition-colors group-hover:bg-[var(--primary)] group-hover:text-white">
-                       <Clock size={20} />
-                     </div>
-                     <div>
-                       <h3 className="text-base font-bold mb-1 text-[var(--text)]">Hours of Operation</h3>
-                       <p className="text-[var(--text-muted)] mb-1 text-sm">Office Hours</p>
-                       <p className="text-lg font-semibold text-[var(--text-muted)]">24/7</p>
-                       <p className="text-[var(--text-muted)] mt-1 text-sm">Dispatch available 24/7</p>
-                     </div>
-                   </div>
-                 </div>
-               </div>
+              {isSuccess ? (
+                <div className="relative z-10 flex flex-col items-center justify-center py-16 text-center space-y-6">
+                  <div className="h-20 w-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
+                    <CheckCircle2 className="w-10 h-10" />
+                  </div>
+                  <h3 className="text-2xl font-black text-[var(--text)]">Message Sent Successfully</h3>
+                  <p className="text-[var(--text-muted)] max-w-md">
+                    Thank you for contacting Forty Niner Trucking. We have received your message and will be in touch shortly.
+                  </p>
+                  <Button onClick={() => setIsSuccess(false)} variant="outline" data-testid="button-send-another-message" className="rounded-full border-[var(--border)] hover:bg-[var(--surface-2)]">
+                    Send Another Message
+                  </Button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName" className="text-[var(--text-muted)]">First Name</Label>
+                      <Input id="firstName" data-testid="input-contact-first-name" value={formData.firstName} onChange={handleChange} placeholder="John" className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName" className="text-[var(--text-muted)]">Last Name</Label>
+                      <Input id="lastName" data-testid="input-contact-last-name" value={formData.lastName} onChange={handleChange} placeholder="Doe" className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                    </div>
+                  </div>
 
-               {/* Map Card */}
-               <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--border)] h-[300px] relative bg-[var(--border)]">
-                 <iframe 
-                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.418648834645!2d-121.8988654242686!3d38.0175829719246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808560b4576394e1%3A0xc3f833777f985440!2s28%20Glen%20Canyon%20Ct%2C%20Pittsburg%2C%20CA%2094565!5e0!3m2!1sen!2sus!4v1707360000000!5m2!1sen!2sus" 
-                   width="100%" 
-                   height="100%" 
-                   style={{ border: 0 }} 
-                   allowFullScreen 
-                   loading="lazy" 
-                   referrerPolicy="no-referrer-when-downgrade"
-                   className="grayscale hover:grayscale-0 transition-all duration-500"
-                 ></iframe>
-               </div>
-             </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-[var(--text-muted)]">Email Address</Label>
+                      <Input id="email" type="email" data-testid="input-contact-email" value={formData.email} onChange={handleChange} placeholder="john@company.com" className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-[var(--text-muted)]">Phone Number</Label>
+                      <Input id="phone" type="tel" data-testid="input-contact-phone" value={formData.phone} onChange={handleChange} placeholder="(555) 123-4567" className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                    </div>
+                  </div>
 
-             {/* Form */}
-             <div className="lg:col-span-7">
-               <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl border border-[var(--border)] relative overflow-hidden">
-                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary)]/5 rounded-bl-full -mr-10 -mt-10" />
-                 
-                 <h3 className="text-2xl font-bold mb-8 relative z-10 text-[var(--text)]">Send us a Message</h3>
-                 
-                 {isSuccess ? (
-                   <div className="relative z-10 flex flex-col items-center justify-center py-16 text-center space-y-6">
-                     <div className="h-20 w-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
-                       <CheckCircle2 className="w-10 h-10" />
-                     </div>
-                     <h3 className="text-2xl font-bold text-[var(--text)]">Message Sent Successfully!</h3>
-                     <p className="text-[var(--text-muted)] max-w-md">
-                       Thank you for contacting FortyNinerTrucking. We have received your message and will be in touch shortly.
-                     </p>
-                     <Button 
-                       onClick={() => setIsSuccess(false)}
-                       variant="outline"
-                       className="mt-6 border-[var(--border)] hover:bg-[var(--surface-2)]"
-                     >
-                       Send Another Message
-                     </Button>
-                   </div>
-                 ) : (
-                 <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
-                   <div className="grid md:grid-cols-2 gap-8">
-                     <div className="space-y-2">
-                       <Label htmlFor="firstName" className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">First Name</Label>
-                       <Input 
-                         id="firstName" 
-                         value={formData.firstName}
-                         onChange={handleChange}
-                         placeholder="John" 
-                         className="h-14 bg-[var(--surface-2)] border-transparent focus:bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all rounded-xl text-lg px-4 text-[var(--text)] placeholder:text-[var(--text-muted)]" 
-                       />
-                     </div>
-                     <div className="space-y-2">
-                       <Label htmlFor="lastName" className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">Last Name</Label>
-                       <Input 
-                         id="lastName" 
-                         value={formData.lastName}
-                         onChange={handleChange}
-                         placeholder="Doe" 
-                         className="h-14 bg-[var(--surface-2)] border-transparent focus:bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all rounded-xl text-lg px-4 text-[var(--text)] placeholder:text-[var(--text-muted)]" 
-                       />
-                     </div>
-                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="subject" className="text-[var(--text-muted)]">I'm interested in</Label>
+                    <select id="subject" data-testid="select-contact-subject" value={formData.subject} onChange={handleChange} className="w-full h-12 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] px-3 text-sm">
+                      <option>Requesting a Quote</option>
+                      <option>Becoming a Subhauler</option>
+                      <option>Driver Opportunities</option>
+                      <option>General Inquiry</option>
+                    </select>
+                  </div>
 
-                   <div className="grid md:grid-cols-2 gap-8">
-                     <div className="space-y-2">
-                       <Label htmlFor="email" className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">Email Address</Label>
-                       <Input 
-                         id="email" 
-                         type="email" 
-                         value={formData.email}
-                         onChange={handleChange}
-                         placeholder="john@company.com" 
-                         className="h-14 bg-[var(--surface-2)] border-transparent focus:bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all rounded-xl text-lg px-4 text-[var(--text)] placeholder:text-[var(--text-muted)]" 
-                       />
-                     </div>
-                     <div className="space-y-2">
-                       <Label htmlFor="phone" className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">Phone Number</Label>
-                       <Input 
-                         id="phone" 
-                         type="tel" 
-                         value={formData.phone}
-                         onChange={handleChange}
-                         placeholder="(555) 123-4567" 
-                         className="h-14 bg-[var(--surface-2)] border-transparent focus:bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all rounded-xl text-lg px-4 text-[var(--text)] placeholder:text-[var(--text-muted)]" 
-                       />
-                     </div>
-                   </div>
-                   
-                   <div className="space-y-2">
-                     <Label htmlFor="subject" className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">I'm interested in</Label>
-                     <select 
-                       id="subject"
-                       value={formData.subject}
-                       onChange={handleChange}
-                       className="w-full h-14 rounded-xl border-transparent bg-[var(--surface-2)] px-4 py-2 text-lg focus:bg-white focus:ring-2 focus:ring-[var(--primary)] focus:outline-none transition-all text-[var(--text)]"
-                     >
-                       <option>Requesting a Quote</option>
-                       <option>Becoming a Subhauler</option>
-                       <option>Driver Opportunities</option>
-                       <option>General Inquiry</option>
-                     </select>
-                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message" className="text-[var(--text-muted)]">Message</Label>
+                    <Textarea id="message" data-testid="input-contact-message" value={formData.message} onChange={handleChange} placeholder="Tell us more about your project or inquiry..." className="min-h-[180px] rounded-xl bg-[var(--surface-2)] border-[var(--border)] resize-none" />
+                  </div>
 
-                   <div className="space-y-2">
-                     <Label htmlFor="message" className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">Message</Label>
-                     <Textarea 
-                       id="message" 
-                       value={formData.message}
-                       onChange={handleChange}
-                       placeholder="Tell us more about your project or inquiry..." 
-                       className="min-h-[200px] bg-[var(--surface-2)] border-transparent focus:bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all rounded-xl text-lg p-4 resize-none text-[var(--text)] placeholder:text-[var(--text-muted)]" 
-                     />
-                   </div>
-
-                   <Button 
-                     type="submit" 
-                     disabled={isSubmitting}
-                     size="lg" 
-                     className="w-full h-16 text-lg font-bold rounded-xl shadow-lg shadow-[var(--primary)]/20 hover:shadow-[var(--primary)]/30 transition-all flex items-center justify-center gap-2"
-                   >
-                     {isSubmitting ? (
-                       <>Sending... <Loader2 className="animate-spin" size={20} /></>
-                     ) : (
-                       <>Send Message <ArrowRight size={20} /></>
-                     )}
-                   </Button>
-                 </form>
-                 )}
-               </div>
-             </div>
+                  <Button type="submit" data-testid="button-send-message" disabled={isSubmitting} className="w-full h-12 text-base font-bold rounded-full shadow-lg shadow-[var(--primary)]/20 hover:shadow-[var(--primary)]/30 transition-all flex items-center justify-center gap-2">
+                    {isSubmitting ? (
+                      <>
+                        Sending...
+                        <Loader2 className="animate-spin" size={18} />
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <ArrowRight size={18} />
+                      </>
+                    )}
+                  </Button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -312,24 +256,4 @@ export default function Contact() {
       <Footer />
     </div>
   );
-}
-
-function CheckCircle2(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="m9 12 2 2 4-4" />
-    </svg>
-  )
 }
