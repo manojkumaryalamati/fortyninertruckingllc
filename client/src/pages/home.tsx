@@ -124,7 +124,7 @@ export default function Home() {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0.15 }}
                       transition={{ duration: 0.7, ease: "easeOut" }}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-contain bg-[var(--surface-2)] p-4"
                     />
                   </AnimatePresence>
                 </div>
@@ -173,7 +173,7 @@ export default function Home() {
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 lg:gap-12 items-center">
             <div className="rounded-[2rem] overflow-hidden border border-[var(--border)] bg-white shadow-sm">
-              <img src={heroImage4} alt="Dump truck at construction site" className="w-full aspect-[4/3] object-cover" />
+              <img src={heroImage4} alt="Dump truck at construction site" className="w-full aspect-[4/3] object-contain bg-[var(--surface-2)] p-4" />
             </div>
             <div className="space-y-6">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Production-ready support</p>

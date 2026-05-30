@@ -73,7 +73,7 @@ export default function Services() {
 
             <div className="rounded-[2rem] border border-[var(--border)] bg-white p-6 md:p-7 shadow-sm">
               <div className="rounded-[1.5rem] overflow-hidden border border-[var(--border)]">
-                <img src={heroImage3} alt="Forty Niner hauling services" className="w-full aspect-[4/3] object-cover" />
+                <img src={heroImage3} alt="Forty Niner hauling services" className="w-full aspect-[4/3] object-contain bg-[var(--surface-2)] p-4" />
               </div>
               <div className="grid sm:grid-cols-2 gap-4 mt-5">
                 <div className="rounded-2xl bg-[var(--surface-2)] p-4 border border-[var(--border)]">
@@ -122,7 +122,7 @@ export default function Services() {
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-center">
             <div className="rounded-[2rem] overflow-hidden border border-[var(--border)] bg-white shadow-sm">
-              <img src={heroImage4} alt="Dump truck services" className="w-full aspect-[4/3] object-cover" />
+              <img src={heroImage4} alt="Dump truck services" className="w-full aspect-[4/3] object-contain bg-[var(--surface-2)] p-4" />
             </div>
             <div className="space-y-6">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">How we work</p>

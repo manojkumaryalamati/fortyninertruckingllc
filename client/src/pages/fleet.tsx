@@ -72,7 +72,7 @@ export default function Fleet() {
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="relative">
               <div className="absolute -inset-4 bg-[var(--primary)]/10 blur-3xl rounded-[2rem]" />
               <div className="relative rounded-[2rem] overflow-hidden border border-[var(--border)] bg-white shadow-sm">
-                <img src={heroImage1} alt="Forty Niner Trucking fleet" className="w-full aspect-[4/3] object-cover" />
+                <img src={heroImage1} alt="Forty Niner Trucking fleet" className="w-full aspect-[4/3] object-contain bg-[var(--surface-2)] p-4" />
                 <div className="grid grid-cols-2 gap-3 p-5 bg-white">
                   <div className="rounded-2xl border border-[var(--border)] p-4">
                     <ShieldCheck className="text-[var(--primary)]" size={24} />
@@ -137,7 +137,7 @@ export default function Fleet() {
             </div>
 
             <div className="rounded-[2rem] overflow-hidden border border-[var(--border)] bg-white shadow-sm">
-              <img src={heroImage2} alt="Fleet maintenance and reliability" className="w-full aspect-[4/3] object-cover" />
+              <img src={heroImage2} alt="Fleet maintenance and reliability" className="w-full aspect-[4/3] object-contain bg-[var(--surface-2)] p-4" />
               <div className="p-5 border-t border-[var(--border)] bg-white">
                 <div className="flex items-center gap-4">
                   <div className="h-12 w-12 rounded-2xl bg-[var(--text)] text-white flex items-center justify-center">
