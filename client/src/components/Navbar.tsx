@@ -12,7 +12,6 @@ const navLinks = [
   { name: "Certifications", href: "/certifications" },
   { name: "Careers", href: "/careers" },
   { name: "Subhaulers", href: "/subhaulers" },
-  { name: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
