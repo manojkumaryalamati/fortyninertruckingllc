@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
-import logoImg from "@assets/fortyninertrucking_logo_1780146058152.png";
+import logoImg from "@assets/fortyninertrucking_1780145811678.png";
 
 interface LogoProps extends HTMLAttributes<HTMLDivElement> {
   variant?: "dark" | "light";
