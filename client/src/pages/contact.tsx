@@ -123,7 +123,7 @@ export default function Contact() {
             <div className="space-y-8 max-w-2xl">
               <div className="space-y-4">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Contact</p>
-                <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-contact-title">
+                <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-contact-title">
                   Reach the team quickly, with a clearer path into quotes and dispatch.
                 </h1>
                 <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed" data-testid="text-contact-description">

@@ -72,7 +72,7 @@ export default function Home() {
                 California construction logistics
               </div>
               <div className="space-y-5 max-w-2xl">
-                <h1 className="text-4xl md:text-5xl xl:text-6xl font-black tracking-tight leading-[0.95] text-[var(--text)]" data-testid="text-home-hero-title">
+                <h1 className="text-3xl md:text-4xl xl:text-5xl font-black tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-home-hero-title">
                   The dependable hauling partner for high-demand job sites.
                 </h1>
                 <p className="text-lg md:text-xl leading-relaxed text-[var(--text-muted)] max-w-xl" data-testid="text-home-hero-description">
