@@ -39,7 +39,7 @@ export default function Footer() {
 
         <div className="mt-4 border-t border-[var(--border)] pt-3 text-sm text-[var(--text-muted)] flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
           <p data-testid="text-rights-footer">© {new Date().getFullYear()} Forty Niner Trucking LLC. All rights reserved.</p>
-          <p data-testid="text-developed-by-footer">Developed by Techtaxcorp</p>
+          <p data-testid="text-developed-by-footer" className="flex items-center gap-2 md:justify-end">Developed by Techtaxcorp <span className="text-xs">techtaxcorp@gmail.com</span></p>
         </div>
       </div>
     </footer>
