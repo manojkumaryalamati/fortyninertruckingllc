@@ -105,7 +105,7 @@ export default function Subhaulers() {
                 <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-subhaulers-title">
                   Partnership information that feels ready for serious fleet conversations.
                 </h1>
-                <p className="text-lg md:text-xl leading-relaxed text-[var(--text-muted)]" data-testid="text-subhaulers-description">
+                <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)]" data-testid="text-subhaulers-description">
                   We rebuilt this page to create a cleaner trust path for owner-operators and fleet partners looking for long-term work, clear terms, and dependable dispatch communication.
                 </p>
               </div>

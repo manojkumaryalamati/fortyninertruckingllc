@@ -112,7 +112,7 @@ export default function Careers() {
                 <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-careers-title">
                   Driver opportunities presented like a serious hiring page, not just a form.
                 </h1>
-                <p className="text-lg md:text-xl leading-relaxed text-[var(--text-muted)]" data-testid="text-careers-description">
+                <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)]" data-testid="text-careers-description">
                   We tightened the spacing, clarified the value proposition, and made the application workflow feel more production-ready for qualified CDL drivers.
                 </p>
               </div>

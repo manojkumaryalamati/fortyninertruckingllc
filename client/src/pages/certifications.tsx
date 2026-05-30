@@ -38,7 +38,7 @@ export default function Certifications() {
               <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-certifications-title">
                 Compliance credentials presented with the clarity expected in production.
               </h1>
-              <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed" data-testid="text-certifications-description">
+              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed" data-testid="text-certifications-description">
                 This page now supports trust-building more directly by surfacing certifications, permit references, and operating posture in a cleaner format that is easier for partners to scan.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
