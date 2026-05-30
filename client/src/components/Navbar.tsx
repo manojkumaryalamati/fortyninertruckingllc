@@ -5,6 +5,16 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/Logo";
 
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Fleet", href: "/fleet" },
+  { name: "Certifications", href: "/certifications" },
+  { name: "Careers", href: "/careers" },
+  { name: "Subhaulers", href: "/subhaulers" },
+  { name: "Contact", href: "/contact" },
+];
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -16,221 +26,222 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Fleet", href: "/fleet" },
-    { name: "Certifications", href: "/certifications" },
-    { name: "Careers", href: "/careers" },
-    { name: "Subhaulers", href: "/subhaulers" },
-    { name: "Contact", href: "/contact" },
-  ];
-
-  const navbarClasses = scrolled
-    ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-[var(--border)]"
-    : "bg-white border-b border-[var(--border)]";
-
-  const linkClasses = (href: string) =>
-    location === href
-      ? "text-[var(--primary)] font-bold bg-[var(--primary)]/10"
-      : "text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]";
+  const isActive = (href: string) => location === href;
 
   return (
     <>
       <div
-        className={`hidden lg:flex fixed top-0 left-0 right-0 z-[51] w-full transition-all duration-300 ${scrolled ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"} bg-[var(--surface-2)] text-[var(--text-muted)] border-b border-[var(--border)]`}
+        className={`hidden lg:block fixed top-0 left-0 right-0 z-[51] transition-all duration-300 ${scrolled ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"}`}
       >
-        <div className="w-full px-3 lg:px-8 h-10 flex justify-between items-center text-xs font-medium tracking-wide">
-          <div className="flex items-center gap-5">
-            <a
-              href="tel:9252504605"
-              data-testid="link-phone-nav"
-              className="flex items-center gap-2 hover:text-[var(--primary)] transition-colors"
-            >
-              <Phone size={14} className="text-[var(--primary)]" />
-              (925) 250-4605
-            </a>
-            <a
-              href="mailto:fortyninertrucking@gmail.com"
-              data-testid="link-email-nav"
-              className="flex items-center gap-2 hover:text-[var(--primary)] transition-colors"
-            >
-              <Mail size={14} className="text-[var(--primary)]" />
-              fortyninertrucking@gmail.com
-            </a>
-          </div>
-          <div className="flex items-center gap-5">
-            <span className="flex items-center gap-2">
-              <Clock size={14} className="text-[var(--primary)]" />
-              24/7 Dispatch
-            </span>
-            <span className="flex items-center gap-2">
-              <ShieldCheck size={14} className="text-[var(--primary)]" />
-              DBE & SB Certified
-            </span>
+        <div className="w-full max-w-[1400px] mx-auto px-4 lg:px-8 pt-3">
+          <div className="flex h-10 items-center justify-between rounded-full border border-[var(--border)]/80 bg-white/88 px-5 text-[11px] font-medium tracking-[0.16em] text-[var(--text-muted)] shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl uppercase">
+            <div className="flex items-center gap-5 tracking-normal normal-case text-xs">
+              <a
+                href="tel:9252504605"
+                data-testid="link-phone-nav"
+                className="flex items-center gap-2 transition-colors hover:text-[var(--primary)]"
+              >
+                <Phone size={14} className="text-[var(--primary)]" />
+                (925) 250-4605
+              </a>
+              <a
+                href="mailto:fortyninertrucking@gmail.com"
+                data-testid="link-email-nav"
+                className="flex items-center gap-2 transition-colors hover:text-[var(--primary)]"
+              >
+                <Mail size={14} className="text-[var(--primary)]" />
+                fortyninertrucking@gmail.com
+              </a>
+            </div>
+
+            <div className="flex items-center gap-5 tracking-normal normal-case text-xs">
+              <span className="flex items-center gap-2">
+                <Clock size={14} className="text-[var(--primary)]" />
+                24/7 Dispatch
+              </span>
+              <span className="flex items-center gap-2">
+                <ShieldCheck size={14} className="text-[var(--primary)]" />
+                DBE & SB Certified
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
       <nav
-        className={`fixed left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? "top-0" : "top-0 lg:top-10"} ${navbarClasses}`}
+        className={`fixed left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? "top-0" : "top-0 lg:top-[52px]"}`}
       >
-        <div className="w-full px-3 lg:px-8 flex items-center justify-between h-[72px]">
-          <div className="flex-shrink-0 relative h-full flex items-center">
-            <Link href="/">
-              <div
-                data-testid="link-home-logo"
-                className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center"
-              >
-                <Logo
-                  variant="dark"
-                  className={`origin-left transition-all duration-300 ${scrolled ? "w-[170px] md:w-[192px]" : "w-[180px] md:w-[216px]"}`}
-                />
-              </div>
-            </Link>
-          </div>
-
-          <div className="hidden lg:flex items-center gap-2 xl:gap-3">
-            {navLinks.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <div
-                  data-testid={`link-${item.name.toLowerCase().replace(/\s+/g, "-")}-nav`}
-                  className={`relative px-3 py-2 rounded-full cursor-pointer transition-all duration-300 group ${linkClasses(item.href)}`}
-                >
-                  <span className="text-sm tracking-wide font-semibold">{item.name}</span>
-                  {location === item.href && (
-                    <motion.div
-                      layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full border border-[var(--primary)]/50"
-                      initial={false}
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        <div className={`w-full max-w-[1400px] mx-auto px-4 lg:px-8 ${scrolled ? "py-2.5" : "py-3.5"}`}>
+          <div className="rounded-[26px] border border-black/5 bg-white/92 shadow-[0_20px_60px_rgba(15,23,42,0.1)] backdrop-blur-xl">
+            <div className={`flex items-center justify-between gap-4 px-4 lg:px-5 ${scrolled ? "h-[72px]" : "h-[78px]"}`}>
+              <div className="flex shrink-0 items-center">
+                <Link href="/">
+                  <div
+                    data-testid="link-home-logo"
+                    className="cursor-pointer transition-opacity hover:opacity-90"
+                  >
+                    <Logo
+                      variant="dark"
+                      className={`origin-left transition-all duration-300 ${scrolled ? "w-[172px] md:w-[188px]" : "w-[180px] md:w-[204px]"}`}
                     />
-                  )}
+                  </div>
+                </Link>
+              </div>
+
+              <div className="hidden xl:flex items-center justify-center flex-1 px-2">
+                <div className="flex items-center gap-1 rounded-full border border-[var(--border)] bg-[var(--surface-2)]/80 p-1.5">
+                  {navLinks.map((item) => (
+                    <Link key={item.name} href={item.href}>
+                      <div
+                        data-testid={`link-${item.name.toLowerCase().replace(/\s+/g, "-")}-nav`}
+                        className={`relative cursor-pointer rounded-full px-4 py-2.5 text-sm font-semibold tracking-wide transition-all duration-300 ${isActive(item.href) ? "text-[var(--text)]" : "text-[var(--text-muted)] hover:text-[var(--text)]"}`}
+                      >
+                        {isActive(item.href) && (
+                          <motion.div
+                            layoutId="nav-pill"
+                            className="absolute inset-0 rounded-full border border-[var(--primary)]/15 bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]"
+                            initial={false}
+                            transition={{ type: "spring", stiffness: 340, damping: 30 }}
+                          />
+                        )}
+                        <span className="relative z-10">{item.name}</span>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
 
-          <div className="hidden lg:flex items-center gap-3">
-            <Link href="/login">
-              <Button
-                data-testid="button-admin-portal-nav"
-                variant="outline"
-                className="rounded-full border-[var(--border)] bg-white text-[var(--text)] hover:bg-[var(--surface-2)]"
-              >
-                Admin Portal
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button
-                data-testid="button-request-quote-nav"
-                className="rounded-full bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90 shadow-lg shadow-[var(--primary)]/15"
-              >
-                Request a Quote
-              </Button>
-            </Link>
-          </div>
+              <div className="hidden lg:flex items-center gap-2 xl:gap-3">
+                <Link href="/login">
+                  <Button
+                    data-testid="button-admin-portal-nav"
+                    variant="outline"
+                    className="rounded-full border-[var(--border)] bg-white px-5 text-[var(--text)] shadow-sm hover:bg-[var(--surface-2)]"
+                  >
+                    Admin Portal
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button
+                    data-testid="button-request-quote-nav"
+                    className="rounded-full bg-[var(--primary)] px-5 text-white shadow-[0_14px_32px_rgba(249,115,22,0.28)] hover:bg-[var(--primary)]/90"
+                  >
+                    Contact Dispatch
+                  </Button>
+                </Link>
+              </div>
 
-          <button
-            data-testid="button-open-mobile-menu"
-            className="lg:hidden p-2 rounded-md transition-colors text-[var(--text)] hover:bg-[var(--surface-2)]"
-            onClick={() => setIsMobileMenuOpen(true)}
-          >
-            <Menu size={30} />
-          </button>
+              <button
+                data-testid="button-open-mobile-menu"
+                className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-white text-[var(--text)] shadow-sm transition-colors hover:bg-[var(--surface-2)]"
+                onClick={() => setIsMobileMenuOpen(true)}
+              >
+                <Menu size={22} />
+              </button>
+            </div>
+          </div>
         </div>
       </nav>
 
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-white text-[var(--text)] p-0 lg:hidden flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[60] bg-[rgba(15,23,42,0.36)] p-4 backdrop-blur-sm lg:hidden"
           >
-            <div className="flex justify-between items-center p-4 border-b border-[var(--border)]">
-              <div className="h-10 w-auto relative flex items-center">
-                <Logo variant="dark" className="w-[180px] origin-left" />
-              </div>
-              <button
-                data-testid="button-close-mobile-menu"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-full bg-[var(--surface-2)] hover:bg-[var(--border)] transition-colors text-[var(--text)]"
-              >
-                <X size={24} />
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-4">
-              <div className="space-y-1">
-                {navLinks.map((item, idx) => (
-                  <Link key={item.name} href={item.href}>
-                    <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.05 }}
-                      className={`text-lg font-bold tracking-wide py-3 px-4 rounded-xl cursor-pointer flex items-center justify-between group ${location === item.href ? "bg-[var(--primary)]/10 text-[var(--primary)]" : "text-[var(--text-muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]"}`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      data-testid={`link-${item.name.toLowerCase().replace(/\s+/g, "-")}-mobile-nav`}
-                    >
-                      {item.name}
-                      <span className={`transition-opacity ${location === item.href ? "opacity-100" : "opacity-0 group-hover:opacity-100"} text-[var(--primary)]`}>
-                        →
-                      </span>
-                    </motion.div>
-                  </Link>
-                ))}
-              </div>
-
-              <Link href="/login" className="mt-2">
-                <div onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button
-                    data-testid="button-admin-portal-mobile-nav"
-                    variant="outline"
-                    className="w-full h-12 text-base font-bold rounded-xl border-[var(--border)]"
-                  >
-                    Admin Portal
-                  </Button>
-                </div>
-              </Link>
-
-              <Link href="/contact" className="mt-1">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 24 }}
+              transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              className="flex h-full flex-col overflow-hidden rounded-[32px] border border-white/70 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.18)]"
+            >
+              <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
+                <Logo variant="dark" className="w-[182px] origin-left" />
+                <button
+                  data-testid="button-close-mobile-menu"
                   onClick={() => setIsMobileMenuOpen(false)}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text)] transition-colors hover:bg-white"
                 >
-                  <Button
-                    data-testid="button-get-quote-mobile-nav"
-                    className="w-full h-12 text-base font-bold bg-[var(--primary)] text-white tracking-wide rounded-xl shadow-md"
-                  >
-                    Get a Quote
-                  </Button>
-                </motion.div>
-              </Link>
-            </div>
+                  <X size={20} />
+                </button>
+              </div>
 
-            <div className="p-6 bg-[var(--surface-2)] border-t border-[var(--border)] text-center space-y-2">
-              <p className="text-[var(--text-muted)] text-sm font-medium">Need immediate assistance?</p>
-              <a
-                href="tel:9252504605"
-                data-testid="link-phone-mobile-nav"
-                className="text-xl font-black text-[var(--primary)] flex items-center justify-center gap-2"
-              >
-                <Phone size={18} />
-                (925) 250-4605
-              </a>
-              <a
-                href="mailto:fortyninertrucking@gmail.com"
-                data-testid="link-email-mobile-nav"
-                className="text-sm text-[var(--text-muted)]"
-              >
-                fortyninertrucking@gmail.com
-              </a>
-            </div>
+              <div className="flex-1 overflow-y-auto px-5 py-6">
+                <div className="space-y-2">
+                  {navLinks.map((item, idx) => (
+                    <Link key={item.name} href={item.href}>
+                      <motion.div
+                        initial={{ opacity: 0, x: 16 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.04 }}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        data-testid={`link-${item.name.toLowerCase().replace(/\s+/g, "-")}-mobile-nav`}
+                        className={`flex cursor-pointer items-center justify-between rounded-2xl px-4 py-3.5 text-base font-semibold transition-all ${isActive(item.href) ? "bg-[var(--primary)]/10 text-[var(--primary)]" : "text-[var(--text)] hover:bg-[var(--surface-2)]"}`}
+                      >
+                        <span>{item.name}</span>
+                        <span className={`text-lg transition-opacity ${isActive(item.href) ? "opacity-100" : "opacity-30"}`}>
+                          →
+                        </span>
+                      </motion.div>
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="mt-6 grid gap-3">
+                  <Link href="/contact">
+                    <div onClick={() => setIsMobileMenuOpen(false)}>
+                      <Button
+                        data-testid="button-get-quote-mobile-nav"
+                        className="h-12 w-full rounded-full bg-[var(--primary)] text-base font-semibold text-white shadow-[0_14px_32px_rgba(249,115,22,0.24)] hover:bg-[var(--primary)]/90"
+                      >
+                        Contact Dispatch
+                      </Button>
+                    </div>
+                  </Link>
+
+                  <Link href="/login">
+                    <div onClick={() => setIsMobileMenuOpen(false)}>
+                      <Button
+                        data-testid="button-admin-portal-mobile-nav"
+                        variant="outline"
+                        className="h-12 w-full rounded-full border-[var(--border)] bg-white text-base font-semibold text-[var(--text)]"
+                      >
+                        Admin Portal
+                      </Button>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="border-t border-[var(--border)] bg-[var(--surface-2)] px-5 py-5">
+                <div className="space-y-3 rounded-[24px] border border-[var(--border)] bg-white p-4">
+                  <a
+                    href="tel:9252504605"
+                    data-testid="link-phone-mobile-nav"
+                    className="flex items-center gap-3 text-sm font-semibold text-[var(--text)]"
+                  >
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
+                      <Phone size={16} />
+                    </span>
+                    (925) 250-4605
+                  </a>
+                  <a
+                    href="mailto:fortyninertrucking@gmail.com"
+                    data-testid="link-email-mobile-nav"
+                    className="flex items-center gap-3 text-sm text-[var(--text-muted)]"
+                  >
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
+                      <Mail size={16} />
+                    </span>
+                    fortyninertrucking@gmail.com
+                  </a>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
