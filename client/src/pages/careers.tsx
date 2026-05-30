@@ -109,9 +109,9 @@ export default function Careers() {
             <div className="space-y-8 max-w-2xl">
               <div className="space-y-4">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Careers</p>
-                <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-careers-title">
+                <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-careers-title">
                   Driver opportunities presented like a serious hiring page, not just a form.
-                </h1>
+                </h3>
                 <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)]" data-testid="text-careers-description">
                   We tightened the spacing, clarified the value proposition, and made the application workflow feel more production-ready for qualified CDL drivers.
                 </p>

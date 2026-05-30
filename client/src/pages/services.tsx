@@ -50,9 +50,9 @@ export default function Services() {
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
             <div className="space-y-7 max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Services</p>
-              <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-services-title">
+              <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-services-title">
                 Specialized hauling support for construction timelines that cannot slip.
-              </h1>
+              </h3>
               <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed" data-testid="text-services-description">
                 We refined this page around the real decision criteria for production work: responsive dispatch, capable equipment, clear scheduling, and confidence in the team executing the load plan.
               </p>
