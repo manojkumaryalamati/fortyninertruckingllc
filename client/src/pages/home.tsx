@@ -61,46 +61,46 @@ export default function Home() {
 
       <section className="pt-28 md:pt-36 pb-16 md:pb-20 bg-[var(--surface-2)] border-b border-[var(--border)] overflow-hidden">
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
+          <div className="grid lg:grid-cols-[0.82fr_1.18fr] gap-8 lg:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="space-y-8"
+              className="order-2 lg:order-1 space-y-6 max-w-lg"
             >
-              <div className="inline-flex items-center rounded-full border border-[var(--primary)]/15 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">
+              <div className="inline-flex items-center rounded-full border border-[var(--primary)]/15 bg-white/90 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--primary)] shadow-sm">
                 California construction logistics
               </div>
-              <div className="space-y-5 max-w-2xl">
-                <h1 className="text-3xl md:text-4xl xl:text-5xl font-black tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-home-hero-title">
+              <div className="space-y-4">
+                <h1 className="text-3xl md:text-4xl xl:text-[2.9rem] font-black tracking-tight leading-[1] text-[var(--text)]" data-testid="text-home-hero-title">
                   The dependable hauling partner for high-demand job sites.
                 </h1>
-                <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)] max-w-xl" data-testid="text-home-hero-description">
-                  Forty Niner Trucking LLC supports contractors, developers, and public works teams with certified fleet coverage, disciplined dispatch, and production-ready transportation.
+                <p className="text-sm md:text-base leading-relaxed text-[var(--text-muted)] max-w-md" data-testid="text-home-hero-description">
+                  Certified fleet coverage, disciplined dispatch, and production-ready transportation for contractors, developers, and public works teams.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link href="/contact">
-                  <Button data-testid="button-home-request-quote" className="w-full sm:w-auto h-12 px-6 rounded-full bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90 shadow-lg shadow-[var(--primary)]/20">
+                  <Button data-testid="button-home-request-quote" className="w-full sm:w-auto h-11 px-5 rounded-full bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90 shadow-lg shadow-[var(--primary)]/20">
                     Talk to Dispatch
-                    <ArrowRight className="ml-2" size={18} />
+                    <ArrowRight className="ml-2" size={17} />
                   </Button>
                 </Link>
                 <Link href="/fleet">
-                  <Button data-testid="button-home-view-fleet" variant="outline" className="w-full sm:w-auto h-12 px-6 rounded-full border-[var(--border)] bg-white text-[var(--text)] hover:bg-white">
+                  <Button data-testid="button-home-view-fleet" variant="outline" className="w-full sm:w-auto h-11 px-5 rounded-full border-[var(--border)] bg-white text-[var(--text)] hover:bg-white">
                     Explore Our Fleet
                   </Button>
                 </Link>
               </div>
 
-              <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3">
-                {metrics.map((metric) => (
-                  <div key={metric.label} className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm">
-                    <p className="text-lg font-black text-[var(--text)]" data-testid={`text-metric-${metric.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {metrics.slice(0, 2).map((metric) => (
+                  <div key={metric.label} className="rounded-2xl border border-[var(--border)]/80 bg-white/85 p-3.5 shadow-sm backdrop-blur-sm">
+                    <p className="text-base font-black text-[var(--text)]" data-testid={`text-metric-${metric.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
                       {metric.value}
                     </p>
-                    <p className="text-sm text-[var(--text-muted)]">{metric.label}</p>
+                    <p className="text-xs text-[var(--text-muted)]">{metric.label}</p>
                   </div>
                 ))}
               </div>
@@ -110,32 +110,68 @@ export default function Home() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.12, ease: "easeOut" }}
-              className="relative"
+              className="order-1 lg:order-2 relative"
             >
-              <div className="absolute -inset-4 bg-[var(--primary)]/10 blur-3xl rounded-[2rem]" />
-              <div className="relative rounded-[2rem] overflow-hidden border border-white/60 bg-white shadow-2xl shadow-black/5">
-                <div className="aspect-[4/3] w-full overflow-hidden">
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={currentImageIndex}
-                      src={carouselImages[currentImageIndex]}
-                      alt="Forty Niner Trucking fleet"
-                      initial={{ opacity: 0.15, scale: 1.04 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0.15 }}
-                      transition={{ duration: 0.7, ease: "easeOut" }}
-                      className="h-full w-full object-contain bg-[var(--surface-2)] p-4"
-                    />
-                  </AnimatePresence>
-                </div>
-                <div className="grid grid-cols-2 gap-3 p-5 bg-white">
-                  <div className="rounded-2xl border border-[var(--border)] p-4">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Service focus</p>
-                    <p className="mt-2 text-base font-bold text-[var(--text)]">Construction materials, aggregates, and dump operations</p>
+              <div className="absolute -inset-5 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.18),transparent_40%),radial-gradient(circle_at_bottom_left,rgba(15,23,42,0.08),transparent_38%)] blur-2xl rounded-[2.5rem]" />
+              <div className="relative rounded-[2.25rem] border border-white/70 bg-white/92 p-4 md:p-5 shadow-[0_28px_80px_rgba(15,23,42,0.12)] backdrop-blur-xl">
+                <div className="relative overflow-hidden rounded-[1.9rem] border border-[var(--border)] bg-[linear-gradient(180deg,#f8fafc_0%,#eef2f7_100%)]">
+                  <div className="absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-full bg-white/92 px-3 py-2 text-xs font-semibold text-[var(--text)] shadow-sm backdrop-blur-sm">
+                    <HardHat size={15} className="text-[var(--primary)]" />
+                    Production-ready fleet support
                   </div>
-                  <div className="rounded-2xl border border-[var(--border)] p-4">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Operating style</p>
-                    <p className="mt-2 text-base font-bold text-[var(--text)]">Clear dispatch, dependable schedules, and site-ready support</p>
+                  <div className="aspect-[16/11] w-full overflow-hidden px-4 pt-14 pb-5 md:px-6 md:pb-6">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={currentImageIndex}
+                        src={carouselImages[currentImageIndex]}
+                        alt="Forty Niner Trucking fleet"
+                        initial={{ opacity: 0.2, scale: 1.03 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0.2 }}
+                        transition={{ duration: 0.7, ease: "easeOut" }}
+                        className="h-full w-full object-contain drop-shadow-[0_20px_35px_rgba(15,23,42,0.12)]"
+                      />
+                    </AnimatePresence>
+                  </div>
+
+                  <div className="absolute inset-x-0 bottom-0 z-10 p-4 md:p-5">
+                    <div className="grid gap-3 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+                      <div className="rounded-2xl bg-white/92 p-4 shadow-sm backdrop-blur-md">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--primary)]">Service focus</p>
+                        <p className="mt-2 text-sm md:text-base font-bold text-[var(--text)]">Construction materials, aggregates, and dump operations</p>
+                      </div>
+                      <div className="rounded-2xl bg-white/88 p-4 shadow-sm backdrop-blur-md">
+                        <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--primary)]">
+                          <Clock3 size={14} />
+                          Dispatch
+                        </div>
+                        <p className="mt-2 text-sm font-semibold text-[var(--text)]">24/7 schedule support</p>
+                      </div>
+                      <div className="rounded-2xl bg-white/88 p-4 shadow-sm backdrop-blur-md">
+                        <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--primary)]">
+                          <MapPin size={14} />
+                          Base
+                        </div>
+                        <p className="mt-2 text-sm font-semibold text-[var(--text)]">Pittsburg, California</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex items-center justify-between gap-4 px-1">
+                  <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
+                      <ShieldCheck size={15} />
+                    </span>
+                    DBE & SB certified and CARB-ready equipment
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {carouselImages.map((_, index) => (
+                      <span
+                        key={index}
+                        className={`block rounded-full transition-all duration-300 ${index === currentImageIndex ? "h-2.5 w-7 bg-[var(--primary)]" : "h-2.5 w-2.5 bg-[var(--border)]"}`}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
