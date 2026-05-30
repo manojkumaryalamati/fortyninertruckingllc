@@ -162,7 +162,7 @@ export default function Services() {
         <div className="w-full max-w-[1200px] mx-auto px-4 md:px-8 text-center space-y-6">
           <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Start the conversation</p>
           <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--text)]">Need a hauling partner that can support the way your project actually runs?</h2>
-          <p className="max-w-3xl mx-auto text-lg text-[var(--text-muted)] leading-relaxed">The CTA flow is now clearer: request service, confirm fleet needs, and move directly into dispatch conversations without hunting for the next step.</p>
+          <p className="max-w-3xl mx-auto text-lg text-[var(--text-muted)] leading-relaxed">The contact path is clearer: request service, confirm fleet needs, and move directly into dispatch conversations without extra friction.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
             <Link href="/contact">
               <Button data-testid="button-services-cta-contact" className="rounded-full bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90">Contact Dispatch</Button>
