@@ -6,8 +6,7 @@ import { Label } from "@/components/ui/label";
 import { ArrowRight, CheckCircle2, Clock, Mail, MapPin, Phone, Loader2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { db, isFirebaseConfigured } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useCreateContactSubmission } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
 
 const contactCards = [
@@ -43,7 +42,8 @@ const contactCards = [
 
 export default function Contact() {
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const createSubmission = useCreateContactSubmission();
+  const isSubmitting = createSubmission.isPending;
   const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -72,26 +72,26 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+
+    if (!formData.email || !formData.message || !formData.firstName || !formData.lastName) {
+      toast({
+        title: "Missing details",
+        description: "Please fill in your name, email, and message.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     try {
-      if (!formData.email || !formData.message || !formData.firstName || !formData.lastName) {
-        throw new Error("Please fill in all required fields");
-      }
-
-      if (!isFirebaseConfigured()) {
-        throw new Error("Contact form is not configured for production yet.");
-      }
-
-      await addDoc(collection(db, "contact_submissions"), {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        interestedIn: formData.subject,
-        message: formData.message,
-        status: "new",
-        createdAt: serverTimestamp(),
+      await createSubmission.mutateAsync({
+        data: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          interestedIn: formData.subject,
+          message: formData.message,
+        },
       });
 
       toast({
@@ -102,22 +102,11 @@ export default function Contact() {
       resetForm();
       setIsSuccess(true);
     } catch (error: any) {
-      if (error?.code === "permission-denied") {
-        toast({
-          title: "Production Setup Required",
-          description: "This form is blocked by Firestore write permissions. The database rules need to allow contact form submissions.",
-          variant: "destructive",
-        });
-        return;
-      }
-
       toast({
         title: "Submission Failed",
-        description: error.message || "Failed to send message. Please try again.",
+        description: error?.message || "Failed to send message. Please try again.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
