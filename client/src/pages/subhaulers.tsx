@@ -1,18 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Check, Upload, Menu, X, Truck, Handshake, ShieldCheck, Briefcase, Loader2 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { Link } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
-
+import { CheckCircle2, FileText, Handshake, Loader2, ShieldCheck, Truck } from "lucide-react";
+import { useState } from "react";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
+
+const partnerBenefits = [
+  {
+    title: "Fair dispatch",
+    desc: "Straightforward communication and load opportunities aligned with active project needs.",
+    icon: Handshake,
+  },
+  {
+    title: "Compliance-focused",
+    desc: "A safety-first operating standard built around dependable paperwork and professional expectations.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Consistent work opportunities",
+    desc: "Long-term relationships for owner-operators and fleets that want repeatable project support.",
+    icon: Truck,
+  },
+];
 
 export default function Subhaulers() {
   const { toast } = useToast();
@@ -23,12 +37,12 @@ export default function Subhaulers() {
     email: "",
     phone: "",
     truckTypes: "",
-    fleetSize: ""
+    fleetSize: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id]: value }));
+    setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,7 +55,7 @@ export default function Subhaulers() {
       }
 
       if (!isFirebaseConfigured()) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         toast({
           title: "Registration Sent (Mock)",
           description: "Firebase is not configured. Check console for data.",
@@ -50,9 +64,9 @@ export default function Subhaulers() {
         await addDoc(collection(db, "subhauler_registrations"), {
           ...formData,
           createdAt: serverTimestamp(),
-          status: "new"
+          status: "new",
         });
-        
+
         toast({
           title: "Registration Sent",
           description: "We've received your registration and will contact you soon.",
@@ -65,14 +79,13 @@ export default function Subhaulers() {
         email: "",
         phone: "",
         truckTypes: "",
-        fleetSize: ""
+        fleetSize: "",
       });
     } catch (error: any) {
-      console.error("Error submitting form:", error);
       toast({
         title: "Error",
         description: error.message || "Failed to submit registration. Please try again.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -80,102 +93,122 @@ export default function Subhaulers() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--surface-2)] text-[var(--text)] font-sans pt-40 md:pt-40 pb-10">
+    <div className="min-h-screen bg-white text-[var(--text)] font-sans">
       <Navbar />
 
-      <div className="w-full max-w-[1800px] mx-auto px-4 md:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div className="space-y-10">
-            <h1 className="text-2xl md:text-3xl lg:text-2xl font-bold tracking-tight mb-6 text-[var(--text)]">Partner With Us.</h1>
-            <p className="text-lg text-[var(--text-muted)] leading-relaxed">
-              We seek reliable owner-operators and subhaulers for long-term partnership. We offer fair dispatch and consistent opportunities.
-            </p>
-            
-            <div className="grid sm:grid-cols-2 gap-4 pt-8">
-               {[
-                 { icon: Handshake, title: "Fair Dispatch", desc: "Equitable loads." },
-                 { icon: ShieldCheck, title: "Clear Terms", desc: "Transparent agreements." },
-                 { icon: Briefcase, title: "Consistent Work", desc: "Ongoing projects." },
-                 { icon: Truck, title: "Compliance", desc: "Safety-first." }
-               ].map((item, i) => (
-                 <Card key={i} className="bg-white border border-[var(--border)]">
-                   <CardContent className="p-5 space-y-2">
-                     <div className="h-8 w-8 rounded-full bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)]">
-                       <item.icon size={16} />
-                     </div>
-                     <h3 className="font-bold text-base text-[var(--text)]">{item.title}</h3>
-                     <p className="text-xs text-[var(--text-muted)]">{item.desc}</p>
-                   </CardContent>
-                 </Card>
-               ))}
-            </div>
+      <section className="pt-28 md:pt-36 pb-16 md:pb-20 bg-[var(--surface-2)] border-b border-[var(--border)]">
+        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
+          <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-start">
+            <div className="space-y-8 max-w-2xl">
+              <div className="space-y-4">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Subhaulers</p>
+                <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-subhaulers-title">
+                  Partnership information that feels ready for serious fleet conversations.
+                </h1>
+                <p className="text-lg md:text-xl leading-relaxed text-[var(--text-muted)]" data-testid="text-subhaulers-description">
+                  We rebuilt this page to create a cleaner trust path for owner-operators and fleet partners looking for long-term work, clear terms, and dependable dispatch communication.
+                </p>
+              </div>
 
-            <div className="pt-8">
-              <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0">
-                    <ShieldCheck size={24} />
+              <div className="grid gap-4">
+                {partnerBenefits.map((item) => (
+                  <div key={item.title} className="rounded-[1.5rem] border border-[var(--border)] bg-white p-5 shadow-sm flex gap-4">
+                    <div className="h-12 w-12 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] flex items-center justify-center shrink-0">
+                      <item.icon size={24} />
+                    </div>
+                    <div className="space-y-1">
+                      <h2 className="text-lg font-black text-[var(--text)]">{item.title}</h2>
+                      <p className="text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-[1.75rem] border border-[var(--border)] bg-white p-6 shadow-sm space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="h-12 w-12 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] flex items-center justify-center">
+                    <FileText size={22} />
                   </div>
                   <div>
-                    <h3 className="font-bold text-[var(--text)]">Subhauler Agreement</h3>
-                    <p className="text-sm text-[var(--text-muted)]">Download our complete terms and conditions.</p>
+                    <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Required document</p>
+                    <h2 className="text-xl font-black text-[var(--text)]">Subhauler Agreement</h2>
                   </div>
                 </div>
-                <Button asChild variant="outline" className="shrink-0 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white rounded-full">
-                  <a href="/src/assets/fortyNinerTruckingSubhauler.pdf" target="_blank" rel="noopener noreferrer">
+                <p className="text-[var(--text-muted)] leading-relaxed">
+                  Review our terms and expectations before registering so both sides start with a clear understanding of compliance and working standards.
+                </p>
+                <Button asChild variant="outline" className="rounded-full border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white">
+                  <a
+                    href="/src/assets/fortyNinerTruckingSubhauler.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid="link-view-subhauler-document"
+                  >
                     View Document
                   </a>
                 </Button>
               </div>
             </div>
+
+            <Card className="rounded-[2rem] border border-[var(--border)] bg-white shadow-xl shadow-black/5">
+              <CardContent className="p-8 md:p-10">
+                <div className="space-y-3 mb-8">
+                  <h2 className="text-3xl font-black tracking-tight text-[var(--text)]">Subhauler Registration</h2>
+                  <p className="text-[var(--text-muted)] leading-relaxed">
+                    Tell us about your company, available truck types, and fleet size so we can evaluate fit and follow up quickly.
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="companyName" className="text-[var(--text-muted)]">Company Name</Label>
+                      <Input id="companyName" data-testid="input-company-name" value={formData.companyName} onChange={handleChange} placeholder="Your Trucking Co." className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="contactPerson" className="text-[var(--text-muted)]">Contact Person</Label>
+                      <Input id="contactPerson" data-testid="input-contact-person" value={formData.contactPerson} onChange={handleChange} placeholder="Full name" className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-[var(--text-muted)]">Email Address</Label>
+                    <Input id="email" type="email" data-testid="input-subhauler-email" value={formData.email} onChange={handleChange} placeholder="dispatch@example.com" className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-[var(--text-muted)]">Phone Number</Label>
+                    <Input id="phone" type="tel" data-testid="input-subhauler-phone" value={formData.phone} onChange={handleChange} placeholder="(555) 000-0000" className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="truckTypes" className="text-[var(--text-muted)]">Truck Types Available</Label>
+                    <Input id="truckTypes" data-testid="input-truck-types" value={formData.truckTypes} onChange={handleChange} placeholder="Super dumps, transfers, end dumps" className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="fleetSize" className="text-[var(--text-muted)]">Fleet Size</Label>
+                    <Input id="fleetSize" type="number" data-testid="input-fleet-size" value={formData.fleetSize} onChange={handleChange} placeholder="Number of units" className="h-12 rounded-xl bg-[var(--surface-2)] border-[var(--border)]" />
+                  </div>
+
+                  <div className="rounded-[1.25rem] border border-[var(--border)] bg-[var(--surface-2)] p-4 flex items-start gap-3">
+                    <CheckCircle2 size={18} className="mt-0.5 text-[var(--primary)] shrink-0" />
+                    <p className="text-sm text-[var(--text-muted)] leading-relaxed" data-testid="text-subhauler-note">
+                      Complete company and contact details help us evaluate dispatch fit, compliance readiness, and follow-up timing.
+                    </p>
+                  </div>
+
+                  <Button type="submit" data-testid="button-submit-registration" disabled={isSubmitting} className="w-full rounded-full h-12 text-base font-bold bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90">
+                    {isSubmitting ? <Loader2 className="animate-spin" /> : "Submit Registration"}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
           </div>
-
-          <Card className="border-none shadow-xl bg-white border border-[var(--border)]">
-            <CardContent className="p-8 md:p-10">
-              <h2 className="text-2xl font-bold mb-6 text-[var(--text)]">Subhauler Registration</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="companyName" className="text-[var(--text-muted)]">Company Name</Label>
-                    <Input id="companyName" value={formData.companyName} onChange={handleChange} placeholder="Your Trucking Co." className="bg-[var(--surface-2)] border-[var(--border)]" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contactPerson" className="text-[var(--text-muted)]">Contact Person</Label>
-                    <Input id="contactPerson" value={formData.contactPerson} onChange={handleChange} placeholder="Full Name" className="bg-[var(--surface-2)] border-[var(--border)]" />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-[var(--text-muted)]">Email Address</Label>
-                  <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="dispatch@example.com" className="bg-[var(--surface-2)] border-[var(--border)]" />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-[var(--text-muted)]">Phone Number</Label>
-                  <Input id="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="(555) 000-0000" className="bg-[var(--surface-2)] border-[var(--border)]" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="truckTypes" className="text-[var(--text-muted)]">Truck Types Available</Label>
-                  <Input id="truckTypes" value={formData.truckTypes} onChange={handleChange} placeholder="e.g. Super Dumps, Transfers" className="bg-[var(--surface-2)] border-[var(--border)]" />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="fleetSize" className="text-[var(--text-muted)]">Fleet Size</Label>
-                  <Input id="fleetSize" type="number" value={formData.fleetSize} onChange={handleChange} placeholder="Number of units" className="bg-[var(--surface-2)] border-[var(--border)]" />
-                </div>
-
-                <Button type="submit" disabled={isSubmitting} size="lg" className="w-full rounded-full h-12 text-base font-bold bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90">
-                  {isSubmitting ? <Loader2 className="animate-spin" /> : "Submit Registration"}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
         </div>
-      </div>
-      <div className="mt-20">
-        <Footer />
-      </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }
