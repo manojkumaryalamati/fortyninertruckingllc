@@ -109,7 +109,7 @@ export default function Careers() {
             <div className="space-y-8 max-w-2xl">
               <div className="space-y-4">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Careers</p>
-                <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-careers-title">
+                <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-careers-title">
                   Driver opportunities presented like a serious hiring page, not just a form.
                 </h1>
                 <p className="text-lg md:text-xl leading-relaxed text-[var(--text-muted)]" data-testid="text-careers-description">

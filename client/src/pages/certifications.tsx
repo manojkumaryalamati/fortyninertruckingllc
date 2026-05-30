@@ -35,7 +35,7 @@ export default function Certifications() {
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
             <div className="space-y-7 max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Certifications</p>
-              <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-certifications-title">
+              <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-certifications-title">
                 Compliance credentials presented with the clarity expected in production.
               </h1>
               <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed" data-testid="text-certifications-description">
