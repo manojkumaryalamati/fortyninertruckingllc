@@ -17,7 +17,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
             <Link href="/contact">
-              <Button data-testid="button-footer-request-quote" className="w-full sm:w-auto rounded-full bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90">Request a Quote</Button>
+              <Button data-testid="button-footer-request-quote" className="w-full sm:w-auto rounded-full bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90">Contact Dispatch</Button>
             </Link>
             <a href="tel:9252504605" data-testid="link-footer-call" className="inline-flex items-center justify-center rounded-full border border-[var(--border)] bg-white px-5 py-2.5 font-semibold text-[var(--text)] hover:bg-[var(--surface-2)]">Call Dispatch</a>
           </div>
