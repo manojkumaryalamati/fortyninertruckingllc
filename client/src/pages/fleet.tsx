@@ -34,9 +34,9 @@ export default function Fleet() {
           <div className="grid lg:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-14 items-center">
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="space-y-7 max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Fleet</p>
-              <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-fleet-title">
+              <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-fleet-title">
                 Specialized equipment matched to the realities of heavy construction work.
-              </h1>
+              </h3>
               <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)]" data-testid="text-fleet-description">
                 We replaced the hard-to-read image overlay with a cleaner production layout that highlights what decision-makers actually need: fleet types, maintenance confidence, and dispatch support.
               </p>

@@ -235,7 +235,7 @@ export default function DocumentsCenter() {
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h1 className="text-2xl font-bold tracking-tight">Documents Center</h1>
+              <h3 className="text-2xl font-bold tracking-tight">Documents Center</h3>
               <p className="text-muted-foreground">Manage compliance, expirations, and digital records.</p>
             </div>
             <div className="flex gap-3">
