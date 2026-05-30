@@ -11,9 +11,9 @@ const connectors = new ReplitConnectors();
 
 // Where contact form messages are delivered.
 const CONTACT_RECIPIENT = "fortyninertrucking@gmail.com";
-// Until a custom domain is verified in Resend, send from Resend's shared
-// onboarding sender. Delivery to the account owner's inbox works out of the box.
-const CONTACT_SENDER = "Forty Niner Trucking <onboarding@resend.dev>";
+// Sends from the verified fortyninertrucking.llc domain in Resend. Once the
+// domain shows "Verified" in resend.com/domains, delivery to any inbox works.
+const CONTACT_SENDER = "Forty Niner Trucking <noreply@fortyninertrucking.llc>";
 
 function escapeHtml(value: string): string {
   return value
