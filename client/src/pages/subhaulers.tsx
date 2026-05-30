@@ -102,7 +102,7 @@ export default function Subhaulers() {
             <div className="space-y-8 max-w-2xl">
               <div className="space-y-4">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Subhaulers</p>
-                <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-subhaulers-title">
+                <h3 className="text-2xl md:text-3xl font-semibold tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-subhaulers-title">
                   Partnership information that feels ready for serious fleet conversations.
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)]" data-testid="text-subhaulers-description">
@@ -117,7 +117,7 @@ export default function Subhaulers() {
                       <item.icon size={24} />
                     </div>
                     <div className="space-y-1">
-                      <h2 className="text-lg font-black text-[var(--text)]">{item.title}</h2>
+                      <h2 className="text-base font-semibold text-[var(--text)]">{item.title}</h2>
                       <p className="text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
@@ -131,7 +131,7 @@ export default function Subhaulers() {
                   </div>
                   <div>
                     <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Required document</p>
-                    <h2 className="text-xl font-black text-[var(--text)]">Subhauler Agreement</h2>
+                    <h2 className="text-lg font-semibold text-[var(--text)]">Subhauler Agreement</h2>
                   </div>
                 </div>
                 <p className="text-[var(--text-muted)] leading-relaxed">
@@ -153,7 +153,7 @@ export default function Subhaulers() {
             <Card className="rounded-[2rem] border border-[var(--border)] bg-white shadow-xl shadow-black/5">
               <CardContent className="p-8 md:p-10">
                 <div className="space-y-3 mb-8">
-                  <h2 className="text-3xl font-black tracking-tight text-[var(--text)]">Subhauler Registration</h2>
+                  <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Subhauler Registration</h2>
                   <p className="text-[var(--text-muted)] leading-relaxed">
                     Tell us about your company, available truck types, and fleet size so we can evaluate fit and follow up quickly.
                   </p>

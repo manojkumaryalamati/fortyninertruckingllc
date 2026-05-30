@@ -433,7 +433,7 @@ export default function AdminDashboard() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-[var(--text-muted)] mb-1 uppercase tracking-wide text-xs">{stat.label}</p>
-                    <div className="text-2xl lg:text-2xl font-black tracking-tight text-[var(--text)]">{stat.value}</div>
+                    <div className="text-2xl lg:text-xl font-semibold tracking-tight text-[var(--text)]">{stat.value}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -444,7 +444,7 @@ export default function AdminDashboard() {
           <section>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-xl font-bold tracking-tight text-[var(--text)]">Recent Shipments</h2>
+                <h2 className="text-lg font-semibold tracking-tight text-[var(--text)]">Recent Shipments</h2>
                 <p className="text-sm text-[var(--text-muted)]">Manage and track active loads.</p>
               </div>
               <div className="flex gap-2">

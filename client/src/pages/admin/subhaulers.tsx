@@ -200,7 +200,7 @@ export default function AdminSubhaulers() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h3 className="text-2xl font-black tracking-tight text-[var(--text)] flex items-center gap-3">
+                <h3 className="text-xl font-semibold tracking-tight text-[var(--text)] flex items-center gap-3">
                   <Truck className="h-6 w-6 text-[var(--primary)]" />
                   Subhauler Registrations
                 </h3>

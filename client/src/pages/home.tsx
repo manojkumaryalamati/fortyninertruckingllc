@@ -72,7 +72,7 @@ export default function Home() {
                 California construction logistics
               </div>
               <div className="space-y-5 max-w-2xl">
-                <h3 className="text-3xl md:text-4xl xl:text-5xl font-black tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-home-hero-title">
+                <h3 className="text-2xl md:text-3xl xl:text-4xl font-semibold tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-home-hero-title">
                   The dependable hauling partner for high-demand job sites.
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)] max-w-xl" data-testid="text-home-hero-description">
@@ -97,7 +97,7 @@ export default function Home() {
               <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3">
                 {metrics.map((metric) => (
                   <div key={metric.label} className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm">
-                    <p className="text-lg font-black text-[var(--text)]" data-testid={`text-metric-${metric.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
+                    <p className="text-base font-semibold text-[var(--text)]" data-testid={`text-metric-${metric.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
                       {metric.value}
                     </p>
                     <p className="text-sm text-[var(--text-muted)]">{metric.label}</p>
@@ -148,7 +148,7 @@ export default function Home() {
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="max-w-3xl space-y-4 mb-10 md:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Why teams choose Forty Niner</p>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--text)]">A cleaner, more reliable way to manage heavy hauling.</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--text)]">A cleaner, more reliable way to manage heavy hauling.</h2>
             <p className="text-lg text-[var(--text-muted)] leading-relaxed">We combine field-tested equipment with responsive coordination so your crews get the support they need without guesswork.</p>
           </div>
           <div className="grid lg:grid-cols-3 gap-6">
@@ -159,7 +159,7 @@ export default function Home() {
                     <item.icon size={28} />
                   </div>
                   <div className="space-y-3">
-                    <h3 className="text-2xl font-black tracking-tight text-[var(--text)]">{item.title}</h3>
+                    <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.title}</h3>
                     <p className="text-[var(--text-muted)] leading-relaxed">{item.description}</p>
                   </div>
                 </CardContent>
@@ -177,7 +177,7 @@ export default function Home() {
             </div>
             <div className="space-y-6">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Production-ready support</p>
-              <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--text)]">Built for demanding schedules, site constraints, and compliance expectations.</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--text)]">Built for demanding schedules, site constraints, and compliance expectations.</h2>
               <p className="text-lg text-[var(--text-muted)] leading-relaxed">Our approach is straightforward: keep the equipment dependable, keep the communication clear, and keep the project moving with the right trucks in the right place.</p>
               <div className="grid sm:grid-cols-2 gap-4">
                 {proofPoints.map((point) => (

@@ -203,7 +203,7 @@ export default function DriversManagement() {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <h3 className="text-2xl font-bold tracking-tight">Drivers</h3>
+            <h3 className="text-xl font-semibold tracking-tight">Drivers</h3>
             <p className="text-muted-foreground">Manage driver profiles, assignments, and compliance.</p>
           </div>
           <div className="flex gap-3">
@@ -378,12 +378,12 @@ export default function DriversManagement() {
                    <div className="space-y-6 py-4">
                      <div className="flex items-center gap-4">
                        <Avatar className="h-20 w-20 border-2 border-border">
-                         <AvatarFallback className="bg-[var(--primary)]/10 text-[var(--primary)] text-2xl font-bold">
+                         <AvatarFallback className="bg-[var(--primary)]/10 text-[var(--primary)] text-xl font-semibold">
                            {selectedDriver.name?.charAt(0)}
                          </AvatarFallback>
                        </Avatar>
                        <div>
-                         <h2 className="text-2xl font-bold">{selectedDriver.name}</h2>
+                         <h2 className="text-xl font-semibold">{selectedDriver.name}</h2>
                          <div className="flex items-center gap-2 mt-1">
                            <Badge variant="outline" className={`
                              ${selectedDriver.status === "Active" ? "bg-green-50 text-green-700 border-green-200" : 
