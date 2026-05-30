@@ -73,7 +73,7 @@ export function Navbar() {
               <div className="cursor-pointer hover:opacity-90 transition-opacity relative group h-full flex items-center">
                 <Logo 
                   variant="dark" 
-                  className={`origin-left transition-all duration-300 ${scrolled ? 'w-[170px] md:w-[210px]' : 'w-[190px] md:w-[240px]'}`}
+                  className={`origin-left transition-all duration-300 ${scrolled ? 'w-[170px] md:w-[192px]' : 'w-[180px] md:w-[216px]'}`}
                 />
               </div>
             </Link>
@@ -126,7 +126,7 @@ export function Navbar() {
           >
             <div className="flex justify-between items-center p-4 border-b border-[var(--border)]">
               <div className="h-10 w-auto relative flex items-center">
-                 <Logo variant="dark" className="w-[170px] origin-left" />
+                 <Logo variant="dark" className="w-[180px] origin-left" />
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
