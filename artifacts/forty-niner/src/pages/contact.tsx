@@ -124,7 +124,7 @@ export default function Contact() {
                   Reach the team quickly, with a clearer path into quotes and dispatch.
                 </h3>
                 <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed" data-testid="text-contact-description">
-                  We tightened the contact experience for production so customers can immediately see how to call, email, visit, or submit a quote request without the oversized empty spacing from before.
+                  Call, email, or visit us, or send a quote request below. Our dispatch team is available 24/7 and will get back to you quickly.
                 </p>
               </div>
 

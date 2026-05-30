@@ -1,0 +1,1 @@
+- [Resend sending constraints](resend-domain-verification.md) — Resend 403s unless a domain is verified; from-address must be on that domain, else only the account owner is reachable.

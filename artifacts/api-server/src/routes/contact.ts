@@ -37,10 +37,19 @@ router.post("/contact-submissions", async (req: Request, res: Response) => {
   const data = parsed.data;
 
   // Keep a stored record of every submission as a backup/audit trail.
-  const [row] = await db
-    .insert(contactSubmissions)
-    .values(data)
-    .returning({ id: contactSubmissions.id, status: contactSubmissions.status });
+  let row: { id: string; status: string };
+  try {
+    [row] = await db
+      .insert(contactSubmissions)
+      .values(data)
+      .returning({ id: contactSubmissions.id, status: contactSubmissions.status });
+  } catch (err) {
+    req.log.error({ err }, "Error storing contact submission");
+    return res.status(500).json({
+      title: "Submission failed",
+      detail: "We couldn't save your message right now. Please try again.",
+    });
+  }
 
   const fullName = `${data.firstName} ${data.lastName}`.trim();
   const subject = `New website inquiry${data.interestedIn ? ` — ${data.interestedIn}` : ""} from ${fullName}`;
