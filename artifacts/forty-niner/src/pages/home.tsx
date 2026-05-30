@@ -59,7 +59,7 @@ export default function Home() {
     <div className="min-h-screen bg-white text-[var(--text)] font-sans selection:bg-[var(--primary)]/20">
       <Navbar />
 
-      <section className="pt-28 md:pt-36 pb-16 md:pb-20 bg-[var(--surface-2)] border-b border-[var(--border)] overflow-hidden">
+      <section className="pt-32 md:pt-36 lg:pt-48 pb-16 md:pb-20 bg-[var(--surface-2)] border-b border-[var(--border)] overflow-hidden">
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
             <motion.div
@@ -72,7 +72,7 @@ export default function Home() {
                 California construction logistics
               </div>
               <div className="space-y-5 max-w-2xl">
-                <h3 className="text-2xl md:text-3xl xl:text-4xl font-semibold tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-home-hero-title">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight leading-[1.05] text-[var(--text)]" data-testid="text-home-hero-title">
                   The dependable hauling partner for high-demand job sites.
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)] max-w-xl" data-testid="text-home-hero-description">

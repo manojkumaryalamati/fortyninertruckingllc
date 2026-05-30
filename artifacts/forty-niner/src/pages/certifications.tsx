@@ -30,7 +30,7 @@ export default function Certifications() {
     <div className="min-h-screen bg-white text-[var(--text)] font-sans">
       <Navbar />
 
-      <section className="pt-28 md:pt-36 pb-16 md:pb-20 bg-[var(--surface-2)] border-b border-[var(--border)]">
+      <section className="pt-32 md:pt-36 lg:pt-48 pb-16 md:pb-20 bg-[var(--surface-2)] border-b border-[var(--border)]">
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
             <div className="space-y-7 max-w-2xl">

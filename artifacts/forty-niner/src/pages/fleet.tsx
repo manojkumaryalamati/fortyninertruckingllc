@@ -29,7 +29,7 @@ export default function Fleet() {
     <div className="min-h-screen bg-white text-[var(--text)] font-sans">
       <Navbar />
 
-      <section className="pt-28 md:pt-36 pb-16 md:pb-20 bg-[var(--surface-2)] border-b border-[var(--border)]">
+      <section className="pt-32 md:pt-36 lg:pt-48 pb-16 md:pb-20 bg-[var(--surface-2)] border-b border-[var(--border)]">
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-14 items-center">
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="space-y-7 max-w-2xl">
