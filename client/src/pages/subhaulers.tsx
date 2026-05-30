@@ -9,6 +9,7 @@ import { Navbar } from "@/components/Navbar";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
+import subhaulerAgreementPdf from "@/assets/fortyNinerTruckingSubhauler.pdf";
 
 const partnerBenefits = [
   {
@@ -139,7 +140,7 @@ export default function Subhaulers() {
                 </p>
                 <Button asChild variant="outline" className="rounded-full border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white">
                   <a
-                    href="/src/assets/fortyNinerTruckingSubhauler.pdf"
+                    href={subhaulerAgreementPdf}
                     target="_blank"
                     rel="noopener noreferrer"
                     data-testid="link-view-subhauler-document"
