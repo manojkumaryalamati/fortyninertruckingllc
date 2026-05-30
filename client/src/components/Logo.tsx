@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
-import logoImg from "@/assets/logo-transparent.png";
+import logoImg from "@assets/fortyninertrucking_1780145811678.png";
 
 interface LogoProps extends HTMLAttributes<HTMLDivElement> {
   variant?: "dark" | "light";
@@ -8,21 +8,22 @@ interface LogoProps extends HTMLAttributes<HTMLDivElement> {
 
 export function Logo({ className, variant = "dark", ...props }: LogoProps) {
   return (
-    <div 
-      className={cn(
-        "flex items-center justify-center select-none overflow-hidden",
-        className
-      )}
+    <div
+      className={cn("flex items-center select-none", className)}
       {...props}
     >
-      <img 
-        src={logoImg} 
-        alt="Forty Niner Trucking LLC" 
+      <div
         className={cn(
-          "h-auto max-h-16 w-auto object-contain transition-all duration-300",
-          variant === "light" && "drop-shadow-md"
+          "flex w-full items-center justify-start transition-all duration-300",
+          variant === "light" && "rounded-2xl bg-white px-3 py-2 shadow-sm ring-1 ring-white/15"
         )}
-      />
+      >
+        <img
+          src={logoImg}
+          alt="Forty Niner Trucking LLC"
+          className="block h-auto max-h-14 w-full max-w-full object-contain"
+        />
+      </div>
     </div>
   );
 }
