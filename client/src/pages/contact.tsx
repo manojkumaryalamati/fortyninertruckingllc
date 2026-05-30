@@ -123,7 +123,7 @@ export default function Contact() {
             <div className="space-y-8 max-w-2xl">
               <div className="space-y-4">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Contact</p>
-                <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-contact-title">
+                <h3 className="text-2xl md:text-3xl font-semibold tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-contact-title">
                   Reach the team quickly, with a clearer path into quotes and dispatch.
                 </h3>
                 <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed" data-testid="text-contact-description">
@@ -138,7 +138,7 @@ export default function Contact() {
                       <card.icon size={24} />
                     </div>
                     <div className="space-y-1">
-                      <h2 className="text-lg font-black text-[var(--text)]">{card.title}</h2>
+                      <h2 className="text-base font-semibold text-[var(--text)]">{card.title}</h2>
                       <p className="text-sm text-[var(--text-muted)]">{card.subtitle}</p>
                     </div>
                     {card.href ? (
@@ -175,7 +175,7 @@ export default function Contact() {
             <div className="bg-white rounded-[2rem] p-8 md:p-10 shadow-xl shadow-black/5 border border-[var(--border)] relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary)]/5 rounded-bl-full -mr-10 -mt-10" />
               <div className="space-y-3 mb-8 relative z-10">
-                <h2 className="text-3xl font-black tracking-tight text-[var(--text)]">Send us a Message</h2>
+                <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Send us a Message</h2>
                 <p className="text-[var(--text-muted)] leading-relaxed">
                   Use the form for quotes, partnership questions, driver opportunities, or general project coordination.
                 </p>
@@ -186,7 +186,7 @@ export default function Contact() {
                   <div className="h-20 w-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
-                  <h3 className="text-2xl font-black text-[var(--text)]">Message Sent Successfully</h3>
+                  <h3 className="text-xl font-semibold text-[var(--text)]">Message Sent Successfully</h3>
                   <p className="text-[var(--text-muted)] max-w-md">
                     Thank you for contacting Forty Niner Trucking. We have received your message and will be in touch shortly.
                   </p>

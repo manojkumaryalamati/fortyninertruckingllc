@@ -34,7 +34,7 @@ export default function Fleet() {
           <div className="grid lg:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-14 items-center">
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="space-y-7 max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Fleet</p>
-              <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-fleet-title">
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-fleet-title">
                 Specialized equipment matched to the realities of heavy construction work.
               </h3>
               <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)]" data-testid="text-fleet-description">
@@ -56,15 +56,15 @@ export default function Fleet() {
               <div className="grid sm:grid-cols-3 gap-3">
                 <div className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Uptime</p>
-                  <p className="mt-2 text-2xl font-black text-[var(--text)]">99.8%</p>
+                  <p className="mt-2 text-xl font-semibold text-[var(--text)]">99.8%</p>
                 </div>
                 <div className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Compliance</p>
-                  <p className="mt-2 text-2xl font-black text-[var(--text)]">CARB Ready</p>
+                  <p className="mt-2 text-xl font-semibold text-[var(--text)]">CARB Ready</p>
                 </div>
                 <div className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Dispatch</p>
-                  <p className="mt-2 text-2xl font-black text-[var(--text)]">24/7</p>
+                  <p className="mt-2 text-xl font-semibold text-[var(--text)]">24/7</p>
                 </div>
               </div>
             </motion.div>
@@ -76,11 +76,11 @@ export default function Fleet() {
                 <div className="grid grid-cols-2 gap-3 p-5 bg-white">
                   <div className="rounded-2xl border border-[var(--border)] p-4">
                     <ShieldCheck className="text-[var(--primary)]" size={24} />
-                    <p className="mt-3 text-base font-black text-[var(--text)]">Well-maintained equipment</p>
+                    <p className="mt-3 text-base font-semibold text-[var(--text)]">Well-maintained equipment</p>
                   </div>
                   <div className="rounded-2xl border border-[var(--border)] p-4">
                     <Gauge className="text-[var(--primary)]" size={24} />
-                    <p className="mt-3 text-base font-black text-[var(--text)]">Matched to payload and site needs</p>
+                    <p className="mt-3 text-base font-semibold text-[var(--text)]">Matched to payload and site needs</p>
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@ export default function Fleet() {
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="max-w-3xl space-y-4 mb-10 md:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Fleet types</p>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--text)]">The equipment lineup is now easier to scan and compare.</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--text)]">The equipment lineup is now easier to scan and compare.</h2>
             <p className="text-lg text-[var(--text-muted)] leading-relaxed">We simplified this section for production so fleet types read clearly without competing against a photo background.</p>
           </div>
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -107,7 +107,7 @@ export default function Fleet() {
                     <span className="rounded-full bg-white border border-[var(--border)] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--text-muted)]">{truck.highlight}</span>
                   </div>
                   <div className="space-y-3">
-                    <h3 className="text-2xl font-black tracking-tight text-[var(--text)]">{truck.name}</h3>
+                    <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{truck.name}</h3>
                     <p className="text-[var(--text-muted)] leading-relaxed">{truck.copy}</p>
                   </div>
                 </CardContent>
@@ -122,7 +122,7 @@ export default function Fleet() {
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
             <div className="space-y-6">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Maintenance and reliability</p>
-              <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--text)]">Dependable fleet performance starts long before the truck leaves the yard.</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--text)]">Dependable fleet performance starts long before the truck leaves the yard.</h2>
               <p className="text-lg text-[var(--text-muted)] leading-relaxed">This content now does a better job of building trust around maintenance standards, compliance posture, and day-to-day operating discipline.</p>
               <div className="grid gap-4">
                 {standards.map((item) => (
@@ -145,7 +145,7 @@ export default function Fleet() {
                   </div>
                   <div>
                     <p className="text-sm text-[var(--text-muted)]">Service discipline</p>
-                    <p className="text-xl font-black text-[var(--text)]">Preventive maintenance with uptime focus</p>
+                    <p className="text-lg font-semibold text-[var(--text)]">Preventive maintenance with uptime focus</p>
                   </div>
                 </div>
               </div>
@@ -157,7 +157,7 @@ export default function Fleet() {
       <section className="py-16 md:py-20 bg-white text-center">
         <div className="w-full max-w-[1000px] mx-auto px-4 md:px-8 space-y-6">
           <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Get the right trucks in place</p>
-          <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--text)]">Need specific fleet coverage for an upcoming project?</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--text)]">Need specific fleet coverage for an upcoming project?</h2>
           <p className="text-lg text-[var(--text-muted)] leading-relaxed">The action path is simpler now: review fleet types, then move directly into a dispatch conversation about timing, materials, and availability.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
             <Link href="/contact">

@@ -115,7 +115,7 @@ export default function Login() {
             <div className="mb-6 flex justify-center md:justify-start">
               <Logo variant="dark" className="w-[240px] max-w-full" />
             </div>
-            <h2 className="text-2xl font-black text-[var(--text)] tracking-tight">Admin Portal</h2>
+            <h2 className="text-xl font-semibold text-[var(--text)] tracking-tight">Admin Portal</h2>
             <p className="text-[var(--text-muted)] mt-2">Secure access for fleet management.</p>
           </div>
 
@@ -194,7 +194,7 @@ export default function Login() {
               <div className="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-[var(--border)] mb-6">
                 <CheckCircle2 className="h-6 w-6 text-[var(--text-muted)]" />
               </div>
-              <h3 className="text-2xl font-bold text-[var(--text)]">Operational Excellence</h3>
+              <h3 className="text-xl font-semibold text-[var(--text)]">Operational Excellence</h3>
               <p className="text-[var(--text-muted)] leading-relaxed max-w-sm">
                 Manage your fleet, track shipments, and coordinate drivers all in one centralized platform.
               </p>

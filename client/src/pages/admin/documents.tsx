@@ -235,7 +235,7 @@ export default function DocumentsCenter() {
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h3 className="text-2xl font-bold tracking-tight">Documents Center</h3>
+              <h3 className="text-xl font-semibold tracking-tight">Documents Center</h3>
               <p className="text-muted-foreground">Manage compliance, expirations, and digital records.</p>
             </div>
             <div className="flex gap-3">
@@ -418,7 +418,7 @@ export default function DocumentsCenter() {
                <CardContent className="p-4 flex items-center justify-between">
                  <div>
                    <p className="text-xs font-bold uppercase text-green-700 mb-1">Compliant</p>
-                   <p className="text-2xl font-bold text-green-800">{documents.filter(d => d.status === "Valid").length}</p>
+                   <p className="text-xl font-semibold text-green-800">{documents.filter(d => d.status === "Valid").length}</p>
                  </div>
                  <div className="h-8 w-8 rounded-full bg-green-200 flex items-center justify-center text-green-700"><CheckCircle2 size={16} /></div>
                </CardContent>
@@ -427,7 +427,7 @@ export default function DocumentsCenter() {
                <CardContent className="p-4 flex items-center justify-between">
                  <div>
                    <p className="text-xs font-bold uppercase text-yellow-700 mb-1">Expiring Soon</p>
-                   <p className="text-2xl font-bold text-yellow-800">{documents.filter(d => d.status === "Expiring Soon").length}</p>
+                   <p className="text-xl font-semibold text-yellow-800">{documents.filter(d => d.status === "Expiring Soon").length}</p>
                  </div>
                  <div className="h-8 w-8 rounded-full bg-yellow-200 flex items-center justify-center text-yellow-700"><Clock size={16} /></div>
                </CardContent>
@@ -436,7 +436,7 @@ export default function DocumentsCenter() {
                <CardContent className="p-4 flex items-center justify-between">
                  <div>
                    <p className="text-xs font-bold uppercase text-red-700 mb-1">Expired</p>
-                   <p className="text-2xl font-bold text-red-800">{documents.filter(d => d.status === "Expired").length}</p>
+                   <p className="text-xl font-semibold text-red-800">{documents.filter(d => d.status === "Expired").length}</p>
                  </div>
                  <div className="h-8 w-8 rounded-full bg-red-200 flex items-center justify-center text-red-700"><AlertTriangle size={16} /></div>
                </CardContent>
@@ -445,7 +445,7 @@ export default function DocumentsCenter() {
                <CardContent className="p-4 flex items-center justify-between">
                  <div>
                    <p className="text-xs font-bold uppercase text-[var(--primary)] mb-1">Total Docs</p>
-                   <p className="text-2xl font-bold">{documents.length}</p>
+                   <p className="text-xl font-semibold">{documents.length}</p>
                  </div>
                  <div className="h-8 w-8 rounded-full bg-[var(--primary)]/20 flex items-center justify-center text-[var(--primary)]"><FileText size={16} /></div>
                </CardContent>

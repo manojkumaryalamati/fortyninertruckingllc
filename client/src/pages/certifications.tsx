@@ -35,7 +35,7 @@ export default function Certifications() {
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
             <div className="space-y-7 max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Certifications</p>
-              <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-certifications-title">
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-certifications-title">
                 Compliance credentials presented with the clarity expected in production.
               </h3>
               <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed" data-testid="text-certifications-description">
@@ -59,17 +59,17 @@ export default function Certifications() {
             <div className="grid gap-4">
               <div className="rounded-[1.75rem] border border-[var(--border)] bg-white p-6 shadow-sm">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Compliance posture</p>
-                <p className="mt-3 text-2xl font-black text-[var(--text)]">Safety-first, certification-backed operations</p>
+                <p className="mt-3 text-xl font-semibold text-[var(--text)]">Safety-first, certification-backed operations</p>
                 <p className="mt-3 text-[var(--text-muted)] leading-relaxed">Positioned for customers who need confidence in documentation, professionalism, and operating standards before work begins.</p>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="rounded-[1.5rem] border border-[var(--border)] bg-white p-5 shadow-sm">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Primary certifications</p>
-                  <p className="mt-2 text-xl font-black text-[var(--text)]">DBE & SB</p>
+                  <p className="mt-2 text-lg font-semibold text-[var(--text)]">DBE & SB</p>
                 </div>
                 <div className="rounded-[1.5rem] border border-[var(--border)] bg-white p-5 shadow-sm">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Operations</p>
-                  <p className="mt-2 text-xl font-black text-[var(--text)]">California-ready fleet support</p>
+                  <p className="mt-2 text-lg font-semibold text-[var(--text)]">California-ready fleet support</p>
                 </div>
               </div>
             </div>
@@ -87,7 +87,7 @@ export default function Certifications() {
                     <item.icon size={30} />
                   </div>
                   <div className="space-y-3">
-                    <h2 className="text-2xl font-black tracking-tight text-[var(--text)]">{item.title}</h2>
+                    <h2 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.title}</h2>
                     <p className="text-[var(--text-muted)] leading-relaxed">{item.description}</p>
                   </div>
                   <div className="rounded-2xl bg-white border border-[var(--border)] px-4 py-3 text-sm font-mono text-[var(--text-muted)]" data-testid={`text-certification-${item.code.toLowerCase()}`}>
@@ -101,7 +101,7 @@ export default function Certifications() {
           <div className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface-2)] p-6 md:p-8 shadow-sm">
             <div className="max-w-2xl space-y-3 mb-8">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Permits and references</p>
-              <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--text)]">Operating details presented in one cleaner section.</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--text)]">Operating details presented in one cleaner section.</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-4">
               {permits.map((permit) => (
@@ -110,7 +110,7 @@ export default function Certifications() {
                     <permit.icon size={24} />
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-lg font-black text-[var(--text)]">{permit.title}</h3>
+                    <h3 className="text-base font-semibold text-[var(--text)]">{permit.title}</h3>
                     <p className="text-sm font-mono text-[var(--text-muted)]">{permit.code}</p>
                   </div>
                 </div>

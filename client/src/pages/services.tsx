@@ -50,7 +50,7 @@ export default function Services() {
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
             <div className="space-y-7 max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Services</p>
-              <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-services-title">
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-services-title">
                 Specialized hauling support for construction timelines that cannot slip.
               </h3>
               <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed" data-testid="text-services-description">
@@ -78,11 +78,11 @@ export default function Services() {
               <div className="grid sm:grid-cols-2 gap-4 mt-5">
                 <div className="rounded-2xl bg-[var(--surface-2)] p-4 border border-[var(--border)]">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Coverage</p>
-                  <p className="mt-2 font-black text-[var(--text)]">Construction logistics and material transport</p>
+                  <p className="mt-2 font-semibold text-[var(--text)]">Construction logistics and material transport</p>
                 </div>
                 <div className="rounded-2xl bg-[var(--surface-2)] p-4 border border-[var(--border)]">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]">Response</p>
-                  <p className="mt-2 font-black text-[var(--text)]">24/7 dispatch support when schedules change</p>
+                  <p className="mt-2 font-semibold text-[var(--text)]">24/7 dispatch support when schedules change</p>
                 </div>
               </div>
             </div>
@@ -100,7 +100,7 @@ export default function Services() {
                     <service.icon size={28} />
                   </div>
                   <div className="space-y-3">
-                    <h2 className="text-2xl font-black tracking-tight text-[var(--text)]">{service.title}</h2>
+                    <h2 className="text-xl font-semibold tracking-tight text-[var(--text)]">{service.title}</h2>
                     <p className="text-[var(--text-muted)] leading-relaxed">{service.description}</p>
                   </div>
                   <div className="space-y-3">
@@ -126,7 +126,7 @@ export default function Services() {
             </div>
             <div className="space-y-6">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">How we work</p>
-              <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--text)]">A simpler service flow for teams that need confidence fast.</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--text)]">A simpler service flow for teams that need confidence fast.</h2>
               <p className="text-lg text-[var(--text-muted)] leading-relaxed">Instead of oversized marketing language, this section now explains the operating flow clearly so customers know exactly what working with Forty Niner looks like.</p>
               <div className="grid gap-4">
                 {process.map((item) => (
@@ -134,7 +134,7 @@ export default function Services() {
                     <div className="flex items-start gap-4">
                       <div className="h-12 w-12 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] flex items-center justify-center font-black">{item.step}</div>
                       <div className="space-y-1">
-                        <h3 className="text-lg font-black text-[var(--text)]">{item.title}</h3>
+                        <h3 className="text-base font-semibold text-[var(--text)]">{item.title}</h3>
                         <p className="text-[var(--text-muted)] leading-relaxed">{item.copy}</p>
                       </div>
                     </div>
@@ -144,12 +144,12 @@ export default function Services() {
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="rounded-2xl bg-white border border-[var(--border)] p-5">
                   <MapPinned className="text-[var(--primary)]" size={24} />
-                  <p className="mt-3 text-lg font-black text-[var(--text)]">Project-ready coverage</p>
+                  <p className="mt-3 text-base font-semibold text-[var(--text)]">Project-ready coverage</p>
                   <p className="text-sm text-[var(--text-muted)] mt-1">Built around active construction schedules and changing field demands.</p>
                 </div>
                 <div className="rounded-2xl bg-white border border-[var(--border)] p-5">
                   <ShieldCheck className="text-[var(--primary)]" size={24} />
-                  <p className="mt-3 text-lg font-black text-[var(--text)]">Compliance-minded execution</p>
+                  <p className="mt-3 text-base font-semibold text-[var(--text)]">Compliance-minded execution</p>
                   <p className="text-sm text-[var(--text-muted)] mt-1">Positioned for teams that care about safety standards and reliable documentation.</p>
                 </div>
               </div>
@@ -161,7 +161,7 @@ export default function Services() {
       <section className="py-16 md:py-20 bg-white">
         <div className="w-full max-w-[1200px] mx-auto px-4 md:px-8 text-center space-y-6">
           <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Start the conversation</p>
-          <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--text)]">Need a hauling partner that can support the way your project actually runs?</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--text)]">Need a hauling partner that can support the way your project actually runs?</h2>
           <p className="max-w-3xl mx-auto text-lg text-[var(--text-muted)] leading-relaxed">The contact path is clearer: request service, confirm fleet needs, and move directly into dispatch conversations without extra friction.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
             <Link href="/contact">

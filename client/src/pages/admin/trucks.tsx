@@ -154,7 +154,7 @@ export default function TrucksManagement() {
           
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-2xl font-black tracking-tight">Fleet Management</h3>
+              <h3 className="text-xl font-semibold tracking-tight">Fleet Management</h3>
               <p className="text-muted-foreground mt-1">Manage your trucks and assets.</p>
             </div>
             <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>

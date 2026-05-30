@@ -109,7 +109,7 @@ export default function Careers() {
             <div className="space-y-8 max-w-2xl">
               <div className="space-y-4">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--primary)]">Careers</p>
-                <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-careers-title">
+                <h3 className="text-2xl md:text-3xl font-semibold tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-careers-title">
                   Driver opportunities presented like a serious hiring page, not just a form.
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)]" data-testid="text-careers-description">
@@ -124,7 +124,7 @@ export default function Careers() {
                       <benefit.icon size={24} />
                     </div>
                     <div className="space-y-1">
-                      <h2 className="text-lg font-black text-[var(--text)]">{benefit.title}</h2>
+                      <h2 className="text-base font-semibold text-[var(--text)]">{benefit.title}</h2>
                       <p className="text-[var(--text-muted)] leading-relaxed">{benefit.desc}</p>
                     </div>
                   </div>
@@ -133,7 +133,7 @@ export default function Careers() {
 
               <div className="rounded-[1.75rem] bg-[var(--text)] text-white p-6 space-y-3">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-white/70">Hiring snapshot</p>
-                <p className="text-2xl font-black">Class A or Class B CDL required.</p>
+                <p className="text-xl font-semibold">Class A or Class B CDL required.</p>
                 <p className="text-white/75 leading-relaxed">
                   We support long-haul and daily local work. Weekends are not mandatory, though select projects may require additional flexibility.
                 </p>
@@ -143,7 +143,7 @@ export default function Careers() {
             <Card className="rounded-[2rem] border border-[var(--border)] bg-white shadow-xl shadow-black/5">
               <CardContent className="p-8 md:p-10">
                 <div className="space-y-3 mb-8">
-                  <h2 className="text-3xl font-black tracking-tight text-[var(--text)]">Driver Application</h2>
+                  <h2 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Driver Application</h2>
                   <p className="text-[var(--text-muted)] leading-relaxed">
                     Complete the form below and our team will review your experience, CDL information, and availability.
                   </p>
