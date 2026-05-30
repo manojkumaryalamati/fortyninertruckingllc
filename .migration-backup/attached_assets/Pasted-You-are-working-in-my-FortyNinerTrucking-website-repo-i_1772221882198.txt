@@ -1,0 +1,49 @@
+You are working in my FortyNinerTrucking website repo in Replit. Apply an ORANGE + WHITE theme across the UI. UI ONLY. Do NOT change Firebase/Firestore/backend logic.
+
+Theme tokens (use exactly):
+Primary: #F97316
+Primary Hover: #EA580C
+Soft Orange BG: #FFF7ED
+Background: #FFFFFF
+Text: #0F172A
+Muted Text: #475569
+Border: #E2E8F0
+Shadow: 0 10px 30px rgba(15, 23, 42, 0.10)
+Radius: 14px
+Radius Small: 10px
+
+Steps (do ALL):
+1) Find the global style file:
+   - Try: src/styles.css, src/styles.scss, src/global.scss, src/index.css, app.css, or styles/globals.css.
+   - If multiple exist, pick the one actually imported/used.
+
+2) Add CSS variables under :root:
+   --bg, --surface, --surface-2, --text, --text-muted, --primary, --primary-hover, --primary-soft, --border, --radius, --radius-sm, --shadow
+
+3) Apply theme globally:
+   - body background = var(--bg)
+   - text color = var(--text)
+   - links hover = var(--primary)
+   - section backgrounds can use var(--primary-soft) sparingly
+
+4) Update common components (by editing existing classes/components instead of creating duplicates):
+   - Primary buttons: bg var(--primary), hover var(--primary-hover), text white, shadow var(--shadow)
+   - Outline buttons: white bg, orange border, orange text
+   - Cards: white bg, 1px border var(--border), border-radius var(--radius), box-shadow var(--shadow)
+   - Inputs/selects: border var(--border), focus ring: 0 0 0 4px rgba(249,115,22,0.16)
+   - Navbar/header: white bg (or translucent), bottom border var(--border), active item in orange
+
+5) Replace any old brand colors (yellow/blue/etc.) with this palette while keeping layout the same.
+   - Search project for hex colors and update to the new tokens.
+   - Do not hardcode colors in components; use variables.
+
+6) Ensure responsiveness remains intact:
+   - No layout breaking changes.
+   - Check mobile widths for nav, hero, cards.
+
+Deliverables:
+- List every file changed with path.
+- Paste the final :root theme block.
+- Paste updated button/card/input styles (or component styles) that are actually used.
+
+Do NOT add any new dependencies or UI libraries.
