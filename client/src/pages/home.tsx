@@ -198,7 +198,6 @@ export default function Home() {
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8">
           <div className="rounded-[2rem] bg-[var(--text)] text-white p-8 md:p-12 grid lg:grid-cols-[1fr_auto] gap-8 items-center">
             <div className="space-y-4 max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-[0.24em] text-white/70">Next steps</p>
               <h2 className="text-3xl md:text-4xl font-black tracking-tight">Need trucks for a project, want to drive, or looking to partner as a subhauler?</h2>
               <p className="text-white/75 text-lg leading-relaxed">We tightened the public experience around the actions that matter most so prospects can move directly into the right workflow.</p>
             </div>
