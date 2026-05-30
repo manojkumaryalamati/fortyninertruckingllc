@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: contact
+    description: Contact form operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,27 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /contact-submissions:
+    post:
+      operationId: createContactSubmission
+      tags: [contact]
+      summary: Submit a contact form message
+      description: Stores a contact form submission from a website visitor.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactSubmissionInput"
+      responses:
+        "201":
+          description: Submission stored
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactSubmissionResult"
+        "400":
+          description: Invalid submission
 components:
   schemas:
     HealthStatus:
@@ -32,5 +55,39 @@ components:
         status:
           type: string
       required:
+        - status
+    ContactSubmissionInput:
+      type: object
+      properties:
+        firstName:
+          type: string
+          minLength: 1
+        lastName:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        interestedIn:
+          type: string
+        message:
+          type: string
+          minLength: 1
+      required:
+        - firstName
+        - lastName
+        - email
+        - message
+    ContactSubmissionResult:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+      required:
+        - id
         - status
 

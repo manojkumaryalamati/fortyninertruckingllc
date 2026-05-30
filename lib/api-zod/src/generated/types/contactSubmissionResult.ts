@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export * from './contactSubmissionInput';
-export * from './contactSubmissionResult';
-export * from './healthStatus';
+export interface ContactSubmissionResult {
+  id: string;
+  status: string;
+}
