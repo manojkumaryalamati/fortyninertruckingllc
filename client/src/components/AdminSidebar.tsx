@@ -37,7 +37,7 @@ export function AdminSidebar() {
       <div className="flex justify-start w-full py-6 px-4">
         <Link href="/admin">
           <div className="flex items-center justify-start w-full cursor-pointer p-2 hover:opacity-80 transition-opacity">
-            <Logo variant="light" className="scale-90 origin-left" />
+            <Logo variant="light" className="w-[190px] origin-left" />
           </div>
         </Link>
       </div>
@@ -142,7 +142,7 @@ export function AdminMobileHeader() {
   return (
     <div className="md:hidden flex items-center justify-between p-4 border-b border-[var(--border)] bg-white sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-2">
-        <Logo variant="dark" className="scale-50 origin-left -ml-4" />
+        <Logo variant="dark" className="w-[150px] origin-left" />
       </div>
       
       <Sheet open={open} onOpenChange={setOpen}>
@@ -155,7 +155,7 @@ export function AdminMobileHeader() {
           <div className="flex flex-col h-full">
             <div className="p-6 mb-2 mt-4">
               <div className="flex items-center gap-2">
-                <Logo variant="light" className="scale-90 origin-left" />
+                <Logo variant="light" className="w-[190px] origin-left" />
               </div>
             </div>
             

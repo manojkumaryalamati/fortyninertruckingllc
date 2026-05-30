@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="lg:col-span-4 space-y-6">
             <Link href="/">
               <div className="block cursor-pointer inline-block mb-2">
-                <Logo variant="dark" className="scale-75 origin-left" />
+                <Logo variant="dark" className="w-[210px] origin-left" />
               </div>
             </Link>
             <p className="text-[var(--text-muted)] leading-relaxed text-sm max-w-sm">

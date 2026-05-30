@@ -113,7 +113,7 @@ export default function Login() {
           ) : null}
           <div className="mb-8">
             <div className="mb-6 flex justify-center md:justify-start">
-              <Logo variant="dark" />
+              <Logo variant="dark" className="w-[240px] max-w-full" />
             </div>
             <h2 className="text-2xl font-black text-[var(--text)] tracking-tight">Admin Portal</h2>
             <p className="text-[var(--text-muted)] mt-2">Secure access for fleet management.</p>
