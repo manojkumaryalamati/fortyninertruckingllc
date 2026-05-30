@@ -37,7 +37,7 @@ export default function Fleet() {
               <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-fleet-title">
                 Specialized equipment matched to the realities of heavy construction work.
               </h1>
-              <p className="text-lg md:text-xl leading-relaxed text-[var(--text-muted)]" data-testid="text-fleet-description">
+              <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)]" data-testid="text-fleet-description">
                 We replaced the hard-to-read image overlay with a cleaner production layout that highlights what decision-makers actually need: fleet types, maintenance confidence, and dispatch support.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">

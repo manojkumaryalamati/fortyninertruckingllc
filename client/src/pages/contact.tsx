@@ -126,7 +126,7 @@ export default function Contact() {
                 <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-contact-title">
                   Reach the team quickly, with a clearer path into quotes and dispatch.
                 </h1>
-                <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed" data-testid="text-contact-description">
+                <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed" data-testid="text-contact-description">
                   We tightened the contact experience for production so customers can immediately see how to call, email, visit, or submit a quote request without the oversized empty spacing from before.
                 </p>
               </div>

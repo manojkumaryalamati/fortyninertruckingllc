@@ -53,7 +53,7 @@ export default function Services() {
               <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.02] text-[var(--text)]" data-testid="text-services-title">
                 Specialized hauling support for construction timelines that cannot slip.
               </h1>
-              <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed" data-testid="text-services-description">
+              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed" data-testid="text-services-description">
                 We refined this page around the real decision criteria for production work: responsive dispatch, capable equipment, clear scheduling, and confidence in the team executing the load plan.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">

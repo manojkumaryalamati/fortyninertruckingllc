@@ -75,7 +75,7 @@ export default function Home() {
                 <h1 className="text-3xl md:text-4xl xl:text-5xl font-black tracking-tight leading-[0.98] text-[var(--text)]" data-testid="text-home-hero-title">
                   The dependable hauling partner for high-demand job sites.
                 </h1>
-                <p className="text-lg md:text-xl leading-relaxed text-[var(--text-muted)] max-w-xl" data-testid="text-home-hero-description">
+                <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)] max-w-xl" data-testid="text-home-hero-description">
                   Forty Niner Trucking LLC supports contractors, developers, and public works teams with certified fleet coverage, disciplined dispatch, and production-ready transportation.
                 </p>
               </div>
