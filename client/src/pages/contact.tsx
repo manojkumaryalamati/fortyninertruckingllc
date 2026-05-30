@@ -10,6 +10,8 @@ import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 
+const contactEmail = "fortyninertrucking@gmail.com";
+
 const contactCards = [
   {
     title: "Phone support",
@@ -44,7 +46,7 @@ const contactCards = [
 export default function Contact() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [successMode, setSuccessMode] = useState<"idle" | "sent" | "draft">("idle");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -59,6 +61,32 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
+  const openMailFallback = () => {
+    const subject = encodeURIComponent(formData.subject);
+    const body = encodeURIComponent(
+      [
+        `Name: ${formData.firstName} ${formData.lastName}`.trim(),
+        `Email: ${formData.email}`,
+        `Phone: ${formData.phone || "Not provided"}`,
+        "",
+        formData.message,
+      ].join("\n")
+    );
+
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+  };
+
+  const resetForm = () => {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      subject: "Requesting a Quote",
+      message: "",
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -69,11 +97,13 @@ export default function Contact() {
       }
 
       if (!isFirebaseConfigured()) {
+        openMailFallback();
         toast({
-          title: "Configuration Error",
-          description: "Firebase environment variables are missing. Please check your setup.",
-          variant: "destructive",
+          title: "Email Draft Opened",
+          description: "Your message was prepared in your email app so you can send it directly.",
         });
+        resetForm();
+        setSuccessMode("draft");
         return;
       }
 
@@ -93,16 +123,20 @@ export default function Contact() {
         description: "We've received your message and will get back to you soon.",
       });
 
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        subject: "Requesting a Quote",
-        message: "",
-      });
-      setIsSuccess(true);
+      resetForm();
+      setSuccessMode("sent");
     } catch (error: any) {
+      if (error?.code === "permission-denied") {
+        openMailFallback();
+        toast({
+          title: "Email Draft Opened",
+          description: "Direct form sending is unavailable right now, so we opened your email app with the message ready.",
+        });
+        resetForm();
+        setSuccessMode("draft");
+        return;
+      }
+
       toast({
         title: "Submission Failed",
         description: error.message || "Failed to send message. Please try again.",
@@ -181,16 +215,20 @@ export default function Contact() {
                 </p>
               </div>
 
-              {isSuccess ? (
+              {successMode !== "idle" ? (
                 <div className="relative z-10 flex flex-col items-center justify-center py-16 text-center space-y-6">
                   <div className="h-20 w-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
-                  <h3 className="text-xl font-semibold text-[var(--text)]">Message Sent Successfully</h3>
+                  <h3 className="text-xl font-semibold text-[var(--text)]">
+                    {successMode === "sent" ? "Message Sent Successfully" : "Email Draft Ready"}
+                  </h3>
                   <p className="text-[var(--text-muted)] max-w-md">
-                    Thank you for contacting Forty Niner Trucking. We have received your message and will be in touch shortly.
+                    {successMode === "sent"
+                      ? "Thank you for contacting Forty Niner Trucking. We have received your message and will be in touch shortly."
+                      : "Your message has been prepared in your email app so you can send it directly while form permissions are unavailable."}
                   </p>
-                  <Button onClick={() => setIsSuccess(false)} variant="outline" data-testid="button-send-another-message" className="rounded-full border-[var(--border)] hover:bg-[var(--surface-2)]">
+                  <Button onClick={() => setSuccessMode("idle")} variant="outline" data-testid="button-send-another-message" className="rounded-full border-[var(--border)] hover:bg-[var(--surface-2)]">
                     Send Another Message
                   </Button>
                 </div>
