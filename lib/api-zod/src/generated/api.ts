@@ -18,7 +18,7 @@ export const HealthCheckResponse = zod.object({
 
 
 /**
- * Stores a contact form submission from a website visitor.
+ * Emails a contact form submission to the business inbox.
  * @summary Submit a contact form message
  */
 

@@ -22,7 +22,6 @@ export interface ContactSubmissionInput {
 }
 
 export interface ContactSubmissionResult {
-  id: string;
   status: string;
 }
 
