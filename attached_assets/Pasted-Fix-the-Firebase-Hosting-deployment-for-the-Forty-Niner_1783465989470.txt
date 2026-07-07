@@ -1,0 +1,96 @@
+Fix the Firebase Hosting deployment for the Forty Niner Trucking LLC website.
+
+Current issue:
+Firebase deploy is failing because the predeploy build command is wrong.
+
+Current error:
+No projects matched the filters in "C:\Users\BrandCraftAccounting\Documents\fortyninertruckingllc"
+
+Then deploy fails with:
+Directory 'artifacts/forty-niner/dist' for Hosting does not exist.
+
+Root cause:
+The firebase.json predeploy command is using:
+
+pnpm --filter @workspace/forty-niner run build
+
+But this workspace filter does not match any project, so the Vite app is not building and the dist folder is not created.
+
+Goal:
+Fix Firebase Hosting deployment so it builds the Vite app inside artifacts/forty-niner and deploys artifacts/forty-niner/dist.
+
+Do not change:
+- Website UI
+- Header
+- Logo
+- Navigation
+- Buttons
+- Submit Job Tags button
+- Admin Portal button
+- Images
+- Routes
+- Content
+- Styling
+- Any unrelated app code
+
+Tasks:
+
+1. Open firebase.json in the repository root.
+
+2. Replace the hosting config with this exact Firebase Hosting config:
+
+{
+  "hosting": {
+    "public": "artifacts/forty-niner/dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "predeploy": [
+      "pnpm --dir artifacts/forty-niner run build"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+
+3. Important:
+Use this build command:
+
+pnpm --dir artifacts/forty-niner run build
+
+Do not use:
+
+pnpm --filter @workspace/forty-niner run build
+
+because the workspace filter is not matching the project.
+
+4. From the repository root, run:
+
+pnpm --dir artifacts/forty-niner install
+pnpm --dir artifacts/forty-niner run build
+
+5. Confirm the build output exists:
+
+artifacts/forty-niner/dist/index.html
+
+6. Then run Firebase deploy:
+
+npx firebase-tools deploy --only hosting --project fortyninertruckingllc
+
+7. Final verification:
+- Firebase deploy should complete successfully.
+- dist folder should be created before deployment.
+- No “No projects matched the filters” error.
+- No “Directory does not exist” error.
+- Website should open after deployment.
+- SPA routes should refresh correctly because rewrites point to /index.html.
+- Submit Job Tags button should still open the external tag form.
+- No UI/content changes should be made.
+
+This is a deployment configuration fix only. Do not refactor the app.

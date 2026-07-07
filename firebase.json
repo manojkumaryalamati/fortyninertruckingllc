@@ -1,8 +1,8 @@
 {
   "hosting": {
-    "public": "artifacts/forty-niner/dist/public",
+    "public": "artifacts/forty-niner/dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "predeploy": "BASE_PATH=/ pnpm --filter @workspace/forty-niner run build",
+    "predeploy": ["pnpm --dir artifacts/forty-niner run build"],
     "rewrites": [
       {
         "source": "**",
