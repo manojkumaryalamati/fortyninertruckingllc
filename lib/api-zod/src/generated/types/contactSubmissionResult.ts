@@ -7,6 +7,5 @@
  */
 
 export interface ContactSubmissionResult {
-  id: string;
   status: string;
 }

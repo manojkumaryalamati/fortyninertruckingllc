@@ -1,5 +1,4 @@
 import { Router, type Request, type Response } from "express";
-import { db, contactSubmissions } from "@workspace/db";
 import { CreateContactSubmissionBody } from "@workspace/api-zod";
 // Resend integration (Replit connector). The SDK handles auth/token refresh
 // and proxies requests to the Resend API (https://api.resend.com).
@@ -11,8 +10,7 @@ const connectors = new ReplitConnectors();
 
 // Where contact form messages are delivered.
 const CONTACT_RECIPIENT = "fortyninertrucking@gmail.com";
-// Sends from the verified fortyninertrucking.llc domain in Resend. Once the
-// domain shows "Verified" in resend.com/domains, delivery to any inbox works.
+// Sends from the verified fortyninertrucking.llc domain in Resend.
 const CONTACT_SENDER = "Forty Niner Trucking <noreply@fortyninertrucking.llc>";
 
 function escapeHtml(value: string): string {
@@ -35,21 +33,6 @@ router.post("/contact-submissions", async (req: Request, res: Response) => {
   }
 
   const data = parsed.data;
-
-  // Keep a stored record of every submission as a backup/audit trail.
-  let row: { id: string; status: string };
-  try {
-    [row] = await db
-      .insert(contactSubmissions)
-      .values(data)
-      .returning({ id: contactSubmissions.id, status: contactSubmissions.status });
-  } catch (err) {
-    req.log.error({ err }, "Error storing contact submission");
-    return res.status(500).json({
-      title: "Submission failed",
-      detail: "We couldn't save your message right now. Please try again.",
-    });
-  }
 
   const fullName = `${data.firstName} ${data.lastName}`.trim();
   const subject = `New website inquiry${data.interestedIn ? ` — ${data.interestedIn}` : ""} from ${fullName}`;
@@ -78,26 +61,23 @@ router.post("/contact-submissions", async (req: Request, res: Response) => {
 
     if (!emailRes.ok) {
       const detail = await emailRes.text().catch(() => "");
-      req.log.error(
-        { status: emailRes.status, detail, id: row.id },
-        "Resend email failed",
-      );
+      req.log.error({ status: emailRes.status, detail }, "Resend email failed");
       return res.status(502).json({
         title: "Email delivery failed",
         detail: "We couldn't send your message right now. Please try again.",
       });
     }
   } catch (err) {
-    req.log.error({ err, id: row.id }, "Error sending contact email");
+    req.log.error({ err }, "Error sending contact email");
     return res.status(502).json({
       title: "Email delivery failed",
       detail: "We couldn't send your message right now. Please try again.",
     });
   }
 
-  req.log.info({ id: row.id }, "Stored and emailed contact submission");
+  req.log.info("Emailed contact submission");
 
-  return res.status(201).json({ id: row.id, status: row.status });
+  return res.status(201).json({ status: "sent" });
 });
 
 export default router;

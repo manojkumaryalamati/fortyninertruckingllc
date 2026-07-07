@@ -124,7 +124,7 @@ export const getCreateContactSubmissionUrl = () => {
 }
 
 /**
- * Stores a contact form submission from a website visitor.
+ * Emails a contact form submission to the business inbox.
  * @summary Submit a contact form message
  */
 export const createContactSubmission = async (contactSubmissionInput: ContactSubmissionInput, options?: RequestInit): Promise<ContactSubmissionResult> => {
