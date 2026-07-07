@@ -1,1 +1,2 @@
 - [Resend sending constraints](resend-domain-verification.md) — Resend 403s unless a domain is verified; from-address must be on that domain, else only the account owner is reachable.
+- [External Firebase builds](external-firebase-builds.md) — root recursive build runs off-Replit; vite configs must default PORT/BASE_PATH, ignore fake pnpm keys from pasted prompts.

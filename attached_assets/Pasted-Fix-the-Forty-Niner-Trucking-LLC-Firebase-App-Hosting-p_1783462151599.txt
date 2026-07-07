@@ -1,0 +1,150 @@
+Fix the Forty Niner Trucking LLC Firebase App Hosting production build failure completely and production-safely.
+
+Current production build error:
+[ERR_PNPM_IGNORED_BUILDS] Ignored build scripts:
+@firebase/util@1.15.1, esbuild@0.27.3, protobufjs@7.6.1
+
+This is failing inside Google Cloud Build / Firebase App Hosting during pnpm install/build.
+
+Goal:
+Fix the pnpm dependency build approval issue in the correct production build root so Firebase App Hosting builds successfully.
+
+Important:
+Do not change website UI, layout, header, buttons, images, routes, navigation, content, Submit Job Tags feature, Admin Portal button, or any unrelated app behavior.
+
+Step 1: Identify the actual app/build root
+
+Find the package.json that Firebase App Hosting is building from.
+
+Run/check:
+- pwd
+- ls
+- find . -name package.json -not -path "*/node_modules/*"
+- find . -name vite.config.ts -not -path "*/node_modules/*"
+- find . -name apphosting.yaml -not -path "*/node_modules/*"
+- find . -name pnpm-workspace.yaml -not -path "*/node_modules/*"
+
+The correct build root is the folder that contains:
+- package.json
+- vite.config.ts
+- pnpm-lock.yaml
+- apphosting.yaml
+
+If the real app is inside a subfolder like:
+artifacts/forty-niner
+
+then all production config files must be inside that same folder, not only in the repo root.
+
+Step 2: Pin pnpm version
+
+In the production package.json, add or update:
+
+"packageManager": "pnpm@11.10.0"
+
+Do not switch to npm or yarn.
+Do not remove pnpm.
+Do not create package-lock.json or yarn.lock.
+
+Step 3: Fix pnpm build script approvals
+
+In the exact same folder as the production package.json, create or update pnpm-workspace.yaml.
+
+Use this exact config:
+
+packages:
+  - "."
+
+strictDepBuilds: true
+
+allowBuilds:
+  "@firebase/util": true
+  esbuild: true
+  protobufjs: true
+
+Important:
+- Remove any false entries for @firebase/util, esbuild, or protobufjs.
+- Remove old pnpm v10-only settings if present:
+  - onlyBuiltDependencies
+  - ignoredBuiltDependencies
+  - neverBuiltDependencies
+  - ignoreDepScripts
+- Do not use dangerouslyAllowAllBuilds.
+- Do not globally disable pnpm security.
+- Do not bypass the issue by changing package managers.
+
+Step 4: Clean and reinstall
+
+From the production build root, run:
+
+rm -rf node_modules
+rm -f package-lock.json yarn.lock
+corepack enable
+pnpm --version
+pnpm install --frozen-lockfile=false
+
+Then run:
+
+pnpm ignored-builds
+
+Expected result:
+There should be no pending ignored build scripts for:
+- @firebase/util
+- esbuild
+- protobufjs
+
+If pnpm ignored-builds still shows them, stop and fix pnpm-workspace.yaml again before continuing.
+
+Step 5: Run production build locally
+
+Run:
+
+BASE_PATH=/ pnpm run build
+
+If BASE_PATH is still required, make sure vite.config.ts has a safe fallback:
+
+const BASE_PATH = process.env.BASE_PATH || "/";
+
+Do not throw an error when BASE_PATH is missing.
+
+Step 6: Keep Firebase App Hosting config
+
+In the same production build root, make sure apphosting.yaml exists and includes:
+
+env:
+  - variable: BASE_PATH
+    value: "/"
+    availability:
+      - BUILD
+      - RUNTIME
+
+Step 7: Commit all required files
+
+Make sure these files are committed and pushed to the branch connected to Firebase App Hosting:
+
+- package.json
+- pnpm-lock.yaml
+- pnpm-workspace.yaml
+- apphosting.yaml
+- vite.config.ts if changed
+
+Run:
+
+git status
+git add package.json pnpm-lock.yaml pnpm-workspace.yaml apphosting.yaml vite.config.ts
+git commit -m "Fix Firebase App Hosting pnpm build approvals"
+git push
+
+Step 8: Final verification
+
+After push, confirm:
+- Firebase App Hosting build starts from the correct app root.
+- Cloud Build no longer shows ERR_PNPM_IGNORED_BUILDS.
+- pnpm install passes.
+- BASE_PATH error does not appear.
+- pnpm run build passes.
+- Website opens normally.
+- Submit Job Tags button still works.
+- Header and mobile menu still look correct.
+
+Production rule:
+Fix the build system only. Do not refactor the website.
