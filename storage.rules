@@ -1,0 +1,21 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper function to check if user is admin via Firestore role
+    function isAdmin() {
+      return request.auth != null && 
+             firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    match /driver_documents/{driverId}/{docType}/{fileName} {
+      allow read: if request.auth != null; 
+      allow write: if isAdmin();
+    }
+    
+    // Fallback catch-all for admins
+    match /{allPaths=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
