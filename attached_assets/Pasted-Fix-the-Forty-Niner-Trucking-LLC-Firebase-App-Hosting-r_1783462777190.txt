@@ -1,0 +1,217 @@
+Fix the Forty Niner Trucking LLC Firebase App Hosting rollout failure completely and production-safely.
+
+Current error:
+The build is reaching rollout, but Cloud Run fails with:
+
+generic::failed_precondition:
+The user-provided container failed to start and listen on the port defined by the PORT=8080 environment variable within the allocated timeout.
+
+This means the production container is not starting a server correctly, or it is listening on the wrong host/port.
+
+Goal:
+Make the Vite production app start correctly on Firebase App Hosting / Cloud Run.
+
+Important:
+Do not change website UI, layout, content, logo, images, routes, navigation, Submit Job Tags button, Admin Portal button, mobile menu, styling, or unrelated code.
+
+Production requirements:
+- Do not use Vite dev server in production.
+- Do not hardcode port 5173.
+- Do not hardcode port 8080 only.
+- The production server must use process.env.PORT || 8080.
+- The server must listen on 0.0.0.0.
+- The app must serve the built dist folder.
+- SPA routing must work on refresh for routes like /services, /fleet, /careers, /subhaulers, etc.
+
+Step 1: Inspect package.json
+
+Find the current scripts:
+- dev
+- build
+- start
+- preview
+
+Fix production scripts so they are safe for Firebase App Hosting.
+
+Expected package.json scripts:
+
+"scripts": {
+  "dev": "vite --host 0.0.0.0 --port 5173",
+  "build": "vite build",
+  "start": "node server.mjs",
+  "preview": "vite preview --host 0.0.0.0 --port 4173"
+}
+
+Keep existing scripts if they contain required project-specific commands, but make sure production "start" runs:
+node server.mjs
+
+Step 2: Create server.mjs in the production app root
+
+Create a minimal production Node server that serves dist and listens on the Cloud Run port.
+
+Use this exact server.mjs unless the project already has an equivalent production server:
+
+import { createServer } from "node:http";
+import { readFile } from "node:fs/promises";
+import { createReadStream, existsSync } from "node:fs";
+import { extname, join, normalize } from "node:path";
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const distDir = join(__dirname, "dist");
+const port = Number(process.env.PORT || 8080);
+const host = "0.0.0.0";
+
+const mimeTypes = {
+  ".html": "text/html; charset=utf-8",
+  ".js": "application/javascript; charset=utf-8",
+  ".mjs": "application/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".gif": "image/gif",
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp",
+  ".ico": "image/x-icon",
+  ".woff": "font/woff",
+  ".woff2": "font/woff2",
+  ".ttf": "font/ttf",
+  ".map": "application/json; charset=utf-8"
+};
+
+function safePath(urlPath) {
+  const decodedPath = decodeURIComponent(urlPath.split("?")[0]);
+  const cleanPath = normalize(decodedPath).replace(/^(\.\.[/\\])+/, "");
+  return join(distDir, cleanPath === "/" ? "index.html" : cleanPath);
+}
+
+const server = createServer(async (req, res) => {
+  try {
+    if (!existsSync(distDir)) {
+      res.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });
+      res.end("Production build folder not found. Run pnpm run build first.");
+      return;
+    }
+
+    let filePath = safePath(req.url || "/");
+    let ext = extname(filePath);
+
+    if (!existsSync(filePath)) {
+      filePath = join(distDir, "index.html");
+      ext = ".html";
+    }
+
+    res.writeHead(200, {
+      "Content-Type": mimeTypes[ext] || "application/octet-stream",
+      "Cache-Control": ext === ".html"
+        ? "no-cache"
+        : "public, max-age=31536000, immutable"
+    });
+
+    createReadStream(filePath).pipe(res);
+  } catch (error) {
+    const indexHtml = join(distDir, "index.html");
+
+    if (existsSync(indexHtml)) {
+      const html = await readFile(indexHtml, "utf8");
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+      res.end(html);
+      return;
+    }
+
+    res.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("Server error");
+  }
+});
+
+server.listen(port, host, () => {
+  console.log(`Forty Niner Trucking LLC server listening on http://${host}:${port}`);
+});
+
+Step 3: Update apphosting.yaml in the same folder as package.json
+
+Make sure apphosting.yaml exists in the actual Firebase App Hosting app root.
+
+Use this:
+
+env:
+  - variable: BASE_PATH
+    value: "/"
+    availability:
+      - BUILD
+      - RUNTIME
+
+scripts:
+  runCommand: node server.mjs
+
+outputFiles:
+  serverApp:
+    include:
+      - dist
+      - server.mjs
+      - package.json
+      - pnpm-lock.yaml
+
+Step 4: Keep previous pnpm production fix
+
+Make sure pnpm-workspace.yaml is also in the same folder as package.json:
+
+packages:
+  - "."
+
+strictDepBuilds: true
+
+allowBuilds:
+  "@firebase/util": true
+  esbuild: true
+  protobufjs: true
+
+Step 5: Verify vite.config.ts
+
+Make sure BASE_PATH has a safe fallback:
+
+const BASE_PATH = process.env.BASE_PATH || "/";
+
+Do not throw an error if BASE_PATH is missing.
+
+Step 6: Test locally in Replit shell
+
+From the actual production app root, run:
+
+rm -rf node_modules dist
+rm -f package-lock.json yarn.lock
+pnpm install --frozen-lockfile=false
+BASE_PATH=/ pnpm run build
+PORT=8080 pnpm start
+
+Then verify:
+- Server logs show it is listening on 0.0.0.0:8080
+- The site opens
+- Refreshing /services works
+- Refreshing /fleet works
+- Refreshing /careers works
+- Submit Job Tags button still opens the external link
+- No console errors
+
+Step 7: Commit and push
+
+Commit all required production files:
+
+git status
+git add package.json pnpm-lock.yaml pnpm-workspace.yaml apphosting.yaml vite.config.ts server.mjs
+git commit -m "Fix Firebase App Hosting production server startup"
+git push
+
+Expected production result:
+- Cloud Build passes
+- Rollout succeeds
+- Cloud Run no longer shows PORT=8080 startup failure
+- Website opens normally
+- Header and Submit Job Tags button remain unchanged
+
+Do not refactor the app. Fix only production build/start/deployment configuration.

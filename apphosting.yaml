@@ -4,3 +4,14 @@ env:
     availability:
       - BUILD
       - RUNTIME
+
+scripts:
+  buildCommand: pnpm --filter @workspace/forty-niner run build
+  runCommand: node server.mjs
+
+outputFiles:
+  serverApp:
+    include:
+      - artifacts/forty-niner/dist
+      - server.mjs
+      - package.json
