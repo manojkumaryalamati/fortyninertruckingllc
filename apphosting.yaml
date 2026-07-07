@@ -1,0 +1,6 @@
+env:
+  - variable: BASE_PATH
+    value: "/"
+    availability:
+      - BUILD
+      - RUNTIME

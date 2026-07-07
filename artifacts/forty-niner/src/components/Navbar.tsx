@@ -81,7 +81,7 @@ export function Navbar() {
                   >
                     <Logo
                       variant="dark"
-                      className={`origin-left transition-all duration-300 ${scrolled ? "w-[172px] md:w-[188px]" : "w-[180px] md:w-[204px]"}`}
+                      className={`origin-left transition-all duration-300 ${scrolled ? "w-[172px] md:w-[188px] lg:w-[200px]" : "w-[180px] md:w-[204px] lg:w-[216px]"}`}
                     />
                   </div>
                 </Link>
@@ -120,14 +120,19 @@ export function Navbar() {
                     Admin Portal
                   </Button>
                 </Link>
-                <Link href="/contact">
-                  <Button
-                    data-testid="button-request-quote-nav"
-                    className="rounded-full bg-[var(--primary)] px-5 text-white shadow-[0_14px_32px_rgba(249,115,22,0.28)] hover:bg-[var(--primary)]/90"
+                <Button
+                  asChild
+                  className="rounded-full bg-[var(--primary)] px-5 text-white shadow-[0_14px_32px_rgba(249,115,22,0.28)] hover:bg-[var(--primary)]/90"
+                >
+                  <a
+                    data-testid="button-submit-job-tags-nav"
+                    href="http://jassboys.us-east-2.elasticbeanstalk.com/upload-tag.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    Contact Dispatch
-                  </Button>
-                </Link>
+                    Submit Job Tags
+                  </a>
+                </Button>
               </div>
 
               <button
@@ -191,16 +196,20 @@ export function Navbar() {
                 </div>
 
                 <div className="mt-6 grid gap-3">
-                  <Link href="/contact">
-                    <div onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button
-                        data-testid="button-get-quote-mobile-nav"
-                        className="h-12 w-full rounded-full bg-[var(--primary)] text-base font-semibold text-white shadow-[0_14px_32px_rgba(249,115,22,0.24)] hover:bg-[var(--primary)]/90"
-                      >
-                        Contact Dispatch
-                      </Button>
-                    </div>
-                  </Link>
+                  <Button
+                    asChild
+                    className="h-12 w-full rounded-full bg-[var(--primary)] text-base font-semibold text-white shadow-[0_14px_32px_rgba(249,115,22,0.24)] hover:bg-[var(--primary)]/90"
+                  >
+                    <a
+                      data-testid="button-submit-job-tags-mobile-nav"
+                      href="http://jassboys.us-east-2.elasticbeanstalk.com/upload-tag.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Submit Job Tags
+                    </a>
+                  </Button>
 
                   <Link href="/login">
                     <div onClick={() => setIsMobileMenuOpen(false)}>
