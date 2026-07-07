@@ -1,0 +1,284 @@
+Stop applying temporary patches. The Firebase App Hosting deployment is still failing after multiple attempts. I need a root-cause production fix, not another partial change.
+
+Project: Forty Niner Trucking LLC website
+Firebase project: fortyninertruckingllc
+Deployment target: Firebase App Hosting / Google Cloud Build / Cloud Run
+
+Known failure history:
+1. Build failed because BASE_PATH was missing.
+2. Build failed with:
+   ERR_PNPM_IGNORED_BUILDS
+   Ignored build scripts: @firebase/util, esbuild, protobufjs
+3. Rollout failed because the container did not listen on PORT=8080.
+4. Current build fails during pnpm install with:
+   ERROR Cannot convert undefined or null to object
+
+This means previous fixes were incomplete or placed in the wrong folder, or the pnpm/Firebase App Hosting configuration is malformed.
+
+Your task:
+Analyze the whole deployment setup end-to-end and make the app production-ready for Firebase App Hosting. Do not guess. Do not patch only the latest error. Find the real build root, fix the package manager configuration, fix the production server, fix Firebase App Hosting config, then prove the build passes locally before saying it is done.
+
+Hard rules:
+- Do not change website UI.
+- Do not change design, layout, logo, images, navigation, buttons, routes, content, or styling.
+- Do not change the Submit Job Tags feature.
+- Do not change the Admin Portal button.
+- Do not rewrite the app.
+- Fix only production build, install, deployment, and runtime startup.
+
+Step 1 — Identify the real Firebase App Hosting app root
+
+Run these commands and inspect the results:
+
+pwd
+find . -maxdepth 5 -name package.json -not -path "*/node_modules/*"
+find . -maxdepth 5 -name vite.config.ts -not -path "*/node_modules/*"
+find . -maxdepth 5 -name pnpm-lock.yaml -not -path "*/node_modules/*"
+find . -maxdepth 5 -name pnpm-workspace.yaml -not -path "*/node_modules/*"
+find . -maxdepth 5 -name apphosting.yaml -not -path "*/node_modules/*"
+find . -maxdepth 5 -name server.mjs -not -path "*/node_modules/*"
+
+The real app root is the folder Firebase is building from. It must contain:
+- package.json
+- vite.config.ts
+- pnpm-lock.yaml
+- apphosting.yaml
+- server.mjs
+
+If the app is inside a subfolder like artifacts/forty-niner, all production config must be inside that folder. Do not place config only in the repository root if Firebase is building a subfolder.
+
+Before making changes, report:
+- Actual app root path
+- package.json path
+- vite.config.ts path
+- apphosting.yaml path
+- pnpm-workspace.yaml path
+- server.mjs path
+
+Step 2 — Audit current broken files
+
+Open and inspect:
+- package.json
+- pnpm-lock.yaml
+- pnpm-workspace.yaml
+- .npmrc if present
+- apphosting.yaml
+- vite.config.ts
+- server.mjs if present
+
+Find and remove invalid/mixed pnpm config.
+
+Important:
+Do not mix pnpm v10 and pnpm v11 approval formats.
+
+If using pnpm 11:
+- use allowBuilds in pnpm-workspace.yaml
+
+If using pnpm 10:
+- use onlyBuiltDependencies in package.json or pnpm-workspace.yaml only if that exact pnpm version supports it
+
+Do not keep both approval systems unless verified compatible.
+
+The current error:
+Cannot convert undefined or null to object
+usually means one of the pnpm config files is malformed, empty, null, incorrectly indented, or using an unsupported shape. Fix the config instead of adding more random keys.
+
+Step 3 — Pin a stable pnpm version intentionally
+
+Check what Firebase App Hosting is using from the build logs and align local testing with it.
+
+In package.json, add a packageManager field.
+
+Use one stable option and make the config match it.
+
+Preferred option:
+"packageManager": "pnpm@11.10.0"
+
+If pnpm 11 keeps failing because Firebase builder has compatibility issues, downgrade intentionally to a stable pnpm 10 version and update config accordingly:
+"packageManager": "pnpm@10.14.0"
+
+Do not leave this unpinned.
+
+Step 4 — Fix pnpm build script approval correctly
+
+If using pnpm 11, create pnpm-workspace.yaml in the real app root with valid YAML:
+
+packages:
+  - "."
+
+allowBuilds:
+  "@firebase/util": true
+  "esbuild": true
+  "protobufjs": true
+
+Do not include:
+- allowBuilds: null
+- allowBuilds: []
+- allowBuilds as a list
+- false values for these packages
+- empty objects
+- tabs
+- invalid indentation
+
+Remove conflicting/broken keys:
+- onlyBuiltDependencies
+- ignoredBuiltDependencies
+- neverBuiltDependencies
+- ignoreDepScripts
+- dangerouslyAllowAllBuilds
+- strictDepBuilds if it is causing Firebase install to fail before approval is read
+
+After editing, run:
+
+pnpm --version
+pnpm install --frozen-lockfile=false
+pnpm ignored-builds
+
+Expected:
+No pending ignored builds for:
+- @firebase/util
+- esbuild
+- protobufjs
+
+If pnpm install still fails with Cannot convert undefined or null to object, stop and fix the malformed pnpm config before continuing. Do not proceed to build.
+
+Step 5 — Regenerate lockfile only if needed
+
+If pnpm-lock.yaml is corrupted or generated by a different incompatible pnpm version:
+
+rm -rf node_modules
+rm -f package-lock.json yarn.lock
+rm -f pnpm-lock.yaml
+pnpm install
+
+Commit the regenerated pnpm-lock.yaml.
+
+Do not switch to npm or yarn.
+
+Step 6 — Fix BASE_PATH permanently
+
+Open vite.config.ts.
+
+If it currently throws when BASE_PATH is missing, remove that fatal throw.
+
+Use:
+
+const BASE_PATH = process.env.BASE_PATH || "/";
+
+Then ensure Vite uses:
+
+base: BASE_PATH
+
+Production must not fail just because BASE_PATH is missing.
+
+Step 7 — Fix production server startup for Cloud Run
+
+Firebase App Hosting runs the app on Cloud Run. The app must listen on process.env.PORT and host 0.0.0.0.
+
+Create or replace server.mjs in the real app root with a minimal static production server that:
+- serves the dist folder
+- listens on Number(process.env.PORT || 8080)
+- listens on 0.0.0.0
+- falls back to dist/index.html for SPA routes
+- does not use Vite dev server in production
+
+server.mjs must not use port 5173.
+server.mjs must not bind only to localhost.
+
+Step 8 — Fix package.json scripts
+
+In the real app root package.json, ensure scripts are production-safe:
+
+"scripts": {
+  "dev": "vite --host 0.0.0.0 --port 5173",
+  "build": "vite build",
+  "start": "node server.mjs",
+  "preview": "vite preview --host 0.0.0.0 --port 4173"
+}
+
+If existing scripts have required project logic, preserve that logic, but production start must run node server.mjs.
+
+Step 9 — Fix apphosting.yaml
+
+apphosting.yaml must be in the real app root.
+
+Use a valid Firebase App Hosting config only.
+
+Use:
+
+env:
+  - variable: BASE_PATH
+    value: "/"
+    availability:
+      - BUILD
+      - RUNTIME
+
+scripts:
+  runCommand: node server.mjs
+
+outputFiles:
+  serverApp:
+    include:
+      - dist
+      - server.mjs
+      - package.json
+      - pnpm-lock.yaml
+
+Do not define PORT in apphosting.yaml. PORT is reserved and provided by Cloud Run.
+
+Step 10 — Full local production simulation
+
+From the real app root, run exactly:
+
+rm -rf node_modules dist
+rm -f package-lock.json yarn.lock
+pnpm install --frozen-lockfile=false
+BASE_PATH=/ pnpm run build
+PORT=8080 pnpm start
+
+Verify:
+- pnpm install succeeds
+- no ERR_PNPM_IGNORED_BUILDS
+- no Cannot convert undefined or null to object
+- build succeeds
+- server starts on 0.0.0.0:8080
+- homepage opens
+- /services opens directly
+- /fleet opens directly
+- /careers opens directly
+- page refresh works on those routes
+- Submit Job Tags opens the external form
+- no console errors
+
+Step 11 — Commit only deployment/build fixes
+
+Run:
+
+git status
+
+Commit required files only:
+- package.json
+- pnpm-lock.yaml
+- pnpm-workspace.yaml
+- apphosting.yaml
+- vite.config.ts
+- server.mjs
+- .npmrc if changed
+
+Commit message:
+Fix Firebase App Hosting production deployment
+
+Step 12 — Final response requirement
+
+Do not say “fixed” until all checks pass.
+
+Your final response must include:
+1. Real app root found
+2. Exact root cause
+3. Files changed
+4. Commands run
+5. Build result
+6. Runtime result on PORT=8080
+7. Confirmation that no UI/content changes were made
+
+This must be a production-ready Firebase App Hosting fix, not another temporary workaround.
