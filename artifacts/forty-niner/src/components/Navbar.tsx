@@ -81,7 +81,7 @@ export function Navbar() {
                   >
                     <Logo
                       variant="dark"
-                      className={`origin-left transition-all duration-300 ${scrolled ? "w-[172px] md:w-[188px]" : "w-[180px] md:w-[204px]"}`}
+                      className={`origin-left transition-all duration-300 ${scrolled ? "w-[172px] md:w-[188px] lg:w-[200px]" : "w-[180px] md:w-[204px] lg:w-[216px]"}`}
                     />
                   </div>
                 </Link>

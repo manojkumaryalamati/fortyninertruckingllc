@@ -22,8 +22,8 @@ export function Logo({ className, variant = "dark", ...props }: LogoProps) {
         <img
           src={logoImg}
           srcSet={`${logoImg2x} 2x`}
-          width={1200}
-          height={400}
+          width={300}
+          height={100}
           alt="Forty Niner Trucking LLC"
           decoding="async"
           draggable={false}
