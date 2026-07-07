@@ -66,6 +66,18 @@ export default defineConfig({
     fs: {
       strict: false,
     },
+    // Local development only (outside Replit): forward /api requests to the
+    // API server. On Replit, the shared proxy handles this routing instead.
+    ...(process.env.REPL_ID === undefined
+      ? {
+          proxy: {
+            "/api": {
+              target: `http://localhost:${process.env.API_PORT ?? "8080"}`,
+              changeOrigin: true,
+            },
+          },
+        }
+      : {}),
   },
   preview: {
     port,
