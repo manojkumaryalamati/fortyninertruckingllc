@@ -1,0 +1,189 @@
+Stop trying to deploy the Forty Niner Trucking LLC website through Firebase App Hosting / Cloud Run.
+
+The build has failed multiple times because the project is being treated like a server/container app. This website is a Vite static marketing website and should be deployed through classic Firebase Hosting.
+
+Goal:
+Convert the deployment to production-ready Firebase Hosting static deployment.
+
+Hard rules:
+- Do not change website UI.
+- Do not change header, logo, navigation, images, buttons, content, styling, routes, Admin Portal button, or Submit Job Tags button.
+- Do not rewrite the app.
+- Fix only deployment/build configuration.
+
+Step 1: Identify the real app root
+
+Find the folder that contains:
+- package.json
+- vite.config.ts
+- src
+- public/assets if present
+
+Run:
+
+pwd
+find . -maxdepth 5 -name package.json -not -path "*/node_modules/*"
+find . -maxdepth 5 -name vite.config.ts -not -path "*/node_modules/*"
+find . -maxdepth 5 -name firebase.json -not -path "*/node_modules/*"
+find . -maxdepth 5 -name apphosting.yaml -not -path "*/node_modules/*"
+
+Report the actual app root before changing files.
+
+Step 2: Remove Firebase App Hosting dependency from this website
+
+If apphosting.yaml exists in this static website project, do not use it for this deployment.
+
+Move it to backup or delete it only if this project is not meant to use App Hosting.
+
+Do not use Cloud Run.
+Do not use server.mjs for production.
+Do not use scripts.runCommand.
+Do not use PORT=8080.
+Do not use Firebase App Hosting for this Vite static site.
+
+Step 3: Configure classic Firebase Hosting
+
+In the real app root, create or replace firebase.json with:
+
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+
+This is required for Vite SPA routing so direct refresh on /services, /fleet, /careers, and other routes works.
+
+Step 4: Configure Firebase project
+
+Create or update .firebaserc in the real app root:
+
+{
+  "projects": {
+    "default": "fortyninertruckingllc"
+  }
+}
+
+Step 5: Fix package.json scripts for static hosting
+
+In package.json, make sure scripts are simple:
+
+"scripts": {
+  "dev": "vite --host 0.0.0.0 --port 5173",
+  "build": "vite build",
+  "preview": "vite preview --host 0.0.0.0 --port 4173"
+}
+
+Remove production dependency on:
+- node server.mjs
+- Cloud Run
+- PORT=8080
+- App Hosting run command
+
+Step 6: Fix BASE_PATH safely
+
+Open vite.config.ts.
+
+If BASE_PATH is required, make it safe:
+
+const BASE_PATH = process.env.BASE_PATH || "/";
+
+Make sure Vite uses:
+
+base: BASE_PATH
+
+Do not throw an error if BASE_PATH is missing.
+
+Step 7: Clean install and build locally
+
+From the real app root, run:
+
+rm -rf node_modules dist
+rm -f package-lock.json yarn.lock
+pnpm install --frozen-lockfile=false
+BASE_PATH=/ pnpm run build
+
+Expected result:
+- dist folder is created
+- dist/index.html exists
+- no BASE_PATH error
+- no pnpm ignored build error
+- no Cloud Run / PORT error because we are not using Cloud Run anymore
+
+Step 8: Test locally
+
+Run:
+
+pnpm preview --host 0.0.0.0 --port 4173
+
+Verify:
+- Home page opens
+- /services opens
+- /fleet opens
+- /careers opens
+- /subhaulers opens
+- Refresh works on every route
+- Submit Job Tags button opens:
+  http://jassboys.us-east-2.elasticbeanstalk.com/upload-tag.html
+- Admin Portal button still works
+- No console errors
+
+Step 9: Deploy to Firebase Hosting
+
+Install Firebase CLI if needed:
+
+pnpm add -D firebase-tools
+
+Then deploy:
+
+pnpm exec firebase deploy --only hosting --project fortyninertruckingllc
+
+If Firebase login is required, use:
+
+pnpm exec firebase login
+
+Then deploy again.
+
+Step 10: Verify production
+
+After deployment, verify:
+- Firebase Hosting URL opens
+- Custom domain opens
+- /services direct URL opens
+- /fleet direct URL opens
+- /careers direct URL opens
+- Submit Job Tags button opens external form
+- No Cloud Run rollout is involved
+- No Firebase App Hosting rollout is involved
+
+Step 11: Commit only deployment config
+
+Commit only:
+
+firebase.json
+.firebaserc
+package.json
+pnpm-lock.yaml
+vite.config.ts if changed
+
+Do not commit unrelated UI changes.
+
+Final response must include:
+1. Actual app root
+2. Confirmation that Firebase App Hosting was removed/not used
+3. Files changed
+4. Commands run
+5. Build result
+6. Firebase Hosting deployment result
+7. Live URL tested
+8. Confirmation that no UI/content changes were made
