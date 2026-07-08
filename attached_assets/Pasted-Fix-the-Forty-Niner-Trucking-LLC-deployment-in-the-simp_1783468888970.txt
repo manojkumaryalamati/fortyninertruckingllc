@@ -1,0 +1,175 @@
+Fix the Forty Niner Trucking LLC deployment in the simplest way.
+
+Important:
+This is NOT Firebase App Hosting.
+This is NOT Cloud Run.
+This is NOT server deployment.
+This is simple Firebase Hosting only.
+
+Goal:
+Deploy only this subset app:
+
+artifacts/forty-niner
+
+to Firebase Hosting.
+
+Do not make this complicated.
+Do not install unnecessary packages.
+Do not add server.mjs.
+Do not use apphosting.yaml.
+Do not use Cloud Run.
+Do not use PORT=8080.
+Do not change Firebase App Hosting settings.
+Do not build the entire workspace.
+Do not build mockup-sandbox or any other artifact.
+
+Only build and deploy:
+
+artifacts/forty-niner
+
+Hard rules:
+- Do not change website UI.
+- Do not change header.
+- Do not change logo.
+- Do not change images.
+- Do not change Submit Job Tags button.
+- Do not change Admin Portal button.
+- Do not change routes/content/styling.
+- Fix only Firebase Hosting deployment structure.
+
+Current problem:
+Firebase Hosting is pointing to:
+
+artifacts/forty-niner/dist
+
+but the build is failing or dist is not being created because the workspace/root build is confused.
+
+Required simple structure:
+
+Root:
+firebase.json
+.firebaserc
+package.json
+pnpm-workspace.yaml
+
+App:
+artifacts/forty-niner/package.json
+artifacts/forty-niner/vite.config.ts
+artifacts/forty-niner/src
+artifacts/forty-niner/dist
+
+Step 1: Keep Firebase Hosting config simple
+
+Root firebase.json must be exactly:
+
+{
+  "hosting": {
+    "public": "artifacts/forty-niner/dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+
+Important:
+Do not add hosting predeploy.
+Do not add apphosting config.
+Do not add functions config unless already needed by the project.
+Do not change the public path away from artifacts/forty-niner/dist.
+
+Step 2: Make the app build by itself
+
+Go to:
+
+artifacts/forty-niner/package.json
+
+Make sure it has a normal Vite build script:
+
+"scripts": {
+  "dev": "vite --host 0.0.0.0 --port 5173",
+  "build": "vite build --config vite.config.ts",
+  "preview": "vite preview --host 0.0.0.0 --port 4173"
+}
+
+Do not make this app depend on building the full workspace.
+
+Step 3: Fix BASE_PATH simply
+
+In artifacts/forty-niner/vite.config.ts:
+
+Use:
+
+const BASE_PATH = process.env.BASE_PATH || "/";
+
+Make sure Vite uses:
+
+base: BASE_PATH
+
+Do not throw an error if BASE_PATH is missing.
+
+Step 4: Fix root package.json only if needed
+
+Root package.json should not use Linux-only scripts like sh -c because this must work on Windows too.
+
+If there is a preinstall script using sh -c, replace it with a simple Windows-safe version or remove it.
+
+Preferred simple option:
+Remove the preinstall script completely if it is not required.
+
+Do not add complex scripts.
+
+Step 5: Do not build root workspace
+
+Do not use:
+
+pnpm run build
+
+because it builds all workspace apps and fails from unrelated folders.
+
+Use only this command for Forty Niner:
+
+pnpm --dir artifacts/forty-niner run build
+
+Step 6: Verify build output
+
+After build, this file must exist:
+
+artifacts/forty-niner/dist/index.html
+
+Firebase Hosting public path must point to the folder that directly contains index.html.
+
+Step 7: Deploy command
+
+Use:
+
+npx firebase-tools deploy --only hosting --project fortyninertruckingllc
+
+Step 8: Final expected flow
+
+From repo root:
+
+pnpm --dir artifacts/forty-niner install --frozen-lockfile=false
+pnpm --dir artifacts/forty-niner run build
+npx firebase-tools deploy --only hosting --project fortyninertruckingllc
+
+Step 9: Final response requirement
+
+Before saying done, confirm:
+
+1. Firebase Hosting only is used.
+2. Firebase App Hosting/Cloud Run was not used.
+3. firebase.json public path is artifacts/forty-niner/dist.
+4. Only artifacts/forty-niner is built.
+5. dist/index.html exists.
+6. Deploy command is ready.
+7. No UI/content changes were made.
+
+Keep this simple. Do not over-engineer the deployment.
