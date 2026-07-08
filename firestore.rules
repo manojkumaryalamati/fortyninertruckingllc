@@ -1,0 +1,233 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function tenantDocPath(tenantId) {
+      return /databases/$(database)/documents/tenants/$(tenantId);
+    }
+
+    function memberDocPath(tenantId) {
+      return /databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid);
+    }
+
+    function isActiveMember(tenantId) {
+      return isSignedIn()
+        && exists(memberDocPath(tenantId))
+        && get(memberDocPath(tenantId)).data.active == true;
+    }
+
+    function role(tenantId) {
+      return get(memberDocPath(tenantId)).data.role;
+    }
+
+    function hasRole(tenantId, roles) {
+      return isActiveMember(tenantId) && (role(tenantId) in roles);
+    }
+
+    function doesNotWriteReferralFields() {
+      return !request.resource.data.diff(resource.data)
+               .affectedKeys()
+               .hasAny(['referralCode', 'referredBy']);
+    }
+
+    match /users/{uid} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn() && request.query.limit <= 1;
+      allow create: if isSignedIn() && (
+        request.auth.uid == uid
+        || (
+          request.resource.data.defaultTenantId is string
+          && request.resource.data.createdBy == request.auth.uid
+          && hasRole(request.resource.data.defaultTenantId, ['owner', 'admin'])
+        )
+      );
+      allow update: if isSignedIn()
+        && request.auth.uid == uid
+        && doesNotWriteReferralFields();
+
+      match /authLog/{logId} {
+        allow create: if isSignedIn() && uid == request.auth.uid;
+        allow read: if isSignedIn() && uid == request.auth.uid;
+        allow update, delete: if false;
+      }
+    }
+
+    match /invites/{uid} {
+      allow read, delete: if isSignedIn() && uid == request.auth.uid;
+      allow create: if isSignedIn()
+        && request.resource.data.tenantId is string
+        && request.resource.data.role is string
+        && hasRole(request.resource.data.tenantId, ['owner', 'admin']);
+      allow update: if false;
+    }
+
+    match /tenants/{tenantId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.resource.data.ownerUid == request.auth.uid;
+      allow update, delete: if hasRole(tenantId, ['owner','admin']);
+
+      match /members/{uid} {
+        allow read: if hasRole(tenantId, ['owner','admin'])
+          || (isSignedIn() && uid == request.auth.uid);
+        allow create: if (
+            isSignedIn()
+            && uid == request.auth.uid
+            && request.resource.data.role == 'owner'
+            && request.resource.data.active == true
+            && (
+              !exists(tenantDocPath(tenantId))
+              || get(tenantDocPath(tenantId)).data.ownerUid == request.auth.uid
+            )
+          )
+          || (
+            hasRole(tenantId, ['owner'])
+            && request.resource.data.active == true
+          )
+          || (
+            hasRole(tenantId, ['admin'])
+            && request.resource.data.active == true
+            && !(request.resource.data.role in ['owner', 'admin'])
+          );
+        allow update: if hasRole(tenantId, ['owner'])
+          || (
+            hasRole(tenantId, ['admin'])
+            && !(request.resource.data.role in ['owner'])
+          );
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /parties/{id} {
+        allow read: if isActiveMember(tenantId);
+        allow create, update: if hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant']);
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /suppliers/{id} {
+        allow read: if isActiveMember(tenantId);
+        allow create, update: if hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant']);
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /drivers/{id} {
+        allow read: if isActiveMember(tenantId);
+        allow create, update: if hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant']);
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /vehicles/{id} {
+        allow read: if isActiveMember(tenantId);
+        allow create, update: if hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant']);
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /trips/{tripId} {
+        allow read: if isActiveMember(tenantId)
+          && (
+            hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant'])
+            || (hasRole(tenantId, ['driver']) && resource.data.assignedDriverUid == request.auth.uid)
+          );
+        allow create: if hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant'])
+          && request.resource.data.createdBy == request.auth.uid;
+        allow update: if
+          (hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant']))
+          || (
+            hasRole(tenantId, ['driver'])
+            && resource.data.assignedDriverUid == request.auth.uid
+            && request.resource.data.diff(resource.data).changedKeys()
+              .hasOnly(['status','podUploadedAt','updatedAt'])
+          );
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /payments/{paymentId} {
+        allow read: if isActiveMember(tenantId);
+        allow create: if hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant'])
+          && request.resource.data.createdBy == request.auth.uid;
+        allow update: if hasRole(tenantId, ['owner','admin','accountant']);
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /expenses/{expenseId} {
+        allow read: if hasRole(tenantId, ['owner','admin','supervisor','accountant']);
+        allow create: if hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant'])
+          && request.resource.data.createdBy == request.auth.uid;
+        allow update: if hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant']);
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /maintenance/{maintenanceId} {
+        allow read: if hasRole(tenantId, ['owner','admin']);
+        allow create: if hasRole(tenantId, ['owner','admin'])
+          && request.resource.data.createdBy == request.auth.uid;
+        allow update: if hasRole(tenantId, ['owner','admin']);
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /ledgers/{id} {
+        allow read: if isActiveMember(tenantId);
+        allow write: if false;
+      }
+
+      match /reports/{id} {
+        allow read: if hasRole(tenantId, ['owner','admin','accountant']);
+        allow write: if false;
+      }
+
+      match /audit/{id} {
+        allow read: if hasRole(tenantId, ['owner','admin']);
+        allow create: if isActiveMember(tenantId);
+        allow update, delete: if false;
+      }
+
+      match /counters/{id} {
+        allow read, write: if hasRole(tenantId, ['owner','admin','broker','dispatcher','supervisor','accountant']);
+      }
+
+      match /documents/{id} {
+        allow read: if isActiveMember(tenantId);
+        allow create: if isActiveMember(tenantId);
+        allow update, delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /reminderRules/{type} {
+        allow read, write: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      match /whatsappLogs/{logId} {
+        allow read: if hasRole(tenantId, ['owner','admin']);
+        allow create, update, delete: if false;
+      }
+
+      // ✅ NEW — Approval workflow (ENTERPRISE)
+      match /approvals/{approvalId} {
+        allow read: if hasRole(tenantId, ['owner','admin']);
+        allow create: if isActiveMember(tenantId);
+        allow update: if hasRole(tenantId, ['owner','admin']);
+        allow delete: if hasRole(tenantId, ['owner','admin']);
+      }
+
+      // ✅ NEW — Party portal tokens (ENTERPRISE)
+      match /portalTokens/{tokenId} {
+        allow read: if hasRole(tenantId, ['owner','admin']);
+        allow create: if hasRole(tenantId, ['owner','admin']);
+        allow update, delete: if false;
+      }
+    }
+
+    match /referrals/{referralId} {
+      allow get: if isSignedIn()
+        && (resource.data.referrerUid == request.auth.uid
+            || resource.data.refereeUid == request.auth.uid);
+      allow list: if isSignedIn()
+        && request.query.limit <= 50
+        && (resource.data.referrerUid == request.auth.uid
+            || resource.data.refereeUid == request.auth.uid);
+      allow create, update, delete: if false;
+    }
+  }
+}
