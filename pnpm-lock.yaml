@@ -157,6 +157,12 @@ importers:
 
   .:
     devDependencies:
+      '@rollup/rollup-win32-x64-msvc':
+        specifier: 4.60.3
+        version: 4.60.3
+      lightningcss-win32-x64-msvc:
+        specifier: 1.32.0
+        version: 1.32.0
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -1777,6 +1783,11 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@rollup/rollup-win32-x64-msvc@4.60.3':
+    resolution: {integrity: sha512-hPt/bgL5cE+Qp+/TPHBqptcAgPzgj46mPcg/16zNUmbQk0j+mOEQV/+Lqu8QRtDV3Ek95Q6FeFITpuhl6OTsAA==}
+    cpu: [x64]
+    os: [win32]
+
   '@scalar/helpers@0.5.2':
     resolution: {integrity: sha512-Pi1GAl8jO6ungmGj2sjDfCfqiBNrKW6HXDZmminV94ybGU/KtRLOqHwd0n9FIhY3j0RYGpGC0VCuniCICfQPHg==}
     engines: {node: '>=22'}
@@ -2720,6 +2731,12 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  lightningcss-win32-x64-msvc@1.32.0:
+    resolution: {integrity: sha512-Amq9B/SoZYdDi1kFrojnoqPLxYhQ4Wo5XiL8EVJrVsB8ARoC1PWW6VGtT0WKCemjy8aC+louJnjS7U18x3b06Q==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [win32]
+
   lightningcss@1.32.0:
     resolution: {integrity: sha512-NXYBzinNrblfraPGyrbPoD19C1h9lfI/1mzgWYvXUTe414Gz/X1FD2XBZSZM7rRTrMA8JL3OtAaGifrIKhQ5yQ==}
     engines: {node: '>= 12.0.0'}
@@ -3318,6 +3335,7 @@ packages:
   tsconfck@3.1.6:
     resolution: {integrity: sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w==}
     engines: {node: ^18 || >=20}
+    deprecated: unmaintained
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
@@ -4919,6 +4937,8 @@ snapshots:
   '@rollup/rollup-linux-x64-gnu@4.60.3':
     optional: true
 
+  '@rollup/rollup-win32-x64-msvc@4.60.3': {}
+
   '@scalar/helpers@0.5.2': {}
 
   '@scalar/helpers@0.6.0': {}
@@ -5773,6 +5793,8 @@ snapshots:
 
   lightningcss-linux-x64-gnu@1.32.0:
     optional: true
+
+  lightningcss-win32-x64-msvc@1.32.0: {}
 
   lightningcss@1.32.0:
     dependencies:
